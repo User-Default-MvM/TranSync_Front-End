@@ -1,0 +1,21 @@
+# Redirect all requests to index.html for SPA routing
+/*    /index.html   200
+
+# API proxy to backend (adjust the backend URL as needed)
+/api/*  https://api.transsync.com/:splat  200
+
+# WebSocket proxy (if needed)
+/socket.io/*  wss://api.transsync.com/socket.io/:splat  200
+
+# Security headers for redirects
+# Cache static assets
+/assets/*   200
+/favicon.ico    200
+/manifest.json  200
+/robots.txt 200
+/sitemap.xml    200
+
+# Block access to sensitive files
+/node_modules/*    404
+/.git/* 404
+/.env*  404

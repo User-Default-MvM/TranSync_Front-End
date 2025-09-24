@@ -1,0 +1,920 @@
+{
+  "welcome": "Bienvenido a Transsync",
+  "dashboard": "Panel de control",
+  "admin_dashboard": "Panel de administrador",
+  "drivers": "Conductores",
+  "routes": "Rutas",
+  "vehicles": "Vehículos",
+  "schedules": "Horarios",
+  "reports": "Informes",
+  "emergency": "Emergencias",
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "logout": "Cerrar sesión",
+  "home": "Inicio",
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Acceda a su cuenta empresarial",
+    "brand": {
+      "description": "Sistema de gestión empresarial para el transporte moderno",
+      "features": {
+        "security": "Acceso seguro y confiable",
+        "admin": "Gestión de administradores",
+        "dashboard": "Panel de control avanzado"
+      }
+    },
+    "form": {
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "emailPlaceholder": "Ingrese su correo",
+      "passwordPlaceholder": "Ingrese su contraseña",
+      "rememberMe": "Recordarme",
+      "forgotPassword": "¿Olvidó su contraseña?",
+      "loginButton": "Iniciar Sesión",
+      "verifying": "Verificando...",
+      "createAccount": "Crear cuenta nueva",
+      "noAccount": "¿No tienes una cuenta?"
+    },
+    "messages": {
+      "success": "¡Inicio de sesión exitoso! Redirigiendo...",
+      "emailRequired": "Por favor ingrese su correo electrónico primero",
+      "emailInvalid": "Por favor ingrese un correo electrónico válido",
+      "passwordInvalid": "La contraseña debe tener al menos 6 caracteres",
+      "credentialsInvalid": "Credenciales incorrectas. Verifique su email y contraseña.",
+      "accountNotActivated": "Su cuenta no está activada. Por favor verifique su correo electrónico.",
+      "serverError": "Sin conexión al servidor",
+      "authError": "Error de autenticación. Intente nuevamente.",
+      "forgotPasswordSuccess": "Se ha enviado un enlace de recuperación a su correo electrónico",
+      "forgotPasswordError": "Error al enviar el correo de recuperación",
+      "serverConnectionError": "No se puede conectar con el servidor",
+      "checkConnection": "Verificar conexión nuevamente"
+    },
+    "theme": {
+      "activateLight": "Activar modo claro",
+      "activateDark": "Activar modo oscuro",
+      "changeToLight": "Cambiar a modo claro",
+      "changeToDark": "Cambiar a modo oscuro"
+    }
+  },
+  "register": {
+    "title": "Crear Cuenta",
+    "subtitle": "Regístrese para acceder al sistema",
+    "adminReview": "Su cuenta será revisada por un administrador antes de la activación",
+    "brand": {
+      "description": "Sistema de gestión empresarial para el transporte moderno",
+      "features": {
+        "security": "Registro seguro y verificado",
+        "admin": "Asignación de roles por administrador",
+        "dashboard": "Acceso controlado al sistema"
+      }
+    },
+    "form": {
+      "email": "Correo electrónico",
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "document": "Número de Documento",
+      "phone": "Teléfono",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "emailPlaceholder": "Ingrese su correo electrónico",
+      "namePlaceholder": "Ingrese su nombre",
+      "lastnamePlaceholder": "Ingrese su apellido",
+      "documentPlaceholder": "Ingrese su número de documento",
+      "phonePlaceholder": "Ingrese su número de teléfono",
+      "passwordPlaceholder": "Cree una contraseña segura",
+      "confirmPasswordPlaceholder": "Confirme su contraseña",
+      "registerButton": "Crear Cuenta",
+      "registering": "Registrando...",
+      "loginButton": "Iniciar sesión",
+      "hasAccount": "¿Ya tienes una cuenta?"
+    },
+    "validation": {
+      "emailInvalid": "Ingrese un correo electrónico válido",
+      "nameRequired": "El nombre es obligatorio",
+      "lastnameRequired": "El apellido es obligatorio",
+      "documentInvalid": "Número de documento inválido",
+      "phoneInvalid": "Número de teléfono inválido",
+      "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+      "passwordLowercase": "Debe incluir al menos una letra minúscula",
+      "passwordUppercase": "Debe incluir al menos una letra mayúscula",
+      "passwordNumber": "Debe incluir al menos un número",
+      "passwordMismatch": "Las contraseñas no coinciden"
+    },
+    "passwordRequirements": {
+      "title": "Requisitos de contraseña:",
+      "minLength": "Mínimo 6 caracteres",
+      "lowercase": "Una letra minúscula",
+      "uppercase": "Una letra mayúscula",
+      "number": "Al menos un número"
+    },
+    "process": {
+      "title": "Proceso de registro",
+      "steps": [
+        "Se creará su cuenta con estado \"PENDIENTE\"",
+        "Recibirá un correo de verificación",
+        "Un administrador revisará y asignará su rol final"
+      ]
+    },
+    "messages": {
+      "success": "¡Registro exitoso! Por favor, verifica tu correo electrónico.",
+      "error": "Error al registrar usuario.",
+      "configError": "Sugerencia: Contacte al administrador del sistema para verificar la configuración de la base de datos."
+    },
+    "theme": {
+      "activateLight": "Activar modo claro",
+      "activateDark": "Activar modo oscuro"
+    }
+  },
+  "dashboard": {
+    "title": "Panel de Control TransSync",
+    "stats": {
+      "busesInService": "Buses en servicio",
+      "activeDrivers": "Conductores activos",
+      "activeRoutes": "Rutas activas",
+      "tripsInProgress": "Viajes en curso",
+      "criticalAlerts": "Alertas críticas"
+    },
+    "charts": {
+      "tripFrequency": "Frecuencia de Viajes",
+      "routeDistribution": "Distribución por Rutas",
+      "periods": {
+        "week": "Semana",
+        "month": "Mes",
+        "year": "Año"
+      },
+      "periodTooltips": {
+        "week": "Muestra datos de los últimos 7 días",
+        "month": "Muestra datos del último mes",
+        "year": "Muestra datos del último año"
+      }
+    },
+    "fleetStatus": {
+      "title": "Estado de la Flota",
+      "available": "Disponibles",
+      "inRoute": "En ruta",
+      "maintenance": "En mantenimiento"
+    },
+    "alerts": {
+      "title": "Alertas del Sistema",
+      "active": "activas",
+      "noAlerts": "No hay alertas activas",
+      "systemOk": "Sistema funcionando correctamente"
+    },
+    "realtime": {
+      "realTime": "Tiempo Real",
+      "hourly": "Cada Hora",
+      "connecting": "Conectando...",
+      "disconnected": "Desconectado",
+      "switchToHourly": "Click para cambiar a actualizaciones cada hora",
+      "switchToRealtime": "Click para cambiar a actualizaciones en tiempo real"
+    },
+    "controls": {
+      "disableNotifications": "Deshabilitar notificaciones",
+      "enableNotifications": "Habilitar notificaciones",
+      "forceUpdate": "Forzar actualización de datos",
+      "clearCache": "Limpiar cache del dashboard",
+      "showPerformance": "Mostrar métricas de rendimiento"
+    },
+    "performance": {
+      "title": "Métricas de Rendimiento",
+      "connectionStatus": "Estado de Conexión",
+      "systemPerformance": "Rendimiento del Sistema",
+      "updates": "Actualizaciones",
+      "cache": "Cache",
+      "notifications": "Notificaciones",
+      "systemInfo": "Información del Sistema",
+      "status": {
+        "connected": "Conectado",
+        "connecting": "Conectando...",
+        "disconnected": "Desconectado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+      },
+      "metrics": {
+        "responseTime": "Tiempo de respuesta",
+        "queriesPerSecond": "Consultas/segundo",
+        "cpu": "CPU",
+        "memory": "Memoria",
+        "totalUpdates": "Total actualizaciones",
+        "lastUpdate": "Última actualización",
+        "cacheHits": "Hits",
+        "cacheMisses": "Misses",
+        "hitRate": "Tasa de aciertos",
+        "sent": "Enviadas",
+        "pending": "Pendientes",
+        "errors": "Errores",
+        "uptime": "Uptime",
+        "version": "Versión",
+        "environment": "Entorno"
+      },
+      "close": "Cerrar"
+    },
+    "errors": {
+      "loadError": "Error al cargar el dashboard",
+      "retry": "Reintentar",
+      "dataLoadError": "Error al cargar los datos. Verifique su conexión."
+    }
+  },
+  "homePage": {
+    "hero": {
+      "badge": "🚀 Startup Innovadora en Transporte Inteligente",
+      "title": "TranSync",
+      "subtitle": "La plataforma emergente de IA que está revolucionando la gestión del transporte público en Colombia",
+      "stats": {
+        "cities": "5+ Ciudades piloto",
+        "passengers": "150K+ Pasajeros impactados",
+        "satisfaction": "95% Satisfacción usuarios",
+        "efficiency": "25% Mejora eficiencia"
+      }
+    },
+    "cities": {
+      "title": "Ciudades que Confían en TranSync",
+      "subtitle": "Y muchas más ciudades en toda Latinoamérica"
+    },
+    "features": {
+      "title": "Tecnología de Vanguardia",
+      "subtitle": "Características avanzadas diseñadas para revolucionar la gestión del transporte público",
+      "items": [
+        {
+          "title": "Gestión de Flota Inteligente",
+          "description": "Monitoreo en tiempo real con IA predictiva que anticipa problemas antes de que ocurran.",
+          "benefits": ["GPS de alta precisión", "Mantenimiento predictivo", "Alertas automáticas"],
+          "stats": "99.8% precisión"
+        },
+        {
+          "title": "Optimización IA Avanzada",
+          "description": "Algoritmos de machine learning que optimizan rutas y horarios basados en datos históricos y patrones de demanda.",
+          "benefits": ["IA predictiva", "Optimización automática", "Reducción de esperas"],
+          "stats": "40% menos tiempo de espera"
+        },
+        {
+          "title": "Seguridad Enterprise",
+          "description": "Protocolos de seguridad de nivel bancario con encriptación end-to-end y monitoreo 24/7.",
+          "benefits": ["Encriptación AES-256", "Monitoreo 24/7", "Cumplimiento GDPR"],
+          "stats": "100% seguro"
+        },
+        {
+          "title": "Geolocalización Ultra-Precisa",
+          "description": "Sistema GPS de precisión submétrica optimizado para entornos urbanos complejos.",
+          "benefits": ["Precisión <1 metro", "Cobertura total", "Actualización en vivo"],
+          "stats": "<1m precisión"
+        },
+        {
+          "title": "Analytics en Tiempo Real",
+          "description": "Dashboard inteligente con métricas avanzadas y reportes automatizados para decisiones estratégicas.",
+          "benefits": ["KPIs en tiempo real", "Reportes automáticos", "Predicciones precisas"],
+          "stats": "24/7 monitoreo"
+        },
+        {
+          "title": "Planificación Dinámica",
+          "description": "Sistema automatizado que se adapta en tiempo real a cambios en la demanda y condiciones del tráfico.",
+          "benefits": ["Adaptación automática", "Optimización continua", "Flexibilidad total"],
+          "stats": "95% eficiencia"
+        }
+      ]
+    },
+    "useCases": {
+      "title": "Soluciones para Cada Necesidad",
+      "subtitle": "Adaptamos nuestra tecnología a diferentes tipos de sistemas de transporte",
+      "items": [
+        {
+          "title": "Transporte Público Urbano",
+          "description": "Optimización de rutas de buses y metro para ciudades con alta densidad poblacional",
+          "benefits": ["Reducción de tiempos de espera", "Mejor distribución de flota", "Ahorro de combustible"]
+        },
+        {
+          "title": "Sistemas BRT",
+          "description": "Gestión integral de sistemas de tránsito rápido con prioridad de señalización",
+          "benefits": ["Prioridad en semáforos", "Flujo continuo de tráfico", "Mayor capacidad"]
+        },
+        {
+          "title": "Transporte Intermunicipal",
+          "description": "Coordinación de rutas entre ciudades con horarios sincronizados",
+          "benefits": ["Conexiones optimizadas", "Horarios coordinados", "Transferencias eficientes"]
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Lo que Dicen Nuestros Clientes",
+      "subtitle": "Historias reales de transformación digital en el transporte público"
+    },
+    "awards": {
+      "title": "Premios y Reconocimientos",
+      "subtitle": "Reconocidos por nuestra innovación y potencial en el sector"
+    },
+    "cta": {
+      "title": "¿Listo para Transformar tu Sistema de Transporte?",
+      "subtitle": "Sé parte de la revolución del transporte inteligente. Únete a nuestro programa de adopción temprana y transforma tu operación",
+      "buttons": {
+        "demo": "Solicitar Demo Gratuita",
+        "expert": "Hablar con un Experto"
+      },
+      "features": ["Implementación en 30 días", "Soporte 24/7 incluido", "Garantía de resultados"]
+    }
+  },
+  "navbar": {
+    "home": "Inicio",
+    "dashboard": "Panel de Control",
+    "goToHome": "Ir a Home",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "profile": "Mi Perfil",
+    "notifications": "Notificaciones",
+    "tutorial": "Iniciar tutorial",
+    "theme": {
+      "activateLight": "Activar modo claro",
+      "activateDark": "Activar modo oscuro"
+    },
+    "userMenu": "Menú de usuario",
+    "confirmLogout": "¿Estás seguro de que deseas cerrar sesión?",
+    "verifyingSession": "Verificando sesión...",
+    "noNotifications": "No hay notificaciones",
+    "markAllRead": "Marcar todas como leídas",
+    "markAsRead": "Marcar como leída",
+    "deleteNotification": "Eliminar notificación",
+    "viewAllNotifications": "Ver todas las notificaciones",
+    "step": "Paso {{current}} de {{total}}"
+  },
+  "adminDashboard": {
+    "title": "Gestión de Usuarios",
+    "subtitle": "Administra los roles y el estado de los usuarios del sistema.",
+    "editUser": {
+      "title": "Editar Usuario",
+      "modifying": "Modificando el perfil de",
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "role": "Asignar Rol",
+      "conductor": "Conductor",
+      "gestor": "Gestor",
+      "cancel": "Cancelar",
+      "updateRole": "Actualizar Rol Usuario",
+      "backToList": "Volver a la lista"
+    },
+    "stats": {
+      "totalUsers": "Total Usuarios",
+      "managers": "Gestores",
+      "drivers": "Conductores",
+      "active": "Activos"
+    },
+    "search": {
+      "placeholder": "Buscar por nombre, email o documento...",
+      "editUser": "Editar usuario",
+      "deleteUser": "Eliminar usuario"
+    },
+    "table": {
+      "name": "Nombre",
+      "email": "Email",
+      "document": "Documento",
+      "role": "Rol",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "messages": {
+      "loading": "Cargando...",
+      "noUsers": "No se encontraron usuarios",
+      "tryOtherTerms": "Intenta con otros términos de búsqueda",
+      "noUsersFound": "No se encontraron usuarios.",
+      "confirmDelete": "¿Estás seguro?",
+      "deleteWarning": "Esta acción no se puede deshacer.",
+      "delete": "Eliminar",
+      "cancel": "Cancelar",
+      "deleting": "Eliminando usuario...",
+      "deleteSuccess": "Usuario eliminado exitosamente.",
+      "deleteError": "No se pudo eliminar el usuario.",
+      "updating": "Actualizando rol...",
+      "updateSuccess": "Rol actualizado exitosamente.",
+      "updateError": "No se pudo actualizar el rol.",
+      "loadingUsers": "Cargando usuarios...",
+      "noPermission": "No tienes permiso para ver esta página."
+    }
+  },
+  "dashboard": {
+    "title": "Panel de Control TransSync",
+    "stats": {
+      "busesInService": "Buses en servicio",
+      "activeDrivers": "Conductores activos",
+      "activeRoutes": "Rutas activas",
+      "tripsInProgress": "Viajes en curso",
+      "criticalAlerts": "Alertas críticas"
+    },
+    "charts": {
+      "tripFrequency": "Frecuencia de Viajes",
+      "routeDistribution": "Distribución por Rutas",
+      "periods": {
+        "week": "Semana",
+        "month": "Mes",
+        "year": "Año"
+      },
+      "periodTooltips": {
+        "week": "Muestra datos de los últimos 7 días",
+        "month": "Muestra datos del último mes",
+        "year": "Muestra datos del último año"
+      }
+    },
+    "fleetStatus": {
+      "title": "Estado de la Flota",
+      "available": "Disponibles",
+      "inRoute": "En ruta",
+      "maintenance": "En mantenimiento"
+    },
+    "alerts": {
+      "title": "Alertas del Sistema",
+      "active": "activas",
+      "noAlerts": "No hay alertas activas",
+      "systemOk": "Sistema funcionando correctamente"
+    },
+    "realtime": {
+      "realTime": "Tiempo Real",
+      "hourly": "Cada Hora",
+      "connecting": "Conectando...",
+      "disconnected": "Desconectado",
+      "switchToHourly": "Click para cambiar a actualizaciones cada hora",
+      "switchToRealtime": "Click para cambiar a actualizaciones en tiempo real"
+    },
+    "controls": {
+      "disableNotifications": "Deshabilitar notificaciones",
+      "enableNotifications": "Habilitar notificaciones",
+      "forceUpdate": "Forzar actualización de datos",
+      "clearCache": "Limpiar cache del dashboard",
+      "showPerformance": "Mostrar métricas de rendimiento"
+    },
+    "performance": {
+      "title": "Métricas de Rendimiento",
+      "connectionStatus": "Estado de Conexión",
+      "systemPerformance": "Rendimiento del Sistema",
+      "updates": "Actualizaciones",
+      "cache": "Cache",
+      "notifications": "Notificaciones",
+      "systemInfo": "Información del Sistema",
+      "status": {
+        "connected": "Conectado",
+        "connecting": "Conectando...",
+        "disconnected": "Desconectado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+      },
+      "metrics": {
+        "responseTime": "Tiempo de respuesta",
+        "queriesPerSecond": "Consultas/segundo",
+        "cpu": "CPU",
+        "memory": "Memoria",
+        "totalUpdates": "Total actualizaciones",
+        "lastUpdate": "Última actualización",
+        "cacheHits": "Hits",
+        "cacheMisses": "Misses",
+        "hitRate": "Tasa de aciertos",
+        "sent": "Enviadas",
+        "pending": "Pendientes",
+        "errors": "Errores",
+        "uptime": "Uptime",
+        "version": "Versión",
+        "environment": "Entorno"
+      },
+      "close": "Cerrar"
+    },
+    "errors": {
+      "loadError": "Error al cargar el dashboard",
+      "retry": "Reintentar",
+      "dataLoadError": "Error al cargar los datos. Verifique su conexión."
+    }
+  },
+  "drivers": {
+    "title": "Gestión de Conductores",
+    "stats": {
+      "total": "Total",
+      "active": "Activos",
+      "withVehicle": "Con Vehículo",
+      "licenseExpiring": "Licencia por Vencer",
+      "licenseExpired": "Licencia Vencida",
+      "inactive": "Inactivos"
+    },
+    "search": {
+      "placeholder": "Buscar por nombre o documento...",
+      "filters": "Filtros",
+      "newDriver": "Nuevo Conductor"
+    },
+    "filters": {
+      "status": "Estado",
+      "licenseType": "Tipo de licencia",
+      "vehicleAssignment": "Asignación de vehículo",
+      "all": "Todos",
+      "withVehicle": "Con vehículo",
+      "withoutVehicle": "Sin vehículo"
+    },
+    "form": {
+      "create": "Crear Conductor",
+      "edit": "Editar Conductor",
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "email": "Email",
+      "document": "Documento",
+      "phone": "Teléfono",
+      "licenseType": "Tipo Licencia",
+      "licenseExpiration": "Vencimiento Licencia",
+      "status": "Estado",
+      "assignedVehicle": "Conductor Asignado",
+      "noVehicleAssigned": "Sin conductor asignado",
+      "current": "(Actual)",
+      "documentNumber": "Número de Documento",
+      "documentNotModifiable": "El número de documento no se puede modificar",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "createDriver": "Crear",
+      "updateDriver": "Actualizar Vehículo"
+    },
+    "table": {
+      "name": "Nombre",
+      "document": "Documento",
+      "license": "Licencia",
+      "contact": "Contacto",
+      "status": "Estado",
+      "vehicle": "Vehículo",
+      "actions": "Acciones",
+      "expires": "Vence",
+      "notAssigned": "Sin asignar"
+    },
+    "status": {
+      "active": "ACTIVO",
+      "inactive": "INACTIVO",
+      "dayOff": "DIA_DESCANSO",
+      "incapacitated": "INCAPACITADO",
+      "onVacation": "DE_VACACIONES"
+    },
+    "messages": {
+      "loading": "Cargando...",
+      "loadingDrivers": "Cargando conductores...",
+      "noDrivers": "No se encontraron conductores",
+      "tryOtherTerms": "Intenta con otros términos de búsqueda",
+      "confirmDelete": "¿Eliminar a",
+      "deleteWarning": "Esta acción no se puede deshacer.",
+      "delete": "Eliminar",
+      "cancel": "Cancelar",
+      "deleting": "Eliminando...",
+      "deleteSuccess": "Conductor eliminado.",
+      "deleteError": "No se pudo eliminar.",
+      "saving": "Guardando conductor...",
+      "saveSuccess": "Conductor guardado.",
+      "saveError": "Error al guardar:",
+      "operationError": "No se pudo completar la operación."
+    }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "subtitle": "Gestiona tu información personal y seguridad",
+    "personalInfo": "Información Personal",
+    "security": "Seguridad",
+    "changePassword": "Cambiar Contraseña",
+    "accountInfo": "Información de la Cuenta",
+    "form": {
+      "names": "Nombres",
+      "lastnames": "Apellidos",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "documentNumber": "Número de Documento",
+      "documentNotModifiable": "El número de documento no se puede modificar",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "namesPlaceholder": "Ingresa tus nombres",
+      "lastnamesPlaceholder": "Ingresa tus apellidos",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "currentPasswordPlaceholder": "Ingresa tu contraseña actual",
+      "newPasswordPlaceholder": "Ingresa tu nueva contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+      "edit": "Editar",
+      "save": "Guardar Cambios",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "changing": "Cambiando...",
+      "change": "Cambiar"
+    },
+    "messages": {
+      "success": "Perfil actualizado exitosamente",
+      "passwordSuccess": "Contraseña cambiada exitosamente",
+      "error": "Error al actualizar el perfil",
+      "passwordError": "Error al cambiar la contraseña",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "passwordTooShort": "La nueva contraseña debe tener al menos 6 caracteres"
+    },
+    "roles": {
+      "superAdmin": "Super Administrador",
+      "manager": "Gestor",
+      "driver": "Conductor"
+    },
+    "account": {
+      "userId": "ID de Usuario",
+      "company": "Empresa",
+      "location": "Ubicación",
+      "online": "En línea"
+    }
+  },
+  "schedules": {
+    "title": "Gestión de Horarios",
+    "subtitle": "Administra los horarios y viajes del sistema",
+    "filters": {
+      "route": "Filtrar por ruta",
+      "status": "Estado",
+      "all": "Todos",
+      "scheduled": "PROGRAMADO",
+      "inProgress": "EN_PROGRESO",
+      "completed": "COMPLETADO",
+      "cancelled": "CANCELADO"
+    },
+    "form": {
+      "create": "Crear Viaje",
+      "edit": "Editar Viaje",
+      "vehicle": "Vehículo",
+      "driver": "Conductor",
+      "route": "Ruta",
+      "departureTime": "Hora de Salida",
+      "arrivalTime": "Hora de Llegada",
+      "status": "Estado",
+      "observations": "Observaciones",
+      "selectVehicle": "Seleccionar vehículo",
+      "selectDriver": "Seleccionar conductor",
+      "selectRoute": "Seleccionar ruta",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar"
+    },
+    "table": {
+      "route": "Ruta",
+      "vehicle": "Vehículo",
+      "driver": "Conductor",
+      "departure": "Salida",
+      "arrival": "Llegada",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "status": {
+      "scheduled": "Programado",
+      "inProgress": "En Progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado"
+    },
+    "messages": {
+      "loading": "Cargando horarios...",
+      "noSchedules": "No se encontraron horarios",
+      "error": "Error al cargar los horarios",
+      "success": "Horario guardado exitosamente",
+      "deleteConfirm": "¿Eliminar este horario?",
+      "deleteSuccess": "Horario eliminado",
+      "deleteError": "Error al eliminar horario"
+    }
+  },
+  "reports": {
+    "title": "Informes y Reportes",
+    "subtitle": "Genera y visualiza reportes del sistema",
+    "generate": "Generar Reporte",
+    "export": "Exportar",
+    "filters": {
+      "dateRange": "Rango de Fechas",
+      "route": "Ruta",
+      "driver": "Conductor",
+      "vehicle": "Vehículo",
+      "status": "Estado",
+      "all": "Todos"
+    },
+    "types": {
+      "trips": "Viajes",
+      "performance": "Rendimiento",
+      "routes": "Rutas",
+      "drivers": "Conductores",
+      "vehicles": "Vehículos",
+      "incidents": "Incidentes"
+    },
+    "table": {
+      "date": "Fecha",
+      "route": "Ruta",
+      "driver": "Conductor",
+      "vehicle": "Vehículo",
+      "status": "Estado",
+      "duration": "Duración",
+      "distance": "Distancia",
+      "actions": "Acciones"
+    },
+    "charts": {
+      "tripsByRoute": "Viajes por Ruta",
+      "performanceByDriver": "Rendimiento por Conductor",
+      "incidentsByType": "Incidentes por Tipo",
+      "usageByTime": "Uso por Horario"
+    },
+    "messages": {
+      "loading": "Cargando reportes...",
+      "noData": "No hay datos disponibles",
+      "generating": "Generando reporte...",
+      "exporting": "Exportando...",
+      "success": "Reporte generado exitosamente",
+      "error": "Error al generar el reporte"
+    }
+  },
+  "routes": {
+    "title": "Gestión de Rutas",
+    "subtitle": "Administra las rutas del sistema de transporte",
+    "create": "Crear Ruta",
+    "edit": "Editar Ruta",
+    "delete": "Eliminar Ruta",
+    "filters": {
+      "status": "Estado",
+      "all": "Todas",
+      "active": "Activas",
+      "inactive": "Inactivas"
+    },
+    "form": {
+      "name": "Nombre de la Ruta",
+      "origin": "Origen",
+      "destination": "Destino",
+      "distance": "Distancia (km)",
+      "duration": "Duración estimada",
+      "status": "Estado",
+      "description": "Descripción",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar"
+    },
+    "table": {
+      "name": "Nombre",
+      "origin": "Origen",
+      "destination": "Destino",
+      "distance": "Distancia",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "status": {
+      "active": "Activa",
+      "inactive": "Inactiva"
+    },
+    "messages": {
+      "loading": "Cargando rutas...",
+      "noRoutes": "No se encontraron rutas",
+      "success": "Ruta guardada exitosamente",
+      "deleteConfirm": "¿Eliminar esta ruta?",
+      "deleteSuccess": "Ruta eliminada",
+      "deleteError": "Error al eliminar ruta"
+    }
+  },
+  "vehicles": {
+    "title": "Gestión de Vehículos",
+    "subtitle": "Administra la flota de vehículos del sistema",
+    "create": "Crear Vehículo",
+    "edit": "Editar Vehículo",
+    "delete": "Eliminar Vehículo",
+    "filters": {
+      "status": "Estado",
+      "type": "Tipo",
+      "all": "Todos",
+      "active": "Activos",
+      "maintenance": "En Mantenimiento",
+      "inactive": "Inactivos"
+    },
+    "form": {
+      "plate": "Placa",
+      "internalNumber": "Número Interno",
+      "brand": "Marca",
+      "model": "Modelo",
+      "year": "Año",
+      "capacity": "Capacidad",
+      "type": "Tipo",
+      "status": "Estado",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar"
+    },
+    "table": {
+      "plate": "Placa",
+      "internalNumber": "N° Interno",
+      "brand": "Marca",
+      "model": "Modelo",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "status": {
+      "active": "Activo",
+      "maintenance": "En Mantenimiento",
+      "inactive": "Inactivo"
+    },
+    "types": {
+      "bus": "Bus",
+      "minibus": "Minibus",
+      "van": "Van"
+    },
+    "messages": {
+      "loading": "Cargando vehículos...",
+      "noVehicles": "No se encontraron vehículos",
+      "success": "Vehículo guardado exitosamente",
+      "deleteConfirm": "¿Eliminar este vehículo?",
+      "deleteSuccess": "Vehículo eliminado",
+      "deleteError": "Error al eliminar vehículo"
+    }
+  },
+  "sidebar": {
+    "navigation": "Navegación",
+    "dashboard": "Panel de Control",
+    "drivers": "Conductores",
+    "routes": "Rutas",
+    "vehicles": "Vehículos",
+    "schedules": "Horarios",
+    "reports": "Informes",
+    "admin": "Administración",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión",
+    "collapse": "Contraer menú",
+    "expand": "Expandir menú"
+  },
+  "tutorial": {
+    "welcome": {
+      "title": "¡Bienvenido a TransSync!",
+      "description": "Te guiaremos a través de las funciones principales de nuestro sistema de gestión de transporte.",
+      "start": "Comenzar tutorial",
+      "skip": "Omitir tutorial"
+    },
+    "step1": {
+      "title": "Panel de Control",
+      "description": "Aquí encontrarás un resumen completo de todas tus operaciones de transporte, incluyendo rutas activas, vehículos disponibles y estadísticas importantes."
+    },
+    "step2": {
+      "title": "Gestión de Conductores",
+      "description": "Administra toda la información de tus conductores, incluyendo sus perfiles, licencias, historial de viajes y rendimiento."
+    },
+    "step3": {
+      "title": "Gestión de Rutas",
+      "description": "Crea, modifica y supervisa todas tus rutas de transporte. Optimiza trayectos y gestiona horarios de manera eficiente."
+    },
+    "step4": {
+      "title": "Gestión de Vehículos",
+      "description": "Mantén un control completo de tu flota vehicular, incluyendo mantenimiento, ubicación en tiempo real y estado operativo."
+    },
+    "step5": {
+      "title": "Horarios y Programación",
+      "description": "Organiza y gestiona los horarios de tus rutas, asigna conductores y vehículos, y mantén todo sincronizado."
+    },
+    "step6": {
+      "title": "Informes y Analytics",
+      "description": "Accede a reportes detallados sobre el rendimiento de tu operación, análisis de costos y métricas de eficiencia."
+    },
+    "step7": {
+      "title": "Configuración de Perfil",
+      "description": "Personaliza tu experiencia configurando tus preferencias, notificaciones y datos personales."
+    },
+    "step8": {
+      "title": "ChatBot Inteligente",
+      "description": "Utiliza nuestro asistente virtual con IA para obtener respuestas rápidas sobre cualquier consulta del sistema."
+    },
+    "step9": {
+      "title": "Notificaciones en Tiempo Real",
+      "description": "Recibe alertas instantáneas sobre eventos importantes como retrasos, emergencias o cambios en rutas."
+    },
+    "step10": {
+      "title": "Configuración de Tema",
+      "description": "Personaliza la apariencia del sistema con temas claros u oscuros según tu preferencia."
+    },
+    "step11": {
+      "title": "Centro de Emergencias",
+      "description": "Accede rápidamente al panel de emergencias para reportar y gestionar situaciones críticas."
+    },
+    "navigation": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "finish": "Finalizar tutorial",
+      "skip": "Omitir",
+      "step": "Paso {{current}} de {{total}}"
+    },
+    "tooltips": {
+      "click_to_continue": "Haz clic para continuar",
+      "explore_feature": "Explora esta función"
+    }
+  },
+  "chatbot": {
+    "title": "Asistente TransSync",
+    "initialMessage": "Hola! Soy el asistente virtual de TransSync. Puedo ayudarte con información actual sobre conductores, vehículos, rutas y mucho más. ¿En qué puedo ayudarte hoy?",
+    "connected": "Conectado",
+    "disconnected": "Sin conexión",
+    "verifying": "Verificando...",
+    "typing": "Escribiendo...",
+    "quietMode": "Modo silencioso",
+    "quietModeActivated": "Modo silencioso activado",
+    "activateQuietMode": "Activar modo silencioso",
+    "deactivateQuietMode": "Desactivar modo silencioso",
+    "minimize": "Minimizar",
+    "expand": "Expandir",
+    "close": "Cerrar chat",
+    "openChat": "Abrir chat de asistencia",
+    "send": "Enviar",
+    "placeholder": "Pregúntame sobre conductores, vehículos, rutas... (Enter para enviar)",
+    "connectionError": "Sin conexión al servidor. Verifica tu internet y reintenta.",
+    "retry": "Reintentar",
+    "notifications": "notificación(es) en tiempo real",
+    "viewAll": "Ver todas",
+    "clear": "Limpiar",
+    "lastNotification": "Última:",
+    "connectedAs": "Conectado como",
+    "realTimeNotification": "Notificación en Tiempo Real",
+    "allNotifications": "Todas las Notificaciones",
+    "error": "Error",
+    "processingError": "Lo siento, ocurrió un error procesando tu consulta. Por favor verifica tu conexión e intenta nuevamente."
+  }
+}

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos adicionales para el tutorial */
+.tutorial-highlight {
+  @apply relative;
+}
+
+.tutorial-highlight::after {
+  content: '';
+  @apply absolute inset-0 rounded-lg border-2 border-primary-500 animate-pulse pointer-events-none;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.tutorial-tooltip {
+  @apply bg-primary-600 text-white px-3 py-1 rounded-lg text-sm shadow-lg;
+  animation: tutorialPulse 2s ease-in-out infinite;
+}
+
+@keyframes tutorialPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Scrollbar personalizado para el tutorial */
+.tutorial-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tutorial-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800 rounded;
+}
+
+.tutorial-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary-400 rounded;
+}
+
+.tutorial-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-500;
+}
