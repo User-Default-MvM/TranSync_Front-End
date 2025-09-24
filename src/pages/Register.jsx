@@ -227,10 +227,6 @@ const Register = () => {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-3">{t('register.title')}</h2>
               <p className="text-text-secondary-light dark:text-text-secondary-dark text-base md:text-lg">{t('register.subtitle')}</p>
 
-              {/* Language Switcher */}
-              <div className="flex justify-center mt-4 mb-4">
-                <LanguageSwitcher />
-              </div>
 
               <div className="mt-4 p-3 md:p-4 bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-xl">
                 <div className="flex items-center text-blue-700 dark:text-blue-300 text-sm">
