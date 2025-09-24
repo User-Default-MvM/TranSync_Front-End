@@ -17,7 +17,6 @@ import {
 
 // Importar el servicio de autenticación
 import authAPI from '../utilidades/authAPI';
-import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Register = () => {
   const { t } = useTranslation();
