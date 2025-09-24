@@ -5,7 +5,7 @@ import axios from "axios";
 // CONFIGURACIÓN BASE
 // ================================
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://transyncbackend-production.up.railway.app";
-const REQUEST_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 10000;
+const REQUEST_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 30000; // Aumentado a 30 segundos
 
 console.log('🚀 BaseAPI initialized with URL:', API_BASE_URL);
 
