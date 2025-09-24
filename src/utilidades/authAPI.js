@@ -422,8 +422,9 @@ const authAPI = {
       try {
         response = await apiClient.get('/api/auth/health', { timeout: 5000 });
       } catch (error) {
-        // Fallback a health check general
-        response = await fetch("http://localhost:5000/api/health", {
+        // Fallback a health check general usando la URL configurada
+        const apiUrl = process.env.REACT_APP_API_URL || "https://transyncbackend-production.up.railway.app";
+        response = await fetch(`${apiUrl}/api/health`, {
           method: "GET",
           signal: AbortSignal.timeout(5000)
         });

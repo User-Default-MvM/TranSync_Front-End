@@ -4,7 +4,7 @@ import axios from "axios";
 // ================================
 // CONFIGURACIÓN BASE
 // ================================
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://transyncbackend-production.up.railway.app";
 const REQUEST_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 10000;
 
 // Crear instancia de axios con configuración base SIN /api

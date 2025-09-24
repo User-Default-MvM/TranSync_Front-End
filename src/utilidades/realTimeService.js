@@ -36,7 +36,7 @@ class RealTimeService {
 
     try {
       // Conectar al servidor WebSocket
-      this.socket = io(process.env.REACT_APP_WS_URL || process.env.REACT_APP_API_URL || 'http://localhost:5000', {
+      this.socket = io(process.env.REACT_APP_WS_URL || process.env.REACT_APP_API_URL || 'https://transyncbackend-production.up.railway.app', {
         transports: ['websocket', 'polling'],
         timeout: 10000, // Aumentado
         forceNew: true,
@@ -743,7 +743,7 @@ class RealTimeService {
   async getServiceStats() {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/realtime/stats`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://transyncbackend-production.up.railway.app'}/api/realtime/stats`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -767,7 +767,7 @@ class RealTimeService {
   async getConnectedClients() {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/realtime/clients`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://transyncbackend-production.up.railway.app'}/api/realtime/clients`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -791,7 +791,7 @@ class RealTimeService {
   async sendNotificationViaAPI(targetType, targetId, event, data, priority = 'medium') {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/realtime/notifications`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://transyncbackend-production.up.railway.app'}/api/realtime/notifications`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -823,7 +823,7 @@ class RealTimeService {
   async getPerformanceMetrics() {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/realtime/metrics`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://transyncbackend-production.up.railway.app'}/api/realtime/metrics`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
