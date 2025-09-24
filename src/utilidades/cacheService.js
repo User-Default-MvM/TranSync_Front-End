@@ -322,6 +322,12 @@ const cacheService = {
    * Pre-cargar datos comunes
    */
   preloadCommonQueries: async function(userContext, apiClient) {
+    // Solo pre-cargar si tenemos contexto de usuario válido
+    if (!userContext || !userContext.idEmpresa) {
+      console.log('⏭️ Skipping preload - no valid user context');
+      return;
+    }
+
     const commonQueries = [
       {
         name: 'active_drivers',
@@ -352,6 +358,7 @@ const cacheService = {
         console.log(`📦 Preloaded common query: ${query.name}`);
       } catch (error) {
         console.error(`Error preloading query ${query.name}:`, error);
+        // No propagar el error para evitar romper la inicialización
       }
     }
   },

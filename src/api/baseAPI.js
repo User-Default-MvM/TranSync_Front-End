@@ -7,6 +7,8 @@ import axios from "axios";
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://transyncbackend-production.up.railway.app";
 const REQUEST_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 10000;
 
+console.log('🚀 BaseAPI initialized with URL:', API_BASE_URL);
+
 // Crear instancia de axios con configuración base SIN /api
 export const apiClient = axios.create({
   baseURL: API_BASE_URL, // Sin /api aquí - se maneja en cada servicio
@@ -93,6 +95,8 @@ apiClient.interceptors.response.use(
         fullURL: error.config
           ? `${API_BASE_URL}${error.config.url}`
           : "Unknown",
+        errorObject: error,
+        responseData: error.response?.data
       });
     }
 
