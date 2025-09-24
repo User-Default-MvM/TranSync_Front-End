@@ -95,7 +95,7 @@ const AdminDashboard = () => {
       setLoading(false);
       setError(t('adminDashboard.messages.noPermission'));
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const filtered = searchTerm

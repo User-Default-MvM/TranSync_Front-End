@@ -186,7 +186,7 @@ export const useTutorial = () => {
       page: '/profile',
       isNavigation: false
     }
-  ], [t]);
+  ], []);
 
   // Función para verificar si un elemento existe en el DOM
   const elementExists = useCallback((selector) => {

@@ -102,7 +102,7 @@ const ChatBot = ({
     if (isOpen && connectionStatus === 'unknown') {
       verificarConexion();
     }
-  }, [isOpen, connectionStatus, messages.length, initialMessage]);
+  }, [isOpen, connectionStatus, messages.length, initialMessage, t]);
 
   // Manejar notificaciones en tiempo real
   const handleRealTimeNotification = useCallback((notification) => {
@@ -133,7 +133,7 @@ const ChatBot = ({
     setTimeout(() => {
       scrollToBottom();
     }, 100);
-  }, [quietMode]);
+  }, [quietMode, t]);
 
   // Configurar WebSocket para notificaciones en tiempo real
   useEffect(() => {

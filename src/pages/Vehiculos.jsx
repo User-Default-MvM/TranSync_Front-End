@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { FaBus, FaCheckCircle, FaTimesCircle, FaSearch, FaFilter, FaPlus, FaEdit, FaTrash, FaUser, FaExclamationTriangle, FaCogs, FaRoad } from "react-icons/fa";
 import vehiculosAPI from '../utilidades/vehiculosAPI';
 import driversAPI from '../utilidades/driversAPI';
-import { apiClient } from '../api/baseAPI';
 
 const Vehiculos = () => {
   const { t } = useTranslation();
