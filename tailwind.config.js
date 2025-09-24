@@ -82,25 +82,25 @@ module.exports = {
         },
         // Colores específicos para el tema
         background: {
-          light: '#ffffff',
+          light: '#f8fafc',
           dark: '#0f172a',
         },
         surface: {
-          light: '#f8fafc',
+          light: '#f1f5f9',
           dark: '#1e293b',
         },
         text: {
           primary: {
-            light: '#0f172a',
+            light: '#1e293b',
             dark: '#f1f5f9',
           },
           secondary: {
-            light: '#475569',
+            light: '#64748b',
             dark: '#94a3b8',
           },
         },
         border: {
-          light: '#e2e8f0',
+          light: '#cbd5e1',
           dark: '#334155',
         }
       },

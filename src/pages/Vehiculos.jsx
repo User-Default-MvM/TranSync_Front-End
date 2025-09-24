@@ -253,7 +253,7 @@ const Vehiculos = () => {
   return (
     <div className="p-4 md:p-6 bg-surface-light dark:bg-background-dark min-h-screen text-text-primary-light dark:text-text-primary-dark">
       {error && (
-        <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded mb-4">
+        <div className="bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
@@ -268,41 +268,41 @@ const Vehiculos = () => {
 
           {/* Mobile Stats Grid */}
           <div className="grid grid-cols-2 lg:hidden gap-3 w-full lg:w-auto">
-            <div key="stats-total" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
+            <div key="stats-total" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
               <span className="text-lg md:text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
-              <span className="text-xs md:text-sm text-slate-500 dark:text-slate-300">{t('vehicles.filters.all')}</span>
+              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.filters.all')}</span>
             </div>
-            <div key="stats-disponibles" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
+            <div key="stats-disponibles" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
               <span className="text-lg md:text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
-              <span className="text-xs md:text-sm text-slate-500 dark:text-slate-300">{t('vehicles.status.active')}</span>
+              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.active')}</span>
             </div>
-            <div key="stats-enRuta" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
+            <div key="stats-enRuta" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
               <span className="text-lg md:text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
-              <span className="text-xs md:text-sm text-slate-500 dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
+              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
             </div>
-            <div key="stats-mantenimiento" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
+            <div key="stats-mantenimiento" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
               <span className="text-lg md:text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
-              <span className="text-xs md:text-sm text-slate-500 dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
+              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
             </div>
           </div>
 
           {/* Desktop Stats */}
           <div className="hidden lg:flex gap-5">
-            <div key="stats-total-desktop" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
+            <div key="stats-total-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
               <span className="text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
-              <span className="text-sm text-slate-500 dark:text-slate-300">Total</span>
+              <span className="text-sm text-text-secondary-light dark:text-slate-300">Total</span>
             </div>
-            <div key="stats-disponibles-desktop" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
+            <div key="stats-disponibles-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
               <span className="text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
-              <span className="text-sm text-slate-500 dark:text-slate-300">Disponibles</span>
+              <span className="text-sm text-text-secondary-light dark:text-slate-300">Disponibles</span>
             </div>
-            <div key="stats-enRuta-desktop" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
+            <div key="stats-enRuta-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
               <span className="text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
-              <span className="text-sm text-slate-500 dark:text-slate-300">En Ruta</span>
+              <span className="text-sm text-text-secondary-light dark:text-slate-300">En Ruta</span>
             </div>
-            <div key="stats-mantenimiento-desktop" className="flex flex-col items-center bg-gray-50 dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
+            <div key="stats-mantenimiento-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
               <span className="text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
-              <span className="text-sm text-slate-500 dark:text-slate-300">Mantenimiento</span>
+              <span className="text-sm text-text-secondary-light dark:text-slate-300">Mantenimiento</span>
             </div>
           </div>
         </div>
@@ -311,22 +311,22 @@ const Vehiculos = () => {
       {/* Filtros */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div key="filters-search" className="flex-1 relative min-w-0">
-          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
+          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400" />
           <input
             type="text"
             placeholder="Buscar por placa, marca, modelo o conductor..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full py-3 pl-10 pr-4 rounded-lg border border-gray-300 dark:border-slate-600 text-base bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none min-h-[48px]"
+            className="w-full py-3 pl-10 pr-4 rounded-lg border border-border-light dark:border-slate-600 text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none min-h-[48px]"
           />
         </div>
 
         <div key="filters-select" className="flex-1 relative min-w-0 md:max-w-48">
-          <FaFilter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" />
+          <FaFilter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400 pointer-events-none" />
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="w-full py-3 pl-10 pr-4 rounded-lg border border-gray-300 dark:border-slate-600 text-base bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none appearance-none min-h-[48px]"
+            className="w-full py-3 pl-10 pr-4 rounded-lg border border-border-light dark:border-slate-600 text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 cursor-pointer transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none appearance-none min-h-[48px]"
           >
             <option value="all">Todos los vehículos</option>
             {estadosVehiculo.map(estado => (
@@ -356,8 +356,8 @@ const Vehiculos = () => {
 
           return (
             <div key={vehiculo.idVehiculo} className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="p-4 border-b border-gray-100 dark:border-slate-700 flex justify-between items-center">
-                <h3 className="m-0 text-lg text-slate-800 dark:text-slate-200 font-semibold">
+              <div className="p-4 border-b border-border-light dark:border-slate-700 flex justify-between items-center">
+                <h3 className="m-0 text-lg text-text-primary-light dark:text-slate-200 font-semibold">
                   {vehiculo.marVehiculo} {vehiculo.modVehiculo}
                 </h3>
                 <div className="flex items-center gap-2">
@@ -372,7 +372,7 @@ const Vehiculos = () => {
                     key={`select-${vehiculo.idVehiculo}`}
                     value={vehiculo.estVehiculo}
                     onChange={(e) => handleChangeStatus(vehiculo, e.target.value)}
-                    className="text-xs border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded px-2 py-1"
+                    className="text-xs border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 rounded px-2 py-1"
                     title="Cambiar estado"
                   >
                     {estadosVehiculo.map(estado => (
@@ -386,40 +386,40 @@ const Vehiculos = () => {
 
               <div className="p-4">
                 {/* detalles */}
-                <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Placa:</span>
-                  <span className="text-slate-800 dark:text-slate-200 text-sm font-mono">{vehiculo.plaVehiculo}</span>
+                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Placa:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-sm font-mono">{vehiculo.plaVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Número interno:</span>
-                  <span className="text-slate-800 dark:text-slate-200 text-sm">{vehiculo.numVehiculo}</span>
+                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Número interno:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-sm">{vehiculo.numVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Año:</span>
-                  <span className="text-slate-800 dark:text-slate-200 text-sm">{vehiculo.anioVehiculo}</span>
+                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Año:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-sm">{vehiculo.anioVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Conductor:</span>
-                  <span className="text-slate-800 dark:text-slate-200 text-sm flex items-center gap-1">
+                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Conductor:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-sm flex items-center gap-1">
                     {vehiculo.conductor ? (
                       <>
                         <FaUser className="text-green-500" />
                         {vehiculo.conductor.nombre}
                       </>
                     ) : (
-                      <span className="text-gray-400 dark:text-slate-500">Sin asignar</span>
+                      <span className="text-text-secondary-light dark:text-slate-500">Sin asignar</span>
                     )}
                   </span>
                 </div>
 
                 {/* fechas */}
-                <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">SOAT:</span>
+                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">SOAT:</span>
                   <span className={`text-sm flex items-center gap-1 ${soatVencido ? 'text-red-600 font-semibold' :
-                    soatProximoVencer ? 'text-orange-600 font-semibold' : 'text-slate-800 dark:text-slate-200'
+                    soatProximoVencer ? 'text-orange-600 font-semibold' : 'text-text-primary-light dark:text-slate-200'
                     }`}>
                     {(soatVencido || soatProximoVencer) && <FaExclamationTriangle />}
                     {formatDate(vehiculo.fecVenSOAT)}
@@ -427,9 +427,9 @@ const Vehiculos = () => {
                 </div>
 
                 <div className="flex justify-between py-2">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Técnica:</span>
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Técnica:</span>
                   <span className={`text-sm flex items-center gap-1 ${tecnicaVencida ? 'text-red-600 font-semibold' :
-                    tecnicaProximaVencer ? 'text-orange-600 font-semibold' : 'text-slate-800 dark:text-slate-200'
+                    tecnicaProximaVencer ? 'text-orange-600 font-semibold' : 'text-text-primary-light dark:text-slate-200'
                     }`}>
                     {(tecnicaVencida || tecnicaProximaVencer) && <FaExclamationTriangle />}
                     {formatDate(vehiculo.fecVenTec)}
@@ -437,7 +437,7 @@ const Vehiculos = () => {
                 </div>
               </div>
 
-              <div className="flex gap-2 p-4 bg-gray-50 dark:bg-slate-700">
+              <div className="flex gap-2 p-4 bg-surface-light dark:bg-slate-700">
                 <button
                   onClick={() => openEditModal(vehiculo)}
                   className="flex-1 py-2 px-4 rounded-md text-sm font-semibold cursor-pointer transition-all duration-300 border-none bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-1"
@@ -459,10 +459,10 @@ const Vehiculos = () => {
       {/* vacío */}
       {filteredVehiculos.length === 0 && !loading && (
         <div className="text-center py-12">
-          <FaBus className="text-gray-400 dark:text-slate-600 text-6xl mb-4 mx-auto" />
-          <p className="text-gray-500 dark:text-slate-400 text-lg">No se encontraron vehículos</p>
+          <FaBus className="text-text-secondary-light dark:text-slate-600 text-6xl mb-4 mx-auto" />
+          <p className="text-text-secondary-light dark:text-slate-400 text-lg">No se encontraron vehículos</p>
           {searchTerm && (
-            <p className="text-gray-400 dark:text-slate-500 text-sm">
+            <p className="text-text-secondary-light dark:text-slate-500 text-sm">
               Intenta con otros términos de búsqueda o cambia los filtros
             </p>
           )}
@@ -473,29 +473,29 @@ const Vehiculos = () => {
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-background-light dark:bg-surface-dark rounded-xl p-6 w-11/12 max-w-3xl max-h-screen overflow-y-auto text-text-primary-light dark:text-text-primary-dark">
-            <h3 className="mt-0 text-xl font-semibold border-b border-gray-100 dark:border-slate-700 pb-4 mb-4">
+            <h3 className="mt-0 text-xl font-semibold border-b border-border-light dark:border-slate-700 pb-4 mb-4">
               Agregar Nuevo Vehículo
             </h3>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="form-numero-interno" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Número Interno *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Número Interno *</label>
                 <input
                   type="text"
                   value={newVehiculo.numVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, numVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   placeholder="Ej: V001"
                 />
               </div>
 
               <div key="form-placa" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Placa *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Placa *</label>
                 <input
                   type="text"
                   value={newVehiculo.plaVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, plaVehiculo: e.target.value.toUpperCase() })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none font-mono"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none font-mono"
                   placeholder="ABC-123"
                 />
               </div>
@@ -503,23 +503,23 @@ const Vehiculos = () => {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="form-marca" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Marca *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Marca *</label>
                 <input
                   type="text"
                   value={newVehiculo.marVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, marVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   placeholder="Ej: Mercedes-Benz"
                 />
               </div>
 
               <div key="form-modelo" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Modelo *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Modelo *</label>
                 <input
                   type="text"
                   value={newVehiculo.modVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, modVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   placeholder="Ej: O500"
                 />
               </div>
@@ -527,23 +527,23 @@ const Vehiculos = () => {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="form-anio" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Año *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Año *</label>
                 <input
                   type="number"
                   value={newVehiculo.anioVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, anioVehiculo: parseInt(e.target.value) })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   min="1950"
                   max={new Date().getFullYear() + 1}
                 />
               </div>
 
               <div key="form-estado" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Estado</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Estado</label>
                 <select
                   value={newVehiculo.estVehiculo}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, estVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 >
                   {estadosVehiculo.map(estado => (
                     <option key={estado.value} value={estado.value}>{estado.label}</option>
@@ -554,34 +554,34 @@ const Vehiculos = () => {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="form-soat" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Vencimiento SOAT *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Vencimiento SOAT *</label>
                 <input
                   type="date"
                   value={newVehiculo.fecVenSOAT}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, fecVenSOAT: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   min={new Date().toISOString().split('T')[0]}
                 />
               </div>
 
               <div key="form-tecnica" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Vencimiento Técnica *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Vencimiento Técnica *</label>
                 <input
                   type="date"
                   value={newVehiculo.fecVenTec}
                   onChange={(e) => setNewVehiculo({ ...newVehiculo, fecVenTec: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   min={new Date().toISOString().split('T')[0]}
                 />
               </div>
             </div>
 
             <div className="flex flex-col mb-6">
-              <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Conductor Asignado</label>
+              <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Conductor Asignado</label>
               <select
                 value={newVehiculo.idConductorAsignado}
                 onChange={(e) => setNewVehiculo({ ...newVehiculo, idConductorAsignado: e.target.value })}
-                className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
               >
                 <option value="">Sin conductor asignado</option>
                 {conductoresDisponibles.map(conductor => (
@@ -594,7 +594,7 @@ const Vehiculos = () => {
 
             <div className="flex justify-end gap-4">
               <button
-                className="py-3 px-6 rounded-md text-base font-semibold cursor-pointer transition-all duration-300 bg-gray-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 border-none hover:bg-gray-300 dark:hover:bg-slate-600"
+                className="py-3 px-6 rounded-md text-base font-semibold cursor-pointer transition-all duration-300 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 border border-border-light dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-slate-600"
                 onClick={() => {
                   setShowAddModal(false);
                   resetNewVehiculo();
@@ -618,73 +618,73 @@ const Vehiculos = () => {
       {showEditModal && selectedVehiculo && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-background-light dark:bg-surface-dark rounded-xl p-6 w-11/12 max-w-3xl max-h-screen overflow-y-auto text-text-primary-light dark:text-text-primary-dark">
-            <h3 className="mt-0 text-xl font-semibold border-b border-gray-100 dark:border-slate-700 pb-4 mb-4">
+            <h3 className="mt-0 text-xl font-semibold border-b border-border-light dark:border-slate-700 pb-4 mb-4">
               Editar Vehículo - {selectedVehiculo.plaVehiculo}
             </h3>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="edit-form-numero-interno" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Número Interno *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Número Interno *</label>
                 <input
                   type="text"
                   value={editVehiculo.numVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, numVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 />
               </div>
 
               <div key="edit-form-placa" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Placa *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Placa *</label>
                 <input
                   type="text"
                   value={editVehiculo.plaVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, plaVehiculo: e.target.value.toUpperCase() })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none font-mono"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none font-mono"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="edit-form-marca" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Marca *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Marca *</label>
                 <input
                   type="text"
                   value={editVehiculo.marVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, marVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 />
               </div>
 
               <div key="edit-form-modelo" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Modelo *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Modelo *</label>
                 <input
                   type="text"
                   value={editVehiculo.modVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, modVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="edit-form-anio" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Año *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Año *</label>
                 <input
                   type="number"
                   value={editVehiculo.anioVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, anioVehiculo: parseInt(e.target.value) })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                   min="1950"
                   max={new Date().getFullYear() + 1}
                 />
               </div>
 
               <div key="edit-form-estado" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Estado</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Estado</label>
                 <select
                   value={editVehiculo.estVehiculo || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, estVehiculo: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 >
                   {estadosVehiculo.map(estado => (
                     <option key={estado.value} value={estado.value}>{estado.label}</option>
@@ -695,32 +695,32 @@ const Vehiculos = () => {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div key="edit-form-soat" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Vencimiento SOAT *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Vencimiento SOAT *</label>
                 <input
                   type="date"
                   value={editVehiculo.fecVenSOAT || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, fecVenSOAT: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 />
               </div>
 
               <div key="edit-form-tecnica" className="flex flex-col">
-                <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Vencimiento Técnica *</label>
+                <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Vencimiento Técnica *</label>
                 <input
                   type="date"
                   value={editVehiculo.fecVenTec || ''}
                   onChange={(e) => setEditVehiculo({ ...editVehiculo, fecVenTec: e.target.value })}
-                  className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 />
               </div>
             </div>
 
             <div className="flex flex-col mb-6">
-              <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Conductor Asignado</label>
+              <label className="text-sm font-semibold text-text-secondary-light dark:text-slate-400 mb-2">Conductor Asignado</label>
               <select
                 value={editVehiculo.idConductorAsignado || ''}
                 onChange={(e) => setEditVehiculo({ ...editVehiculo, idConductorAsignado: e.target.value })}
-                className="py-3 px-3 rounded-md border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="py-3 px-3 rounded-md border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 text-base transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
               >
                 <option value="">Sin conductor asignado</option>
                 {selectedVehiculo.conductor && (
@@ -740,7 +740,7 @@ const Vehiculos = () => {
 
             <div className="flex justify-end gap-4">
               <button
-                className="py-3 px-6 rounded-md text-base font-semibold cursor-pointer transition-all duration-300 bg-gray-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 border-none hover:bg-gray-300 dark:hover:bg-slate-600"
+                className="py-3 px-6 rounded-md text-base font-semibold cursor-pointer transition-all duration-300 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 border border-border-light dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-slate-600"
                 onClick={() => {
                   setShowEditModal(false);
                   setSelectedVehiculo(null);

@@ -10,23 +10,23 @@ import { useTheme } from '../context/ThemeContext';
 // --- COMPONENTES AUXILIARES ---
 
 const StatCard = ({ title, value, colorClass = 'text-white', theme }) => (
-    <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
         <h3 className={`text-2xl font-bold ${colorClass}`}>{value}</h3>
-        <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{title}</p>
+        <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>{title}</p>
     </div>
 );
 
 const InputField = ({ label, theme, ...props }) => (
     <div>
-        <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{label}</label>
-        <input {...props} className={`w-full p-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`} />
+        <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-text-primary-light'}`}>{label}</label>
+        <input {...props} className={`w-full p-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-700 text-white border-gray-600' : 'bg-surface-light text-text-primary-light border-border-light'}`} />
     </div>
 );
 
 const SelectField = ({ label, options, theme, ...props }) => (
     <div>
-        <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{label}</label>
-        <select {...props} className={`w-full p-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}>
+        <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-text-primary-light'}`}>{label}</label>
+        <select {...props} className={`w-full p-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-700 text-white border-gray-600' : 'bg-surface-light text-text-primary-light border-border-light'}`}>
             {options.map(opt =>
                 typeof opt === 'object'
                 ? <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -55,8 +55,8 @@ const DriverForm = ({ initialData, onSave, onCancel, theme }) => {
                     <SelectField label="Estado" name="estConductor" value={formData.estConductor} onChange={handleChange} options={['ACTIVO', 'INACTIVO', 'DIA_DESCANSO', 'INCAPACITADO', 'DE_VACACIONES']} theme={theme} />
                 )}
             </div>
-            <div className={`flex justify-end gap-3 pt-4 border-t mt-4 ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                <button type="button" onClick={onCancel} className={`px-4 py-2 border rounded-lg ${theme === 'dark' ? 'border-gray-600 hover:bg-gray-700 text-white' : 'border-gray-300 hover:bg-gray-100 text-gray-800'}`}>Cancelar</button>
+            <div className={`flex justify-end gap-3 pt-4 border-t mt-4 ${theme === 'dark' ? 'border-gray-700' : 'border-border-light'}`}>
+                <button type="button" onClick={onCancel} className={`px-4 py-2 border rounded-lg ${theme === 'dark' ? 'border-gray-600 hover:bg-gray-700 text-white' : 'border-border-light hover:bg-background-light text-text-primary-light'}`}>Cancelar</button>
                 <button type="submit" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Guardar</button>
             </div>
         </form>
@@ -172,11 +172,11 @@ const Drivers = () => {
         ));
     };
 
-    if (loading) return <div className={`p-8 min-h-full text-center ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'}`}>Cargando...</div>;
+    if (loading) return <div className={`p-8 min-h-full text-center ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-surface-light text-text-primary-light'}`}>Cargando...</div>;
 
     return (
-        <div className={`p-4 md:p-8 min-h-full ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'}`}>
-            <h1 className={`text-2xl md:text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`} data-tutorial="drivers">{t('drivers.title')}</h1>
+        <div className={`p-4 md:p-8 min-h-full ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-surface-light text-text-primary-light'}`}>
+            <h1 className={`text-2xl md:text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`} data-tutorial="drivers">{t('drivers.title')}</h1>
 
             {/* === BLOQUE DE TARJETAS AÑADIDO === */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 my-6">
@@ -188,14 +188,14 @@ const Drivers = () => {
                 <StatCard title={t('drivers.stats.inactive')} value={stats.inactivos} theme={theme} />
             </div>
 
-            <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
                 <div className="flex flex-wrap justify-between items-center gap-4">
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16}/>
-                        <input type="text" placeholder={t('drivers.search.placeholder')} value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className={`w-full sm:w-72 pl-10 pr-4 py-2 rounded-lg border min-h-[44px] ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-300 text-gray-800'}`}/>
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-gray-400" size={16}/>
+                        <input type="text" placeholder={t('drivers.search.placeholder')} value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className={`w-full sm:w-72 pl-10 pr-4 py-2 rounded-lg border min-h-[44px] ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-white' : 'bg-surface-light border-border-light text-text-primary-light'}`}/>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button onClick={() => setShowFilters(!showFilters)} className={`px-4 py-2 rounded-lg flex items-center gap-2 min-h-[44px] ${showFilters ? 'bg-blue-600 text-white' : theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}>
+                        <button onClick={() => setShowFilters(!showFilters)} className={`px-4 py-2 rounded-lg flex items-center gap-2 min-h-[44px] ${showFilters ? 'bg-blue-600 text-white' : theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-surface-light hover:bg-background-light text-text-primary-light'}`}>
                             <Filter size={16} /> {t('drivers.search.filters')}
                         </button>
                         <button onClick={() => setModal({ type: 'create', data: { nomUsuario: '', apeUsuario: '', email: '', numDocUsuario: '', telUsuario: '', tipLicConductor: 'B1', fecVenLicConductor: '' }})} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg flex items-center gap-2 min-h-[44px] text-white">
@@ -205,7 +205,7 @@ const Drivers = () => {
                 </div>
 
                 {showFilters && (
-                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 mt-4 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 mt-4 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-border-light'}`}>
                         <SelectField label="Estado" name="estConductor" value={filters.estConductor} onChange={handleFilterChange} options={['', 'ACTIVO', 'INACTIVO', 'DIA_DESCANSO', 'INCAPACITADO', 'DE_VACACIONES']} theme={theme} />
                         <SelectField label="Tipo de licencia" name="tipLicConductor" value={filters.tipLicConductor} onChange={handleFilterChange} options={['', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']} theme={theme} />
                         <SelectField label="Asignación de vehículo" name="conVehiculo" value={filters.conVehiculo} onChange={handleFilterChange} options={[{value:'', label:'Todos'}, {value:'true', label:'Con vehículo'}, {value:'false', label:'Sin vehículo'}]} theme={theme} />
@@ -215,8 +215,8 @@ const Drivers = () => {
 
             {modal.type && (
                 <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4">
-                    <div className={`rounded-lg w-full max-w-2xl border ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                        <h2 className={`text-xl font-bold p-6 border-b ${theme === 'dark' ? 'border-gray-700 text-white' : 'border-gray-200 text-gray-800'}`}>{modal.type === 'create' ? 'Crear' : 'Editar'} Conductor</h2>
+                    <div className={`rounded-lg w-full max-w-2xl border ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-background-light border-border-light'}`}>
+                        <h2 className={`text-xl font-bold p-6 border-b ${theme === 'dark' ? 'border-gray-700 text-white' : 'border-border-light text-text-primary-light'}`}>{modal.type === 'create' ? 'Crear' : 'Editar'} Conductor</h2>
                         <DriverForm initialData={modal.data} onSave={handleSave} onCancel={() => setModal({ type: null, data: null })} theme={theme}/>
                     </div>
                 </div>
@@ -227,17 +227,17 @@ const Drivers = () => {
                 {loading ? (
                     <div className="text-center py-12">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-                        <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Cargando conductores...</p>
+                        <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Cargando conductores...</p>
                     </div>
                 ) : filteredDrivers.length ? (
                     filteredDrivers.map(driver => (
-                        <div key={driver.idConductor} className={`rounded-xl shadow-sm border p-4 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                        <div key={driver.idConductor} className={`rounded-xl shadow-sm border p-4 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-background-light border-border-light'}`}>
                             <div className="flex justify-between items-start mb-3">
                                 <div className="flex-1 min-w-0">
-                                    <h3 className={`font-semibold text-sm truncate ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+                                    <h3 className={`font-semibold text-sm truncate ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>
                                         {driver.nomUsuario} {driver.apeUsuario}
                                     </h3>
-                                    <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                    <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>
                                         {driver.numDocUsuario}
                                     </p>
                                 </div>
@@ -248,20 +248,20 @@ const Drivers = () => {
 
                             <div className="space-y-2 mb-3">
                                 <div className="flex justify-between items-center">
-                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Licencia:</span>
-                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{driver.tipLicConductor}</span>
+                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Licencia:</span>
+                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{driver.tipLicConductor}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Vence:</span>
-                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{formatDate(driver.fecVenLicConductor)}</span>
+                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Vence:</span>
+                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{formatDate(driver.fecVenLicConductor)}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Vehículo:</span>
-                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{driver.plaVehiculo || 'Sin asignar'}</span>
+                                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Vehículo:</span>
+                                    <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{driver.plaVehiculo || 'Sin asignar'}</span>
                                 </div>
                                 {driver.telUsuario && (
                                     <div className="flex justify-between items-center">
-                                        <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Teléfono:</span>
+                                        <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Teléfono:</span>
                                         <a href={`tel:${driver.telUsuario}`} className="text-sm text-blue-400 hover:underline">
                                             {driver.telUsuario}
                                         </a>
@@ -269,17 +269,17 @@ const Drivers = () => {
                                 )}
                             </div>
 
-                            <div className={`flex justify-end gap-2 pt-2 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                            <div className={`flex justify-end gap-2 pt-2 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-border-light'}`}>
                                 <button
                                     onClick={() => setModal({ type: 'edit', data: { ...driver, fecVenLicConductor: driver.fecVenLicConductor.split('T')[0] } })}
-                                    className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-gray-100'}`}
+                                    className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-background-light'}`}
                                     title="Editar conductor"
                                 >
                                     <Edit size={16}/>
                                 </button>
                                 <button
                                     onClick={() => handleDelete(driver)}
-                                    className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-gray-100'}`}
+                                    className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-background-light'}`}
                                     title="Eliminar conductor"
                                 >
                                     <Trash2 size={16}/>
@@ -289,10 +289,10 @@ const Drivers = () => {
                     ))
                 ) : (
                     <div className="text-center py-12">
-                        <div className={`text-4xl mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>👥</div>
-                        <p className={`mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>No se encontraron conductores</p>
+                        <div className={`text-4xl mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>👥</div>
+                        <p className={`mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>No se encontraron conductores</p>
                         {searchTerm && (
-                            <p className={`text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                            <p className={`text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-text-secondary-light'}`}>
                                 Intenta con otros términos de búsqueda
                             </p>
                         )}
@@ -301,10 +301,10 @@ const Drivers = () => {
             </div>
 
             {/* Desktop Table View */}
-            <div className={`hidden md:block overflow-x-auto rounded-lg mt-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`hidden md:block overflow-x-auto rounded-lg mt-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
                 <table className="w-full text-left text-sm">
                     <thead>
-                        <tr className={`border-b ${theme === 'dark' ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-700'}`}>
+                        <tr className={`border-b ${theme === 'dark' ? 'border-gray-700 text-gray-400' : 'border-border-light text-text-primary-light'}`}>
                             <th className="p-4 font-semibold">Nombre</th>
                             <th className="p-4 font-semibold">Documento</th>
                             <th className="p-4 font-semibold">Licencia</th>
@@ -315,14 +315,14 @@ const Drivers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <tr><td colSpan="7" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Cargando...</td></tr>}
+                        {loading && <tr><td colSpan="7" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Cargando...</td></tr>}
                         {!loading && filteredDrivers.map(driver => (
-                            <tr key={driver.idConductor} className={`border-b ${theme === 'dark' ? 'border-gray-700 hover:bg-gray-700/50' : 'border-gray-200 hover:bg-gray-50'}`}>
-                                <td className={`p-4 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{driver.nomUsuario} {driver.apeUsuario}</td>
-                                <td className={`p-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{driver.numDocUsuario}</td>
+                            <tr key={driver.idConductor} className={`border-b ${theme === 'dark' ? 'border-gray-700 hover:bg-gray-700/50' : 'border-border-light hover:bg-background-light'}`}>
+                                <td className={`p-4 font-medium ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{driver.nomUsuario} {driver.apeUsuario}</td>
+                                <td className={`p-4 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>{driver.numDocUsuario}</td>
                                 <td className="p-4">
-                                    <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{driver.tipLicConductor}</div>
-                                    <div className={`text-xs flex items-center gap-1 mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}><Calendar size={12} /><span>Vence: {formatDate(driver.fecVenLicConductor)}</span></div>
+                                    <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{driver.tipLicConductor}</div>
+                                    <div className={`text-xs flex items-center gap-1 mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-text-secondary-light'}`}><Calendar size={12} /><span>Vence: {formatDate(driver.fecVenLicConductor)}</span></div>
                                 </td>
                                 <td className="p-4">
                                     <a href={`tel:${driver.telUsuario}`} className="flex items-center gap-2 text-blue-400 hover:underline"><Phone size={14} />{driver.telUsuario || 'N/A'}</a>
@@ -332,10 +332,10 @@ const Drivers = () => {
                                         {driver.estConductor.replace('_', ' ')}
                                     </span>
                                 </td>
-                                <td className={`p-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{driver.plaVehiculo || 'Sin asignar'}</td>
+                                <td className={`p-4 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>{driver.plaVehiculo || 'Sin asignar'}</td>
                                 <td className="p-4 text-center">
-                                    <button onClick={() => setModal({ type: 'edit', data: { ...driver, fecVenLicConductor: driver.fecVenLicConductor.split('T')[0] }})} className={`p-2 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-gray-100'}`}><Edit size={16}/></button>
-                                    <button onClick={() => handleDelete(driver)} className={`p-2 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-gray-100'}`}><Trash2 size={16}/></button>
+                                    <button onClick={() => setModal({ type: 'edit', data: { ...driver, fecVenLicConductor: driver.fecVenLicConductor.split('T')[0] }})} className={`p-2 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-background-light'}`}><Edit size={16}/></button>
+                                    <button onClick={() => handleDelete(driver)} className={`p-2 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-background-light'}`}><Trash2 size={16}/></button>
                                 </td>
                             </tr>
                         ))}

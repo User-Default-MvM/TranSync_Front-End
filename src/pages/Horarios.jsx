@@ -468,13 +468,13 @@ const Horarios = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 p-4 lg:p-6 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen w-full bg-surface-light dark:bg-gray-900 p-4 lg:p-6 text-text-primary-light dark:text-gray-100">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h2 className="text-xl lg:text-2xl font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100">
+        <h2 className="text-xl lg:text-2xl font-semibold flex items-center gap-2 text-text-primary-light dark:text-gray-100">
           <Clock className="text-indigo-600 w-6 h-6 lg:w-7 lg:h-7" />
           {t('schedules.title')}
-          <span className="text-sm lg:text-base font-normal text-gray-500 dark:text-gray-400 ml-2">
+          <span className="text-sm lg:text-base font-normal text-text-secondary-light dark:text-gray-400 ml-2">
             ({filtered.length} viajes)
           </span>
         </h2>
@@ -482,7 +482,7 @@ const Horarios = () => {
           <button
             onClick={fetchAll}
             disabled={loading}
-            className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 min-h-[44px]"
+            className="flex items-center gap-2 px-3 py-2 bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 min-h-[44px]"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             <span className="hidden sm:inline">{t('schedules.form.save')}</span>
@@ -500,14 +500,14 @@ const Horarios = () => {
 
       {/* Messages */}
       {error && (
-        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
+        <div className="mb-4 p-4 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
           <AlertTriangle className="w-5 h-5 flex-shrink-0" />
           <span className="text-sm">{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="mb-4 p-4 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg flex items-center gap-2 text-green-700 dark:text-green-200">
+        <div className="mb-4 p-4 bg-surface-light dark:bg-green-900 border border-border-light dark:border-green-700 rounded-lg flex items-center gap-2 text-green-700 dark:text-green-200">
           <CheckCircle className="w-5 h-5 flex-shrink-0" />
           <span className="text-sm">{success}</span>
         </div>
@@ -515,22 +515,22 @@ const Horarios = () => {
 
       {/* Filters */}
       <div className="flex flex-col lg:flex-row gap-4 mb-6">
-        <div className="flex items-center bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 flex-grow min-h-[44px]">
-          <Search className="w-5 h-5 text-gray-400 mr-2 flex-shrink-0" />
+        <div className="flex items-center bg-surface-light dark:bg-gray-800 border border-border-light dark:border-gray-700 rounded-lg px-3 py-2 flex-grow min-h-[44px]">
+          <Search className="w-5 h-5 text-text-secondary-light dark:text-gray-400 mr-2 flex-shrink-0" />
           <input
             type="text"
             placeholder={t('schedules.filters.route')}
-            className="border-none bg-transparent w-full text-sm text-gray-800 dark:text-gray-200 outline-none"
+            className="border-none bg-transparent w-full text-sm text-text-primary-light dark:text-gray-200 outline-none"
             value={filtroRuta}
             onChange={(e) => setFiltroRuta(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-2 min-h-[44px]">
-          <Filter className="w-5 h-5 text-gray-400" />
+          <Filter className="w-5 h-5 text-text-secondary-light dark:text-gray-400" />
           <select
             value={filtroEstado}
             onChange={(e) => setFiltroEstado(e.target.value)}
-            className="border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-w-32 min-h-[44px]"
+            className="border border-border-light dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 min-w-32 min-h-[44px]"
           >
             <option value="all">{t('schedules.filters.all')}</option>
             <option value="PROGRAMADO">{t('schedules.status.scheduled')}</option>
@@ -551,13 +551,13 @@ const Horarios = () => {
             const llegada = getField(v, ["fecHorLleViaje", "fec_hor_lle_viaje", "fecLle"]) || "";
 
             return (
-              <div key={id || i} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+              <div key={id || i} className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-4">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm truncate">
+                    <h3 className="font-semibold text-text-primary-light dark:text-gray-100 text-sm truncate">
                       {getRutaLabel(v)}
                     </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="text-xs text-text-secondary-light dark:text-gray-400 mt-1">
                       {getConductorLabel(v)}
                     </p>
                   </div>
@@ -569,22 +569,22 @@ const Horarios = () => {
 
                 <div className="space-y-2 mb-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Vehículo:</span>
-                    <span className="text-sm text-gray-900 dark:text-gray-100">{getVehicleLabel(v)}</span>
+                    <span className="text-xs text-text-secondary-light dark:text-gray-400">Vehículo:</span>
+                    <span className="text-sm text-text-primary-light dark:text-gray-100">{getVehicleLabel(v)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Salida:</span>
-                    <span className="text-sm text-gray-900 dark:text-gray-100">{parseDateForDisplay(salida)}</span>
+                    <span className="text-xs text-text-secondary-light dark:text-gray-400">Salida:</span>
+                    <span className="text-sm text-text-primary-light dark:text-gray-100">{parseDateForDisplay(salida)}</span>
                   </div>
                   {llegada && (
                     <div className="flex justify-between items-center">
-                      <span className="text-xs text-gray-500 dark:text-gray-400">Llegada:</span>
-                      <span className="text-sm text-gray-900 dark:text-gray-100">{parseDateForDisplay(llegada)}</span>
+                      <span className="text-xs text-text-secondary-light dark:text-gray-400">Llegada:</span>
+                      <span className="text-sm text-text-primary-light dark:text-gray-100">{parseDateForDisplay(llegada)}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+                <div className="flex justify-end gap-2 pt-2 border-t border-border-light dark:border-gray-700">
                   <button
                     onClick={() => openEdit(v)}
                     className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -605,8 +605,8 @@ const Horarios = () => {
           })
         ) : (
           <div className="text-center py-12">
-            <Clock className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500 dark:text-gray-400 mb-2">No hay viajes registrados</p>
+            <Clock className="w-12 h-12 text-text-secondary-light dark:text-gray-600 mx-auto mb-4" />
+            <p className="text-text-secondary-light dark:text-gray-400 mb-2">No hay viajes registrados</p>
             {filtroRuta || filtroEstado !== "all" ? (
               <button
                 onClick={() => {
@@ -623,17 +623,17 @@ const Horarios = () => {
       </div>
 
       {/* Desktop Table View */}
-      <div className="hidden md:block overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="hidden md:block overflow-x-auto rounded-xl border border-border-light dark:border-gray-700 shadow-sm">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-800">
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-32">Ruta</th>
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-32 hidden sm:table-cell">Conductor</th>
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-32 hidden md:table-cell">Vehículo</th>
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-40">Salida</th>
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-40 hidden lg:table-cell">Llegada</th>
-              <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300 min-w-28">Estado</th>
-              <th className="p-3 text-center font-medium text-gray-700 dark:text-gray-300 w-24">Acciones</th>
+            <tr className="bg-surface-light dark:bg-gray-800">
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32">Ruta</th>
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 hidden sm:table-cell">Conductor</th>
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 hidden md:table-cell">Vehículo</th>
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-40">Salida</th>
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-40 hidden lg:table-cell">Llegada</th>
+              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-28">Estado</th>
+              <th className="p-3 text-center font-medium text-text-primary-light dark:text-gray-300 w-24">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -645,23 +645,23 @@ const Horarios = () => {
                 const llegada = getField(v, ["fecHorLleViaje", "fec_hor_lle_viaje", "fecLle"]) || "";
 
                 return (
-                  <tr key={id || i} className={i % 2 === 0 ? "bg-white dark:bg-slate-900 hover:bg-gray-50 dark:hover:bg-gray-800" : "bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-gray-700"}>
+                  <tr key={id || i} className={i % 2 === 0 ? "bg-background-light dark:bg-slate-900 hover:bg-surface-light dark:hover:bg-gray-800" : "bg-surface-light dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-gray-700"}>
                     <td className="p-3">
-                      <div className="font-medium text-gray-900 dark:text-gray-100">{getRutaLabel(v)}</div>
-                      <div className="sm:hidden text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      <div className="font-medium text-text-primary-light dark:text-gray-100">{getRutaLabel(v)}</div>
+                      <div className="sm:hidden text-xs text-text-secondary-light dark:text-gray-400 mt-1">
                         {getConductorLabel(v)} • {getVehicleLabel(v)}
                       </div>
                     </td>
                     <td className="p-3 hidden sm:table-cell">{getConductorLabel(v)}</td>
                     <td className="p-3 hidden md:table-cell">{getVehicleLabel(v)}</td>
                     <td className="p-3">
-                      <div className="text-gray-900 dark:text-gray-100">{parseDateForDisplay(salida)}</div>
+                      <div className="text-text-primary-light dark:text-gray-100">{parseDateForDisplay(salida)}</div>
                     </td>
                     <td className="p-3 hidden lg:table-cell">
                       {llegada ? (
-                        <div className="text-gray-900 dark:text-gray-100">{parseDateForDisplay(llegada)}</div>
+                        <div className="text-text-primary-light dark:text-gray-100">{parseDateForDisplay(llegada)}</div>
                       ) : (
-                        <span className="text-gray-400 dark:text-gray-500 text-xs">No programada</span>
+                        <span className="text-text-secondary-light dark:text-gray-500 text-xs">No programada</span>
                       )}
                     </td>
                     <td className="p-3">
@@ -693,9 +693,9 @@ const Horarios = () => {
               })
             ) : (
               <tr>
-                <td colSpan="7" className="p-8 text-center text-gray-500 dark:text-gray-400">
+                <td colSpan="7" className="p-8 text-center text-text-secondary-light dark:text-gray-400">
                   <div className="flex flex-col items-center gap-2">
-                    <Clock className="w-8 h-8 text-gray-300 dark:text-gray-600" />
+                    <Clock className="w-8 h-8 text-text-secondary-light dark:text-gray-600" />
                     <span>No hay viajes registrados</span>
                     {filtroRuta || filtroEstado !== "all" ? (
                       <button
@@ -719,24 +719,24 @@ const Horarios = () => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-lg w-full max-w-lg relative max-h-full overflow-y-auto text-gray-900 dark:text-gray-100">
+          <div className="bg-background-light dark:bg-slate-900 p-6 rounded-xl shadow-lg w-full max-w-lg relative max-h-full overflow-y-auto text-text-primary-light dark:text-gray-100">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold">
                 {editId ? t('schedules.form.edit') : t('schedules.form.create')}
               </h3>
-              <button 
+              <button
                 onClick={() => {
                   setShowModal(false);
                   resetForm();
                 }}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                className="text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
+              <div className="mb-4 p-3 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">{error}</span>
               </div>
@@ -744,20 +744,20 @@ const Horarios = () => {
 
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                   {t('schedules.form.vehicle')} *
                 </label>
-                <select 
-                  name="idVehiculo" 
-                  value={formData.idVehiculo} 
-                  onChange={onInput} 
-                  className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                <select
+                  name="idVehiculo"
+                  value={formData.idVehiculo}
+                  onChange={onInput}
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 >
                   <option value="">{t('schedules.form.selectVehicle')}</option>
                   {vehiculos.map((v) => (
                     <option key={getField(v, ["idVehiculo", "id"])} value={getField(v, ["idVehiculo", "id"])}>
-                      {getField(v, ["placaVehiculo", "plaVehiculo", "placa"]) || getField(v, ["numVehiculo"])} 
+                      {getField(v, ["placaVehiculo", "plaVehiculo", "placa"]) || getField(v, ["numVehiculo"])}
                       {getField(v, ["modeloVehiculo"]) ? ` - ${getField(v, ["modeloVehiculo"])}` : ""}
                     </option>
                   ))}
@@ -765,14 +765,14 @@ const Horarios = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                   {t('schedules.form.driver')} *
                 </label>
                 <select
                   name="idConductor"
                   value={formData.idConductor}
                   onChange={onInput}
-                  className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 >
                   <option value="">{t('schedules.form.selectDriver')}</option>
@@ -785,20 +785,20 @@ const Horarios = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                   {t('schedules.form.route')} *
                 </label>
                 <select
                   name="idRuta"
                   value={formData.idRuta}
                   onChange={onInput}
-                  className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 >
                   <option value="">{t('schedules.form.selectRoute')}</option>
                   {rutas.map((r) => (
                     <option key={getField(r, ["idRuta", "id"])} value={getField(r, ["idRuta", "id"])}>
-                      {getField(r, ["nomRuta", "nombreRuta"])} 
+                      {getField(r, ["nomRuta", "nombreRuta"])}
                       {getField(r, ["oriRuta"]) ? ` — ${getField(r, ["oriRuta"])} → ${getField(r, ["desRuta"])}` : ""}
                     </option>
                   ))}
@@ -807,42 +807,42 @@ const Horarios = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                     {t('schedules.form.departureTime')} *
                   </label>
-                  <input 
-                    type="datetime-local" 
-                    name="fecHorSalViaje" 
-                    value={formData.fecHorSalViaje} 
-                    onChange={onInput} 
-                    className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
-                    required 
+                  <input
+                    type="datetime-local"
+                    name="fecHorSalViaje"
+                    value={formData.fecHorSalViaje}
+                    onChange={onInput}
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                     {t('schedules.form.arrivalTime')}
                   </label>
-                  <input 
-                    type="datetime-local" 
-                    name="fecHorLleViaje" 
-                    value={formData.fecHorLleViaje} 
-                    onChange={onInput} 
-                    className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                  <input
+                    type="datetime-local"
+                    name="fecHorLleViaje"
+                    value={formData.fecHorLleViaje}
+                    onChange={onInput}
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                   {t('schedules.form.status')}
                 </label>
-                <select 
-                  name="estViaje" 
-                  value={formData.estViaje} 
-                  onChange={onInput} 
-                  className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                <select
+                  name="estViaje"
+                  value={formData.estViaje}
+                  onChange={onInput}
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 >
                   <option value="PROGRAMADO">PROGRAMADO</option>
                   <option value="EN_CURSO">EN_CURSO</option>
@@ -852,14 +852,14 @@ const Horarios = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
                   {t('schedules.form.observations')}
                 </label>
-                <textarea 
-                  name="obsViaje" 
-                  value={formData.obsViaje} 
-                  onChange={onInput} 
-                  className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                <textarea
+                  name="obsViaje"
+                  value={formData.obsViaje}
+                  onChange={onInput}
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Observaciones adicionales..."
                   rows="3"
                 />
@@ -872,7 +872,7 @@ const Horarios = () => {
                     setShowModal(false);
                     resetForm();
                   }}
-                  className="flex-1 px-4 py-2 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="flex-1 px-4 py-2 text-text-primary-light dark:text-gray-200 bg-surface-light dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
                   {t('schedules.form.cancel')}
                 </button>

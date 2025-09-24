@@ -17,6 +17,7 @@ import {
 
 // Importar el servicio de autenticación
 import authAPI from '../utilidades/authAPI';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -126,8 +127,7 @@ const Register = () => {
       });
 
       updateUI({
-        success:
-          "¡Registro exitoso! Por favor, verifica tu correo electrónico.",
+        success: t('register.messages.success'),
         loading: false
       });
 
@@ -149,7 +149,7 @@ const Register = () => {
         error:
           error?.response?.data?.message ||
           error.message ||
-          "Error al registrar usuario.",
+          t('register.messages.error'),
         loading: false
       });
     }
@@ -201,20 +201,20 @@ const Register = () => {
                 TransSync
               </h1>
               <p className="text-blue-100 text-xl mb-10 leading-relaxed">
-                Sistema de gestión empresarial para el transporte moderno
+                {t('register.brand.description')}
               </p>
               <div className="space-y-6">
                 <div className="flex items-center text-blue-100 text-lg">
                   <FaShieldAlt className="mr-4 text-blue-300 text-xl" />
-                  <span>Registro seguro y verificado</span>
+                  <span>{t('register.brand.features.security')}</span>
                 </div>
                 <div className="flex items-center text-blue-100 text-lg">
                   <FaUsers className="mr-4 text-blue-300 text-xl" />
-                  <span>Asignación de roles por administrador</span>
+                  <span>{t('register.brand.features.admin')}</span>
                 </div>
                 <div className="flex items-center text-blue-100 text-lg">
                   <FaCogs className="mr-4 text-blue-300 text-xl" />
-                  <span>Acceso controlado al sistema</span>
+                  <span>{t('register.brand.features.dashboard')}</span>
                 </div>
               </div>
             </div>
@@ -224,12 +224,18 @@ const Register = () => {
           <div className="lg:w-3/5 p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center animate-slide-in-right">
             {/* Header */}
             <div className="text-center mb-6 md:mb-10">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-3">Crear Cuenta</h2>
-              <p className="text-text-secondary-light dark:text-text-secondary-dark text-base md:text-lg">Regístrese para acceder al sistema</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-3">{t('register.title')}</h2>
+              <p className="text-text-secondary-light dark:text-text-secondary-dark text-base md:text-lg">{t('register.subtitle')}</p>
+
+              {/* Language Switcher */}
+              <div className="flex justify-center mt-4 mb-4">
+                <LanguageSwitcher />
+              </div>
+
               <div className="mt-4 p-3 md:p-4 bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-xl">
                 <div className="flex items-center text-blue-700 dark:text-blue-300 text-sm">
                   <FaUserTie className="mr-2 text-blue-600 dark:text-blue-400" />
-                  <span className="font-medium">Su cuenta será revisada por un administrador antes de la activación</span>
+                  <span className="font-medium">{t('register.adminReview')}</span>
                 </div>
               </div>
             </div>
@@ -260,22 +266,22 @@ const Register = () => {
             <form onSubmit={handleRegister} className="space-y-6 md:space-y-8">
               {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Correo electrónico <span className="text-red-500">*</span>
+                <label htmlFor="email" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.email')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                  <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 text-lg" />
+                  <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Ingrese su correo electrónico"
+                    placeholder={t('register.form.emailPlaceholder')}
                     value={formData.email}
                     onChange={handleChange}
                     disabled={ui.loading}
-                    className={`w-full pl-12 pr-4 py-3 md:py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.email
-                        ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                        : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full pl-12 pr-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.email
+                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
                     required
                     autoComplete="email"
@@ -291,19 +297,19 @@ const Register = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="nombre" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Nombre <span className="text-red-500">*</span>
+                <label htmlFor="nombre" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.name')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="nombre"
                   name="nombre"
-                  placeholder="Ingrese su nombre"
+                  placeholder={t('register.form.namePlaceholder')}
                   value={formData.nombre}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.nombre
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.nombre
+                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
                   required
                   autoComplete="name"
@@ -318,19 +324,19 @@ const Register = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="apellido" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Apellido <span className="text-red-500">*</span>
+                <label htmlFor="apellido" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.lastname')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="apellido"
                   name="apellido"
-                  placeholder="Ingrese su apellido"
+                  placeholder={t('register.form.lastnamePlaceholder')}
                   value={formData.apellido}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.apellido
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.apellido
+                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
                   required
                   autoComplete="family-name"
@@ -345,19 +351,19 @@ const Register = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="numeroDocumento" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Número de Documento
+                <label htmlFor="numeroDocumento" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.document')}
                 </label>
                 <input
                   id="numeroDocumento"
                   name="numeroDocumento"
-                  placeholder="Ingrese su número de documento"
+                  placeholder={t('register.form.documentPlaceholder')}
                   value={formData.numeroDocumento}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.numeroDocumento
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.numeroDocumento
+                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
                   required
                   autoComplete="off"
@@ -370,19 +376,19 @@ const Register = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="telefono" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Teléfono
+                <label htmlFor="telefono" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.phone')}
                 </label>
                 <input
                   id="telefono"
                   name="telefono"
-                  placeholder="Ingrese su número de teléfono"
+                  placeholder={t('register.form.phonePlaceholder')}
                   value={formData.telefono}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.telefono
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.telefono
+                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
                   required
                   autoComplete="tel"
@@ -396,29 +402,29 @@ const Register = () => {
               </div>
               {/* Password Field */}
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Contraseña
+                <label htmlFor="password" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.password')}
                 </label>
                 <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 text-lg" />
+                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
                   <input
                     id="password"
                     name="password"
                     type={ui.showPassword ? "text" : "password"}
-                    placeholder="Cree una contraseña segura"
+                    placeholder={t('register.form.passwordPlaceholder')}
                     value={formData.password}
                     onChange={handleChange}
                     disabled={ui.loading}
-                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.password
-                        ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                        : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.password
+                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
                     required
                     autoComplete="new-password"
                   />
                   <button
                     type="button"
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
                     onClick={() => togglePasswordVisibility('password')}
                     disabled={ui.loading}
                     tabIndex="-1"
@@ -431,19 +437,19 @@ const Register = () => {
                 {formData.password && (
                   <div className="mt-3">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-slate-600 dark:text-slate-300">Fortaleza:</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-300">{t('register.form.strength')}:</span>
                       <span className={`text-sm font-medium ${passwordStrength.color}`}>
                         {passwordStrength.label}
                       </span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-gray-600 rounded-full h-2">
-                       <div
-                         className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.score < 2 ? 'bg-red-500' :
-                             passwordStrength.score < 4 ? 'bg-yellow-500' : 'bg-green-500'
-                           }`}
-                         style={{ width: `${(passwordStrength.score / 4) * 100}%` }}
-                       />
-                     </div>
+                      <div
+                        className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.score < 2 ? 'bg-red-500' :
+                          passwordStrength.score < 4 ? 'bg-yellow-500' : 'bg-green-500'
+                          }`}
+                        style={{ width: `${(passwordStrength.score / 4) * 100}%` }}
+                      />
+                    </div>
                   </div>
                 )}
 
@@ -457,29 +463,29 @@ const Register = () => {
 
               {/* Confirm Password Field */}
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
-                  Confirmar contraseña
+                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                  {t('register.form.confirmPassword')}
                 </label>
                 <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 text-lg" />
+                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
                   <input
                     id="confirmPassword"
                     name="confirmPassword"
                     type={ui.showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirme su contraseña"
+                    placeholder={t('register.form.confirmPasswordPlaceholder')}
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     disabled={ui.loading}
-                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.confirmPassword
-                        ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                        : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.confirmPassword
+                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
                     required
                     autoComplete="new-password"
                   />
                   <button
                     type="button"
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
                     onClick={() => togglePasswordVisibility('confirmPassword')}
                     disabled={ui.loading}
                     tabIndex="-1"
@@ -496,36 +502,32 @@ const Register = () => {
               </div>
 
               {/* Password requirements */}
-              <div className="bg-slate-50 dark:bg-surface-dark border border-slate-200 dark:border-gray-600 rounded-xl p-4 md:p-6">
-                <p className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-3 md:mb-4">Requisitos de contraseña:</p>
+              <div className="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-gray-600 rounded-xl p-4 md:p-6">
+                <p className="text-sm font-medium text-text-primary-light dark:text-slate-200 mb-3 md:mb-4">{t('register.passwordRequirements.title')}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                   <PasswordRequirement met={formData.password.length >= 6}>
-                     Mínimo 6 caracteres
-                   </PasswordRequirement>
-                   <PasswordRequirement met={/(?=.*[a-z])/.test(formData.password)}>
-                     Una letra minúscula
-                   </PasswordRequirement>
-                   <PasswordRequirement met={/(?=.*[A-Z])/.test(formData.password)}>
-                     Una letra mayúscula
-                   </PasswordRequirement>
-                   <PasswordRequirement met={/(?=.*\d)/.test(formData.password)}>
-                     Al menos un número
-                   </PasswordRequirement>
-                 </div>
+                  <PasswordRequirement met={formData.password.length >= 6}>
+                    {t('register.passwordRequirements.minLength')}
+                  </PasswordRequirement>
+                  <PasswordRequirement met={/(?=.*[a-z])/.test(formData.password)}>
+                    {t('register.passwordRequirements.lowercase')}
+                  </PasswordRequirement>
+                  <PasswordRequirement met={/(?=.*[A-Z])/.test(formData.password)}>
+                    {t('register.passwordRequirements.uppercase')}
+                  </PasswordRequirement>
+                  <PasswordRequirement met={/(?=.*\d)/.test(formData.password)}>
+                    {t('register.passwordRequirements.number')}
+                  </PasswordRequirement>
+                </div>
               </div>
 
               {/* Information about process */}
               <div className="bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-xl p-4 md:p-6">
                 <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center">
                   <FaUserTie className="mr-2" />
-                  Proceso de registro
+                  {t('register.process.title')}
                 </h4>
                 <div className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
-                  {[
-                    'Se creará su cuenta con estado "PENDIENTE"',
-                    'Recibirá un correo de verificación',
-                    'Un administrador revisará y asignará su rol final'
-                  ].map((step, index) => (
+                  {t('register.process.steps', { returnObjects: true }).map((step, index) => (
                     <div key={index} className="flex items-start">
                       <span className="inline-block w-6 h-6 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center mr-3 mt-0.5 font-bold">
                         {index + 1}
@@ -546,24 +548,24 @@ const Register = () => {
                 {ui.loading ? (
                   <div className="flex items-center justify-center">
                     <FaSpinner className="w-5 h-5 md:w-6 md:h-6 mr-3 animate-spin" />
-                    Registrando...
+                    {t('register.form.registering')}
                   </div>
                 ) : (
-                  'Crear Cuenta'
+                  t('register.form.registerButton')
                 )}
               </button>
 
               {/* Login link */}
-              <div className="text-center pt-4 md:pt-6 border-t border-slate-200 dark:border-gray-600">
-                <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base mb-3 md:mb-4">¿Ya tienes una cuenta?</p>
+              <div className="text-center pt-4 md:pt-6 border-t border-border-light dark:border-gray-600">
+                <p className="text-text-secondary-light dark:text-slate-300 text-sm md:text-base mb-3 md:mb-4">{t('register.form.hasAccount')}</p>
                 <button
                   type="button"
-                  className="w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-xl transition-all duration-300 text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-xl transition-all duration-300 text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50"
                   onClick={() => navigate("/login")}
                   disabled={ui.loading}
                   aria-label="Ir a la página de inicio de sesión"
                 >
-                  Iniciar sesión
+                  {t('register.form.loginButton')}
                 </button>
               </div>
             </form>

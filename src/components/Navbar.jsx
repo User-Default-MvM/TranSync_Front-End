@@ -508,7 +508,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-800 dark:to-primary-700 bg-clip-text text-transparent">TransSync</span>
+                <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-800 dark:to-primary-700 bg-clip-text text-transparent">TranSync</span>
                 <span className="text-xs text-text-secondary-light dark:text-text-secondary-dark -mt-1 opacity-80">Transport Management</span>
               </div>
             </Link>
@@ -519,7 +519,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
             {/* Theme toggle button */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 text-slate-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600"
+              className="p-2.5 text-slate-700 dark:text-gray-300 hover:text-indigo-700 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600"
               title={theme === "dark" ? t('navbar.theme.activateLight') : t('navbar.theme.activateDark')}
               data-tutorial="theme"
             >
@@ -550,7 +550,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 {(location.pathname === '/dashboard' || location.pathname.startsWith('/admin')) && (
                   <button
                     onClick={goToHome}
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-indigo-700 dark:text-gray-200 border border-indigo-200 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-300 hover:scale-105"
+                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 hover:scale-105"
                     title={t('navbar.goToHome')}
                   >
                     <FaHome size={14} />
@@ -562,7 +562,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
 
             {!isLoggedIn ? (
               <div className="flex items-center gap-3">
-                <button onClick={handleLogin} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-indigo-700 dark:text-gray-200 border border-indigo-200 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-300">
+                <button onClick={handleLogin} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400">
                   <FaSignInAlt size={14} />
                   <span className="hidden sm:inline">{t('navbar.login')}</span>
                 </button>
@@ -577,7 +577,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 <div className="relative" ref={notificationsRef}>
                   <button
                     onClick={toggleNotifications}
-                    className="relative p-2.5 text-slate-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group min-h-[44px] min-w-[44px] flex items-center justify-center border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    className="relative p-2.5 text-slate-700 dark:text-gray-300 hover:text-indigo-700 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group min-h-[44px] min-w-[44px] flex items-center justify-center border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
                     title="Notificaciones"
                     aria-label={`Notificaciones ${unreadCount > 0 ? `(${unreadCount} sin leer)` : '(sin notificaciones nuevas)'}`}
                     aria-expanded={isNotificationsOpen}
@@ -608,13 +608,13 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                    {isNotificationsOpen && (
                      <div
                        id="notifications-dropdown"
-                       className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-hidden"
+                       className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-surface-light dark:bg-gray-800 rounded-2xl shadow-xl border border-border-light dark:border-gray-700 z-50 max-h-96 overflow-hidden"
                        role="dialog"
                        aria-modal="true"
                        aria-labelledby="notifications-title"
                      >
                       {/* Header */}
-                       <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                       <div className="px-4 py-3 border-b border-border-light dark:border-gray-700 flex justify-between items-center">
                          <h3 id="notifications-title" className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                            {t('navbar.notifications')}
                            {unreadCount > 0 && (
@@ -639,7 +639,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                           notifications.map((notification) => (
                             <div
                               key={notification.id}
-                              className={`px-4 py-3 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
+                              className={`px-4 py-3 border-b border-border-light dark:border-gray-700 hover:bg-surface-light dark:hover:bg-gray-700/50 transition-colors ${
                                 !notification.read ? 'bg-blue-50/50 dark:bg-blue-900/20' : ''
                               }`}
                             >
@@ -697,7 +697,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
 
                       {/* Footer */}
                       {notifications.length > 0 && (
-                        <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+                        <div className="px-4 py-3 border-t border-border-light dark:border-gray-700 bg-surface-light dark:bg-gray-700/50">
                           <button className="w-full text-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
                             {t('navbar.viewAllNotifications')}
                           </button>
@@ -712,7 +712,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                     console.log('Tutorial button clicked');
                     startTutorial();
                   }}
-                  className="p-2.5 text-slate-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group min-h-[44px] min-w-[44px] flex items-center justify-center border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600"
+                  className="p-2.5 text-slate-700 dark:text-gray-300 hover:text-indigo-700 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group min-h-[44px] min-w-[44px] flex items-center justify-center border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600"
                   title={t('navbar.tutorial')}
                 >
                   <FaQuestionCircle size={16} />
@@ -739,8 +739,8 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                   </button>
 
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50">
-                      <div className="px-4 py-4 border-b border-gray-100 dark:border-gray-700">
+                    <div className="absolute right-0 mt-2 w-64 bg-surface-light dark:bg-gray-800 rounded-2xl shadow-xl border border-border-light dark:border-gray-700 py-2 z-50">
+                      <div className="px-4 py-4 border-b border-border-light dark:border-gray-700">
                         <div className="flex items-center gap-3">
                           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-md`}>
                             {getUserRoleIcon()}
@@ -754,14 +754,14 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                       <div className="py-2">
                         <button
                           onClick={() => navigate('/profile')}
-                          className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+                          className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-surface-light dark:hover:bg-gray-700"
                           data-tutorial="profile-menu-item"
                         >
                           <FaUser />
                           <span>{t('navbar.profile')}</span>
                         </button>
-                        <div className="border-t border-gray-100 dark:border-gray-700 my-2" />
-                        <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900">
+                        <div className="border-t border-border-light dark:border-gray-700 my-2" />
+                        <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900">
                           <FaSignOutAlt />
                           <span>{t('navbar.logout')}</span>
                         </button>

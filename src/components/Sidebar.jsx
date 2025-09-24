@@ -223,7 +223,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
           flex flex-col shadow-2xl transition-all duration-300 ease-in-out
           ${theme === "dark"
             ? "bg-gradient-to-br from-background-dark via-surface-dark to-background-dark text-text-primary-dark before:from-black/10"
-            : "bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white before:from-white/5"}
+            : "bg-gradient-to-br from-primary-800 via-primary-700 to-primary-600 text-white before:from-white/5"}
           before:absolute before:inset-0 before:bg-gradient-to-r before:to-transparent before:pointer-events-none
           ${isMobile || isTablet
             ? `w-[280px] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
@@ -235,7 +235,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
       >
         {/* Header del sidebar */}
         <div className={`relative p-4 border-b min-h-[70px] flex items-center justify-between backdrop-blur-sm
-          ${theme === "dark" ? "border-border-dark" : "border-white/20"}`}>
+          ${theme === "dark" ? "border-border-dark" : "border-white/30"}`}>
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="relative">
               <img 
@@ -246,7 +246,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                   e.target.style.display = 'none';
                 }}
               />
-              <div className={`absolute -inset-1 rounded-full blur opacity-50 ${theme === "dark" ? "bg-gray-700" : "bg-white/20"}`} />
+              <div className={`absolute -inset-1 rounded-full blur opacity-50 ${theme === "dark" ? "bg-gray-700" : "bg-white/30"}`} />
             </div>
             {(isOpen || (!isMobile && !isTablet)) && (
               <div className={`flex flex-col transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
@@ -284,11 +284,11 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
         </div>
 
         {/* Perfil de usuario */}
-        <div className={`p-4 border-b backdrop-blur-sm ${theme === "dark" ? "border-gray-700" : "border-white/20"}`}>
+        <div className={`p-4 border-b backdrop-blur-sm ${theme === "dark" ? "border-gray-700" : "border-white/30"}`}>
           <div className="flex items-center gap-3">
             <div className="relative">
               <div
-                className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-lg ring-2 ${theme === "dark" ? "ring-gray-700" : "ring-white/20"}`}
+                className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-lg ring-2 ${theme === "dark" ? "ring-gray-700" : "ring-white/30"}`}
                 data-tutorial="profile"
               >
                 {currentUser ? (
@@ -299,7 +299,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                   getUserRoleIcon()
                 )}
               </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white shadow-sm animate-pulse" />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white/80 shadow-sm animate-pulse" />
             </div>
             {(isOpen || (!isMobile && !isTablet)) && (
               <div className={`flex-1 min-w-0 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
@@ -382,7 +382,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
         </nav>
 
         {/* Footer del sidebar */}
-        <div className={`p-4 mt-auto backdrop-blur-sm space-y-3 ${theme === "dark" ? "border-t border-gray-700" : "border-t border-white/20"}`}>
+        <div className={`p-4 mt-auto backdrop-blur-sm space-y-3 ${theme === "dark" ? "border-t border-gray-700" : "border-t border-white/30"}`}>
           {/* Botón modo oscuro */}
           {/* <button
             onClick={() => setDark(!dark)}

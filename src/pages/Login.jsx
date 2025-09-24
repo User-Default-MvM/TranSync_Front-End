@@ -196,7 +196,7 @@ const Login = () => {
       {/* Theme toggle button - fixed position */}
       <button
         onClick={toggleTheme}
-        className="fixed top-4 right-4 z-10 p-3 rounded-full bg-background-light dark:bg-surface-dark shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500"
+        className="fixed top-4 right-4 z-10 p-3 rounded-full bg-background-light dark:bg-surface-dark shadow-lg hover:shadow-xl transition-all duration-300 border border-border-light dark:border-gray-600 hover:border-border-light dark:hover:border-gray-500"
         title={theme === 'dark' ? t('login.theme.activateLight') : t('login.theme.activateDark')}
         aria-label={theme === 'dark' ? t('login.theme.changeToLight') : t('login.theme.changeToDark')}
       >
@@ -216,7 +216,7 @@ const Login = () => {
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-white/5 to-transparent rounded-full -translate-y-32 translate-x-32"></div>
             <div className="relative z-10">
               <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6">
-                TransSync
+                TranSync
               </h1>
               <p className="text-blue-100 text-xl mb-10 leading-relaxed">
                 {t('login.brand.description')}
@@ -293,11 +293,11 @@ const Login = () => {
             <div className="space-y-6 md:space-y-8">
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label htmlFor="email" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
                   {t('login.form.email')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                  <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 text-lg" />
+                  <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
                   <input
                     id="email"
                     type="email"
@@ -305,9 +305,9 @@ const Login = () => {
                     value={email}
                     onChange={handleInputChange(setEmail)}
                     disabled={loading}
-                    className={`w-full pl-12 pr-4 py-3 md:py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${formTouched && !isEmailValid(email) && email
+                    className={`w-full pl-12 pr-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${formTouched && !isEmailValid(email) && email
                         ? 'border-red-500 focus:ring-2 focus:ring-red-500'
-                        : 'border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                        : 'border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                       }`}
                     required
                     autoComplete="email"
@@ -321,12 +321,12 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3"
+                  className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3"
                 >
                   {t('login.form.password')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 text-lg" />
+                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
                   <input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -334,9 +334,9 @@ const Login = () => {
                     value={password}
                     onChange={handleInputChange(setPassword)}
                     disabled={loading}
-                    className={`w-full pl-12 pr-12 py-3 md:py-4 border rounded-xl bg-slate-50 dark:bg-gray-700 text-slate-800 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${formTouched && !password
+                    className={`w-full pl-12 pr-12 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${formTouched && !password
                         ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                        : "border-slate-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
                     required
                     autoComplete="current-password"
@@ -346,7 +346,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-300 hover:text-text-primary-light dark:hover:text-slate-100"
                     aria-label="Mostrar contraseña"
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -356,7 +356,7 @@ const Login = () => {
 
               {/* Remember + Forgot */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-sm">
-                <label className="flex items-center cursor-pointer text-slate-700 dark:text-slate-200">
+                <label className="flex items-center cursor-pointer text-text-primary-light dark:text-slate-200">
                   <input
                     type="checkbox"
                     checked={rememberMe}
@@ -395,11 +395,11 @@ const Login = () => {
               </button>
 
               {/* Register */}
-              <div className="text-center pt-4 md:pt-6 border-t border-slate-200 dark:border-gray-700">
-                <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base mb-3 md:mb-4">{t('login.form.noAccount')}</p>
+              <div className="text-center pt-4 md:pt-6 border-t border-border-light dark:border-gray-700">
+                <p className="text-text-secondary-light dark:text-slate-300 text-sm md:text-base mb-3 md:mb-4">{t('login.form.noAccount')}</p>
                 <button
                   type="button"
-                  className="w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-300 border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-xl transition-all duration-300 text-sm md:text-base animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-300 border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-xl transition-all duration-300 text-sm md:text-base animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50"
                   onClick={handleNavigateToRegister}
                   disabled={loading}
                   aria-label="Ir a la página de registro de cuenta"

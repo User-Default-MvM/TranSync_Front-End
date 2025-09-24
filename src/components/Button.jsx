@@ -63,9 +63,9 @@ const Button = ({
       focus:ring-primary-800 focus:ring-opacity-50
     `,
     ghost: `
-      bg-transparent text-primary-700 border border-transparent
-      hover:bg-gradient-to-r hover:from-primary-800/5 hover:to-primary-700/5 hover:text-primary-800
-      focus:ring-primary-700 focus:ring-opacity-50
+      bg-transparent text-primary-800 border border-transparent
+      hover:bg-gradient-to-r hover:from-primary-800/5 hover:to-primary-700/5 hover:text-primary-900
+      focus:ring-primary-800 focus:ring-opacity-50
     `
   };
   

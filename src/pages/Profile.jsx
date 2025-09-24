@@ -188,26 +188,26 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-surface-light dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-background-light dark:bg-gray-800 shadow-sm border-b border-border-light dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => navigate(-1)}
-                className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="p-2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-100 hover:bg-surface-light dark:hover:bg-gray-700 rounded-lg transition-colors"
               >
                 <FaArrowLeft size={18} />
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('profile.title')}</h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{t('profile.subtitle')}</p>
+                <h1 className="text-2xl font-bold text-text-primary-light dark:text-gray-100">{t('profile.title')}</h1>
+                <p className="text-sm text-text-secondary-light dark:text-gray-400">{t('profile.subtitle')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               {getRoleIcon(userRole)}
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-sm font-medium text-text-primary-light dark:text-gray-300">
                 {getRoleDisplayName(userRole)}
               </span>
             </div>
@@ -220,8 +220,8 @@ const Profile = () => {
         {message.text && (
           <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
             message.type === 'success'
-              ? 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800'
-              : 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-800'
+              ? 'bg-surface-light dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-border-light dark:border-green-800'
+              : 'bg-surface-light dark:bg-red-900/20 text-red-800 dark:text-red-200 border border-border-light dark:border-red-800'
           }`}>
             {message.type === 'success' ? (
               <FaCheckCircle className="text-green-500" />
@@ -235,9 +235,9 @@ const Profile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Información Personal */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <div className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-3">
+                <h2 className="text-xl font-semibold text-text-primary-light dark:text-gray-100 flex items-center gap-3">
                   <FaUser className="text-primary-600" />
                   {t('profile.personalInfo')}
                 </h2>
@@ -255,7 +255,7 @@ const Profile = () => {
               <div className="space-y-6">
                 {/* Nombres */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                     Nombres
                   </label>
                   {isEditing ? (
@@ -264,13 +264,13 @@ const Profile = () => {
                       name="nomUsuario"
                       value={editData.nomUsuario}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                      className="w-full px-3 py-2 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                       placeholder="Ingresa tus nombres"
                     />
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <FaUser className="text-gray-400" />
-                      <span className="text-gray-900 dark:text-gray-100">
+                    <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                      <FaUser className="text-text-secondary-light dark:text-gray-400" />
+                      <span className="text-text-primary-light dark:text-gray-100">
                         {userProfile?.nomUsuario || 'No especificado'}
                       </span>
                     </div>
@@ -279,7 +279,7 @@ const Profile = () => {
 
                 {/* Apellidos */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                     Apellidos
                   </label>
                   {isEditing ? (
@@ -288,13 +288,13 @@ const Profile = () => {
                       name="apeUsuario"
                       value={editData.apeUsuario}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                      className="w-full px-3 py-2 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                       placeholder="Ingresa tus apellidos"
                     />
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <FaUser className="text-gray-400" />
-                      <span className="text-gray-900 dark:text-gray-100">
+                    <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                      <FaUser className="text-text-secondary-light dark:text-gray-400" />
+                      <span className="text-text-primary-light dark:text-gray-100">
                         {userProfile?.apeUsuario || 'No especificado'}
                       </span>
                     </div>
@@ -303,7 +303,7 @@ const Profile = () => {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                     Correo Electrónico
                   </label>
                   {isEditing ? (
@@ -312,13 +312,13 @@ const Profile = () => {
                       name="email"
                       value={editData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                      className="w-full px-3 py-2 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                       placeholder="Ingresa tu correo electrónico"
                     />
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <FaEnvelope className="text-gray-400" />
-                      <span className="text-gray-900 dark:text-gray-100">
+                    <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                      <FaEnvelope className="text-text-secondary-light dark:text-gray-400" />
+                      <span className="text-text-primary-light dark:text-gray-100">
                         {userProfile?.email || 'No especificado'}
                       </span>
                     </div>
@@ -327,7 +327,7 @@ const Profile = () => {
 
                 {/* Teléfono */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                     Teléfono
                   </label>
                   {isEditing ? (
@@ -336,13 +336,13 @@ const Profile = () => {
                       name="telUsuario"
                       value={editData.telUsuario}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                      className="w-full px-3 py-2 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                       placeholder="Ingresa tu número de teléfono"
                     />
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <FaPhone className="text-gray-400" />
-                      <span className="text-gray-900 dark:text-gray-100">
+                    <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                      <FaPhone className="text-text-secondary-light dark:text-gray-400" />
+                      <span className="text-text-primary-light dark:text-gray-100">
                         {userProfile?.telUsuario || 'No especificado'}
                       </span>
                     </div>
@@ -351,16 +351,16 @@ const Profile = () => {
 
                 {/* Documento */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                     Número de Documento
                   </label>
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <FaIdCard className="text-gray-400" />
-                    <span className="text-gray-900 dark:text-gray-100">
+                  <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                    <FaIdCard className="text-text-secondary-light dark:text-gray-400" />
+                    <span className="text-text-primary-light dark:text-gray-100">
                       {userProfile?.numDocUsuario || 'No especificado'}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-xs text-text-secondary-light dark:text-gray-400 mt-1">
                     El número de documento no se puede modificar
                   </p>
                 </div>
@@ -368,7 +368,7 @@ const Profile = () => {
 
               {/* Botones de acción */}
               {isEditing && (
-                <div className="flex gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex gap-3 mt-6 pt-6 border-t border-border-light dark:border-gray-700">
                   <button
                     onClick={handleSaveProfile}
                     disabled={loading}
@@ -380,7 +380,7 @@ const Profile = () => {
                   <button
                     onClick={handleCancel}
                     disabled={loading}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 rounded-lg transition-colors"
                   >
                     <FaTimes size={14} />
                     Cancelar
@@ -393,8 +393,8 @@ const Profile = () => {
           {/* Panel Lateral - Seguridad */}
           <div className="space-y-6">
             {/* Cambio de Contraseña */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <div className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-text-primary-light dark:text-gray-100 mb-4 flex items-center gap-2">
                 <FaLock className="text-primary-600" />
                 {t('profile.security')}
               </h3>
@@ -411,7 +411,7 @@ const Profile = () => {
                 <div className="space-y-4">
                   {/* Contraseña actual */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                       Contraseña Actual
                     </label>
                     <div className="relative">
@@ -420,13 +420,13 @@ const Profile = () => {
                         name="currentPassword"
                         value={passwordData.currentPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                        className="w-full px-3 py-2 pr-10 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                         placeholder="Ingresa tu contraseña actual"
                       />
                       <button
                         type="button"
                         onClick={() => togglePasswordVisibility('current')}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
                       >
                         {showPasswords.current ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
                       </button>
@@ -435,7 +435,7 @@ const Profile = () => {
 
                   {/* Nueva contraseña */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                       Nueva Contraseña
                     </label>
                     <div className="relative">
@@ -444,13 +444,13 @@ const Profile = () => {
                         name="newPassword"
                         value={passwordData.newPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                        className="w-full px-3 py-2 pr-10 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                         placeholder="Ingresa tu nueva contraseña"
                       />
                       <button
                         type="button"
                         onClick={() => togglePasswordVisibility('new')}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
                       >
                         {showPasswords.new ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
                       </button>
@@ -459,7 +459,7 @@ const Profile = () => {
 
                   {/* Confirmar contraseña */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-2">
                       Confirmar Nueva Contraseña
                     </label>
                     <div className="relative">
@@ -468,13 +468,13 @@ const Profile = () => {
                         name="confirmPassword"
                         value={passwordData.confirmPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                        className="w-full px-3 py-2 pr-10 border border-border-light dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100"
                         placeholder="Confirma tu nueva contraseña"
                       />
                       <button
                         type="button"
                         onClick={() => togglePasswordVisibility('confirm')}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
                       >
                         {showPasswords.confirm ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
                       </button>
@@ -494,7 +494,7 @@ const Profile = () => {
                     <button
                       onClick={handleCancel}
                       disabled={loading}
-                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-lg transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 text-sm rounded-lg transition-colors"
                     >
                       <FaTimes size={14} />
                       Cancelar
@@ -505,34 +505,34 @@ const Profile = () => {
             </div>
 
             {/* Información de la cuenta */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <div className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-text-primary-light dark:text-gray-100 mb-4 flex items-center gap-2">
                 <FaCalendarAlt className="text-primary-600" />
                 Información de la Cuenta
               </h3>
 
               <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <FaUser className="text-gray-400" />
+                <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                  <FaUser className="text-text-secondary-light dark:text-gray-400" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">ID de Usuario</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">{user?.id || 'N/A'}</p>
+                    <p className="text-sm font-medium text-text-primary-light dark:text-gray-100">ID de Usuario</p>
+                    <p className="text-xs text-text-secondary-light dark:text-gray-400">{user?.id || 'N/A'}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <FaBuilding className="text-gray-400" />
+                <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                  <FaBuilding className="text-text-secondary-light dark:text-gray-400" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Empresa</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">Transporte La Sabana S.A.S</p>
+                    <p className="text-sm font-medium text-text-primary-light dark:text-gray-100">Empresa</p>
+                    <p className="text-xs text-text-secondary-light dark:text-gray-400">Transporte La Sabana S.A.S</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <FaMapMarkerAlt className="text-gray-400" />
+                <div className="flex items-center gap-3 p-3 bg-surface-light dark:bg-gray-700 rounded-lg">
+                  <FaMapMarkerAlt className="text-text-secondary-light dark:text-gray-400" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Ubicación</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">Bogotá, Colombia</p>
+                    <p className="text-sm font-medium text-text-primary-light dark:text-gray-100">Ubicación</p>
+                    <p className="text-xs text-text-secondary-light dark:text-gray-400">Bogotá, Colombia</p>
                   </div>
                 </div>
               </div>

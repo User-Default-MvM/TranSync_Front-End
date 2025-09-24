@@ -192,7 +192,7 @@ const AdminDashboard = () => {
   const stats = getStats();
 
   return (
-    <div className={`p-4 md:p-8 min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'}`}>
+    <div className={`p-4 md:p-8 min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-surface-light text-text-primary-light'}`}>
       {editingUser ? (
         // VISTA DE FORMULARIO DE EDICIÓN
         <EditUserForm
@@ -204,39 +204,39 @@ const AdminDashboard = () => {
       ) : (
         // VISTA DE LISTA DE USUARIOS
         <>
-          <h1 className={`text-2xl md:text-3xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('adminDashboard.title')}</h1>
-          <p className={`mb-6 md:mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{t('adminDashboard.subtitle')}</p>
+          <h1 className={`text-2xl md:text-3xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{t('adminDashboard.title')}</h1>
+          <p className={`mb-6 md:mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>{t('adminDashboard.subtitle')}</p>
 
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
               <FaUsers className="text-blue-500 mb-2 mx-auto md:mx-0" size={20} />
-              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{stats.total}</h3>
-              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{t('adminDashboard.stats.totalUsers')}</p>
+              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{stats.total}</h3>
+              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.stats.totalUsers')}</p>
             </div>
-            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
               <FaUserShield className="text-green-500 mb-2 mx-auto md:mx-0" size={20} />
-              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{stats.gestorCount}</h3>
-              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{t('adminDashboard.stats.managers')}</p>
+              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{stats.gestorCount}</h3>
+              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.stats.managers')}</p>
             </div>
-            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
               <FaCog className="text-yellow-500 mb-2 mx-auto md:mx-0" size={20} />
-              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{stats.conductorCount}</h3>
-              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{t('adminDashboard.stats.drivers')}</p>
+              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{stats.conductorCount}</h3>
+              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.stats.drivers')}</p>
             </div>
-            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`p-4 md:p-6 rounded-lg min-h-[100px] flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
               <div className="text-purple-500 mb-2 mx-auto md:mx-0 text-xl">✅</div>
-              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{stats.activosCount}</h3>
-              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{t('adminDashboard.stats.active')}</p>
+              <h3 className={`text-xl md:text-2xl font-semibold text-center md:text-left ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{stats.activosCount}</h3>
+              <p className={`text-sm text-center md:text-left ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.stats.active')}</p>
             </div>
           </div>
 
-          <div className={`p-4 rounded-lg mb-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+          <div className={`p-4 rounded-lg mb-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
             <div className="relative w-full md:w-1/3">
-              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-gray-400" />
               <input
                 type="text"
                 placeholder={t('adminDashboard.search.placeholder')}
-                className={`pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full min-h-[44px] ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-50 text-gray-800'}`}
+                className={`pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full min-h-[44px] ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-surface-light text-text-primary-light'}`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -261,13 +261,13 @@ const AdminDashboard = () => {
               </div>
             ) : filteredUsuarios.length > 0 ? (
               filteredUsuarios.map(u => (
-                <div key={u.idUsuario} className={`rounded-xl shadow-sm border p-4 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                <div key={u.idUsuario} className={`rounded-xl shadow-sm border p-4 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-background-light border-border-light'}`}>
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1 min-w-0">
-                      <h3 className={`font-semibold text-sm truncate ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+                      <h3 className={`font-semibold text-sm truncate ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>
                         {u.nomUsuario} {u.apeUsuario}
                       </h3>
-                      <p className={`text-xs mt-1 truncate ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`text-xs mt-1 truncate ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>
                         {u.email}
                       </p>
                     </div>
@@ -283,22 +283,22 @@ const AdminDashboard = () => {
 
                   <div className="space-y-2 mb-3">
                     <div className="flex justify-between items-center">
-                      <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Documento:</span>
-                      <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{u.numDocUsuario}</span>
+                      <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>Documento:</span>
+                      <span className={`text-sm ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{u.numDocUsuario}</span>
                     </div>
                   </div>
 
-                  <div className={`flex justify-end gap-2 pt-2 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                  <div className={`flex justify-end gap-2 pt-2 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-border-light'}`}>
                     <button
                       onClick={() => handleEditUser(u)}
-                      className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-surface-light'}`}
                       title="Editar usuario"
                     >
                       <FaEdit size={16}/>
                     </button>
                     <button
                       onClick={() => handleDeleteUser(u.idUsuario)}
-                      className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${theme === 'dark' ? 'text-red-400 hover:bg-gray-700' : 'text-red-600 hover:bg-surface-light'}`}
                       title="Eliminar usuario"
                     >
                       <FaTrash size={16}/>
@@ -308,10 +308,10 @@ const AdminDashboard = () => {
               ))
             ) : (
               <div className="text-center py-12">
-                <div className={`text-4xl mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>👥</div>
-                <p className={`mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>No se encontraron usuarios</p>
+                <div className={`text-4xl mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>👥</div>
+                <p className={`mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>No se encontraron usuarios</p>
                 {searchTerm && (
-                  <p className={`text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-text-secondary-light'}`}>
                     Intenta con otros términos de búsqueda
                   </p>
                 )}
@@ -320,43 +320,43 @@ const AdminDashboard = () => {
           </div>
 
           {/* Desktop Table View */}
-          <div className={`hidden md:block overflow-x-auto rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+          <div className={`hidden md:block overflow-x-auto rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-background-light'}`}>
             <table className="w-full text-left">
               <thead>
-                <tr className={`border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.name')}</th>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.email')}</th>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.document')}</th>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.role')}</th>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.status')}</th>
-                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('adminDashboard.table.actions')}</th>
+                <tr className={`border-b ${theme === 'dark' ? 'border-gray-700' : 'border-border-light'}`}>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.name')}</th>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.email')}</th>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.document')}</th>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.role')}</th>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.status')}</th>
+                  <th className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{t('adminDashboard.table.actions')}</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="6" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <td colSpan="6" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
                       Cargando...
                     </td>
                   </tr>
                 ) : filteredUsuarios.length > 0 ? (
                   filteredUsuarios.map(u => (
-                    <tr key={u.idUsuario} className={`border-b ${theme === 'dark' ? 'border-gray-700 hover:bg-gray-700' : 'border-gray-200 hover:bg-gray-50'}`}>
-                      <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{u.nomUsuario} {u.apeUsuario}</td>
-                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{u.email}</td>
-                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{u.numDocUsuario}</td>
+                    <tr key={u.idUsuario} className={`border-b ${theme === 'dark' ? 'border-gray-700 hover:bg-gray-700' : 'border-border-light hover:bg-surface-light'}`}>
+                      <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{u.nomUsuario} {u.apeUsuario}</td>
+                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{u.email}</td>
+                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{u.numDocUsuario}</td>
                       <td className="p-4">
                         <span className={`px-2 py-1 rounded-full text-xs font-semibold ${u.rol === 'GESTOR' ? 'bg-green-800 text-green-300' : 'bg-yellow-800 text-yellow-300'}`}>
                           {formatRole(u.rol)}
                         </span>
                       </td>
-                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{u.estActivo ? 'Activo' : 'Inactivo'}</td>
+                      <td className={`p-4 ${theme === 'dark' ? 'text-gray-300' : 'text-text-secondary-light'}`}>{u.estActivo ? 'Activo' : 'Inactivo'}</td>
                       <td className="p-4">
-                        <button onClick={() => handleEditUser(u)} className={`mr-4 min-h-[44px] px-3 py-2 rounded transition-colors ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300 hover:bg-gray-700' : 'text-blue-600 hover:text-blue-700 hover:bg-gray-100'}`}>
+                        <button onClick={() => handleEditUser(u)} className={`mr-4 min-h-[44px] px-3 py-2 rounded transition-colors ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300 hover:bg-gray-700' : 'text-blue-600 hover:text-blue-700 hover:bg-surface-light'}`}>
                           <FaEdit />
                         </button>
-                        <button onClick={() => handleDeleteUser(u.idUsuario)} className={`min-h-[44px] px-3 py-2 rounded transition-colors ${theme === 'dark' ? 'text-red-400 hover:text-red-300 hover:bg-gray-700' : 'text-red-600 hover:text-red-700 hover:bg-gray-100'}`}>
+                        <button onClick={() => handleDeleteUser(u.idUsuario)} className={`min-h-[44px] px-3 py-2 rounded transition-colors ${theme === 'dark' ? 'text-red-400 hover:text-red-300 hover:bg-gray-700' : 'text-red-600 hover:text-red-700 hover:bg-surface-light'}`}>
                           <FaTrash />
                         </button>
                       </td>
@@ -364,7 +364,7 @@ const AdminDashboard = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>{t('adminDashboard.messages.noUsersFound')}</td>
+                    <td colSpan="6" className={`text-center p-8 ${theme === 'dark' ? 'text-gray-500' : 'text-text-secondary-light'}`}>{t('adminDashboard.messages.noUsersFound')}</td>
                   </tr>
                 )}
               </tbody>
