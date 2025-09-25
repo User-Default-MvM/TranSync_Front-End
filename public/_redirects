@@ -3,6 +3,12 @@
 /static/js/*    /static/js/:splat    200
 /static/css/*   /static/css/:splat   200
 /assets/*   /assets/:splat   200
+
+# Admin static assets - serve from actual location
+/admin/static/js/*    /static/js/:splat    200
+/admin/static/css/*   /static/css/:splat   200
+/admin/assets/*   /assets/:splat   200
+
 /favicon.ico    /favicon.ico   200
 /manifest.json  /manifest.json 200
 /robots.txt /robots.txt 200
