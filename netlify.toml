@@ -82,12 +82,12 @@
 
 # Admin static assets - serve directly without redirect
 [[redirects]]
-  from = "/admin/static/*"
+  from = "/static/*"
   to = "/static/:splat"
   status = 200
 
 [[redirects]]
-  from = "/admin/assets/*"
+  from = "/assets/*"
   to = "/assets/:splat"
   status = 200
 
