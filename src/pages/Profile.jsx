@@ -29,7 +29,7 @@ const Profile = () => {
   const { user, userRole, refreshAuth } = useAuth();
   const {
     userProfile,
-    loading,
+    loading: profileLoading,
     updateProfile,
     changePassword
   } = useUser();
@@ -60,6 +60,14 @@ const Profile = () => {
     telUsuario: ''
   });
 
+  // Estados para errores de validación
+  const [editErrors, setEditErrors] = useState({
+    nomUsuario: '',
+    apeUsuario: '',
+    email: '',
+    telUsuario: ''
+  });
+
   // Inicializar datos de edición cuando se activa la edición
   useEffect(() => {
     if (isEditing && userProfile) {
@@ -77,6 +85,49 @@ const Profile = () => {
     setEditData(prev => ({
       ...prev,
       [name]: value
+    }));
+
+    // Validación en tiempo real
+    validateField(name, value);
+  };
+
+  const validateField = (name, value) => {
+    let error = '';
+
+    switch (name) {
+      case 'nomUsuario':
+        if (!value.trim()) {
+          error = 'El nombre es requerido';
+        } else if (value.trim().length < 2) {
+          error = 'El nombre debe tener al menos 2 caracteres';
+        }
+        break;
+      case 'apeUsuario':
+        if (!value.trim()) {
+          error = 'Los apellidos son requeridos';
+        } else if (value.trim().length < 2) {
+          error = 'Los apellidos deben tener al menos 2 caracteres';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          error = 'El correo electrónico es requerido';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Ingresa un correo electrónico válido';
+        }
+        break;
+      case 'telUsuario':
+        if (value.trim() && !/^\d{7,15}$/.test(value.replace(/\s+/g, ''))) {
+          error = 'Ingresa un número de teléfono válido (solo dígitos, 7-15 caracteres)';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setEditErrors(prev => ({
+      ...prev,
+      [name]: error
     }));
   };
 
@@ -98,6 +149,24 @@ const Profile = () => {
   const handleSaveProfile = async () => {
     try {
       setMessage({ type: '', text: '' });
+
+      // Validar todos los campos antes de guardar
+      const errors = {};
+      Object.keys(editData).forEach(key => {
+        validateField(key, editData[key]);
+        if (editErrors[key]) {
+          errors[key] = editErrors[key];
+        }
+      });
+
+      // Si hay errores, no continuar
+      if (Object.keys(errors).length > 0) {
+        setMessage({
+          type: 'error',
+          text: 'Por favor corrige los errores en el formulario'
+        });
+        return;
+      }
 
       await updateProfile(editData);
       setIsEditing(false);
@@ -121,6 +190,10 @@ const Profile = () => {
       setMessage({ type: '', text: '' });
 
       // Validaciones
+      if (!passwordData.currentPassword.trim()) {
+        throw new Error('Debes ingresar tu contraseña actual');
+      }
+
       if (passwordData.newPassword !== passwordData.confirmPassword) {
         throw new Error('Las contraseñas no coinciden');
       }
@@ -176,7 +249,7 @@ const Profile = () => {
     }
   };
 
-  if (loading.profile && !userProfile) {
+  if (profileLoading && !userProfile) {
     return (
       <div className="min-h-screen bg-surface-light dark:bg-gray-900 flex items-center justify-center p-4">
         <div className="flex items-center gap-3">
@@ -259,14 +332,23 @@ const Profile = () => {
                     Nombres
                   </label>
                   {isEditing ? (
-                    <input
-                      type="text"
-                      name="nomUsuario"
-                      value={editData.nomUsuario}
-                      onChange={handleInputChange}
-                      className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
-                      placeholder="Ingresa tus nombres"
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        name="nomUsuario"
+                        value={editData.nomUsuario}
+                        onChange={handleInputChange}
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          editErrors.nomUsuario
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
+                        placeholder="Ingresa tus nombres"
+                      />
+                      {editErrors.nomUsuario && (
+                        <p className="text-xs text-red-600 dark:text-red-400 mt-1">{editErrors.nomUsuario}</p>
+                      )}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-surface-light dark:bg-gray-700 rounded-md sm:rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
                       <FaUser className="text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
@@ -283,14 +365,23 @@ const Profile = () => {
                     Apellidos
                   </label>
                   {isEditing ? (
-                    <input
-                      type="text"
-                      name="apeUsuario"
-                      value={editData.apeUsuario}
-                      onChange={handleInputChange}
-                      className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
-                      placeholder="Ingresa tus apellidos"
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        name="apeUsuario"
+                        value={editData.apeUsuario}
+                        onChange={handleInputChange}
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          editErrors.apeUsuario
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
+                        placeholder="Ingresa tus apellidos"
+                      />
+                      {editErrors.apeUsuario && (
+                        <p className="text-xs text-red-600 dark:text-red-400 mt-1">{editErrors.apeUsuario}</p>
+                      )}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-surface-light dark:bg-gray-700 rounded-md sm:rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
                       <FaUser className="text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
@@ -307,14 +398,23 @@ const Profile = () => {
                     Correo Electrónico
                   </label>
                   {isEditing ? (
-                    <input
-                      type="email"
-                      name="email"
-                      value={editData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
-                      placeholder="Ingresa tu correo electrónico"
-                    />
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        value={editData.email}
+                        onChange={handleInputChange}
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          editErrors.email
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
+                        placeholder="Ingresa tu correo electrónico"
+                      />
+                      {editErrors.email && (
+                        <p className="text-xs text-red-600 dark:text-red-400 mt-1">{editErrors.email}</p>
+                      )}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-surface-light dark:bg-gray-700 rounded-md sm:rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
                       <FaEnvelope className="text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
@@ -331,14 +431,23 @@ const Profile = () => {
                     Teléfono
                   </label>
                   {isEditing ? (
-                    <input
-                      type="tel"
-                      name="telUsuario"
-                      value={editData.telUsuario}
-                      onChange={handleInputChange}
-                      className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
-                      placeholder="Ingresa tu número de teléfono"
-                    />
+                    <div>
+                      <input
+                        type="tel"
+                        name="telUsuario"
+                        value={editData.telUsuario}
+                        onChange={handleInputChange}
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          editErrors.telUsuario
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
+                        placeholder="Ingresa tu número de teléfono"
+                      />
+                      {editErrors.telUsuario && (
+                        <p className="text-xs text-red-600 dark:text-red-400 mt-1">{editErrors.telUsuario}</p>
+                      )}
+                    </div>
                   ) : (
                     <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-surface-light dark:bg-gray-700 rounded-md sm:rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
                       <FaPhone className="text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
@@ -371,19 +480,19 @@ const Profile = () => {
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 border-t border-border-light dark:border-gray-700">
                   <button
                     onClick={handleSaveProfile}
-                    disabled={loading}
+                    disabled={profileLoading}
                     className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-md sm:rounded-lg transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   >
                     <FaSave size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span>{loading ? 'Guardando...' : 'Guardar Cambios'}</span>
+                    <span>{profileLoading ? 'Guardando...' : 'Guardar Cambios'}</span>
                   </button>
                   <button
                     onClick={handleCancel}
-                    disabled={loading}
+                    disabled={profileLoading}
                     className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 rounded-md sm:rounded-lg transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   >
                     <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span>{loading ? 'Procesando...' : 'Cancelar'}</span>
+                    <span>{profileLoading ? 'Procesando...' : 'Cancelar'}</span>
                   </button>
                 </div>
               )}
@@ -427,6 +536,7 @@ const Profile = () => {
                         type="button"
                         onClick={() => togglePasswordVisibility('current')}
                         className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
+                        aria-label={showPasswords.current ? 'Ocultar contraseña actual' : 'Mostrar contraseña actual'}
                       >
                         {showPasswords.current ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
@@ -451,6 +561,7 @@ const Profile = () => {
                         type="button"
                         onClick={() => togglePasswordVisibility('new')}
                         className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
+                        aria-label={showPasswords.new ? 'Ocultar nueva contraseña' : 'Mostrar nueva contraseña'}
                       >
                         {showPasswords.new ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
@@ -475,6 +586,7 @@ const Profile = () => {
                         type="button"
                         onClick={() => togglePasswordVisibility('confirm')}
                         className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
+                        aria-label={showPasswords.confirm ? 'Ocultar confirmación de contraseña' : 'Mostrar confirmación de contraseña'}
                       >
                         {showPasswords.confirm ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
@@ -485,19 +597,19 @@ const Profile = () => {
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 sm:pt-3">
                     <button
                       onClick={handleChangePassword}
-                      disabled={loading}
+                      disabled={profileLoading}
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white text-xs sm:text-sm rounded-md sm:rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     >
                       <FaSave size={12} className="sm:w-[14px] sm:h-[14px]" />
-                      <span>{loading ? 'Cambiando...' : 'Cambiar'}</span>
+                      <span>{profileLoading ? 'Cambiando...' : 'Cambiar'}</span>
                     </button>
                     <button
                       onClick={handleCancel}
-                      disabled={loading}
+                      disabled={profileLoading}
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 text-xs sm:text-sm rounded-md sm:rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     >
                       <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                      <span>{loading ? 'Procesando...' : 'Cancelar'}</span>
+                      <span>{profileLoading ? 'Procesando...' : 'Cancelar'}</span>
                     </button>
                   </div>
                 </div>
