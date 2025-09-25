@@ -90,21 +90,43 @@ const authAPI = {
 
       // Verificar que la respuesta tenga la estructura esperada
       if (!response.data) {
+        console.error('❌ No response data received from server');
         throw new Error('No se recibió respuesta del servidor');
       }
 
       if (!response.data.token) {
+        console.error('❌ No token received in response:', response.data);
         throw new Error('No se recibió token de autenticación');
       }
 
-      if (!response.data.user) {
+      // Buscar datos del usuario en diferentes ubicaciones de la respuesta
+      let user = response.data.user;
+      if (!user) {
+        // Intentar buscar en otras ubicaciones comunes
+        user = response.data.userData || response.data.profile || response.data.data;
+        console.log('🔍 User data found in alternative location:', user ? 'YES' : 'NO');
+      }
+
+      if (!user) {
+        console.error('❌ No user data received in response:', {
+          hasUser: !!response.data.user,
+          hasUserData: !!response.data.userData,
+          hasProfile: !!response.data.profile,
+          hasData: !!response.data.data,
+          fullResponse: response.data
+        });
         throw new Error('No se recibieron datos del usuario');
       }
 
       // Verificar que el usuario tenga los campos requeridos
-      const user = response.data.user;
       if (!user.id || !user.email) {
-        console.error('❌ User data incomplete:', user);
+        console.error('❌ User data incomplete:', {
+          user,
+          hasId: !!user.id,
+          hasEmail: !!user.email,
+          hasName: !!user.name,
+          hasRole: !!user.role
+        });
         throw new Error('Los datos del usuario están incompletos');
       }
 
@@ -412,7 +434,8 @@ const authAPI = {
         localStorage.setItem('userToken', authData.token); // Por compatibilidad
         localStorage.setItem('isAuthenticated', 'true');
 
-        if (authData.user) {
+        // Verificar y guardar datos del usuario con validación mejorada
+        if (authData.user && typeof authData.user === 'object') {
           const userData = {
             id: authData.user.id,
             name: authData.user.name,
@@ -420,18 +443,75 @@ const authAPI = {
             role: authData.user.role
           };
 
-          localStorage.setItem('userData', JSON.stringify(userData));
-          localStorage.setItem('userName', userData.name || '');
-          localStorage.setItem('userRole', userData.role || '');
-          localStorage.setItem('userEmail', userData.email || '');
-          localStorage.setItem('userId', userData.id || '');
+          // Validar que los datos del usuario sean completos
+          if (userData.id && userData.email) {
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('userName', userData.name || '');
+            localStorage.setItem('userRole', userData.role || '');
+            localStorage.setItem('userEmail', userData.email || '');
+            localStorage.setItem('userId', userData.id || '');
 
-          console.log('✅ User data saved successfully:', userData);
+            console.log('✅ User data saved successfully:', userData);
+          } else {
+            console.warn('⚠️ User data incomplete, attempting to recover from response:', authData);
+            // Intentar recuperar datos del usuario desde la respuesta completa
+            if (authData.userData || authData.profile) {
+              const recoveredUser = authData.userData || authData.profile;
+              const recoveredUserData = {
+                id: recoveredUser.id,
+                name: recoveredUser.name,
+                email: recoveredUser.email,
+                role: recoveredUser.role
+              };
+
+              if (recoveredUserData.id && recoveredUserData.email) {
+                localStorage.setItem('userData', JSON.stringify(recoveredUserData));
+                localStorage.setItem('userName', recoveredUserData.name || '');
+                localStorage.setItem('userRole', recoveredUserData.role || '');
+                localStorage.setItem('userEmail', recoveredUserData.email || '');
+                localStorage.setItem('userId', recoveredUserData.id || '');
+
+                console.log('✅ User data recovered and saved successfully:', recoveredUserData);
+              } else {
+                throw new Error('No valid user data found in response');
+              }
+            } else {
+              throw new Error('No valid user data found in response');
+            }
+          }
+        } else {
+          console.warn('⚠️ No user data in auth response, attempting recovery...');
+          // Intentar recuperar datos del usuario desde otras partes de la respuesta
+          if (authData.userData || authData.profile) {
+            const recoveredUser = authData.userData || authData.profile;
+            const recoveredUserData = {
+              id: recoveredUser.id,
+              name: recoveredUser.name,
+              email: recoveredUser.email,
+              role: recoveredUser.role
+            };
+
+            if (recoveredUserData.id && recoveredUserData.email) {
+              localStorage.setItem('userData', JSON.stringify(recoveredUserData));
+              localStorage.setItem('userName', recoveredUserData.name || '');
+              localStorage.setItem('userRole', recoveredUserData.role || '');
+              localStorage.setItem('userEmail', recoveredUserData.email || '');
+              localStorage.setItem('userId', recoveredUserData.id || '');
+
+              console.log('✅ User data recovered and saved successfully:', recoveredUserData);
+            } else {
+              throw new Error('No valid user data found in response');
+            }
+          } else {
+            throw new Error('No user data found in authentication response');
+          }
         }
+      } else {
+        throw new Error('No authentication token provided');
       }
     } catch (error) {
       console.error('❌ Error saving auth data:', error);
-      throw new Error('Failed to save authentication data');
+      throw new Error(`Failed to save authentication data: ${error.message}`);
     }
   },
 

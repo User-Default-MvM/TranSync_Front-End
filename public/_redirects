@@ -1,14 +1,19 @@
 # Static assets - serve directly without redirect (must be before SPA fallback)
-# JavaScript files
+# JavaScript files - IMPORTANT: These must be before SPA fallback
 /static/js/*    /static/js/:splat    200
 /static/css/*   /static/css/:splat   200
 /assets/*   /assets/:splat   200
 
-# Admin static assets - serve from actual location
+# Admin static assets - serve from actual location (IMPORTANT: Before SPA fallback)
 /admin/static/js/*    /static/js/:splat    200
 /admin/static/css/*   /static/css/:splat   200
 /admin/assets/*   /assets/:splat   200
 
+# Dynamic chunks with hash - serve JavaScript files correctly (IMPORTANT: Before SPA fallback)
+/static/js/*.chunk.js    /static/js/:splat    200
+/admin/static/js/*.chunk.js    /static/js/:splat    200
+
+# Critical static files - serve directly (IMPORTANT: Before SPA fallback)
 /favicon.ico    /favicon.ico   200
 /manifest.json  /manifest.json 200
 /robots.txt /robots.txt 200

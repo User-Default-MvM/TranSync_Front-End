@@ -118,14 +118,30 @@ const Login = () => {
       setSuccess(t('login.messages.success'));
 
       // Verificar que los datos del usuario se guardaron correctamente
-      if (response.user && response.token) {
-        // Forzar actualización del contexto de autenticación
-        window.dispatchEvent(new CustomEvent('auth:login', {
-          detail: { user: response.user, token: response.token }
-        }));
-        console.log('✅ Login successful, user data verified:', response.user);
+      if (response.token) {
+        // Buscar datos del usuario en diferentes ubicaciones
+        const userData = response.user || response.userData || response.profile || response.data;
+
+        if (userData && userData.id && userData.email) {
+          // Forzar actualización del contexto de autenticación
+          window.dispatchEvent(new CustomEvent('auth:login', {
+            detail: { user: userData, token: response.token }
+          }));
+          console.log('✅ Login successful, user data verified:', userData);
+        } else {
+          console.error('❌ Login response missing user data:', {
+            hasToken: !!response.token,
+            hasUser: !!response.user,
+            hasUserData: !!response.userData,
+            hasProfile: !!response.profile,
+            hasData: !!response.data,
+            fullResponse: response
+          });
+          throw new Error('No user data received after login');
+        }
       } else {
-        throw new Error('No user data received after login');
+        console.error('❌ Login response missing token:', response);
+        throw new Error('No authentication token received after login');
       }
 
       // Guardar estado de "recordarme"
