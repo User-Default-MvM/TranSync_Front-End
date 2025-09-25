@@ -188,31 +188,31 @@ const Register = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-surface-light via-primary-50 to-primary-100 dark:from-background-dark dark:via-surface-dark dark:to-background-dark flex items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-6xl mx-auto bg-background-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 animate-fade-in-up">
-        <div className="flex flex-col lg:flex-row min-h-[70vh] md:min-h-[80vh] xl:min-h-[85vh]">
+    <div className="min-h-screen bg-gradient-to-br from-surface-light via-primary-50 to-primary-100 dark:from-background-dark dark:via-surface-dark dark:to-background-dark flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8">
+      <div className="w-full max-w-6xl mx-auto bg-background-light dark:bg-surface-dark rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 animate-fade-in-up">
+        <div className="flex flex-col lg:flex-row min-h-[600px] sm:min-h-[70vh] md:min-h-[80vh] xl:min-h-[85vh]">
           {/* Left side - Brand section */}
-          <div className="lg:w-2/5 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center relative overflow-hidden animate-slide-in-left">
+          <div className="lg:w-2/5 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center relative overflow-hidden animate-slide-in-left">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-white/5 to-transparent rounded-full -translate-y-32 translate-x-32"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-l from-white/5 to-transparent rounded-full -translate-y-32 translate-x-32"></div>
             <div className="relative z-10">
-              <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold text-white mb-4 sm:mb-6">
                 TransSync
               </h1>
-              <p className="text-blue-100 text-xl mb-10 leading-relaxed">
+              <p className="text-blue-100 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 leading-relaxed">
                 {t('register.brand.description')}
               </p>
-              <div className="space-y-6">
-                <div className="flex items-center text-blue-100 text-lg">
-                  <FaShieldAlt className="mr-4 text-blue-300 text-xl" />
+              <div className="space-y-3 sm:space-y-4 md:space-y-6">
+                <div className="flex items-center text-blue-100 text-sm sm:text-base md:text-lg">
+                  <FaShieldAlt className="mr-3 sm:mr-4 text-blue-300 text-lg sm:text-xl" />
                   <span>{t('register.brand.features.security')}</span>
                 </div>
-                <div className="flex items-center text-blue-100 text-lg">
-                  <FaUsers className="mr-4 text-blue-300 text-xl" />
+                <div className="flex items-center text-blue-100 text-sm sm:text-base md:text-lg">
+                  <FaUsers className="mr-3 sm:mr-4 text-blue-300 text-lg sm:text-xl" />
                   <span>{t('register.brand.features.admin')}</span>
                 </div>
-                <div className="flex items-center text-blue-100 text-lg">
-                  <FaCogs className="mr-4 text-blue-300 text-xl" />
+                <div className="flex items-center text-blue-100 text-sm sm:text-base md:text-lg">
+                  <FaCogs className="mr-3 sm:mr-4 text-blue-300 text-lg sm:text-xl" />
                   <span>{t('register.brand.features.dashboard')}</span>
                 </div>
               </div>
@@ -220,16 +220,16 @@ const Register = () => {
           </div>
 
           {/* Right side - Form section */}
-          <div className="lg:w-3/5 p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center animate-slide-in-right">
+          <div className="lg:w-3/5 p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center animate-slide-in-right">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-10">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-3">{t('register.title')}</h2>
-              <p className="text-text-secondary-light dark:text-text-secondary-dark text-base md:text-lg">{t('register.subtitle')}</p>
+            <div className="text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3">{t('register.title')}</h2>
+              <p className="text-text-secondary-light dark:text-text-secondary-dark text-sm sm:text-base md:text-lg">{t('register.subtitle')}</p>
 
 
-              <div className="mt-4 p-3 md:p-4 bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-xl">
-                <div className="flex items-center text-blue-700 dark:text-blue-300 text-sm">
-                  <FaUserTie className="mr-2 text-blue-600 dark:text-blue-400" />
+              <div className="mt-3 sm:mt-4 p-2 sm:p-3 md:p-4 bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-lg sm:rounded-xl min-h-[40px] sm:min-h-[44px] md:min-h-[48px] flex items-center justify-center">
+                <div className="flex items-center text-blue-700 dark:text-blue-300 text-xs sm:text-sm">
+                  <FaUserTie className="mr-2 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                   <span className="font-medium">{t('register.adminReview')}</span>
                 </div>
               </div>
@@ -237,19 +237,19 @@ const Register = () => {
 
             {/* Messages */}
             {ui.success && (
-              <div className="flex items-center bg-green-50 dark:bg-green-900/50 text-green-700 dark:text-green-200 p-3 md:p-4 rounded-xl mb-6 md:mb-8 border border-green-200 dark:border-green-800">
-                <FaCheckCircle className="mr-3 flex-shrink-0 text-green-500 dark:text-green-300 text-base md:text-lg" />
-                <span className="text-sm">{ui.success}</span>
+              <div className="flex items-center bg-green-50 dark:bg-green-900/50 text-green-700 dark:text-green-200 p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl mb-4 sm:mb-6 md:mb-8 border border-green-200 dark:border-green-800 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+                <FaCheckCircle className="mr-2 sm:mr-3 flex-shrink-0 text-green-500 dark:text-green-300 text-sm sm:text-base md:text-lg" />
+                <span className="text-xs sm:text-sm">{ui.success}</span>
               </div>
             )}
 
             {ui.error && (
-              <div className="flex items-center bg-red-50 dark:bg-red-900/50 text-red-700 dark:text-red-200 p-3 md:p-4 rounded-xl mb-6 md:mb-8 border border-red-200 dark:border-red-800">
-                <FaExclamationTriangle className="mr-3 flex-shrink-0 text-red-500 dark:text-red-300 text-base md:text-lg" />
-                <div className="text-sm">
+              <div className="flex items-center bg-red-50 dark:bg-red-900/50 text-red-700 dark:text-red-200 p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl mb-4 sm:mb-6 md:mb-8 border border-red-200 dark:border-red-800 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+                <FaExclamationTriangle className="mr-2 sm:mr-3 flex-shrink-0 text-red-500 dark:text-red-300 text-sm sm:text-base md:text-lg" />
+                <div className="text-xs sm:text-sm">
                   <p>{ui.error}</p>
                   {ui.error.includes("configuración del sistema") && (
-                    <p className="mt-2 text-red-600 dark:text-red-400 font-medium">
+                    <p className="mt-1 sm:mt-2 text-red-600 dark:text-red-400 font-medium">
                       Sugerencia: Contacte al administrador del sistema para verificar la configuración de la base de datos.
                     </p>
                   )}
@@ -258,14 +258,14 @@ const Register = () => {
             )}
 
             {/* Form */}
-            <form onSubmit={handleRegister} className="space-y-6 md:space-y-8">
+            <form onSubmit={handleRegister} className="space-y-4 sm:space-y-6 md:space-y-8">
               {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
                   {t('register.form.email')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                  <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
+                  <FaEnvelope className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
                   <input
                     id="email"
                     name="email"
@@ -274,7 +274,7 @@ const Register = () => {
                     value={formData.email}
                     onChange={handleChange}
                     disabled={ui.loading}
-                    className={`w-full pl-12 pr-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.email
+                    className={`w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.email
                       ? "border-red-500 focus:ring-2 focus:ring-red-500"
                       : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
@@ -285,68 +285,74 @@ const Register = () => {
                   />
                 </div>
                 {ui.formTouched && ui.formErrors.email && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.email}
+                  <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                    <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                    <span>{ui.formErrors.email}</span>
                   </p>
                 )}
               </div>
-              <div>
-                <label htmlFor="nombre" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
-                  {t('register.form.name')} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="nombre"
-                  name="nombre"
-                  placeholder={t('register.form.namePlaceholder')}
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  disabled={ui.loading}
-                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.nombre
-                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    }`}
-                  required
-                  autoComplete="name"
-                  aria-describedby={ui.formTouched && ui.formErrors.nombre ? "nombre-error" : undefined}
-                  aria-invalid={ui.formTouched && ui.formErrors.nombre}
-                />
-                {ui.formTouched && ui.formErrors.nombre && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.nombre}
-                  </p>
-                )}
+
+              {/* Grid de campos - responsive */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                <div>
+                  <label htmlFor="nombre" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
+                    {t('register.form.name')} <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    placeholder={t('register.form.namePlaceholder')}
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    disabled={ui.loading}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.nombre
+                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      }`}
+                    required
+                    autoComplete="name"
+                    aria-describedby={ui.formTouched && ui.formErrors.nombre ? "nombre-error" : undefined}
+                    aria-invalid={ui.formTouched && ui.formErrors.nombre}
+                  />
+                  {ui.formTouched && ui.formErrors.nombre && (
+                    <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                      <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                      <span>{ui.formErrors.nombre}</span>
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="apellido" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
+                    {t('register.form.lastname')} <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="apellido"
+                    name="apellido"
+                    placeholder={t('register.form.lastnamePlaceholder')}
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    disabled={ui.loading}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.apellido
+                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      }`}
+                    required
+                    autoComplete="family-name"
+                    aria-describedby={ui.formTouched && ui.formErrors.apellido ? "apellido-error" : undefined}
+                    aria-invalid={ui.formTouched && ui.formErrors.apellido}
+                  />
+                  {ui.formTouched && ui.formErrors.apellido && (
+                    <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                      <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                      <span>{ui.formErrors.apellido}</span>
+                    </p>
+                  )}
+                </div>
               </div>
+
               <div>
-                <label htmlFor="apellido" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
-                  {t('register.form.lastname')} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="apellido"
-                  name="apellido"
-                  placeholder={t('register.form.lastnamePlaceholder')}
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  disabled={ui.loading}
-                  className={`w-full px-4 py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base md:text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.apellido
-                    ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                    : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    }`}
-                  required
-                  autoComplete="family-name"
-                  aria-describedby={ui.formTouched && ui.formErrors.apellido ? "apellido-error" : undefined}
-                  aria-invalid={ui.formTouched && ui.formErrors.apellido}
-                />
-                {ui.formTouched && ui.formErrors.apellido && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.apellido}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="numeroDocumento" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                <label htmlFor="numeroDocumento" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
                   {t('register.form.document')}
                 </label>
                 <input
@@ -356,7 +362,7 @@ const Register = () => {
                   value={formData.numeroDocumento}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.numeroDocumento
+                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.numeroDocumento
                     ? "border-red-500 focus:ring-2 focus:ring-red-500"
                     : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
@@ -364,14 +370,15 @@ const Register = () => {
                   autoComplete="off"
                 />
                 {ui.formTouched && ui.formErrors.numeroDocumento && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.numeroDocumento}
+                  <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                    <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                    <span>{ui.formErrors.numeroDocumento}</span>
                   </p>
                 )}
               </div>
+
               <div>
-                <label htmlFor="telefono" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
+                <label htmlFor="telefono" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
                   {t('register.form.phone')}
                 </label>
                 <input
@@ -381,7 +388,7 @@ const Register = () => {
                   value={formData.telefono}
                   onChange={handleChange}
                   disabled={ui.loading}
-                  className={`w-full px-4 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.telefono
+                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.telefono
                     ? "border-red-500 focus:ring-2 focus:ring-red-500"
                     : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
@@ -389,117 +396,118 @@ const Register = () => {
                   autoComplete="tel"
                 />
                 {ui.formTouched && ui.formErrors.telefono && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.telefono}
+                  <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                    <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                    <span>{ui.formErrors.telefono}</span>
                   </p>
                 )}
               </div>
-              {/* Password Field */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
-                  {t('register.form.password')}
-                </label>
-                <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
-                  <input
-                    id="password"
-                    name="password"
-                    type={ui.showPassword ? "text" : "password"}
-                    placeholder={t('register.form.passwordPlaceholder')}
-                    value={formData.password}
-                    onChange={handleChange}
-                    disabled={ui.loading}
-                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.password
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      }`}
-                    required
-                    autoComplete="new-password"
-                  />
-                  <button
-                    type="button"
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
-                    onClick={() => togglePasswordVisibility('password')}
-                    disabled={ui.loading}
-                    tabIndex="-1"
-                  >
-                    {ui.showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
-
-                {/* Password strength indicator */}
-                {formData.password && (
-                  <div className="mt-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-slate-600 dark:text-slate-300">{t('register.form.strength')}:</span>
-                      <span className={`text-sm font-medium ${passwordStrength.color}`}>
-                        {passwordStrength.label}
-                      </span>
-                    </div>
-                    <div className="w-full bg-slate-200 dark:bg-gray-600 rounded-full h-2">
-                      <div
-                        className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.score < 2 ? 'bg-red-500' :
-                          passwordStrength.score < 4 ? 'bg-yellow-500' : 'bg-green-500'
-                          }`}
-                        style={{ width: `${(passwordStrength.score / 4) * 100}%` }}
-                      />
-                    </div>
+              {/* Grid de campos de contraseña - responsive */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                <div>
+                  <label htmlFor="password" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
+                    {t('register.form.password')}
+                  </label>
+                  <div className="relative">
+                    <FaLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
+                    <input
+                      id="password"
+                      name="password"
+                      type={ui.showPassword ? "text" : "password"}
+                      placeholder={t('register.form.passwordPlaceholder')}
+                      value={formData.password}
+                      onChange={handleChange}
+                      disabled={ui.loading}
+                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.password
+                        ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                        : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        }`}
+                      required
+                      autoComplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                      onClick={() => togglePasswordVisibility('password')}
+                      disabled={ui.loading}
+                      tabIndex="-1"
+                    >
+                      {ui.showPassword ? <FaEyeSlash className="text-sm sm:text-base" /> : <FaEye className="text-sm sm:text-base" />}
+                    </button>
                   </div>
-                )}
 
-                {ui.formTouched && ui.formErrors.password && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.password}
-                  </p>
-                )}
-              </div>
+                  {/* Password strength indicator */}
+                  {formData.password && (
+                    <div className="mt-2 sm:mt-3">
+                      <div className="flex items-center justify-between mb-1 sm:mb-2">
+                        <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">{t('register.form.strength')}:</span>
+                        <span className={`text-xs sm:text-sm font-medium ${passwordStrength.color}`}>
+                          {passwordStrength.label}
+                        </span>
+                      </div>
+                      <div className="w-full bg-slate-200 dark:bg-gray-600 rounded-full h-1.5 sm:h-2">
+                        <div
+                          className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${passwordStrength.score < 2 ? 'bg-red-500' :
+                            passwordStrength.score < 4 ? 'bg-yellow-500' : 'bg-green-500'
+                            }`}
+                          style={{ width: `${(passwordStrength.score / 4) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
 
-              {/* Confirm Password Field */}
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-3">
-                  {t('register.form.confirmPassword')}
-                </label>
-                <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-lg" />
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={ui.showConfirmPassword ? "text" : "password"}
-                    placeholder={t('register.form.confirmPasswordPlaceholder')}
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    disabled={ui.loading}
-                    className={`w-full pl-12 pr-12 py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-lg disabled:opacity-50 ${ui.formTouched && ui.formErrors.confirmPassword
-                      ? "border-red-500 focus:ring-2 focus:ring-red-500"
-                      : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      }`}
-                    required
-                    autoComplete="new-password"
-                  />
-                  <button
-                    type="button"
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
-                    onClick={() => togglePasswordVisibility('confirmPassword')}
-                    disabled={ui.loading}
-                    tabIndex="-1"
-                  >
-                    {ui.showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
+                  {ui.formTouched && ui.formErrors.password && (
+                    <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                      <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                      <span>{ui.formErrors.password}</span>
+                    </p>
+                  )}
                 </div>
-                {ui.formTouched && ui.formErrors.confirmPassword && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center">
-                    <FaExclamationTriangle className="mr-2 text-red-500" />
-                    {ui.formErrors.confirmPassword}
-                  </p>
-                )}
+
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-xs sm:text-sm font-semibold text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3">
+                    {t('register.form.confirmPassword')}
+                  </label>
+                  <div className="relative">
+                    <FaLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
+                    <input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={ui.showConfirmPassword ? "text" : "password"}
+                      placeholder={t('register.form.confirmPasswordPlaceholder')}
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      disabled={ui.loading}
+                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.confirmPassword
+                        ? "border-red-500 focus:ring-2 focus:ring-red-500"
+                        : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        }`}
+                      required
+                      autoComplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                      onClick={() => togglePasswordVisibility('confirmPassword')}
+                      disabled={ui.loading}
+                      tabIndex="-1"
+                    >
+                      {ui.showConfirmPassword ? <FaEyeSlash className="text-sm sm:text-base" /> : <FaEye className="text-sm sm:text-base" />}
+                    </button>
+                  </div>
+                  {ui.formTouched && ui.formErrors.confirmPassword && (
+                    <p className="text-red-600 dark:text-red-400 text-xs sm:text-sm mt-1 sm:mt-2 flex items-center">
+                      <FaExclamationTriangle className="mr-1 sm:mr-2 text-red-500 flex-shrink-0" />
+                      <span>{ui.formErrors.confirmPassword}</span>
+                    </p>
+                  )}
+                </div>
               </div>
 
               {/* Password requirements */}
-              <div className="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-gray-600 rounded-xl p-4 md:p-6">
-                <p className="text-sm font-medium text-text-primary-light dark:text-slate-200 mb-3 md:mb-4">{t('register.passwordRequirements.title')}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-gray-600 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6">
+                <p className="text-xs sm:text-sm font-medium text-text-primary-light dark:text-slate-200 mb-2 sm:mb-3 md:mb-4">{t('register.passwordRequirements.title')}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   <PasswordRequirement met={formData.password.length >= 6}>
                     {t('register.passwordRequirements.minLength')}
                   </PasswordRequirement>
@@ -516,18 +524,18 @@ const Register = () => {
               </div>
 
               {/* Information about process */}
-              <div className="bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-xl p-4 md:p-6">
-                <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center">
-                  <FaUserTie className="mr-2" />
+              <div className="bg-blue-50 dark:bg-surface-dark border border-blue-200 dark:border-gray-600 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6">
+                <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                  <FaUserTie className="mr-2 flex-shrink-0" />
                   {t('register.process.title')}
                 </h4>
-                <div className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
+                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-blue-700 dark:text-blue-300">
                   {t('register.process.steps', { returnObjects: true }).map((step, index) => (
                     <div key={index} className="flex items-start">
-                      <span className="inline-block w-6 h-6 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center mr-3 mt-0.5 font-bold">
+                      <span className="inline-block w-5 h-5 sm:w-6 sm:h-6 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center mr-2 sm:mr-3 mt-0.5 font-bold flex-shrink-0">
                         {index + 1}
                       </span>
-                      <span>{step}</span>
+                      <span className="leading-relaxed">{step}</span>
                     </div>
                   ))}
                 </div>
@@ -536,14 +544,14 @@ const Register = () => {
               {/* Submit button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 md:py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 sm:py-4 md:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 text-sm sm:text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[48px] sm:min-h-[52px] md:min-h-[56px]"
                 disabled={ui.loading}
                 aria-describedby={ui.loading ? "register-loading" : undefined}
               >
                 {ui.loading ? (
                   <div className="flex items-center justify-center">
-                    <FaSpinner className="w-5 h-5 md:w-6 md:h-6 mr-3 animate-spin" />
-                    {t('register.form.registering')}
+                    <FaSpinner className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 mr-2 sm:mr-3 animate-spin" />
+                    <span>{t('register.form.registering')}</span>
                   </div>
                 ) : (
                   t('register.form.registerButton')
@@ -551,11 +559,11 @@ const Register = () => {
               </button>
 
               {/* Login link */}
-              <div className="text-center pt-4 md:pt-6 border-t border-border-light dark:border-gray-600">
-                <p className="text-text-secondary-light dark:text-slate-300 text-sm md:text-base mb-3 md:mb-4">{t('register.form.hasAccount')}</p>
+              <div className="text-center pt-3 sm:pt-4 md:pt-6 border-t border-border-light dark:border-gray-600">
+                <p className="text-text-secondary-light dark:text-slate-300 text-xs sm:text-sm md:text-base mb-2 sm:mb-3 md:mb-4">{t('register.form.hasAccount')}</p>
                 <button
                   type="button"
-                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-xl transition-all duration-300 text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl transition-all duration-300 text-xs sm:text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   onClick={() => navigate("/login")}
                   disabled={ui.loading}
                   aria-label="Ir a la página de inicio de sesión"

@@ -36,15 +36,15 @@ const Informes = () => {
   });
 
   return (
-    <div className="p-4 md:p-6 max-w-7xl mx-auto text-text-primary-light">
+    <div className="p-2 sm:p-4 md:p-6 max-w-7xl mx-auto text-text-primary-light min-h-screen">
       {/* Header */}
-      <div className="mb-6 md:mb-7">
-        <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2 md:gap-3 mb-2 text-text-primary-light">
-          <FileText className="text-blue-600 w-6 h-6 md:w-auto md:h-auto" />
-          <span className="leading-tight">{t('reports.title')}</span>
+      <div className="mb-4 sm:mb-6 md:mb-8">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 text-text-primary-light min-w-0">
+          <FileText className="text-blue-600 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 flex-shrink-0" />
+          <span className="leading-tight truncate">{t('reports.title')}</span>
         </h1>
-        <p className="text-sm md:text-base text-text-secondary-light mt-0 leading-relaxed">
-          {t('reports.subtitle')}
+        <p className="text-xs sm:text-sm md:text-base text-text-secondary-light mt-0 leading-relaxed min-w-0">
+          <span className="truncate">{t('reports.subtitle')}</span>
         </p>
       </div>
 
@@ -97,35 +97,35 @@ const Informes = () => {
       </div>
 
       {/* Panel Container */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-4 md:gap-6 mb-6">
+      <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.5fr] gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
         {/* Generate Report Panel */}
-        <div className="bg-background-light rounded-lg shadow-sm overflow-hidden h-fit">
-          <div className="px-4 md:px-5 py-4 bg-surface-light border-b border-border-light flex justify-between items-center">
-            <h2 className="text-base md:text-lg m-0 font-semibold text-text-primary-light">Generar nuevo informe</h2>
+        <div className="bg-background-light dark:bg-surface-dark rounded-lg shadow-sm overflow-hidden h-fit">
+          <div className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 flex justify-between items-center min-h-[60px] sm:min-h-[70px]">
+            <h2 className="text-sm sm:text-base md:text-lg m-0 font-semibold text-text-primary-light dark:text-gray-100 min-w-0 truncate">Generar nuevo informe</h2>
           </div>
-          <div className="p-4 md:p-5">
-            <div className="mb-4">
-              <label className="block mb-1.5 font-medium text-sm text-text-secondary-light">Tipo de informe</label>
+          <div className="p-3 sm:p-4 md:p-5">
+            <div className="mb-3 sm:mb-4 md:mb-5">
+              <label className="block mb-1.5 sm:mb-2 font-medium text-xs sm:text-sm text-text-secondary-light dark:text-gray-300">Tipo de informe</label>
               <div className="relative">
-                <select className="w-full py-3 px-3 pr-9 border border-border-light rounded-md text-sm transition-all duration-200 text-text-primary-light appearance-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px]">
+                <select className="w-full py-2.5 sm:py-3 px-3 pr-8 sm:pr-9 border border-border-light dark:border-gray-600 rounded-md text-xs sm:text-sm md:text-base transition-all duration-200 text-text-primary-light dark:text-gray-100 appearance-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px] sm:min-h-[48px] bg-surface-light dark:bg-gray-700">
                   <option>Ocupación por ruta</option>
                   <option>Puntualidad de servicios</option>
                   <option>Estado de la flota</option>
                   <option>Incidencias reportadas</option>
                   <option>Ganancias por ruta</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary-light pointer-events-none w-4 h-4" />
+                <ChevronDown className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-gray-400 pointer-events-none w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4 md:mb-5">
               <div>
-                <label className="block mb-1.5 font-medium text-sm text-text-secondary-light">Fecha inicial</label>
+                <label className="block mb-1.5 sm:mb-2 font-medium text-xs sm:text-sm text-text-secondary-light dark:text-gray-300">Fecha inicial</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light w-4 h-4" />
+                  <Calendar className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-gray-400 w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                   <input
                     type="date"
-                    className="w-full py-3 pl-10 pr-3 border border-border-light rounded-md text-sm transition-all duration-200 text-text-primary-light focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px]"
+                    className="w-full py-2.5 sm:py-3 pl-8 sm:pl-10 pr-3 border border-border-light dark:border-gray-600 rounded-md text-xs sm:text-sm md:text-base transition-all duration-200 text-text-primary-light dark:text-gray-100 focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px] sm:min-h-[48px] bg-surface-light dark:bg-gray-700"
                     value={dateRange.from}
                     onChange={(e) => setDateRange({...dateRange, from: e.target.value})}
                   />
@@ -133,12 +133,12 @@ const Informes = () => {
               </div>
 
               <div>
-                <label className="block mb-1.5 font-medium text-sm text-text-secondary-light">Fecha final</label>
+                <label className="block mb-1.5 sm:mb-2 font-medium text-xs sm:text-sm text-text-secondary-light dark:text-gray-300">Fecha final</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light w-4 h-4" />
+                  <Calendar className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-gray-400 w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                   <input
                     type="date"
-                    className="w-full py-3 pl-10 pr-3 border border-border-light rounded-md text-sm transition-all duration-200 text-text-primary-light focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px]"
+                    className="w-full py-2.5 sm:py-3 pl-8 sm:pl-10 pr-3 border border-border-light dark:border-gray-600 rounded-md text-xs sm:text-sm md:text-base transition-all duration-200 text-text-primary-light dark:text-gray-100 focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(49,130,206,0.15)] focus:outline-none min-h-[44px] sm:min-h-[48px] bg-surface-light dark:bg-gray-700"
                     value={dateRange.to}
                     onChange={(e) => setDateRange({...dateRange, to: e.target.value})}
                   />
@@ -146,26 +146,26 @@ const Informes = () => {
               </div>
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-1.5 font-medium text-sm text-text-secondary-light">Formato</label>
-              <div className="flex flex-wrap gap-4 mt-1.5">
-                <label className="flex items-center gap-2 cursor-pointer min-h-[44px]">
-                  <input type="radio" name="format" value="pdf" defaultChecked className="m-0" />
-                  <span className="text-sm">PDF</span>
+            <div className="mb-3 sm:mb-4 md:mb-5">
+              <label className="block mb-1.5 sm:mb-2 font-medium text-xs sm:text-sm text-text-secondary-light dark:text-gray-300">Formato</label>
+              <div className="flex flex-wrap gap-3 sm:gap-4 mt-1.5 sm:mt-2">
+                <label className="flex items-center gap-2 cursor-pointer min-h-[44px] sm:min-h-[48px]">
+                  <input type="radio" name="format" value="pdf" defaultChecked className="m-0 w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100">PDF</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer min-h-[44px]">
-                  <input type="radio" name="format" value="excel" className="m-0" />
-                  <span className="text-sm">Excel</span>
+                <label className="flex items-center gap-2 cursor-pointer min-h-[44px] sm:min-h-[48px]">
+                  <input type="radio" name="format" value="excel" className="m-0 w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100">Excel</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer min-h-[44px]">
-                  <input type="radio" name="format" value="csv" className="m-0" />
-                  <span className="text-sm">CSV</span>
+                <label className="flex items-center gap-2 cursor-pointer min-h-[44px] sm:min-h-[48px]">
+                  <input type="radio" name="format" value="csv" className="m-0 w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100">CSV</span>
                 </label>
               </div>
             </div>
 
             <button
-              className={`flex items-center justify-center gap-2 text-white border-none py-3 px-6 rounded-md font-semibold text-sm cursor-pointer transition-all duration-200 ease-in-out w-full mt-4 min-h-[48px] ${
+              className={`flex items-center justify-center gap-2 text-white border-none py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 rounded-md font-semibold text-xs sm:text-sm md:text-base cursor-pointer transition-all duration-200 ease-in-out w-full mt-3 sm:mt-4 min-h-[48px] sm:min-h-[52px] ${
                 loading
                   ? "bg-blue-300 cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700"
@@ -175,13 +175,13 @@ const Informes = () => {
             >
               {loading ? (
                 <>
-                  <Clock className="w-4 h-4 animate-spin" />
-                  Generando...
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 animate-spin flex-shrink-0" />
+                  <span className="truncate">Generando...</span>
                 </>
               ) : (
                 <>
-                  <BarChart2 className="w-4 h-4" />
-                  Generar informe
+                  <BarChart2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate">Generar informe</span>
                 </>
               )}
             </button>
@@ -189,13 +189,13 @@ const Informes = () => {
         </div>
         
         {/* Recent Reports Panel */}
-        <div className="bg-background-light rounded-lg shadow-sm overflow-hidden h-fit">
-          <div className="px-4 md:px-5 py-4 bg-surface-light border-b border-border-light flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-            <h2 className="text-base md:text-lg m-0 font-semibold text-text-primary-light">Informes recientes</h2>
-            <div className="flex gap-2">
-              <button className="flex items-center gap-1.5 bg-surface-light text-text-secondary-light border-none py-2 px-3 rounded text-xs font-medium cursor-pointer transition-all duration-200 hover:bg-gray-200 hover:text-blue-600 min-h-[36px]">
-                <Filter className="w-4 h-4" />
-                Filtrar
+        <div className="bg-background-light dark:bg-surface-dark rounded-lg shadow-sm overflow-hidden h-fit">
+          <div className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 min-h-[60px] sm:min-h-[70px]">
+            <h2 className="text-sm sm:text-base md:text-lg m-0 font-semibold text-text-primary-light dark:text-gray-100 min-w-0 truncate">Informes recientes</h2>
+            <div className="flex gap-2 sm:gap-3 flex-shrink-0">
+              <button className="flex items-center gap-1.5 sm:gap-2 bg-surface-light dark:bg-gray-700 text-text-secondary-light dark:text-gray-300 border-none py-2 sm:py-2.5 px-2 sm:px-3 rounded text-xs sm:text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400 min-h-[36px] sm:min-h-[40px]">
+                <Filter className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span className="truncate">Filtrar</span>
               </button>
             </div>
           </div>
@@ -203,64 +203,66 @@ const Informes = () => {
           {/* Mobile Card View */}
           <div className="block md:hidden">
             {filteredReports.length > 0 ? (
-              <div className="divide-y divide-border-light">
+              <div className="divide-y divide-border-light dark:divide-gray-700">
                 {filteredReports.map(report => (
-                  <div key={report.id} className="p-4 hover:bg-surface-light">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-medium text-text-primary-light text-sm flex-1 min-w-0">
-                        {report.name}
+                  <div key={report.id} className="p-3 sm:p-4 hover:bg-surface-light dark:hover:bg-gray-800 transition-colors duration-200">
+                    <div className="flex justify-between items-start mb-2 sm:mb-3">
+                      <h3 className="font-medium text-text-primary-light dark:text-gray-100 text-xs sm:text-sm flex-1 min-w-0">
+                        <span className="truncate block">{report.name}</span>
                       </h3>
-                      <span className="text-xs text-text-secondary-light bg-surface-light px-2 py-1 rounded ml-2 flex-shrink-0">
+                      <span className="text-xs text-text-secondary-light dark:text-gray-400 bg-surface-light dark:bg-gray-700 px-2 py-1 rounded ml-2 flex-shrink-0">
                         {report.downloads} descargas
                       </span>
                     </div>
-                    <p className="text-xs text-text-secondary-light mb-3">{report.date}</p>
-                    <div className="flex gap-2">
-                      <button className="flex items-center justify-center bg-transparent border border-border-light rounded p-2 cursor-pointer text-text-secondary-light transition-all duration-200 hover:bg-surface-light hover:text-blue-600 hover:border-gray-300 min-h-[44px] min-w-[44px] flex-1" title="Descargar">
-                        <Download size={16} />
-                        <span className="ml-1 text-xs">Descargar</span>
+                    <p className="text-xs text-text-secondary-light dark:text-gray-400 mb-2 sm:mb-3 truncate">{report.date}</p>
+                    <div className="flex gap-2 sm:gap-3">
+                      <button className="flex items-center justify-center bg-transparent border border-border-light dark:border-gray-600 rounded p-2 cursor-pointer text-text-secondary-light dark:text-gray-400 transition-all duration-200 hover:bg-surface-light dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-gray-300 dark:hover:border-gray-500 min-h-[44px] min-w-[44px] flex-1" title="Descargar">
+                        <Download size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
+                        <span className="ml-1 text-xs truncate">Descargar</span>
                       </button>
-                      <button className="flex items-center justify-center bg-transparent border border-border-light rounded p-2 cursor-pointer text-text-secondary-light transition-all duration-200 hover:bg-surface-light hover:text-blue-600 hover:border-gray-300 min-h-[44px] min-w-[44px] flex-1" title="Imprimir">
-                        <Printer size={16} />
-                        <span className="ml-1 text-xs">Imprimir</span>
+                      <button className="flex items-center justify-center bg-transparent border border-border-light dark:border-gray-600 rounded p-2 cursor-pointer text-text-secondary-light dark:text-gray-400 transition-all duration-200 hover:bg-surface-light dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-gray-300 dark:hover:border-gray-500 min-h-[44px] min-w-[44px] flex-1" title="Imprimir">
+                        <Printer size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
+                        <span className="ml-1 text-xs truncate">Imprimir</span>
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-text-secondary-light">
-                <FileText className="w-12 h-12 text-text-secondary-light mx-auto mb-3" />
-                <p className="text-sm italic">No hay informes disponibles</p>
+              <div className="text-center py-6 sm:py-8 md:py-10 text-text-secondary-light dark:text-gray-400">
+                <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-text-secondary-light dark:text-gray-600 mx-auto mb-3 flex-shrink-0" />
+                <p className="text-xs sm:text-sm italic">No hay informes disponibles</p>
               </div>
             )}
           </div>
 
           {/* Desktop Table View */}
           <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
+            <table className="w-full border-collapse text-xs sm:text-sm md:text-base min-w-0">
               <thead>
-                <tr>
-                  <th className="text-left py-3 px-4 bg-surface-light border-b border-border-light text-text-secondary-light font-semibold">Nombre</th>
-                  <th className="text-left py-3 px-4 bg-surface-light border-b border-border-light text-text-secondary-light font-semibold">Fecha</th>
-                  <th className="text-left py-3 px-4 bg-surface-light border-b border-border-light text-text-secondary-light font-semibold">Descargas</th>
-                  <th className="text-left py-3 px-4 bg-surface-light border-b border-border-light text-text-secondary-light font-semibold">Acciones</th>
+                <tr className="bg-surface-light dark:bg-gray-800">
+                  <th className="text-left py-2 sm:py-3 px-3 sm:px-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 text-text-secondary-light dark:text-gray-300 font-semibold min-w-0">Nombre</th>
+                  <th className="text-left py-2 sm:py-3 px-3 sm:px-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 text-text-secondary-light dark:text-gray-300 font-semibold min-w-0">Fecha</th>
+                  <th className="text-left py-2 sm:py-3 px-3 sm:px-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 text-text-secondary-light dark:text-gray-300 font-semibold min-w-0">Descargas</th>
+                  <th className="text-left py-2 sm:py-3 px-3 sm:px-4 bg-surface-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700 text-text-secondary-light dark:text-gray-300 font-semibold min-w-0">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredReports.length > 0 ? (
                   filteredReports.map(report => (
-                    <tr key={report.id} className="hover:bg-surface-light">
-                      <td className="py-3 px-4 border-b border-border-light text-text-primary-light">{report.name}</td>
-                      <td className="py-3 px-4 border-b border-border-light text-text-primary-light">{report.date}</td>
-                      <td className="py-3 px-4 border-b border-border-light text-text-primary-light">{report.downloads}</td>
-                      <td className="py-3 px-4 border-b border-border-light text-text-primary-light">
-                        <div className="flex gap-2">
-                          <button className="flex items-center justify-center bg-transparent border border-border-light rounded w-8 h-8 cursor-pointer text-text-secondary-light transition-all duration-200 hover:bg-surface-light hover:text-blue-600 hover:border-gray-300" title="Descargar">
-                            <Download size={16} />
+                    <tr key={report.id} className="hover:bg-surface-light dark:hover:bg-gray-800 transition-colors duration-200">
+                      <td className="py-2 sm:py-3 px-3 sm:px-4 border-b border-border-light dark:border-gray-700 text-text-primary-light dark:text-gray-100 min-w-0">
+                        <span className="truncate block">{report.name}</span>
+                      </td>
+                      <td className="py-2 sm:py-3 px-3 sm:px-4 border-b border-border-light dark:border-gray-700 text-text-primary-light dark:text-gray-100 min-w-0 truncate">{report.date}</td>
+                      <td className="py-2 sm:py-3 px-3 sm:px-4 border-b border-border-light dark:border-gray-700 text-text-primary-light dark:text-gray-100 min-w-0">{report.downloads}</td>
+                      <td className="py-2 sm:py-3 px-3 sm:px-4 border-b border-border-light dark:border-gray-700 text-text-primary-light dark:text-gray-100 min-w-0">
+                        <div className="flex gap-1 sm:gap-2">
+                          <button className="flex items-center justify-center bg-transparent border border-border-light dark:border-gray-600 rounded w-7 h-7 sm:w-8 sm:h-8 cursor-pointer text-text-secondary-light dark:text-gray-400 transition-all duration-200 hover:bg-surface-light dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-gray-300 dark:hover:border-gray-500 min-w-[32px] sm:min-w-[36px]" title="Descargar">
+                            <Download size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
                           </button>
-                          <button className="flex items-center justify-center bg-transparent border border-border-light rounded w-8 h-8 cursor-pointer text-text-secondary-light transition-all duration-200 hover:bg-surface-light hover:text-blue-600 hover:border-gray-300" title="Imprimir">
-                            <Printer size={16} />
+                          <button className="flex items-center justify-center bg-transparent border border-border-light dark:border-gray-600 rounded w-7 h-7 sm:w-8 sm:h-8 cursor-pointer text-text-secondary-light dark:text-gray-400 transition-all duration-200 hover:bg-surface-light dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-gray-300 dark:hover:border-gray-500 min-w-[32px] sm:min-w-[36px]" title="Imprimir">
+                            <Printer size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
                           </button>
                         </div>
                       </td>
@@ -268,7 +270,7 @@ const Informes = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" className="text-center py-6 text-text-secondary-light italic">
+                    <td colSpan="4" className="text-center py-4 sm:py-6 md:py-8 text-text-secondary-light dark:text-gray-400 italic text-xs sm:text-sm">
                       No hay informes disponibles
                     </td>
                   </tr>
@@ -280,40 +282,40 @@ const Informes = () => {
       </div>
       
       {/* Dashboard Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        <div className="bg-background-light rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 md:p-5">
-            <h3 className="text-base font-semibold mt-0 mb-4 text-text-primary-light">Estadísticas rápidas</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center py-2 border-b border-border-light">
-                <span className="text-sm text-text-secondary-light">Informes generados este mes:</span>
-                <span className="font-semibold text-text-primary-light">0</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        <div className="bg-background-light dark:bg-surface-dark rounded-lg shadow-sm overflow-hidden">
+          <div className="p-3 sm:p-4 md:p-5">
+            <h3 className="text-sm sm:text-base font-semibold mt-0 mb-3 sm:mb-4 text-text-primary-light dark:text-gray-100 min-w-0">Estadísticas rápidas</h3>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex justify-between items-center py-1.5 sm:py-2 border-b border-border-light dark:border-gray-700 min-h-[40px] sm:min-h-[44px]">
+                <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-300 truncate">Informes generados este mes:</span>
+                <span className="font-semibold text-text-primary-light dark:text-gray-100 text-xs sm:text-sm">0</span>
               </div>
-              <div className="flex justify-between items-center py-2 border-b border-border-light">
-                <span className="text-sm text-text-secondary-light">Ruta más analizada:</span>
-                <span className="font-semibold text-text-primary-light">-</span>
+              <div className="flex justify-between items-center py-1.5 sm:py-2 border-b border-border-light dark:border-gray-700 min-h-[40px] sm:min-h-[44px]">
+                <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-300 truncate">Ruta más analizada:</span>
+                <span className="font-semibold text-text-primary-light dark:text-gray-100 text-xs sm:text-sm truncate">-</span>
               </div>
-              <div className="flex justify-between items-center py-2">
-                <span className="text-sm text-text-secondary-light">Descargas totales:</span>
-                <span className="font-semibold text-text-primary-light">0</span>
+              <div className="flex justify-between items-center py-1.5 sm:py-2 min-h-[40px] sm:min-h-[44px]">
+                <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-300 truncate">Descargas totales:</span>
+                <span className="font-semibold text-text-primary-light dark:text-gray-100 text-xs sm:text-sm">0</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-background-light rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 md:p-5">
-            <h3 className="text-base font-semibold mt-0 mb-4 text-text-primary-light">Programar informes</h3>
-            <p className="mb-4 text-sm text-text-secondary-light leading-relaxed">Configura informes automáticos periódicos enviados directamente a tu correo.</p>
-            <button className="bg-surface-light text-blue-600 border-none py-3 px-4 rounded font-medium cursor-pointer transition-all duration-200 w-full hover:bg-gray-200 hover:text-blue-700 min-h-[44px]">Configurar</button>
+        <div className="bg-background-light dark:bg-surface-dark rounded-lg shadow-sm overflow-hidden">
+          <div className="p-3 sm:p-4 md:p-5">
+            <h3 className="text-sm sm:text-base font-semibold mt-0 mb-3 sm:mb-4 text-text-primary-light dark:text-gray-100 min-w-0 truncate">Programar informes</h3>
+            <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-text-secondary-light dark:text-gray-300 leading-relaxed min-w-0">Configura informes automáticos periódicos enviados directamente a tu correo.</p>
+            <button className="bg-surface-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-none py-2.5 sm:py-3 px-3 sm:px-4 rounded font-medium cursor-pointer transition-all duration-200 w-full hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-blue-700 dark:hover:text-blue-300 min-h-[44px] sm:min-h-[48px] text-xs sm:text-sm">Configurar</button>
           </div>
         </div>
 
-        <div className="bg-background-light rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 md:p-5">
-            <h3 className="text-base font-semibold mt-0 mb-4 text-text-primary-light">Personalizar informes</h3>
-            <p className="mb-4 text-sm text-text-secondary-light leading-relaxed">Crea plantillas personalizadas para tus necesidades específicas.</p>
-            <button className="bg-surface-light text-blue-600 border-none py-3 px-4 rounded font-medium cursor-pointer transition-all duration-200 w-full hover:bg-gray-200 hover:text-blue-700 min-h-[44px]">Crear plantilla</button>
+        <div className="bg-background-light dark:bg-surface-dark rounded-lg shadow-sm overflow-hidden">
+          <div className="p-3 sm:p-4 md:p-5">
+            <h3 className="text-sm sm:text-base font-semibold mt-0 mb-3 sm:mb-4 text-text-primary-light dark:text-gray-100 min-w-0 truncate">Personalizar informes</h3>
+            <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-text-secondary-light dark:text-gray-300 leading-relaxed min-w-0">Crea plantillas personalizadas para tus necesidades específicas.</p>
+            <button className="bg-surface-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-none py-2.5 sm:py-3 px-3 sm:px-4 rounded font-medium cursor-pointer transition-all duration-200 w-full hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-blue-700 dark:hover:text-blue-300 min-h-[44px] sm:min-h-[48px] text-xs sm:text-sm">Crear plantilla</button>
           </div>
         </div>
       </div>

@@ -203,52 +203,52 @@ const Home = () => {
   return (
     <div className="font-['Inter',system-ui] text-text-primary-light dark:text-gray-100 bg-background-light dark:bg-gray-900 transition-colors duration-300 overflow-x-hidden">
       {/* Hero Section Mejorado */}
-      <header className="relative bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#3949ab] text-white py-24 px-6 overflow-hidden dark:from-gray-800 dark:via-gray-900 dark:to-black">
+      <header className="relative bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#3949ab] text-white py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden dark:from-gray-800 dark:via-gray-900 dark:to-black">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent pointer-events-none"></div>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
         <div className="w-full max-w-7xl mx-auto text-center relative z-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 mb-8 hover:bg-white/15 transition-all duration-300">
-            <Award className="w-5 h-5 text-primary-500" />
-            <span className="text-sm font-medium">{t('homePage.hero.badge')}</span>
+          <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full border border-white/20 mb-4 sm:mb-6 md:mb-8 hover:bg-white/15 transition-all duration-300">
+            <Award className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-primary-500" />
+            <span className="text-xs sm:text-sm font-medium">{t('homePage.hero.badge')}</span>
           </div>
 
           {/* Main Title */}
-          <h1 className={`text-7xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 dark:from-primary-300 dark:via-primary-100 dark:to-secondary-200 bg-clip-text text-transparent transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-3 sm:mb-4 md:mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 dark:from-primary-300 dark:via-primary-100 dark:to-secondary-200 bg-clip-text text-transparent transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             TranSync
           </h1>
 
-          <p className={`text-2xl max-w-4xl mx-auto mb-12 text-blue-100 dark:text-gray-300 leading-relaxed transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <p className={`text-sm sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-8 md:mb-12 text-blue-100 dark:text-gray-300 leading-relaxed transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             {t('homePage.hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center items-center transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           </div>
         </div>
       </header>
 
       {/* Estadísticas Impactantes */}
-      <section className="py-20 bg-gradient-to-r from-surface-light to-primary-50 dark:from-gray-900 dark:to-gray-800 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-surface-light to-primary-50 dark:from-gray-900 dark:to-gray-800 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
               {t('homePage.hero.title')}
             </h2>
-            <p className="text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
               {t('homePage.hero.subtitle')}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {estadisticas.map((stat, index) => (
-              <div key={index} className={`text-center p-6 rounded-2xl bg-background-light dark:bg-gray-800 shadow-lg border border-border-light dark:border-gray-700 transform transition-all duration-500 hover:scale-105 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
-                <stat.icono className="w-12 h-12 text-[#3949ab] dark:text-primary-500 mx-auto mb-4" />
-                <div className="text-4xl font-bold text-primary-800 dark:text-primary-500 mb-2">{stat.numero}</div>
-                <div className="text-text-secondary-light dark:text-gray-300 font-medium">{stat.etiqueta}</div>
+              <div key={index} className={`text-center p-3 sm:p-4 md:p-6 rounded-2xl bg-background-light dark:bg-gray-800 shadow-lg border border-border-light dark:border-gray-700 transform transition-all duration-500 hover:scale-105 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
+                <stat.icono className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-[#3949ab] dark:text-primary-500 mx-auto mb-2 sm:mb-3 md:mb-4" />
+                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary-800 dark:text-primary-500 mb-1 sm:mb-2">{stat.numero}</div>
+                <div className="text-xs sm:text-sm md:text-base text-text-secondary-light dark:text-gray-300 font-medium">{stat.etiqueta}</div>
               </div>
             ))}
           </div>
@@ -256,58 +256,58 @@ const Home = () => {
       </section>
 
       {/* Ciudades que Confían en Nosotros */}
-      <section className="py-16 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-bold mb-8 text-gray-800 dark:text-gray-100">{t('homePage.cities.title')}</h3>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
+      <section className="py-8 sm:py-12 md:py-16 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-gray-800 dark:text-gray-100">{t('homePage.cities.title')}</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
             {ciudades.slice(0, 12).map((ciudad, i) => (
-              <div key={i} className={`p-4 rounded-xl bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-800 dark:to-gray-700 border border-border-light dark:border-gray-600 transform transition-all duration-300 hover:scale-105 hover:shadow-lg ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 50}ms` }}>
-                <span className="font-semibold text-text-primary-light dark:text-gray-200 text-sm">{ciudad}</span>
+              <div key={i} className={`p-2 sm:p-3 md:p-4 rounded-xl bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-800 dark:to-gray-700 border border-border-light dark:border-gray-600 transform transition-all duration-300 hover:scale-105 hover:shadow-lg ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 50}ms` }}>
+                <span className="font-semibold text-text-primary-light dark:text-gray-200 text-xs sm:text-sm">{ciudad}</span>
               </div>
             ))}
           </div>
-          <div className="mt-8 text-center">
-            <span className="text-text-secondary-light dark:text-gray-400">{t('homePage.cities.subtitle')}</span>
+          <div className="mt-4 sm:mt-6 md:mt-8 text-center">
+            <span className="text-xs sm:text-sm md:text-base text-text-secondary-light dark:text-gray-400">{t('homePage.cities.subtitle')}</span>
           </div>
         </div>
       </section>
 
       {/* Características Mejoradas */}
-      <section className="py-24 bg-gradient-to-br from-surface-light via-primary-50 to-secondary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-surface-light via-primary-50 to-secondary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
               {t('homePage.features.title')}
             </h2>
-            <p className="text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
               {t('homePage.features.subtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {caracteristicas.map((caracteristica, i) => (
-              <div key={i} className={`group bg-background-light dark:bg-gray-800 p-8 rounded-3xl shadow-xl border border-border-light dark:border-gray-700 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="relative mb-6">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${caracteristica.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <caracteristica.icono className="w-8 h-8" />
+              <div key={i} className={`group bg-background-light dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-3xl shadow-xl border border-border-light dark:border-gray-700 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="relative mb-4 sm:mb-6">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${caracteristica.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <caracteristica.icono className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  <div className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 bg-green-500 text-white text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
                     {caracteristica.stats}
                   </div>
                 </div>
 
-                <h3 className="font-bold text-xl mb-3 text-text-primary-light dark:text-gray-100 group-hover:text-primary-700 dark:group-hover:text-primary-500 transition-colors">
+                <h3 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-text-primary-light dark:text-gray-100 group-hover:text-primary-700 dark:group-hover:text-primary-500 transition-colors">
                   {caracteristica.titulo}
                 </h3>
 
-                <p className="text-text-secondary-light dark:text-gray-300 mb-6 leading-relaxed">
+                <p className="text-sm sm:text-base text-text-secondary-light dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed">
                   {caracteristica.descripcion}
                 </p>
 
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {caracteristica.beneficios.map((beneficio, j) => (
-                    <li key={j} className="flex items-center gap-3 text-sm text-text-primary-light dark:text-gray-200">
-                      <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <li key={j} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-text-primary-light dark:text-gray-200">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                       <span>{beneficio}</span>
                     </li>
                   ))}
@@ -319,29 +319,29 @@ const Home = () => {
       </section>
 
       {/* Casos de Uso Específicos */}
-      <section className="py-24 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
               {t('homePage.useCases.title')}
             </h2>
-            <p className="text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-gray-300 max-w-3xl mx-auto">
               {t('homePage.useCases.subtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {casosDeUso.map((caso, i) => (
-              <div key={i} className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${caso.color} text-white p-8 hover:scale-105 transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 200}ms` }}>
+              <div key={i} className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${caso.color} text-white p-4 sm:p-6 md:p-8 hover:scale-105 transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 200}ms` }}>
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
                 <div className="relative z-10">
-                  <caso.icono className="w-12 h-12 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  <h3 className="font-bold text-2xl mb-3">{caso.titulo}</h3>
-                  <p className="text-white/90 mb-6 leading-relaxed">{caso.descripcion}</p>
-                  <ul className="space-y-2">
+                  <caso.icono className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <h3 className="font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3">{caso.titulo}</h3>
+                  <p className="text-white/90 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">{caso.descripcion}</p>
+                  <ul className="space-y-1.5 sm:space-y-2">
                     {caso.beneficios.map((beneficio, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-green-300" />
+                      <li key={j} className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
+                        <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-300 flex-shrink-0" />
                         <span>{beneficio}</span>
                       </li>
                     ))}
@@ -354,54 +354,54 @@ const Home = () => {
       </section>
 
       {/* Testimonios Mejorados */}
-      <section className="py-24 bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-900 dark:to-gray-800 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-900 dark:to-gray-800 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
               {t('homePage.testimonials.title')}
             </h2>
-            <p className="text-xl text-text-secondary-light dark:text-gray-300">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-gray-300">
               {t('homePage.testimonials.subtitle')}
             </p>
           </div>
 
           <div className="relative">
-            <div className={`bg-background-light dark:bg-gray-800 p-10 rounded-3xl shadow-2xl border border-border-light dark:border-gray-700 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <div className="flex items-start gap-6 mb-8">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3949ab] to-[#5c6bc0] flex items-center justify-center text-white font-bold text-xl">
+            <div className={`bg-background-light dark:bg-gray-800 p-4 sm:p-6 md:p-8 lg:p-10 rounded-3xl shadow-2xl border border-border-light dark:border-gray-700 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-4 sm:mb-6 md:mb-8">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#3949ab] to-[#5c6bc0] flex items-center justify-center text-white font-bold text-lg sm:text-xl flex-shrink-0">
                   {testimonios[currentTestimonial].autor.split(' ').map(n => n[0]).join('')}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
                     {[...Array(testimonios[currentTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-primary-500 fill-current" />
+                      <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-primary-500 fill-current" />
                     ))}
                   </div>
-                  <h4 className="font-bold text-xl text-text-primary-light dark:text-gray-100">
+                  <h4 className="font-bold text-lg sm:text-xl text-text-primary-light dark:text-gray-100 truncate">
                     {testimonios[currentTestimonial].autor}
                   </h4>
-                  <p className="text-text-secondary-light dark:text-gray-300">
+                  <p className="text-sm sm:text-base text-text-secondary-light dark:text-gray-300">
                     {testimonios[currentTestimonial].cargo} en {testimonios[currentTestimonial].empresa}
                   </p>
                 </div>
-                <div className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-4 py-2 rounded-full font-semibold text-sm">
+                <div className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full font-semibold text-xs sm:text-sm flex-shrink-0">
                   {testimonios[currentTestimonial].beneficio}
                 </div>
               </div>
 
-              <blockquote className="text-lg italic text-text-primary-light dark:text-gray-200 leading-relaxed mb-8">
+              <blockquote className="text-sm sm:text-base md:text-lg italic text-text-primary-light dark:text-gray-200 leading-relaxed mb-4 sm:mb-6 md:mb-8">
                 "{testimonios[currentTestimonial].texto}"
               </blockquote>
 
               {/* Indicadores de Testimonios */}
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-1.5 sm:gap-2">
                 {testimonios.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrentTestimonial(i)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                       i === currentTestimonial
-                        ? 'bg-[#3949ab] dark:bg-primary-500 w-8'
+                        ? 'bg-[#3949ab] dark:bg-primary-500 w-6 sm:w-8'
                         : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
                     }`}
                   />
@@ -413,26 +413,26 @@ const Home = () => {
       </section>
 
       {/* Premios y Reconocimientos */}
-      <section className="py-24 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-background-light dark:bg-gray-800 border-b border-border-light dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary-800 to-primary-600 bg-clip-text text-transparent">
               {t('homePage.awards.title')}
             </h2>
-            <p className="text-xl text-text-secondary-light dark:text-gray-300">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-gray-300">
               {t('homePage.awards.subtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {premios.map((premio, i) => (
-              <div key={i} className={`group bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl shadow-lg border border-border-light dark:border-gray-600 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <premio.icono className="w-8 h-8 text-white" />
+              <div key={i} className={`group bg-gradient-to-br from-surface-light to-primary-50 dark:from-gray-800 dark:to-gray-700 p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg border border-border-light dark:border-gray-600 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <premio.icono className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-gray-100">{premio.titulo}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{premio.organizacion}</p>
-                <p className="text-sm font-semibold text-[#3949ab] dark:text-primary-500">{premio.año}</p>
+                <h4 className="font-bold text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-gray-800 dark:text-gray-100">{premio.titulo}</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-0.5 sm:mb-1">{premio.organizacion}</p>
+                <p className="text-xs sm:text-sm font-semibold text-[#3949ab] dark:text-primary-500">{premio.año}</p>
               </div>
             ))}
           </div>
@@ -440,41 +440,41 @@ const Home = () => {
       </section>
 
       {/* CTA Final Mejorado */}
-      <section className="py-24 bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#3949ab] dark:from-gray-800 dark:via-gray-900 dark:to-black text-white relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-[#1a237e] via-[#283593] to-[#3949ab] dark:from-gray-800 dark:via-gray-900 dark:to-black text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent pointer-events-none"></div>
-        <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-5 sm:top-10 left-5 sm:left-10 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-5 sm:bottom-10 right-5 sm:right-10 w-40 sm:w-64 md:w-80 h-40 sm:h-64 md:h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h2 className={`text-5xl font-bold mb-6 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             {t('homePage.cta.title')}
           </h2>
-          <p className={`text-xl text-blue-100 dark:text-gray-300 mb-12 leading-relaxed transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <p className={`text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 dark:text-gray-300 mb-6 sm:mb-8 md:mb-12 leading-relaxed transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             {t('homePage.cta.subtitle')}
           </p>
 
-          <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <button className="group bg-gradient-to-r from-primary-600 to-secondary-700 hover:from-primary-700 hover:to-secondary-800 text-white font-bold py-5 px-10 rounded-2xl shadow-2xl transition-all duration-300 flex items-center gap-3 hover:scale-105 text-lg">
-              <Play className="w-6 h-6" />
+          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <button className="group bg-gradient-to-r from-primary-600 to-secondary-700 hover:from-primary-700 hover:to-secondary-800 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-2xl shadow-2xl transition-all duration-300 flex items-center gap-2 sm:gap-3 hover:scale-105 text-sm sm:text-base md:text-lg">
+              <Play className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               {t('homePage.cta.buttons.demo')}
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold py-5 px-10 rounded-2xl border border-white/40 transition-all duration-300 hover:scale-105 text-lg">
+            <button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-2xl border border-white/40 transition-all duration-300 hover:scale-105 text-sm sm:text-base md:text-lg">
               {t('homePage.cta.buttons.expert')}
             </button>
           </div>
 
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-blue-100 dark:text-gray-300">
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-400" />
+          <div className="mt-6 sm:mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-blue-100 dark:text-gray-300">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Check className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-green-400 flex-shrink-0" />
               <span>{t('homePage.cta.features.0')}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-400" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Check className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-green-400 flex-shrink-0" />
               <span>{t('homePage.cta.features.1')}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-400" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Check className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-green-400 flex-shrink-0" />
               <span>{t('homePage.cta.features.2')}</span>
             </div>
           </div>

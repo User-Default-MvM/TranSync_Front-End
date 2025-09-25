@@ -294,60 +294,61 @@ const InteractiveMap = () => {
   return (
     <div className="w-full h-screen flex flex-col bg-surface-light dark:bg-gray-100">
       {/* Header de Control */}
-      <div className="bg-background-light dark:bg-gray-900 shadow-sm border-b border-border-light dark:border-gray-700 p-2 md:p-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 md:gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 md:gap-4">
+      <div className="bg-background-light dark:bg-gray-900 shadow-sm border-b border-border-light dark:border-gray-700 p-2 sm:p-3 md:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 md:gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 md:gap-4">
             <div className="flex items-center gap-2">
-              <Bus className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
-              <h1 className="text-lg md:text-xl font-bold text-text-primary-light dark:text-gray-100">
-                {t('routes.title')}</h1>
+              <Bus className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-600 flex-shrink-0" />
+              <h1 className="text-base sm:text-lg md:text-xl font-bold text-text-primary-light dark:text-gray-100 truncate">
+                {t('routes.title')}
+              </h1>
             </div>
-            <div className="flex items-center gap-2 text-xs md:text-sm text-text-secondary-light dark:text-gray-400">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-text-secondary-light dark:text-gray-400">
               <div className={`w-2 h-2 rounded-full ${refreshing ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'}`}></div>
-              <span>{refreshing ? 'Actualizando...' : 'En tiempo real'}</span>
+              <span className="truncate">{refreshing ? 'Actualizando...' : 'En tiempo real'}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-3 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-wrap">
             {/* Botón de menú móvil */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="md:hidden bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition-colors"
+              className="md:hidden bg-gray-500 text-white p-1.5 sm:p-2 rounded hover:bg-gray-600 transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             {/* Filtros de visualización - responsive */}
-            <div className="flex flex-wrap items-center gap-1 md:gap-2">
-              <label key="filter-buses" className="flex items-center gap-1 text-xs md:text-sm text-text-primary-light dark:text-gray-300">
+            <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+              <label key="filter-buses" className="flex items-center gap-1 text-xs sm:text-sm text-text-primary-light dark:text-gray-300">
                 <input
                   type="checkbox"
                   checked={showBuses}
                   onChange={(e) => setShowBuses(e.target.checked)}
-                  className="rounded w-3 h-3 md:w-4 md:h-4"
+                  className="rounded w-3 h-3 sm:w-4 sm:h-4"
                 />
-                <Bus className="w-3 h-3 md:w-4 md:h-4 text-text-primary-light dark:text-gray-300" />
-                <span className="hidden sm:inline">Buses</span>
+                <Bus className="w-3 h-3 sm:w-4 sm:h-4 text-text-primary-light dark:text-gray-300 flex-shrink-0" />
+                <span className="hidden sm:inline truncate">Buses</span>
               </label>
-              <label key="filter-routes" className="flex items-center gap-1 text-xs md:text-sm text-text-primary-light dark:text-gray-300">
+              <label key="filter-routes" className="flex items-center gap-1 text-xs sm:text-sm text-text-primary-light dark:text-gray-300">
                 <input
                   type="checkbox"
                   checked={showRoutes}
                   onChange={(e) => setShowRoutes(e.target.checked)}
-                  className="rounded w-3 h-3 md:w-4 md:h-4"
+                  className="rounded w-3 h-3 sm:w-4 sm:h-4"
                 />
-                <Route className="w-3 h-3 md:w-4 md:h-4" />
-                <span className="hidden sm:inline">Rutas</span>
+                <Route className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span className="hidden sm:inline truncate">Rutas</span>
               </label>
-              <label key="filter-stops" className="flex items-center gap-1 text-xs md:text-sm text-text-primary-light dark:text-gray-300">
+              <label key="filter-stops" className="flex items-center gap-1 text-xs sm:text-sm text-text-primary-light dark:text-gray-300">
                 <input
                   type="checkbox"
                   checked={showStops}
                   onChange={(e) => setShowStops(e.target.checked)}
-                  className="rounded w-3 h-3 md:w-4 md:h-4"
+                  className="rounded w-3 h-3 sm:w-4 sm:h-4"
                 />
-                <MapPin className="w-3 h-3 md:w-4 md:h-4" />
-                <span className="hidden sm:inline">Paradas</span>
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span className="hidden sm:inline truncate">Paradas</span>
               </label>
             </div>
 
@@ -355,10 +356,10 @@ const InteractiveMap = () => {
             <button
               onClick={refreshRealTimeData}
               disabled={refreshing}
-              className="bg-green-500 text-white px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm hover:bg-green-600 disabled:opacity-50 transition-colors flex items-center gap-1"
+              className="bg-green-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm hover:bg-green-600 disabled:opacity-50 transition-colors flex items-center gap-1 min-h-[40px] sm:min-h-[44px]"
             >
-              <RefreshCw className={`w-3 h-3 md:w-4 md:h-4 ${refreshing ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">Actualizar</span>
+              <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline truncate">Actualizar</span>
             </button>
 
             <button
@@ -368,19 +369,19 @@ const InteractiveMap = () => {
                 setSelectedRoute(null);
                 setSelectedBus(null);
               }}
-              className="bg-gray-500 text-white px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm hover:bg-gray-600 transition-colors flex items-center gap-1"
+              className="bg-gray-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm hover:bg-gray-600 transition-colors flex items-center gap-1 min-h-[40px] sm:min-h-[44px]"
             >
-              <Home className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="hidden sm:inline">Vista General</span>
+              <Home className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline truncate">Vista General</span>
             </button>
           </div>
         </div>
 
         {isAddingStop && (
-          <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs md:text-sm text-blue-700 flex items-center gap-2">
-            <Info className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-            <span className="hidden sm:inline">Haz clic en el mapa donde quieres agregar una nueva parada</span>
-            <span className="sm:hidden">Toca el mapa para agregar parada</span>
+          <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs sm:text-sm text-blue-700 flex items-center gap-2">
+            <Info className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="hidden sm:inline truncate">Haz clic en el mapa donde quieres agregar una nueva parada</span>
+            <span className="sm:hidden truncate">Toca el mapa para agregar parada</span>
           </div>
         )}
       </div>
@@ -391,76 +392,76 @@ const InteractiveMap = () => {
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 fixed md:relative z-50 md:z-auto w-72 sm:w-80 md:w-80 lg:w-96 bg-background-light dark:bg-gray-900 shadow-lg overflow-y-auto flex-shrink-0 h-full transition-transform duration-300 ease-in-out`}>
           {/* Botón para cerrar sidebar en móvil */}
-          <div className="md:hidden p-4 border-b border-border-light dark:border-gray-700">
+          <div className="md:hidden p-3 sm:p-4 border-b border-border-light dark:border-gray-700">
             <button
               onClick={() => setSidebarOpen(false)}
-              className="flex items-center gap-2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-200"
+              className="flex items-center gap-2 text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-200 min-h-[40px] sm:min-h-[44px]"
             >
-              <ChevronLeft className="w-5 h-5" />
-              Cerrar panel
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <span className="truncate">Cerrar panel</span>
             </button>
           </div>
 
           {/* Información del bus seleccionado */}
           {selectedBus && (
-            <div className="p-4 bg-surface-light dark:bg-blue-50 border-b">
-              <div className="flex items-center gap-2 mb-2">
-                <Bus className="w-5 h-5 text-blue-600" />
-                <h3 className="font-bold text-blue-900">{selectedBus.route}</h3>
+            <div className="p-3 sm:p-4 bg-surface-light dark:bg-blue-50 border-b">
+              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                <Bus className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0" />
+                <h3 className="font-bold text-blue-900 truncate">{selectedBus.route}</h3>
               </div>
-              <div className="space-y-1 text-sm">
+              <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
-                  <Navigation className="w-4 h-4" />
-                  <span><strong>Conductor:</strong> {selectedBus.driver}</span>
+                  <Navigation className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate"><strong>Conductor:</strong> {selectedBus.driver}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {getStatusIcon(selectedBus.status)}
-                  <span><strong>Estado:</strong></span>
+                  <span className="truncate"><strong>Estado:</strong></span>
                   <span className={`px-2 py-1 rounded text-xs font-medium ${selectedBus.status === 'en_ruta' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                     }`}>
                     {getStatusText(selectedBus.status)}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4" />
-                  <span><strong>Velocidad:</strong> {selectedBus.speed} km/h</span>
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate"><strong>Velocidad:</strong> {selectedBus.speed} km/h</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  <span><strong>Pasajeros:</strong> {selectedBus.passengers}/{selectedBus.capacity}</span>
+                  <Users className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate"><strong>Pasajeros:</strong> {selectedBus.passengers}/{selectedBus.capacity}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span><strong>Última actualización:</strong> {selectedBus.lastUpdate ? new Date(selectedBus.lastUpdate).toLocaleTimeString() : 'N/A'}</span>
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate"><strong>Última actualización:</strong> {selectedBus.lastUpdate ? new Date(selectedBus.lastUpdate).toLocaleTimeString() : 'N/A'}</span>
                 </div>
               </div>
-              <div className="mt-3 flex gap-2">
+              <div className="mt-2 sm:mt-3 flex flex-col sm:flex-row gap-2">
                 <button
                   key="track-bus"
                   onClick={() => startTracking(selectedBus)}
                   disabled={isTracking}
-                  className="bg-green-500 text-white px-3 py-1 rounded text-xs hover:bg-green-600 disabled:opacity-50 transition-colors flex items-center gap-1"
+                  className="bg-green-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm hover:bg-green-600 disabled:opacity-50 transition-colors flex items-center justify-center gap-1 min-h-[40px] sm:min-h-[44px]"
                 >
-                  <Target className="w-3 h-3" />
-                  {isTracking ? 'Siguiendo...' : 'Seguir Bus'}
+                  <Target className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate">{isTracking ? 'Siguiendo...' : 'Seguir Bus'}</span>
                 </button>
                 <button
                   key="close-bus-info"
                   onClick={() => setSelectedBus(null)}
-                  className="bg-gray-500 text-white px-3 py-1 rounded text-xs hover:bg-gray-600 transition-colors flex items-center gap-1"
+                  className="bg-gray-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm hover:bg-gray-600 transition-colors flex items-center justify-center gap-1 min-h-[40px] sm:min-h-[44px]"
                 >
-                  <X className="w-3 h-3" />
-                  Cerrar
+                  <X className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate">Cerrar</span>
                 </button>
               </div>
             </div>
           )}
 
           {/* Lista de Buses */}
-          <div className="p-4 border-b border-border-light dark:border-gray-700">
-            <div className="flex items-center gap-2 mb-3">
-              <Bus className="w-5 h-5 text-text-primary-light dark:text-gray-300" />
-              <h3 key="buses-title" className="font-bold text-text-primary-light dark:text-gray-100">
+          <div className="p-3 sm:p-4 border-b border-border-light dark:border-gray-700">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <Bus className="w-4 h-4 sm:w-5 sm:h-5 text-text-primary-light dark:text-gray-300 flex-shrink-0" />
+              <h3 key="buses-title" className="font-bold text-text-primary-light dark:text-gray-100 truncate">
                 Buses Activos ({buses.length})
               </h3>
             </div>
@@ -469,24 +470,24 @@ const InteractiveMap = () => {
                 <div
                   key={bus.idVehiculo}
                   onClick={() => handleBusClick(bus)}
-                  className={`p-3 rounded-lg cursor-pointer transition-colors ${selectedBus?.idVehiculo === bus.idVehiculo
+                  className={`p-2 sm:p-3 rounded-lg cursor-pointer transition-colors ${selectedBus?.idVehiculo === bus.idVehiculo
                     ? 'bg-surface-light dark:bg-blue-900 border-2 border-border-light dark:border-blue-600'
                     : 'bg-surface-light dark:bg-gray-800 hover:bg-background-light dark:hover:bg-gray-700 border border-border-light dark:border-gray-600'
                     }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-medium text-sm text-text-primary-light dark:text-gray-100">
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-medium text-xs sm:text-sm text-text-primary-light dark:text-gray-100 truncate">
                         {bus.plaVehiculo || `Vehículo ${bus.numVehiculo}`}
                       </h4>
                       <p className="text-xs text-text-secondary-light dark:text-gray-400 flex items-center gap-1">
-                        <Navigation className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-                        {bus.marVehiculo} {bus.modVehiculo}
+                        <Navigation className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+                        <span className="truncate">{bus.marVehiculo} {bus.modVehiculo}</span>
                       </p>
                     </div>
-                    <div className="text-right flex flex-col items-end">
+                    <div className="text-right flex flex-col items-end ml-2">
                       <div
-                        className={`w-3 h-3 rounded-full ${bus.estVehiculo === 'EN_RUTA' ? 'bg-green-400' : 'bg-red-400'
+                        className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${bus.estVehiculo === 'EN_RUTA' ? 'bg-green-400' : 'bg-red-400'
                           }`}
                       ></div>
                       <span className="text-xs text-text-secondary-light dark:text-gray-400">
@@ -494,10 +495,10 @@ const InteractiveMap = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="mt-2 flex justify-between text-xs text-text-secondary-light dark:text-gray-400">
+                  <div className="mt-1 sm:mt-2 flex justify-between text-xs text-text-secondary-light dark:text-gray-400">
                     <span className="flex items-center gap-1">
                       {getStatusIcon(bus.estVehiculo)}
-                      {getStatusText(bus.estVehiculo)}
+                      <span className="truncate">{getStatusText(bus.estVehiculo)}</span>
                     </span>
                   </div>
                 </div>
@@ -507,38 +508,38 @@ const InteractiveMap = () => {
 
 
           {/* Lista de Rutas */}
-          <div className="p-4 border-b border-border-light dark:border-gray-700">
-            <div className="flex items-center gap-2 mb-3">
-              <Route className="w-5 h-5 text-text-primary-light dark:text-gray-300" />
-              <h3 className="font-bold text-text-primary-light dark:text-gray-100">Rutas Disponibles</h3>
+          <div className="p-3 sm:p-4 border-b border-border-light dark:border-gray-700">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <Route className="w-4 h-4 sm:w-5 sm:h-5 text-text-primary-light dark:text-gray-300 flex-shrink-0" />
+              <h3 className="font-bold text-text-primary-light dark:text-gray-100 truncate">Rutas Disponibles</h3>
             </div>
             <div className="space-y-2">
               {routes.map(route => (
                 <div
                   key={route.idRuta}
                   onClick={() => handleRouteSelect(route)}
-                  className={`p-3 rounded-lg cursor-pointer transition-colors border ${selectedRoute?.idRuta === route.idRuta
+                  className={`p-2 sm:p-3 rounded-lg cursor-pointer transition-colors border ${selectedRoute?.idRuta === route.idRuta
                     ? 'bg-surface-light dark:bg-purple-900 border-border-light dark:border-purple-600'
                     : 'bg-surface-light dark:bg-gray-800 hover:bg-background-light dark:hover:bg-gray-700 border-border-light dark:border-gray-600'
                     }`}
                 >
                   <div className="flex items-center gap-2">
                     <div
-                      className="w-4 h-4 rounded-full"
+                      className="w-3 h-3 sm:w-4 sm:h-4 rounded-full flex-shrink-0"
                       style={{ backgroundColor: route.estRuta === 'ACTIVA' ? '#6366f1' : '#ef4444' }}
                     ></div>
-                    <div className="flex-1">
-                      <h4 className="font-medium text-sm text-text-primary-light dark:text-gray-100">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium text-xs sm:text-sm text-text-primary-light dark:text-gray-100 truncate">
                         {route.nomRuta}
                       </h4>
                       <div className="flex justify-between text-xs text-text-secondary-light dark:text-gray-400 mt-1">
                         <span className="flex items-center gap-1">
-                          <MapIcon className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-                          {route.distanciaKm ? `${route.distanciaKm} km` : 'N/A'}
+                          <MapIcon className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+                          <span className="truncate">{route.distanciaKm ? `${route.distanciaKm} km` : 'N/A'}</span>
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-                          {route.tiempoEstimadoMin ? `${Math.floor(route.tiempoEstimadoMin / 60)}h ${route.tiempoEstimadoMin % 60}min` : 'N/A'}
+                          <Clock className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+                          <span className="truncate">{route.tiempoEstimadoMin ? `${Math.floor(route.tiempoEstimadoMin / 60)}h ${route.tiempoEstimadoMin % 60}min` : 'N/A'}</span>
                         </span>
                       </div>
                     </div>
@@ -554,29 +555,29 @@ const InteractiveMap = () => {
 
 
           {/* Estadísticas */}
-          <div className="p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Activity className="w-5 h-5 text-text-primary-light dark:text-gray-300" />
-              <h3 className="font-bold text-text-primary-light dark:text-gray-100">Estadísticas en Tiempo Real</h3>
+          <div className="p-3 sm:p-4">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-text-primary-light dark:text-gray-300 flex-shrink-0" />
+              <h3 className="font-bold text-text-primary-light dark:text-gray-100 truncate">Estadísticas en Tiempo Real</h3>
             </div>
-            <div className="space-y-3">
-              <div key="stats-en-ruta" className="bg-surface-light dark:bg-green-900 p-3 rounded-lg">
-                <div className="text-lg font-bold text-green-600 dark:text-green-400">
+            <div className="space-y-2 sm:space-y-3">
+              <div key="stats-en-ruta" className="bg-surface-light dark:bg-green-900 p-2 sm:p-3 rounded-lg">
+                <div className="text-base sm:text-lg font-bold text-green-600 dark:text-green-400">
                   {buses.filter(b => b.estVehiculo === 'EN_RUTA').length}
                 </div>
-                <div className="text-sm text-green-700 dark:text-green-300">Buses en Ruta</div>
+                <div className="text-xs sm:text-sm text-green-700 dark:text-green-300 truncate">Buses en Ruta</div>
               </div>
-              <div key="stats-total" className="bg-surface-light dark:bg-blue-900 p-3 rounded-lg">
-                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+              <div key="stats-total" className="bg-surface-light dark:bg-blue-900 p-2 sm:p-3 rounded-lg">
+                <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400">
                   {buses.length}
                 </div>
-                <div className="text-sm text-blue-700 dark:text-blue-300">Vehículos Totales</div>
+                <div className="text-xs sm:text-sm text-blue-700 dark:text-blue-300 truncate">Vehículos Totales</div>
               </div>
-              <div key="stats-activas" className="bg-surface-light dark:bg-purple-900 p-3 rounded-lg">
-                <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
+              <div key="stats-activas" className="bg-surface-light dark:bg-purple-900 p-2 sm:p-3 rounded-lg">
+                <div className="text-base sm:text-lg font-bold text-purple-600 dark:text-purple-400">
                   {routes.filter(r => r.estRuta === 'ACTIVA').length}
                 </div>
-                <div className="text-sm text-purple-700 dark:text-purple-300">Rutas Activas</div>
+                <div className="text-xs sm:text-sm text-purple-700 dark:text-purple-300 truncate">Rutas Activas</div>
               </div>
             </div>
           </div>
@@ -908,34 +909,34 @@ const InteractiveMap = () => {
       </div>
 
       {/* Footer con información adicional */}
-      <div className="bg-background-light dark:bg-gray-900 border-t border-border-light dark:border-gray-700 px-2 md:px-4 py-2">
+      <div className="bg-background-light dark:bg-gray-900 border-t border-border-light dark:border-gray-700 px-2 sm:px-3 md:px-4 py-2">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs text-text-secondary-light dark:text-gray-400">
           <div key="footer-time" className="flex items-center gap-1">
-            <Clock className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-            <span className="hidden sm:inline">Última actualización:</span>
-            {new Date().toLocaleTimeString()}
+            <Clock className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+            <span className="hidden sm:inline truncate">Última actualización:</span>
+            <span className="truncate">{new Date().toLocaleTimeString()}</span>
           </div>
-          <div className="flex flex-wrap gap-2 md:gap-4 justify-center sm:justify-end">
+          <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center sm:justify-end">
             <span key="footer-vehicles" className="flex items-center gap-1">
-              <Bus className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-              <span className="hidden sm:inline">{buses.length} vehículos</span>
-              <span className="sm:hidden">{buses.length}</span>
+              <Bus className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+              <span className="hidden sm:inline truncate">{buses.length} vehículos</span>
+              <span className="sm:hidden truncate">{buses.length}</span>
             </span>
             <span key="footer-routes" className="flex items-center gap-1">
-              <Route className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-              <span className="hidden sm:inline">{routes.filter(r => r.estRuta === 'ACTIVA').length} rutas</span>
-              <span className="sm:hidden">{routes.filter(r => r.estRuta === 'ACTIVA').length}</span>
+              <Route className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+              <span className="hidden sm:inline truncate">{routes.filter(r => r.estRuta === 'ACTIVA').length} rutas</span>
+              <span className="sm:hidden truncate">{routes.filter(r => r.estRuta === 'ACTIVA').length}</span>
             </span>
             <span key="footer-stops" className="flex items-center gap-1">
-              <MapPin className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-              <span className="hidden sm:inline">{stops.length + newMarkers.length} paradas</span>
-              <span className="sm:hidden">{stops.length + newMarkers.length}</span>
+              <MapPin className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+              <span className="hidden sm:inline truncate">{stops.length + newMarkers.length} paradas</span>
+              <span className="sm:hidden truncate">{stops.length + newMarkers.length}</span>
             </span>
           </div>
           <div key="footer-status" className="flex items-center gap-1 justify-center sm:justify-end">
-            <Activity className="w-3 h-3 text-text-secondary-light dark:text-gray-400" />
-            <span className="hidden sm:inline">Sistema en tiempo real</span>
-            <span className="sm:hidden">En línea</span>
+            <Activity className="w-3 h-3 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
+            <span className="hidden sm:inline truncate">Sistema en tiempo real</span>
+            <span className="sm:hidden truncate">En línea</span>
           </div>
         </div>
       </div>

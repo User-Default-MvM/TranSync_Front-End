@@ -259,74 +259,74 @@ const Vehiculos = () => {
       )}
 
       {/* Header con estadísticas */}
-      <div className="mb-6 bg-background-light dark:bg-surface-dark p-4 md:p-5 rounded-xl shadow-sm">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-          <h2 className="text-xl md:text-2xl font-semibold flex items-center gap-2 md:gap-3 m-0" data-tutorial="vehicles">
-            <FaBus className="text-primary-500 text-2xl md:text-3xl" />
-            <span>{t('vehicles.title')}</span>
+      <div className="mb-4 sm:mb-5 md:mb-6 bg-background-light dark:bg-surface-dark p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl shadow-sm">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 sm:gap-4">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2 sm:gap-3 m-0" data-tutorial="vehicles">
+            <FaBus className="text-primary-500 text-xl sm:text-2xl md:text-3xl flex-shrink-0" />
+            <span className="truncate">{t('vehicles.title')}</span>
           </h2>
 
           {/* Mobile Stats Grid */}
-          <div className="grid grid-cols-2 lg:hidden gap-3 w-full lg:w-auto">
-            <div key="stats-total" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
-              <span className="text-lg md:text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
-              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.filters.all')}</span>
+          <div className="grid grid-cols-2 lg:hidden gap-2 sm:gap-3 w-full lg:w-auto">
+            <div key="stats-total" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-2 sm:p-3 rounded-md sm:rounded-lg min-h-[50px] sm:min-h-[60px] justify-center">
+              <span className="text-base sm:text-lg md:text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">{t('vehicles.filters.all')}</span>
             </div>
-            <div key="stats-disponibles" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
-              <span className="text-lg md:text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
-              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.active')}</span>
+            <div key="stats-disponibles" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-2 sm:p-3 rounded-md sm:rounded-lg min-h-[50px] sm:min-h-[60px] justify-center">
+              <span className="text-base sm:text-lg md:text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">{t('vehicles.status.active')}</span>
             </div>
-            <div key="stats-enRuta" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
-              <span className="text-lg md:text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
-              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
+            <div key="stats-enRuta" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-2 sm:p-3 rounded-md sm:rounded-lg min-h-[50px] sm:min-h-[60px] justify-center">
+              <span className="text-base sm:text-lg md:text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">{t('vehicles.status.maintenance')}</span>
             </div>
-            <div key="stats-mantenimiento" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-3 rounded-lg min-h-[60px] justify-center">
-              <span className="text-lg md:text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
-              <span className="text-xs md:text-sm text-text-secondary-light dark:text-slate-300">{t('vehicles.status.maintenance')}</span>
+            <div key="stats-mantenimiento" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 p-2 sm:p-3 rounded-md sm:rounded-lg min-h-[50px] sm:min-h-[60px] justify-center">
+              <span className="text-base sm:text-lg md:text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">{t('vehicles.status.maintenance')}</span>
             </div>
           </div>
 
           {/* Desktop Stats */}
-          <div className="hidden lg:flex gap-5">
-            <div key="stats-total-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
-              <span className="text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
-              <span className="text-sm text-text-secondary-light dark:text-slate-300">Total</span>
+          <div className="hidden lg:flex gap-3 sm:gap-4 md:gap-5">
+            <div key="stats-total-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 rounded-md sm:rounded-lg min-w-20 sm:min-w-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-500">{estadisticas.total || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">Total</span>
             </div>
-            <div key="stats-disponibles-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
-              <span className="text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
-              <span className="text-sm text-text-secondary-light dark:text-slate-300">Disponibles</span>
+            <div key="stats-disponibles-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 rounded-md sm:rounded-lg min-w-20 sm:min-w-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-green-500">{estadisticas.disponibles || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">Disponibles</span>
             </div>
-            <div key="stats-enRuta-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
-              <span className="text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
-              <span className="text-sm text-text-secondary-light dark:text-slate-300">En Ruta</span>
+            <div key="stats-enRuta-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 rounded-md sm:rounded-lg min-w-20 sm:min-w-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-500">{estadisticas.enRuta || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">En Ruta</span>
             </div>
-            <div key="stats-mantenimiento-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-2 px-5 rounded-lg min-w-24">
-              <span className="text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
-              <span className="text-sm text-text-secondary-light dark:text-slate-300">Mantenimiento</span>
+            <div key="stats-mantenimiento-desktop" className="flex flex-col items-center bg-surface-light dark:bg-slate-700 py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 rounded-md sm:rounded-lg min-w-20 sm:min-w-24">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-orange-500">{estadisticas.enMantenimiento || 0}</span>
+              <span className="text-xs sm:text-sm text-text-secondary-light dark:text-slate-300 truncate">Mantenimiento</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Filtros */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 mb-4 sm:mb-5 md:mb-6">
         <div key="filters-search" className="flex-1 relative min-w-0">
-          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400" />
+          <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400 flex-shrink-0" />
           <input
             type="text"
             placeholder="Buscar por placa, marca, modelo o conductor..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full py-3 pl-10 pr-4 rounded-lg border border-border-light dark:border-slate-600 text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none min-h-[48px]"
+            className="w-full py-2.5 sm:py-3 pl-8 sm:pl-10 pr-3 sm:pr-4 rounded-md sm:rounded-lg border border-border-light dark:border-slate-600 text-sm sm:text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none min-h-[44px] sm:min-h-[48px]"
           />
         </div>
 
-        <div key="filters-select" className="flex-1 relative min-w-0 md:max-w-48">
-          <FaFilter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400 pointer-events-none" />
+        <div key="filters-select" className="flex-1 relative min-w-0 md:max-w-40 sm:max-w-48">
+          <FaFilter className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-400 pointer-events-none flex-shrink-0" />
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="w-full py-3 pl-10 pr-4 rounded-lg border border-border-light dark:border-slate-600 text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 cursor-pointer transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none appearance-none min-h-[48px]"
+            className="w-full py-2.5 sm:py-3 pl-8 sm:pl-10 pr-3 sm:pr-4 rounded-md sm:rounded-lg border border-border-light dark:border-slate-600 text-sm sm:text-base bg-surface-light dark:bg-slate-800 text-text-primary-light dark:text-slate-200 cursor-pointer transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none appearance-none min-h-[44px] sm:min-h-[48px]"
           >
             <option value="all">Todos los vehículos</option>
             {estadosVehiculo.map(estado => (
@@ -337,16 +337,17 @@ const Vehiculos = () => {
 
         <button
           key="filters-add-button"
-          className="bg-blue-500 text-white border-none rounded-lg px-4 md:px-6 py-3 text-base font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 hover:bg-blue-600 hover:-translate-y-0.5 min-h-[48px] w-full md:w-auto"
+          className="bg-blue-500 text-white border-none rounded-md sm:rounded-lg px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 hover:bg-blue-600 hover:-translate-y-0.5 min-h-[44px] sm:min-h-[48px] w-full md:w-auto"
           onClick={() => setShowAddModal(true)}
         >
-          <FaPlus /> <span className="hidden sm:inline">Agregar Vehículo</span>
-          <span className="sm:hidden">Agregar</span>
+          <FaPlus className="flex-shrink-0" />
+          <span className="hidden sm:inline truncate">Agregar Vehículo</span>
+          <span className="sm:hidden truncate">Agregar</span>
         </button>
       </div>
 
       {/* Cards - Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4 md:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-3 sm:gap-4 md:gap-5">
         {filteredVehiculos.map((vehiculo) => {
           const estadoInfo = getEstadoInfo(vehiculo.estVehiculo);
           const soatProximoVencer = isVencimientoProximo(vehiculo.fecVenSOAT);
@@ -355,24 +356,24 @@ const Vehiculos = () => {
           const tecnicaVencida = isVencido(vehiculo.fecVenTec);
 
           return (
-            <div key={vehiculo.idVehiculo} className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="p-4 border-b border-border-light dark:border-slate-700 flex justify-between items-center">
-                <h3 className="m-0 text-lg text-text-primary-light dark:text-slate-200 font-semibold">
+            <div key={vehiculo.idVehiculo} className="bg-background-light dark:bg-surface-dark rounded-lg sm:rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="p-3 sm:p-4 border-b border-border-light dark:border-slate-700 flex justify-between items-center">
+                <h3 className="m-0 text-base sm:text-lg text-text-primary-light dark:text-slate-200 font-semibold truncate">
                   {vehiculo.marVehiculo} {vehiculo.modVehiculo}
                 </h3>
-                <div className="flex items-center gap-2">
-                  <span key={`status-${vehiculo.idVehiculo}`} className={`flex items-center gap-1 text-sm font-semibold py-1 px-3 rounded-full ${estadoInfo.color}`}>
-                    {vehiculo.estVehiculo === 'DISPONIBLE' && <FaCheckCircle />}
-                    {vehiculo.estVehiculo === 'EN_RUTA' && <FaRoad />}
-                    {vehiculo.estVehiculo === 'EN_MANTENIMIENTO' && <FaCogs />}
-                    {vehiculo.estVehiculo === 'FUERA_DE_SERVICIO' && <FaTimesCircle />}
-                    {estadoInfo.label}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span key={`status-${vehiculo.idVehiculo}`} className={`flex items-center gap-1 text-xs sm:text-sm font-semibold py-1 px-2 sm:px-3 rounded-full ${estadoInfo.color}`}>
+                    {vehiculo.estVehiculo === 'DISPONIBLE' && <FaCheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />}
+                    {vehiculo.estVehiculo === 'EN_RUTA' && <FaRoad className="w-3 h-3 sm:w-4 sm:h-4" />}
+                    {vehiculo.estVehiculo === 'EN_MANTENIMIENTO' && <FaCogs className="w-3 h-3 sm:w-4 sm:h-4" />}
+                    {vehiculo.estVehiculo === 'FUERA_DE_SERVICIO' && <FaTimesCircle className="w-3 h-3 sm:w-4 sm:h-4" />}
+                    <span className="truncate">{estadoInfo.label}</span>
                   </span>
                   <select
                     key={`select-${vehiculo.idVehiculo}`}
                     value={vehiculo.estVehiculo}
                     onChange={(e) => handleChangeStatus(vehiculo, e.target.value)}
-                    className="text-xs border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 rounded px-2 py-1"
+                    className="text-xs border border-border-light dark:border-slate-600 bg-surface-light dark:bg-slate-700 text-text-primary-light dark:text-slate-200 rounded px-1.5 sm:px-2 py-1 min-h-[32px] sm:min-h-[36px]"
                     title="Cambiar estado"
                   >
                     {estadosVehiculo.map(estado => (
@@ -384,71 +385,73 @@ const Vehiculos = () => {
                 </div>
               </div>
 
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 {/* detalles */}
-                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Placa:</span>
-                  <span className="text-text-primary-light dark:text-slate-200 text-sm font-mono">{vehiculo.plaVehiculo}</span>
+                <div className="flex justify-between py-1.5 sm:py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">Placa:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-xs sm:text-sm font-mono truncate">{vehiculo.plaVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Número interno:</span>
-                  <span className="text-text-primary-light dark:text-slate-200 text-sm">{vehiculo.numVehiculo}</span>
+                <div className="flex justify-between py-1.5 sm:py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">Número interno:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-xs sm:text-sm truncate">{vehiculo.numVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Año:</span>
-                  <span className="text-text-primary-light dark:text-slate-200 text-sm">{vehiculo.anioVehiculo}</span>
+                <div className="flex justify-between py-1.5 sm:py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">Año:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-xs sm:text-sm truncate">{vehiculo.anioVehiculo}</span>
                 </div>
 
-                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Conductor:</span>
-                  <span className="text-text-primary-light dark:text-slate-200 text-sm flex items-center gap-1">
+                <div className="flex justify-between py-1.5 sm:py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">Conductor:</span>
+                  <span className="text-text-primary-light dark:text-slate-200 text-xs sm:text-sm flex items-center gap-1 truncate">
                     {vehiculo.conductor ? (
                       <>
-                        <FaUser className="text-green-500" />
-                        {vehiculo.conductor.nombre}
+                        <FaUser className="text-green-500 flex-shrink-0" />
+                        <span className="truncate">{vehiculo.conductor.nombre}</span>
                       </>
                     ) : (
-                      <span className="text-text-secondary-light dark:text-slate-500">Sin asignar</span>
+                      <span className="text-text-secondary-light dark:text-slate-500 truncate">Sin asignar</span>
                     )}
                   </span>
                 </div>
 
                 {/* fechas */}
-                <div className="flex justify-between py-2 border-b border-border-light dark:border-slate-700">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">SOAT:</span>
-                  <span className={`text-sm flex items-center gap-1 ${soatVencido ? 'text-red-600 font-semibold' :
+                <div className="flex justify-between py-1.5 sm:py-2 border-b border-border-light dark:border-slate-700">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">SOAT:</span>
+                  <span className={`text-xs sm:text-sm flex items-center gap-1 truncate ${soatVencido ? 'text-red-600 font-semibold' :
                     soatProximoVencer ? 'text-orange-600 font-semibold' : 'text-text-primary-light dark:text-slate-200'
-                    }`}>
-                    {(soatVencido || soatProximoVencer) && <FaExclamationTriangle />}
-                    {formatDate(vehiculo.fecVenSOAT)}
+                  }`}>
+                    {(soatVencido || soatProximoVencer) && <FaExclamationTriangle className="flex-shrink-0" />}
+                    <span className="truncate">{formatDate(vehiculo.fecVenSOAT)}</span>
                   </span>
                 </div>
 
-                <div className="flex justify-between py-2">
-                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-sm">Técnica:</span>
-                  <span className={`text-sm flex items-center gap-1 ${tecnicaVencida ? 'text-red-600 font-semibold' :
+                <div className="flex justify-between py-1.5 sm:py-2">
+                  <span className="font-semibold text-text-secondary-light dark:text-slate-400 text-xs sm:text-sm truncate">Técnica:</span>
+                  <span className={`text-xs sm:text-sm flex items-center gap-1 truncate ${tecnicaVencida ? 'text-red-600 font-semibold' :
                     tecnicaProximaVencer ? 'text-orange-600 font-semibold' : 'text-text-primary-light dark:text-slate-200'
-                    }`}>
-                    {(tecnicaVencida || tecnicaProximaVencer) && <FaExclamationTriangle />}
-                    {formatDate(vehiculo.fecVenTec)}
+                  }`}>
+                    {(tecnicaVencida || tecnicaProximaVencer) && <FaExclamationTriangle className="flex-shrink-0" />}
+                    <span className="truncate">{formatDate(vehiculo.fecVenTec)}</span>
                   </span>
                 </div>
               </div>
 
-              <div className="flex gap-2 p-4 bg-surface-light dark:bg-slate-700">
+              <div className="flex gap-2 p-3 sm:p-4 bg-surface-light dark:bg-slate-700">
                 <button
                   onClick={() => openEditModal(vehiculo)}
-                  className="flex-1 py-2 px-4 rounded-md text-sm font-semibold cursor-pointer transition-all duration-300 border-none bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-1"
+                  className="flex-1 py-2 sm:py-2.5 px-2 sm:px-4 rounded-md text-xs sm:text-sm font-semibold cursor-pointer transition-all duration-300 border-none bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-1 min-h-[40px] sm:min-h-[44px]"
                 >
-                  <FaEdit /> Editar
+                  <FaEdit className="flex-shrink-0" />
+                  <span className="truncate">Editar</span>
                 </button>
                 <button
                   onClick={() => handleDeleteVehiculo(vehiculo)}
-                  className="flex-1 py-2 px-4 rounded-md text-sm font-semibold cursor-pointer transition-all duration-300 border-none bg-red-500 text-white hover:bg-red-600 flex items-center justify-center gap-1"
+                  className="flex-1 py-2 sm:py-2.5 px-2 sm:px-4 rounded-md text-xs sm:text-sm font-semibold cursor-pointer transition-all duration-300 border-none bg-red-500 text-white hover:bg-red-600 flex items-center justify-center gap-1 min-h-[40px] sm:min-h-[44px]"
                 >
-                  <FaTrash /> Eliminar
+                  <FaTrash className="flex-shrink-0" />
+                  <span className="truncate">Eliminar</span>
                 </button>
               </div>
             </div>
@@ -458,11 +461,11 @@ const Vehiculos = () => {
 
       {/* vacío */}
       {filteredVehiculos.length === 0 && !loading && (
-        <div className="text-center py-12">
-          <FaBus className="text-text-secondary-light dark:text-slate-600 text-6xl mb-4 mx-auto" />
-          <p className="text-text-secondary-light dark:text-slate-400 text-lg">No se encontraron vehículos</p>
+        <div className="text-center py-8 sm:py-10 md:py-12">
+          <FaBus className="text-text-secondary-light dark:text-slate-600 text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4 mx-auto" />
+          <p className="text-text-secondary-light dark:text-slate-400 text-base sm:text-lg">No se encontraron vehículos</p>
           {searchTerm && (
-            <p className="text-text-secondary-light dark:text-slate-500 text-sm">
+            <p className="text-text-secondary-light dark:text-slate-500 text-xs sm:text-sm mt-2">
               Intenta con otros términos de búsqueda o cambia los filtros
             </p>
           )}

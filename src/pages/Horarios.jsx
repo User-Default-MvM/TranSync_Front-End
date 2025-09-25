@@ -458,79 +458,80 @@ const Horarios = () => {
   // ============================
   if (loading) {
     return (
-      <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm m-6">
-        <div className="flex items-center justify-center py-12">
-          <Loader className="w-8 h-8 animate-spin text-indigo-600 mr-3" />
-          <span className="text-lg text-gray-600 dark:text-gray-300">{t('schedules.messages.loading')}</span>
+      <div className="min-h-screen w-full bg-surface-light dark:bg-gray-900 p-2 sm:p-4 md:p-6 text-text-primary-light dark:text-gray-100">
+        <div className="flex flex-col items-center justify-center py-8 sm:py-12 md:py-16">
+          <Loader className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 animate-spin text-indigo-600 mb-3 sm:mb-4 flex-shrink-0" />
+          <span className="text-sm sm:text-base md:text-lg text-text-secondary-light dark:text-gray-400">{t('schedules.messages.loading')}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full bg-surface-light dark:bg-gray-900 p-4 lg:p-6 text-text-primary-light dark:text-gray-100">
+    <div className="min-h-screen w-full bg-surface-light dark:bg-gray-900 p-2 sm:p-4 md:p-6 text-text-primary-light dark:text-gray-100">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h2 className="text-xl lg:text-2xl font-semibold flex items-center gap-2 text-text-primary-light dark:text-gray-100">
-          <Clock className="text-indigo-600 w-6 h-6 lg:w-7 lg:h-7" />
-          {t('schedules.title')}
-          <span className="text-sm lg:text-base font-normal text-text-secondary-light dark:text-gray-400 ml-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2 sm:gap-3 text-text-primary-light dark:text-gray-100 min-w-0 flex-shrink-0">
+          <Clock className="text-indigo-600 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 flex-shrink-0" />
+          <span className="truncate">{t('schedules.title')}</span>
+          <span className="text-xs sm:text-sm md:text-base font-normal text-text-secondary-light dark:text-gray-400 ml-1 sm:ml-2 min-w-0 flex-shrink-0">
             ({filtered.length} viajes)
           </span>
         </h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 sm:gap-3 w-full sm:w-auto min-w-0 flex-shrink-0">
           <button
             onClick={fetchAll}
             disabled={loading}
-            className="flex items-center gap-2 px-3 py-2 bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 min-h-[44px]"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 min-h-[40px] sm:min-h-[44px] md:min-h-[48px] text-sm sm:text-base flex-shrink-0"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">{t('schedules.form.save')}</span>
+            <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 ${loading ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline truncate">{t('schedules.form.save')}</span>
+            <span className="sm:hidden truncate">Actualizar</span>
           </button>
           <button
             onClick={openCreate}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors min-h-[44px]"
+            className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px] text-sm sm:text-base flex-shrink-0"
           >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">{t('schedules.form.create')}</span>
-            <span className="sm:hidden">{t('schedules.form.create')}</span>
+            <Plus className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="hidden sm:inline truncate">{t('schedules.form.create')}</span>
+            <span className="sm:hidden truncate">Nuevo</span>
           </button>
         </div>
       </div>
 
       {/* Messages */}
       {error && (
-        <div className="mb-4 p-4 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
-          <AlertTriangle className="w-5 h-5 flex-shrink-0" />
-          <span className="text-sm">{error}</span>
+        <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 sm:gap-3 text-red-700 dark:text-red-200 min-w-0">
+          <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+          <span className="text-xs sm:text-sm truncate">{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="mb-4 p-4 bg-surface-light dark:bg-green-900 border border-border-light dark:border-green-700 rounded-lg flex items-center gap-2 text-green-700 dark:text-green-200">
-          <CheckCircle className="w-5 h-5 flex-shrink-0" />
-          <span className="text-sm">{success}</span>
+        <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-surface-light dark:bg-green-900 border border-border-light dark:border-green-700 rounded-lg flex items-center gap-2 sm:gap-3 text-green-700 dark:text-green-200 min-w-0">
+          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+          <span className="text-xs sm:text-sm truncate">{success}</span>
         </div>
       )}
 
       {/* Filters */}
-      <div className="flex flex-col lg:flex-row gap-4 mb-6">
-        <div className="flex items-center bg-surface-light dark:bg-gray-800 border border-border-light dark:border-gray-700 rounded-lg px-3 py-2 flex-grow min-h-[44px]">
-          <Search className="w-5 h-5 text-text-secondary-light dark:text-gray-400 mr-2 flex-shrink-0" />
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 min-w-0">
+        <div className="flex items-center bg-surface-light dark:bg-gray-800 border border-border-light dark:border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 flex-grow min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+          <Search className="w-4 h-4 sm:w-5 sm:h-5 text-text-secondary-light dark:text-gray-400 mr-2 sm:mr-3 flex-shrink-0" />
           <input
             type="text"
             placeholder={t('schedules.filters.route')}
-            className="border-none bg-transparent w-full text-sm text-text-primary-light dark:text-gray-200 outline-none"
+            className="border-none bg-transparent w-full text-xs sm:text-sm md:text-base text-text-primary-light dark:text-gray-200 outline-none min-w-0"
             value={filtroRuta}
             onChange={(e) => setFiltroRuta(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-2 min-h-[44px]">
-          <Filter className="w-5 h-5 text-text-secondary-light dark:text-gray-400" />
+        <div className="flex items-center gap-2 sm:gap-3 min-h-[40px] sm:min-h-[44px] md:min-h-[48px] min-w-0">
+          <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-text-secondary-light dark:text-gray-400 flex-shrink-0" />
           <select
             value={filtroEstado}
             onChange={(e) => setFiltroEstado(e.target.value)}
-            className="border border-border-light dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 min-w-32 min-h-[44px]"
+            className="border border-border-light dark:border-gray-700 rounded-lg px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 min-w-24 sm:min-w-32 md:min-w-36 cursor-pointer appearance-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           >
             <option value="all">{t('schedules.filters.all')}</option>
             <option value="PROGRAMADO">{t('schedules.status.scheduled')}</option>
@@ -542,7 +543,7 @@ const Horarios = () => {
       </div>
 
       {/* Mobile Card View */}
-      <div className="block md:hidden space-y-4 mb-6">
+      <div className="block md:hidden space-y-3 sm:space-y-4 mb-4 sm:mb-6 min-w-0">
         {filtered.length ? (
           filtered.map((v, i) => {
             const id = getField(v, ["idViaje", "id_viaje", "id"]);
@@ -551,69 +552,69 @@ const Horarios = () => {
             const llegada = getField(v, ["fecHorLleViaje", "fec_hor_lle_viaje", "fecLle"]) || "";
 
             return (
-              <div key={id || i} className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-4">
-                <div className="flex justify-between items-start mb-3">
+              <div key={id || i} className="bg-background-light dark:bg-gray-800 rounded-xl shadow-sm border border-border-light dark:border-gray-700 p-3 sm:p-4 min-w-0">
+                <div className="flex justify-between items-start mb-3 sm:mb-4 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-text-primary-light dark:text-gray-100 text-sm truncate">
+                    <h3 className="font-semibold text-text-primary-light dark:text-gray-100 text-sm sm:text-base truncate min-w-0">
                       {getRutaLabel(v)}
                     </h3>
-                    <p className="text-xs text-text-secondary-light dark:text-gray-400 mt-1">
+                    <p className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-400 mt-1 truncate min-w-0">
                       {getConductorLabel(v)}
                     </p>
                   </div>
-                  <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusClass(status)} ml-2 flex-shrink-0`}>
+                  <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusClass(status)} ml-2 flex-shrink-0 min-w-0`}>
                     {getStatusIcon(status)}
-                    <span>{status}</span>
+                    <span className="truncate">{status}</span>
                   </span>
                 </div>
 
-                <div className="space-y-2 mb-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-text-secondary-light dark:text-gray-400">Vehículo:</span>
-                    <span className="text-sm text-text-primary-light dark:text-gray-100">{getVehicleLabel(v)}</span>
+                <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 min-w-0">
+                  <div className="flex justify-between items-center min-w-0">
+                    <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-400 flex-shrink-0">Vehículo:</span>
+                    <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100 truncate ml-2 min-w-0">{getVehicleLabel(v)}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-text-secondary-light dark:text-gray-400">Salida:</span>
-                    <span className="text-sm text-text-primary-light dark:text-gray-100">{parseDateForDisplay(salida)}</span>
+                  <div className="flex justify-between items-center min-w-0">
+                    <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-400 flex-shrink-0">Salida:</span>
+                    <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100 truncate ml-2 min-w-0">{parseDateForDisplay(salida)}</span>
                   </div>
                   {llegada && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-text-secondary-light dark:text-gray-400">Llegada:</span>
-                      <span className="text-sm text-text-primary-light dark:text-gray-100">{parseDateForDisplay(llegada)}</span>
+                    <div className="flex justify-between items-center min-w-0">
+                      <span className="text-xs sm:text-sm text-text-secondary-light dark:text-gray-400 flex-shrink-0">Llegada:</span>
+                      <span className="text-xs sm:text-sm text-text-primary-light dark:text-gray-100 truncate ml-2 min-w-0">{parseDateForDisplay(llegada)}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="flex justify-end gap-2 pt-2 border-t border-border-light dark:border-gray-700">
+                <div className="flex justify-end gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-border-light dark:border-gray-700 min-w-0">
                   <button
                     onClick={() => openEdit(v)}
-                    className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    className="p-2 sm:p-2.5 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] min-w-[40px] sm:min-w-[44px] flex items-center justify-center flex-shrink-0"
                     title="Editar viaje"
                   >
-                    <Edit2 className="w-4 h-4" />
+                    <Edit2 className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                   <button
                     onClick={() => onDelete(id)}
-                    className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    className="p-2 sm:p-2.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] min-w-[40px] sm:min-w-[44px] flex items-center justify-center flex-shrink-0"
                     title="Eliminar viaje"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>
             );
           })
         ) : (
-          <div className="text-center py-12">
-            <Clock className="w-12 h-12 text-text-secondary-light dark:text-gray-600 mx-auto mb-4" />
-            <p className="text-text-secondary-light dark:text-gray-400 mb-2">No hay viajes registrados</p>
+          <div className="text-center py-8 sm:py-10 md:py-12 min-w-0">
+            <Clock className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-text-secondary-light dark:text-gray-600 mx-auto mb-3 sm:mb-4 flex-shrink-0" />
+            <p className="text-sm sm:text-base md:text-lg text-text-secondary-light dark:text-gray-400 mb-2 min-w-0">No hay viajes registrados</p>
             {filtroRuta || filtroEstado !== "all" ? (
               <button
                 onClick={() => {
                   setFiltroRuta("");
                   setFiltroEstado("all");
                 }}
-                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 text-sm underline"
+                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 text-xs sm:text-sm underline"
               >
                 Limpiar filtros
               </button>
@@ -624,16 +625,16 @@ const Horarios = () => {
 
       {/* Desktop Table View */}
       <div className="hidden md:block overflow-x-auto rounded-xl border border-border-light dark:border-gray-700 shadow-sm">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-xs sm:text-sm md:text-base min-w-0">
           <thead>
             <tr className="bg-surface-light dark:bg-gray-800">
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32">Ruta</th>
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 hidden sm:table-cell">Conductor</th>
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 hidden md:table-cell">Vehículo</th>
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-40">Salida</th>
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-40 hidden lg:table-cell">Llegada</th>
-              <th className="p-3 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-28">Estado</th>
-              <th className="p-3 text-center font-medium text-text-primary-light dark:text-gray-300 w-24">Acciones</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-24 sm:min-w-32">Ruta</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-24 sm:min-w-32 hidden sm:table-cell">Conductor</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-24 sm:min-w-32 hidden md:table-cell">Vehículo</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 sm:min-w-40">Salida</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-32 sm:min-w-40 hidden lg:table-cell">Llegada</th>
+              <th className="p-2 sm:p-3 md:p-4 text-left font-medium text-text-primary-light dark:text-gray-300 min-w-20 sm:min-w-28">Estado</th>
+              <th className="p-2 sm:p-3 md:p-4 text-center font-medium text-text-primary-light dark:text-gray-300 w-20 sm:w-24">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -645,46 +646,46 @@ const Horarios = () => {
                 const llegada = getField(v, ["fecHorLleViaje", "fec_hor_lle_viaje", "fecLle"]) || "";
 
                 return (
-                  <tr key={id || i} className={i % 2 === 0 ? "bg-background-light dark:bg-slate-900 hover:bg-surface-light dark:hover:bg-gray-800" : "bg-surface-light dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-gray-700"}>
-                    <td className="p-3">
-                      <div className="font-medium text-text-primary-light dark:text-gray-100">{getRutaLabel(v)}</div>
-                      <div className="sm:hidden text-xs text-text-secondary-light dark:text-gray-400 mt-1">
+                  <tr key={id || i} className={`border-b border-border-light dark:border-gray-700 ${i % 2 === 0 ? "bg-background-light dark:bg-slate-900 hover:bg-surface-light dark:hover:bg-gray-800" : "bg-surface-light dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-gray-700"}`}>
+                    <td className="p-2 sm:p-3 md:p-4 min-w-0">
+                      <div className="font-medium text-text-primary-light dark:text-gray-100 truncate">{getRutaLabel(v)}</div>
+                      <div className="sm:hidden text-xs text-text-secondary-light dark:text-gray-400 mt-1 truncate">
                         {getConductorLabel(v)} • {getVehicleLabel(v)}
                       </div>
                     </td>
-                    <td className="p-3 hidden sm:table-cell">{getConductorLabel(v)}</td>
-                    <td className="p-3 hidden md:table-cell">{getVehicleLabel(v)}</td>
-                    <td className="p-3">
-                      <div className="text-text-primary-light dark:text-gray-100">{parseDateForDisplay(salida)}</div>
+                    <td className="p-2 sm:p-3 md:p-4 hidden sm:table-cell truncate">{getConductorLabel(v)}</td>
+                    <td className="p-2 sm:p-3 md:p-4 hidden md:table-cell truncate">{getVehicleLabel(v)}</td>
+                    <td className="p-2 sm:p-3 md:p-4 min-w-0">
+                      <div className="text-text-primary-light dark:text-gray-100 truncate">{parseDateForDisplay(salida)}</div>
                     </td>
-                    <td className="p-3 hidden lg:table-cell">
+                    <td className="p-2 sm:p-3 md:p-4 hidden lg:table-cell min-w-0">
                       {llegada ? (
-                        <div className="text-text-primary-light dark:text-gray-100">{parseDateForDisplay(llegada)}</div>
+                        <div className="text-text-primary-light dark:text-gray-100 truncate">{parseDateForDisplay(llegada)}</div>
                       ) : (
                         <span className="text-text-secondary-light dark:text-gray-500 text-xs">No programada</span>
                       )}
                     </td>
-                    <td className="p-3">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusClass(status)}`}>
+                    <td className="p-2 sm:p-3 md:p-4 min-w-0">
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusClass(status)} min-w-0`}>
                         {getStatusIcon(status)}
-                        <span className="hidden sm:inline">{status}</span>
+                        <span className="hidden sm:inline truncate">{status}</span>
                       </span>
                     </td>
-                    <td className="p-3">
-                      <div className="flex justify-center gap-1">
+                    <td className="p-2 sm:p-3 md:p-4 min-w-0">
+                      <div className="flex justify-center gap-1 sm:gap-2">
                         <button
                           onClick={() => openEdit(v)}
-                          className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                          className="p-1.5 sm:p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors min-h-[36px] sm:min-h-[40px] md:min-h-[44px] min-w-[36px] sm:min-w-[40px] md:min-w-[44px] flex items-center justify-center flex-shrink-0"
                           title="Editar viaje"
                         >
-                          <Edit2 className="w-4 h-4" />
+                          <Edit2 className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                         <button
                           onClick={() => onDelete(id)}
-                          className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                          className="p-1.5 sm:p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition-colors min-h-[36px] sm:min-h-[40px] md:min-h-[44px] min-w-[36px] sm:min-w-[40px] md:min-w-[44px] flex items-center justify-center flex-shrink-0"
                           title="Eliminar viaje"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                     </td>
@@ -693,17 +694,17 @@ const Horarios = () => {
               })
             ) : (
               <tr>
-                <td colSpan="7" className="p-8 text-center text-text-secondary-light dark:text-gray-400">
-                  <div className="flex flex-col items-center gap-2">
-                    <Clock className="w-8 h-8 text-text-secondary-light dark:text-gray-600" />
-                    <span>No hay viajes registrados</span>
+                <td colSpan="7" className="p-6 sm:p-8 md:p-10 text-center text-text-secondary-light dark:text-gray-400 min-w-0">
+                  <div className="flex flex-col items-center gap-2 sm:gap-3">
+                    <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-text-secondary-light dark:text-gray-600 flex-shrink-0" />
+                    <span className="text-sm sm:text-base">No hay viajes registrados</span>
                     {filtroRuta || filtroEstado !== "all" ? (
                       <button
                         onClick={() => {
                           setFiltroRuta("");
                           setFiltroEstado("all");
                         }}
-                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 text-sm"
+                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 text-xs sm:text-sm underline"
                       >
                         Limpiar filtros
                       </button>
@@ -718,10 +719,10 @@ const Horarios = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-background-light dark:bg-slate-900 p-6 rounded-xl shadow-lg w-full max-w-lg relative max-h-full overflow-y-auto text-text-primary-light dark:text-gray-100">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-background-light dark:bg-slate-900 p-4 sm:p-5 md:p-6 rounded-xl shadow-lg w-full max-w-2xl relative max-h-[90vh] sm:max-h-[95vh] overflow-y-auto text-text-primary-light dark:text-gray-100 min-w-0">
+            <div className="flex justify-between items-center mb-4 sm:mb-6 min-w-0">
+              <h3 className="text-lg sm:text-xl font-semibold truncate min-w-0">
                 {editId ? t('schedules.form.edit') : t('schedules.form.create')}
               </h3>
               <button
@@ -729,70 +730,72 @@ const Horarios = () => {
                   setShowModal(false);
                   resetForm();
                 }}
-                className="text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300"
+                className="text-text-secondary-light dark:text-gray-400 hover:text-text-primary-light dark:hover:text-gray-300 p-1 sm:p-2 flex-shrink-0"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-200">
-                <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                <span className="text-sm">{error}</span>
+              <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-surface-light dark:bg-red-900 border border-border-light dark:border-red-700 rounded-lg flex items-center gap-2 sm:gap-3 text-red-700 dark:text-red-200 min-w-0">
+                <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span className="text-xs sm:text-sm truncate">{error}</span>
               </div>
             )}
 
-            <form onSubmit={onSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
-                  {t('schedules.form.vehicle')} *
-                </label>
-                <select
-                  name="idVehiculo"
-                  value={formData.idVehiculo}
-                  onChange={onInput}
-                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  required
-                >
-                  <option value="">{t('schedules.form.selectVehicle')}</option>
-                  {vehiculos.map((v) => (
-                    <option key={getField(v, ["idVehiculo", "id"])} value={getField(v, ["idVehiculo", "id"])}>
-                      {getField(v, ["placaVehiculo", "plaVehiculo", "placa"]) || getField(v, ["numVehiculo"])}
-                      {getField(v, ["modeloVehiculo"]) ? ` - ${getField(v, ["modeloVehiculo"])}` : ""}
-                    </option>
-                  ))}
-                </select>
+            <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5 md:space-y-6 min-w-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 min-w-0">
+                <div className="min-w-0">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
+                    {t('schedules.form.vehicle')} *
+                  </label>
+                  <select
+                    name="idVehiculo"
+                    value={formData.idVehiculo}
+                    onChange={onInput}
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
+                    required
+                  >
+                    <option value="">{t('schedules.form.selectVehicle')}</option>
+                    {vehiculos.map((v) => (
+                      <option key={getField(v, ["idVehiculo", "id"])} value={getField(v, ["idVehiculo", "id"])}>
+                        {getField(v, ["placaVehiculo", "plaVehiculo", "placa"]) || getField(v, ["numVehiculo"])}
+                        {getField(v, ["modeloVehiculo"]) ? ` - ${getField(v, ["modeloVehiculo"])}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="min-w-0">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
+                    {t('schedules.form.driver')} *
+                  </label>
+                  <select
+                    name="idConductor"
+                    value={formData.idConductor}
+                    onChange={onInput}
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
+                    required
+                  >
+                    <option value="">{t('schedules.form.selectDriver')}</option>
+                    {conductores.map((c) => (
+                      <option key={getField(c, ["idConductor", "id"])} value={getField(c, ["idConductor", "id"])}>
+                        {(getField(c, ["nomUsuario", "nomConductor", "nom"]) || "")} {(getField(c, ["apeUsuario", "apeConductor", "ape"]) || "")}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
-                  {t('schedules.form.driver')} *
-                </label>
-                <select
-                  name="idConductor"
-                  value={formData.idConductor}
-                  onChange={onInput}
-                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  required
-                >
-                  <option value="">{t('schedules.form.selectDriver')}</option>
-                  {conductores.map((c) => (
-                    <option key={getField(c, ["idConductor", "id"])} value={getField(c, ["idConductor", "id"])}>
-                      {(getField(c, ["nomUsuario", "nomConductor", "nom"]) || "")} {(getField(c, ["apeUsuario", "apeConductor", "ape"]) || "")}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
+              <div className="min-w-0">
+                <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
                   {t('schedules.form.route')} *
                 </label>
                 <select
                   name="idRuta"
                   value={formData.idRuta}
                   onChange={onInput}
-                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                   required
                 >
                   <option value="">{t('schedules.form.selectRoute')}</option>
@@ -805,9 +808,9 @@ const Horarios = () => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 min-w-0">
+                <div className="min-w-0">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
                     {t('schedules.form.departureTime')} *
                   </label>
                   <input
@@ -815,13 +818,13 @@ const Horarios = () => {
                     name="fecHorSalViaje"
                     value={formData.fecHorSalViaje}
                     onChange={onInput}
-                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
+                <div className="min-w-0">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
                     {t('schedules.form.arrivalTime')}
                   </label>
                   <input
@@ -829,20 +832,20 @@ const Horarios = () => {
                     name="fecHorLleViaje"
                     value={formData.fecHorLleViaje}
                     onChange={onInput}
-                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
+              <div className="min-w-0">
+                <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
                   {t('schedules.form.status')}
                 </label>
                 <select
                   name="estViaje"
                   value={formData.estViaje}
                   onChange={onInput}
-                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                 >
                   <option value="PROGRAMADO">PROGRAMADO</option>
                   <option value="EN_CURSO">EN_CURSO</option>
@@ -851,37 +854,37 @@ const Horarios = () => {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1">
+              <div className="min-w-0">
+                <label className="block text-xs sm:text-sm font-medium text-text-secondary-light dark:text-gray-300 mb-1 sm:mb-2">
                   {t('schedules.form.observations')}
                 </label>
                 <textarea
                   name="obsViaje"
                   value={formData.obsViaje}
                   onChange={onInput}
-                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 text-sm bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full border border-border-light dark:border-gray-700 rounded-lg p-2 sm:p-2.5 md:p-3 text-xs sm:text-sm md:text-base bg-surface-light dark:bg-gray-800 text-text-primary-light dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                   placeholder="Observaciones adicionales..."
                   rows="3"
                 />
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-4 sm:pt-6 border-t border-border-light dark:border-gray-700 min-w-0">
                 <button
                   type="button"
                   onClick={() => {
                     setShowModal(false);
                     resetForm();
                   }}
-                  className="flex-1 px-4 py-2 text-text-primary-light dark:text-gray-200 bg-surface-light dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="flex-1 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base font-medium text-text-primary-light dark:text-gray-200 bg-surface-light dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                 >
                   {t('schedules.form.cancel')}
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="flex-1 bg-indigo-600 text-white py-2 sm:py-2.5 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[40px] sm:min-h-[44px] md:min-h-[48px] text-xs sm:text-sm md:text-base font-medium"
                 >
-                  {submitting && <Loader className="w-4 h-4 animate-spin" />}
+                  {submitting && <Loader className="w-3 h-3 sm:w-4 sm:h-4 animate-spin" />}
                   {editId ? t('schedules.form.save') : t('schedules.form.create')}
                 </button>
               </div>

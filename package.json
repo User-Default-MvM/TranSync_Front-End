@@ -68,7 +68,8 @@
     "rules": {
       "no-unused-vars": "warn",
       "no-empty-pattern": "warn",
-      "react-hooks/exhaustive-deps": "warn"
+      "react-hooks/exhaustive-deps": "warn",
+      "no-template-curly-in-string": "off"
     }
   },
   "browserslist": {
