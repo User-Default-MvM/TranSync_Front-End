@@ -722,7 +722,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={toggleUserMenu}
-                    className="flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-700"
+                    className="flex items-center gap-1 sm:gap-3 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-700 min-h-[44px]"
                     aria-label="User menu"
                     data-tutorial="user-menu"
                   >
@@ -731,7 +731,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                         <span className="text-white font-bold text-xs sm:text-sm">{getUserInitials()}</span>
                       </div>
                     </div>
-                    <div className="hidden sm:flex flex-col items-start min-w-0">
+                    <div className="hidden xs:flex flex-col items-start min-w-0">
                        <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{getDisplayName()}</span>
                        <span className={`text-xs px-1.5 sm:px-2 py-0.5 rounded-md font-medium ${getRoleBadgeColor()}`}>{formatUserRole(userRole)}</span>
                      </div>
