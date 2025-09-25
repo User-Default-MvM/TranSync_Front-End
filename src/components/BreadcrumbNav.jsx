@@ -48,34 +48,34 @@ const BreadcrumbNav = ({ items = [], className = "" }) => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6 ${className}`}
+      className={`flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 ${className}`}
     >
       {breadcrumbItems.map((item, index) => (
         <React.Fragment key={item.href}>
           {index > 0 && (
             <FaChevronRight
-              size={12}
-              className="text-gray-400 dark:text-gray-500"
+              size={10}
+              className="text-gray-400 dark:text-gray-500 flex-shrink-0"
               aria-hidden="true"
             />
           )}
 
           {item.isLast || index === breadcrumbItems.length - 1 ? (
             <span
-              className="font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2"
+              className="font-medium text-gray-900 dark:text-gray-100 flex items-center gap-1 sm:gap-2 truncate max-w-[120px] sm:max-w-none"
               aria-current="page"
             >
-              {item.icon && <span className="text-blue-600 dark:text-blue-400">{item.icon}</span>}
-              {item.label}
+              {item.icon && <span className="text-blue-600 dark:text-blue-400 flex-shrink-0">{item.icon}</span>}
+              <span className="truncate">{item.label}</span>
             </span>
           ) : (
             <Link
               to={item.href}
-              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded px-1 py-0.5"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1 sm:gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded px-1 py-0.5 truncate max-w-[100px] sm:max-w-none"
               aria-label={`Ir a ${item.label}`}
             >
-              {item.icon && <span className="text-blue-600 dark:text-blue-400">{item.icon}</span>}
-              {item.label}
+              {item.icon && <span className="text-blue-600 dark:text-blue-400 flex-shrink-0">{item.icon}</span>}
+              <span className="truncate">{item.label}</span>
             </Link>
           )}
         </React.Fragment>

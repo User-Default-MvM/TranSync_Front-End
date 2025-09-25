@@ -477,8 +477,8 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
         ? 'bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl shadow-lg border-b border-border-light/50 dark:border-border-dark'
         : 'bg-gradient-to-r from-background-light/95 via-primary-50/30 to-primary-100/20 dark:from-background-dark/90 dark:via-surface-dark/90 dark:to-background-dark/90 backdrop-blur-md shadow-sm border-b border-border-light/30 dark:border-border-dark'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8">
+        <div className="flex items-center justify-between h-12 sm:h-14 md:h-16">
           {/* Left section */}
           <div className="flex items-center gap-4">
             {!isPublic && isMobile && (
@@ -501,15 +501,15 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
             )}
             
             {/* Logo */}
-            <Link to="/home" className="flex items-center gap-3 no-underline group">
+            <Link to="/home" className="flex items-center gap-2 sm:gap-3 no-underline group">
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a237e] to-[#3949ab] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <div className="text-white font-bold text-lg">T</div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1a237e] to-[#3949ab] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                  <div className="text-white font-bold text-sm sm:text-lg">T</div>
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-800 dark:to-primary-700 bg-clip-text text-transparent">TranSync</span>
-                <span className="text-xs text-text-secondary-light dark:text-text-secondary-dark -mt-1 opacity-80">Transport Management</span>
+                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-800 dark:to-primary-700 bg-clip-text text-transparent">TranSync</span>
+                <span className="text-xs text-text-secondary-light dark:text-text-secondary-dark -mt-1 opacity-80 hidden sm:block">Transport Management</span>
               </div>
             </Link>
           </div>
@@ -535,14 +535,14 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
 
             {/* Botones de navegación inteligente */}
             {isLoggedIn && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 {location.pathname === '/home' && (
                   <button
                     onClick={goToDashboard}
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-xl transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg border border-transparent"
+                    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg sm:rounded-xl transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg border border-transparent"
                     title={t('navbar.dashboard')}
                   >
-                    <FaChartLine size={14} />
+                    <FaChartLine size={12} className="sm:w-[14px] sm:h-[14px]" />
                     <span className="hidden sm:inline">{t('navbar.dashboard')}</span>
                   </button>
                 )}
@@ -550,10 +550,10 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 {(location.pathname === '/dashboard' || location.pathname.startsWith('/admin')) && (
                   <button
                     onClick={goToHome}
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 hover:scale-105"
+                    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 hover:scale-105"
                     title={t('navbar.goToHome')}
                   >
-                    <FaHome size={14} />
+                    <FaHome size={12} className="sm:w-[14px] sm:h-[14px]" />
                     <span className="hidden sm:inline">{t('navbar.goToHome')}</span>
                   </button>
                 )}
@@ -561,13 +561,13 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
             )}
 
             {!isLoggedIn ? (
-              <div className="flex items-center gap-3">
-                <button onClick={handleLogin} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400">
-                  <FaSignInAlt size={14} />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button onClick={handleLogin} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400">
+                  <FaSignInAlt size={12} className="sm:w-[14px] sm:h-[14px]" />
                   <span className="hidden sm:inline">{t('navbar.login')}</span>
                 </button>
-                <button onClick={handleRegister} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-[#1a237e] dark:to-[#3949ab] rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
-                  <FaUserCircle size={14} />
+                <button onClick={handleRegister} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-[#1a237e] dark:to-[#3949ab] rounded-lg sm:rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
+                  <FaUserCircle size={12} className="sm:w-[14px] sm:h-[14px]" />
                   <span className="hidden sm:inline">{t('navbar.register')}</span>
                 </button>
               </div>
@@ -606,13 +606,13 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
 
                   {/* Notification Dropdown */}
                    {isNotificationsOpen && (
-                     <div
-                       id="notifications-dropdown"
-                       className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-surface-light dark:bg-gray-800 rounded-2xl shadow-xl border border-border-light dark:border-gray-700 z-50 max-h-96 overflow-hidden"
-                       role="dialog"
-                       aria-modal="true"
-                       aria-labelledby="notifications-title"
-                     >
+                      <div
+                        id="notifications-dropdown"
+                        className="absolute right-0 mt-2 w-72 sm:w-80 max-w-[calc(100vw-1rem)] bg-surface-light dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-xl border border-border-light dark:border-gray-700 z-50 max-h-80 sm:max-h-96 overflow-hidden"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="notifications-title"
+                      >
                       {/* Header */}
                        <div className="px-4 py-3 border-b border-border-light dark:border-gray-700 flex justify-between items-center">
                          <h3 id="notifications-title" className="text-sm font-semibold text-gray-900 dark:text-gray-100">
@@ -722,24 +722,24 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={toggleUserMenu}
-                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-700"
+                    className="flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 transition-all duration-200 group border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-700"
                     aria-label="User menu"
                     data-tutorial="user-menu"
                   >
                     <div className="relative">
-                      <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-md ring-2 ring-white`}>
-                        <span className="text-white font-bold text-sm">{getUserInitials()}</span>
+                      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-md ring-2 ring-white`}>
+                        <span className="text-white font-bold text-xs sm:text-sm">{getUserInitials()}</span>
                       </div>
                     </div>
                     <div className="hidden md:flex flex-col items-start min-w-0">
-                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{getDisplayName()}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded-md font-medium ${getRoleBadgeColor()}`}>{formatUserRole(userRole)}</span>
+                      <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{getDisplayName()}</span>
+                      <span className={`text-xs px-1.5 sm:px-2 py-0.5 rounded-md font-medium ${getRoleBadgeColor()}`}>{formatUserRole(userRole)}</span>
                     </div>
-                    <FaChevronDown size={12} className={`text-gray-400 dark:text-gray-300 ${isUserMenuOpen ? 'rotate-180 text-[#3949ab]' : ''}`} />
+                    <FaChevronDown size={10} className={`text-gray-400 dark:text-gray-300 ${isUserMenuOpen ? 'rotate-180 text-[#3949ab]' : ''} sm:w-[12px] sm:h-[12px]`} />
                   </button>
 
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-64 bg-surface-light dark:bg-gray-800 rounded-2xl shadow-xl border border-border-light dark:border-gray-700 py-2 z-50">
+                    <div className="absolute right-0 mt-2 w-60 sm:w-64 bg-surface-light dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-xl border border-border-light dark:border-gray-700 py-2 z-50">
                       <div className="px-4 py-4 border-b border-border-light dark:border-gray-700">
                         <div className="flex items-center gap-3">
                           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-md`}>

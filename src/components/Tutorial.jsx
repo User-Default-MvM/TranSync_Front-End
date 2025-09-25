@@ -133,21 +133,21 @@ const Tutorial = () => {
   // Pantalla de bienvenida
   if (showWelcome) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-background-light dark:bg-background-dark rounded-xl shadow-2xl max-w-md w-full mx-4">
-          <div className="p-6 text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+        <div className="bg-background-light dark:bg-background-dark rounded-xl shadow-2xl max-w-sm sm:max-w-md w-full mx-2 sm:mx-4">
+          <div className="p-4 sm:p-6 text-center">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-text-primary-light dark:text-text-primary-dark mb-3">
+            <h2 className="text-lg sm:text-2xl font-bold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3">
               {currentStepData?.title}
             </h2>
-            <p className="text-text-secondary-light dark:text-text-secondary-dark mb-6 leading-relaxed">
+            <p className="text-sm sm:text-base text-text-secondary-light dark:text-text-secondary-dark mb-4 sm:mb-6 leading-relaxed">
               {currentStepData?.description}
             </p>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 sm:gap-3">
               <Button
                 onClick={() => {
                   setShowWelcome(false);

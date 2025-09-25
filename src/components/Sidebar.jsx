@@ -226,7 +226,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
             : "bg-gradient-to-br from-primary-800 via-primary-700 to-primary-600 text-white before:from-white/5"}
           before:absolute before:inset-0 before:bg-gradient-to-r before:to-transparent before:pointer-events-none
           ${isMobile || isTablet
-            ? `w-[280px] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+            ? `w-[calc(100vw-2rem)] max-w-[320px] sm:w-[280px] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
             : `${isOpen ? 'w-[280px]' : 'w-[70px]'} translate-x-0`
           }
         `}
@@ -234,14 +234,14 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
         aria-label="Navegación principal"
       >
         {/* Header del sidebar */}
-        <div className={`relative p-4 border-b min-h-[70px] flex items-center justify-between backdrop-blur-sm
+        <div className={`relative p-3 sm:p-4 border-b min-h-[60px] sm:min-h-[70px] flex items-center justify-between backdrop-blur-sm
           ${theme === "dark" ? "border-border-dark" : "border-white/30"}`}>
-          <div className="flex items-center gap-3 overflow-hidden">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
             <div className="relative">
-              <img 
-                src={`${process.env.PUBLIC_URL}/logo.svg`} 
-                alt="Logo TransSync" 
-                className="h-10 w-10 object-contain filter drop-shadow-lg" 
+              <img
+                src={`${process.env.PUBLIC_URL}/logo.svg`}
+                alt="Logo TransSync"
+                className="h-8 w-8 sm:h-10 sm:w-10 object-contain filter drop-shadow-lg"
                 onError={(e) => {
                   e.target.style.display = 'none';
                 }}
@@ -250,7 +250,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
             </div>
             {(isOpen || (!isMobile && !isTablet)) && (
               <div className={`flex flex-col transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
-                <span className="text-xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent whitespace-nowrap">
+                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent whitespace-nowrap">
                   TransSync
                 </span>
                 <span className={`text-xs ${theme === "dark" ? "text-text-secondary-dark" : "text-primary-200 opacity-80"}`}>
@@ -284,26 +284,26 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
         </div>
 
         {/* Perfil de usuario */}
-        <div className={`p-4 border-b backdrop-blur-sm ${theme === "dark" ? "border-gray-700" : "border-white/30"}`}>
-          <div className="flex items-center gap-3">
+        <div className={`p-3 sm:p-4 border-b backdrop-blur-sm ${theme === "dark" ? "border-gray-700" : "border-white/30"}`}>
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="relative">
               <div
-                className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-lg ring-2 ${theme === "dark" ? "ring-gray-700" : "ring-white/30"}`}
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br ${getAvatarGradient()} flex items-center justify-center shadow-lg ring-2 ${theme === "dark" ? "ring-gray-700" : "ring-white/30"}`}
                 data-tutorial="profile"
               >
                 {currentUser ? (
-                  <span className="text-white font-bold text-sm">
+                  <span className="text-white font-bold text-xs sm:text-sm">
                     {getUserInitials()}
                   </span>
                 ) : (
                   getUserRoleIcon()
                 )}
               </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white/80 shadow-sm animate-pulse" />
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full border-2 border-white/80 shadow-sm animate-pulse" />
             </div>
             {(isOpen || (!isMobile && !isTablet)) && (
               <div className={`flex-1 min-w-0 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
-                <h4 className={`text-sm font-semibold truncate ${theme === "dark" ? "text-gray-100" : "text-white"}`} title={getDisplayName()}>
+                <h4 className={`text-xs sm:text-sm font-semibold truncate ${theme === "dark" ? "text-gray-100" : "text-white"}`} title={getDisplayName()}>
                   {getDisplayName()}
                 </h4>
                 <p className={`text-xs truncate ${theme === "dark" ? "text-gray-400" : "text-blue-200 opacity-80"}`} title={formatUserRole(userRole)}>
@@ -324,12 +324,12 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
         </div>
 
         {/* Menú de navegación */}
-        <nav className="flex-1 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+        <nav className="flex-1 py-3 sm:py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
           {menuItems.length > 0 ? (
-            <div className="px-2 space-y-1">
+            <div className="px-2 sm:px-3 space-y-1">
               {menuItems.map(({ path, icon, label, superAdminOnly }) => {
                 const isActive = location.pathname === path;
-                
+
                 if (superAdminOnly && userRole !== 'SUPERADMIN') {
                   return null;
                 }
@@ -349,7 +349,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                         null
                       }
                       className={`
-                        flex items-center no-underline rounded-xl
+                        flex items-center no-underline rounded-lg sm:rounded-xl
                         transition-all duration-300 ease-in-out
                         hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]
                         ${isActive
@@ -359,15 +359,15 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                           : theme === "dark"
                             ? "text-gray-300 hover:bg-gray-700 hover:text-gray-100"
                             : "text-white/90 hover:bg-white/10 hover:text-white"}
-                        ${(isOpen || (!isMobile && !isTablet)) ? 'p-3 justify-start' : 'p-3 justify-center'}
+                        ${(isOpen || (!isMobile && !isTablet)) ? 'p-2 sm:p-3 justify-start' : 'p-2 sm:p-3 justify-center'}
                       `}
                       onClick={handleLinkClick}
                     >
-                      <div className={`flex items-center justify-center text-lg ${(isOpen || (!isMobile && !isTablet)) ? 'w-6 mr-4' : 'w-6'} ${isActive ? (theme === "dark" ? "text-gray-200" : "text-blue-200") : ""}`}>
+                      <div className={`flex items-center justify-center text-base sm:text-lg ${(isOpen || (!isMobile && !isTablet)) ? 'w-5 sm:w-6 mr-3 sm:mr-4' : 'w-5 sm:w-6'} ${isActive ? (theme === "dark" ? "text-gray-200" : "text-blue-200") : ""}`}>
                         {icon}
                       </div>
                       {(isOpen || (!isMobile && !isTablet)) && (
-                        <span className={`text-sm font-medium truncate transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+                        <span className={`text-xs sm:text-sm font-medium truncate transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
                           {label}
                         </span>
                       )}
@@ -377,12 +377,12 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
               })}
             </div>
           ) : (
-            <div className={`p-4 text-center text-sm ${theme === "dark" ? "text-gray-400" : "text-blue-200"}`}>Sin permisos de acceso</div>
+            <div className={`p-3 sm:p-4 text-center text-xs sm:text-sm ${theme === "dark" ? "text-gray-400" : "text-blue-200"}`}>Sin permisos de acceso</div>
           )}
         </nav>
 
         {/* Footer del sidebar */}
-        <div className={`p-4 mt-auto backdrop-blur-sm space-y-3 ${theme === "dark" ? "border-t border-gray-700" : "border-t border-white/30"}`}>
+        <div className={`p-3 sm:p-4 mt-auto backdrop-blur-sm space-y-2 sm:space-y-3 ${theme === "dark" ? "border-t border-gray-700" : "border-t border-white/30"}`}>
           {/* Botón modo oscuro */}
           {/* <button
             onClick={() => setDark(!dark)}

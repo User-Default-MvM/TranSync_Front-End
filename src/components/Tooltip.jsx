@@ -26,20 +26,20 @@ const Tooltip = ({
 
   const getPositionClasses = () => {
     const positions = {
-      top: 'bottom-full left-1/2 transform -translate-x-1/2 mb-2',
-      bottom: 'top-full left-1/2 transform -translate-x-1/2 mt-2',
-      left: 'right-full top-1/2 transform -translate-y-1/2 mr-2',
-      right: 'left-full top-1/2 transform -translate-y-1/2 ml-2'
+      top: 'bottom-full left-1/2 transform -translate-x-1/2 mb-1 sm:mb-2 z-50',
+      bottom: 'top-full left-1/2 transform -translate-x-1/2 mt-1 sm:mt-2 z-50',
+      left: 'right-full top-1/2 transform -translate-y-1/2 mr-1 sm:mr-2 z-50',
+      right: 'left-full top-1/2 transform -translate-y-1/2 ml-1 sm:ml-2 z-50'
     };
     return positions[position] || positions.top;
   };
 
   const getArrowClasses = () => {
     const arrows = {
-      top: 'top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800 dark:border-t-gray-200',
-      bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-gray-800 dark:border-b-gray-200',
-      left: 'left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-800 dark:border-l-gray-200',
-      right: 'right-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-r-gray-800 dark:border-r-gray-200'
+      top: 'top-full left-1/2 transform -translate-x-1/2 border-2 sm:border-4 border-transparent border-t-gray-800 dark:border-t-gray-200',
+      bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-2 sm:border-4 border-transparent border-b-gray-800 dark:border-b-gray-200',
+      left: 'left-full top-1/2 transform -translate-y-1/2 border-2 sm:border-4 border-transparent border-l-gray-800 dark:border-l-gray-200',
+      right: 'right-full top-1/2 transform -translate-y-1/2 border-2 sm:border-4 border-transparent border-r-gray-800 dark:border-r-gray-200'
     };
     return arrows[position] || arrows.top;
   };

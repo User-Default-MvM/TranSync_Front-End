@@ -359,16 +359,20 @@ const Dashboard = () => {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <AlertTriangle className="w-16 h-16 text-red-500 mb-4" />
-        <h2 className="text-xl font-semibold text-red-700 mb-2">Error al cargar el dashboard</h2>
-        <p className="text-gray-600 mb-4">{error}</p>
-        <button 
+      <div className="flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] p-4 sm:p-6 md:p-8">
+        <AlertTriangle className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-red-500 mb-3 sm:mb-4 flex-shrink-0" />
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-red-700 dark:text-red-400 mb-2 sm:mb-3 text-center min-w-0">
+          <span className="truncate">Error al cargar el dashboard</span>
+        </h2>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 text-center max-w-md min-w-0">
+          <span className="truncate">{error}</span>
+        </p>
+        <button
           onClick={() => {
             setError(null);
             fetchDashboardData();
           }}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] flex-shrink-0"
         >
           Reintentar
         </button>
@@ -431,11 +435,11 @@ const Dashboard = () => {
       <BreadcrumbNav />
 
       {/* Header */}
-      <div className="flex justify-between items-center mb-8 flex-col md:flex-row md:items-center gap-3">
-        <h1 className="text-3xl font-bold text-primary-900 dark:text-primary-200 m-0" data-tutorial="dashboard">
-          {t('dashboard.title')}
+      <div className="flex justify-between items-center mb-3 sm:mb-4 md:mb-6 lg:mb-8 flex-col md:flex-row md:items-center gap-2 sm:gap-3 md:gap-4 min-h-[60px] sm:min-h-[70px] md:min-h-[80px]">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary-900 dark:text-primary-200 m-0 min-w-0 flex-shrink-0" data-tutorial="dashboard">
+          <span className="truncate">{t('dashboard.title')}</span>
         </h1>
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 md:gap-4 w-full md:w-auto min-w-0 flex-shrink-0">
           {/* Indicador de estado en tiempo real */}
           <RealTimeIndicator
             isActive={isRealTimeActive}
@@ -454,28 +458,31 @@ const Dashboard = () => {
           />
 
           {/* Información de fecha */}
-          <div className="flex items-center gap-2 text-sm text-text-secondary-light dark:text-text-secondary-dark bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-md shadow-sm">
-            <Calendar size={18} />
-            <span>{new Date().toLocaleDateString('es-CO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-text-secondary-light dark:text-text-secondary-dark bg-surface-light dark:bg-surface-dark px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md shadow-sm min-h-[32px] sm:min-h-[36px] md:min-h-[40px] flex-shrink-0">
+            <Calendar size={12} className="sm:w-[14px] sm:h-[14px] md:w-[16px] md:h-[16px] lg:w-[18px] lg:h-[18px] flex-shrink-0" />
+            <span className="hidden sm:inline truncate">{new Date().toLocaleDateString('es-CO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <span className="sm:hidden truncate">{new Date().toLocaleDateString('es-CO', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
           </div>
         </div>
       </div>
         
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5 mb-4 sm:mb-6 md:mb-8">
         {dashboardStats.map((stat, index) => (
-          <div 
-            key={index} 
-            className={`flex items-center p-5 rounded-xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-background-light dark:bg-surface-dark border-l-4 ${stat.colorClass}`}
+          <div
+            key={index}
+            className={`flex items-center p-3 sm:p-4 md:p-5 rounded-xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-background-light dark:bg-surface-dark border-l-4 ${stat.colorClass} min-h-[80px] sm:min-h-[90px] md:min-h-[100px]`}
           >
-            <div className={`flex items-center justify-center w-12 h-12 ${stat.iconBg} dark:bg-gray-700 rounded-xl mr-4 ${stat.iconColor}`}>
-              {stat.icon}
+            <div className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 ${stat.iconBg} dark:bg-gray-700 rounded-xl mr-2 sm:mr-3 md:mr-4 ${stat.iconColor} flex-shrink-0`}>
+              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6">
+                {stat.icon}
+              </div>
             </div>
-            <div>
-              <h3 className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark m-0 mb-1">{stat.value}</h3>
-              <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark m-0">{stat.label}</p>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-primary-light dark:text-text-primary-dark m-0 mb-0.5 sm:mb-1 truncate">{stat.value}</h3>
+              <p className="text-xs sm:text-sm text-text-secondary-light dark:text-text-secondary-dark m-0 truncate">{stat.label}</p>
               {stat.subtitle && (
-                <p className="text-xs text-slate-400 dark:text-gray-500 m-0 mt-1">{stat.subtitle}</p>
+                <p className="text-xs text-slate-400 dark:text-gray-500 m-0 mt-0.5 sm:mt-1 truncate">{stat.subtitle}</p>
               )}
             </div>
           </div>
@@ -483,14 +490,14 @@ const Dashboard = () => {
       </div>
       
       {/* Charts Container */}
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-3 sm:gap-4 md:gap-5">
         {/* First Chart Row */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
           {/* Trips Chart */}
-          <div className="xl:col-span-2 bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-5 flex flex-col">
-            <div className="flex justify-between items-center mb-3 flex-col md:flex-row gap-3">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0">{t('dashboard.charts.tripFrequency')}</h3>
-              <div className="flex gap-0.5 bg-slate-100 dark:bg-gray-700 rounded-md p-0.5">
+          <div className="xl:col-span-2 bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-3 sm:p-4 md:p-5 flex flex-col">
+            <div className="flex justify-between items-center mb-2 sm:mb-3 md:mb-4 flex-col md:flex-row gap-2 sm:gap-3">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0">{t('dashboard.charts.tripFrequency')}</h3>
+              <div className="flex gap-0.5 bg-slate-100 dark:bg-gray-700 rounded-md p-0.5 w-full md:w-auto justify-center md:justify-start min-h-[36px] sm:min-h-[40px]">
                 {[
                   { key: 'semana', label: t('dashboard.charts.periods.week'), tooltip: t('dashboard.charts.periodTooltips.week') },
                   { key: 'mes', label: t('dashboard.charts.periods.month'), tooltip: t('dashboard.charts.periodTooltips.month') },
@@ -498,35 +505,36 @@ const Dashboard = () => {
                 ].map(period => (
                   <Tooltip key={period.key} content={period.tooltip}>
                     <button
-                      className={`px-3 py-1.5 text-sm rounded transition-all ${
+                      className={`px-1.5 sm:px-2 md:px-3 py-1 sm:py-1.5 text-xs sm:text-sm rounded transition-all flex-1 md:flex-none min-h-[32px] sm:min-h-[36px] ${
                         selectedPeriod === period.key
                           ? 'bg-background-light dark:bg-background-dark text-primary-700 dark:text-primary-300 shadow-sm'
                           : 'text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark'
                       }`}
                       onClick={() => setSelectedPeriod(period.key)}
                     >
-                      {period.label}
+                      <span className="hidden sm:inline truncate">{period.label}</span>
+                      <span className="sm:hidden truncate">{period.label.split(' ')[0]}</span>
                     </button>
                   </Tooltip>
                 ))}
               </div>
             </div>
-            <div className="flex-grow h-80 relative">
+            <div className="flex-grow h-56 sm:h-64 md:h-72 lg:h-80 relative">
               <Line data={viajesData} options={chartOptions} />
             </div>
           </div>
-              
+
           {/* Routes Distribution Chart */}
-          <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-5 flex flex-col">
-            <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0 mb-4">{t('dashboard.charts.routeDistribution')}</h3>
-            <div className="flex-grow h-80 relative">
+          <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-3 sm:p-4 md:p-5 flex flex-col">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0 mb-2 sm:mb-3 md:mb-4">{t('dashboard.charts.routeDistribution')}</h3>
+            <div className="flex-grow h-56 sm:h-64 md:h-72 lg:h-80 relative">
               {rutasData.labels.length > 0 ? (
                 <Doughnut data={rutasData} options={doughnutOptions} />
               ) : (
                 <div className="flex items-center justify-center h-full text-text-secondary-light dark:text-text-secondary-dark">
                   <div className="text-center">
-                    <LayoutGrid className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                    <p>No hay datos de rutas</p>
+                    <LayoutGrid className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2 opacity-50" />
+                    <p className="text-xs sm:text-sm">No hay datos de rutas</p>
                   </div>
                 </div>
               )}
@@ -535,73 +543,73 @@ const Dashboard = () => {
         </div>
             
         {/* Second Row - Alerts */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
           {/* Vehicle Status */}
-          <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-5 flex flex-col">
-            <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0 mb-4">{t('dashboard.fleetStatus.title')}</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">{t('dashboard.fleetStatus.available')}</span>
+          <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-3 sm:p-4 md:p-5 flex flex-col min-h-[200px] sm:min-h-[220px] md:min-h-[240px]">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0 mb-2 sm:mb-3 md:mb-4">{t('dashboard.fleetStatus.title')}</h3>
+            <div className="space-y-1.5 sm:space-y-2 md:space-y-3 flex-1">
+              <div className="flex justify-between items-center p-2 sm:p-3 bg-green-50 dark:bg-green-900 rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full flex-shrink-0"></div>
+                  <span className="text-xs sm:text-sm truncate">{t('dashboard.fleetStatus.available')}</span>
                 </div>
-                <span className="font-semibold text-green-700 dark:text-green-300">{stats.vehiculosDisponibles}</span>
+                <span className="font-semibold text-green-700 dark:text-green-300 text-xs sm:text-sm md:text-base flex-shrink-0 ml-2">{stats.vehiculosDisponibles}</span>
               </div>
-              <div className="flex justify-between items-center p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">{t('dashboard.fleetStatus.inRoute')}</span>
+              <div className="flex justify-between items-center p-2 sm:p-3 bg-blue-50 dark:bg-blue-900 rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-blue-500 rounded-full flex-shrink-0"></div>
+                  <span className="text-xs sm:text-sm truncate">{t('dashboard.fleetStatus.inRoute')}</span>
                 </div>
-                <span className="font-semibold text-blue-700 dark:text-blue-300">{stats.vehiculosEnRuta}</span>
+                <span className="font-semibold text-blue-700 dark:text-blue-300 text-xs sm:text-sm md:text-base flex-shrink-0 ml-2">{stats.vehiculosEnRuta}</span>
               </div>
-              <div className="flex justify-between items-center p-3 bg-orange-50 dark:bg-orange-900 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                  <span className="text-sm">{t('dashboard.fleetStatus.maintenance')}</span>
+              <div className="flex justify-between items-center p-2 sm:p-3 bg-orange-50 dark:bg-orange-900 rounded-lg min-h-[40px] sm:min-h-[44px] md:min-h-[48px]">
+                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-orange-500 rounded-full flex-shrink-0"></div>
+                  <span className="text-xs sm:text-sm truncate">{t('dashboard.fleetStatus.maintenance')}</span>
                 </div>
-                <span className="font-semibold text-orange-700 dark:text-orange-300">{stats.vehiculosEnMantenimiento || 0}</span>
+                <span className="font-semibold text-orange-700 dark:text-orange-300 text-xs sm:text-sm md:text-base flex-shrink-0 ml-2">{stats.vehiculosEnMantenimiento || 0}</span>
               </div>
             </div>
           </div>
-            
+
           {/* Alerts List */}
-          <div className="xl:col-span-2 bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-5 flex flex-col overflow-y-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0">{t('dashboard.alerts.title')}</h3>
+          <div className="xl:col-span-2 bg-background-light dark:bg-surface-dark rounded-xl shadow-sm p-3 sm:p-4 md:p-5 flex flex-col overflow-y-auto min-h-[200px] sm:min-h-[220px] md:min-h-[240px]">
+            <div className="flex justify-between items-center mb-2 sm:mb-3 md:mb-4 flex-wrap gap-1 sm:gap-2">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark m-0">{t('dashboard.alerts.title')}</h3>
               {alerts.length > 0 && (
-                <span className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 text-xs px-2 py-1 rounded-full">
+                <span className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full flex-shrink-0">
                   {alerts.length} {t('dashboard.alerts.active')}
                 </span>
               )}
             </div>
-            <div className="max-h-64 overflow-y-auto">
+            <div className="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 overflow-y-auto flex-1">
               {alerts && alerts.length > 0 ? (
-                <ul className="list-none p-0 m-0 flex flex-col gap-3">
+                <ul className="list-none p-0 m-0 flex flex-col gap-1.5 sm:gap-2 md:gap-3">
                   {alerts.map((alert, index) => (
-                    <li key={index} className={`flex items-start gap-3 p-3 rounded-md border-l-4 ${
-                      alert.severity === 'critical' 
-                        ? 'bg-red-50 dark:bg-red-900 border-red-500' 
-                        : alert.severity === 'warning' 
-                        ? 'bg-orange-50 dark:bg-orange-900 border-orange-500' 
+                    <li key={index} className={`flex items-start gap-1.5 sm:gap-2 md:gap-3 p-2 sm:p-3 rounded-md border-l-4 min-h-[48px] sm:min-h-[52px] md:min-h-[56px] ${
+                      alert.severity === 'critical'
+                        ? 'bg-red-50 dark:bg-red-900 border-red-500'
+                        : alert.severity === 'warning'
+                        ? 'bg-orange-50 dark:bg-orange-900 border-orange-500'
                         : 'bg-blue-50 dark:bg-blue-900 border-blue-500'
                     }`}>
-                      <AlertTriangle size={16} className={
+                      <AlertTriangle size={12} className={`mt-0.5 flex-shrink-0 ${
                         alert.severity === 'critical' ? 'text-red-500' :
                         alert.severity === 'warning' ? 'text-orange-500' :
                         'text-blue-500'
-                      } />
-                      <div className="flex-1">
-                        <p className="m-0 mb-1 text-sm font-medium text-slate-800 dark:text-gray-100">{alert.title}</p>
-                        <p className="m-0 text-xs text-slate-500 dark:text-gray-400">{alert.time}</p>
+                      }`} />
+                      <div className="flex-1 min-w-0">
+                        <p className="m-0 mb-0.5 sm:mb-1 text-xs sm:text-sm font-medium text-slate-800 dark:text-gray-100 truncate">{alert.title}</p>
+                        <p className="m-0 text-xs text-slate-500 dark:text-gray-400 truncate">{alert.time}</p>
                       </div>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <div className="flex flex-col items-center justify-center py-12 text-text-secondary-light dark:text-text-secondary-dark">
-                  <AlertTriangle className="w-12 h-12 mb-3 opacity-30" />
-                  <p className="text-center italic">{t('dashboard.alerts.noAlerts')}</p>
-                  <p className="text-xs text-center mt-1">{t('dashboard.alerts.systemOk')}</p>
+                <div className="flex flex-col items-center justify-center py-6 sm:py-8 md:py-10 lg:py-12 text-text-secondary-light dark:text-text-secondary-dark h-full">
+                  <AlertTriangle className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mb-1.5 sm:mb-2 md:mb-3 opacity-30" />
+                  <p className="text-center text-xs sm:text-sm md:text-base italic">{t('dashboard.alerts.noAlerts')}</p>
+                  <p className="text-xs text-center mt-0.5 sm:mt-1">{t('dashboard.alerts.systemOk')}</p>
                 </div>
               )}
             </div>
@@ -626,7 +634,7 @@ const RealTimeIndicator = ({ isActive, connectionStatus, onToggle }) => {
   const getStatusInfo = () => {
     if (connectionStatus === 'connected' && isActive) {
       return {
-        icon: <Zap className="w-4 h-4" />,
+        icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />,
         text: 'Tiempo Real',
         color: 'text-green-600 dark:text-green-400',
         bgColor: 'bg-green-50 dark:bg-green-900',
@@ -634,7 +642,7 @@ const RealTimeIndicator = ({ isActive, connectionStatus, onToggle }) => {
       };
     } else if (connectionStatus === 'connected' && !isActive) {
       return {
-        icon: <Clock className="w-4 h-4" />,
+        icon: <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />,
         text: 'Cada Hora',
         color: 'text-blue-600 dark:text-blue-400',
         bgColor: 'bg-blue-50 dark:bg-blue-900',
@@ -642,7 +650,7 @@ const RealTimeIndicator = ({ isActive, connectionStatus, onToggle }) => {
       };
     } else if (connectionStatus === 'connecting') {
       return {
-        icon: <RefreshCw className="w-4 h-4 animate-spin" />,
+        icon: <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 animate-spin flex-shrink-0" />,
         text: 'Conectando...',
         color: 'text-yellow-600 dark:text-yellow-400',
         bgColor: 'bg-yellow-50 dark:bg-yellow-900',
@@ -650,7 +658,7 @@ const RealTimeIndicator = ({ isActive, connectionStatus, onToggle }) => {
       };
     } else {
       return {
-        icon: <WifiOff className="w-4 h-4" />,
+        icon: <WifiOff className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />,
         text: 'Desconectado',
         color: 'text-gray-600 dark:text-gray-400',
         bgColor: 'bg-gray-50 dark:bg-gray-900',
@@ -669,16 +677,18 @@ const RealTimeIndicator = ({ isActive, connectionStatus, onToggle }) => {
     }>
       <button
         onClick={onToggle}
-        className={`flex items-center gap-2 text-sm px-3 py-1 rounded-md transition-all cursor-pointer hover:opacity-80 ${statusInfo.bgColor} ${statusInfo.color}`}
+        className={`flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-md transition-all cursor-pointer hover:opacity-80 min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px] ${statusInfo.bgColor} ${statusInfo.color} flex-shrink-0`}
+        aria-label={isActive ? "Cambiar a actualizaciones cada hora" : "Cambiar a actualizaciones en tiempo real"}
       >
-        <div className={`flex items-center gap-2 ${statusInfo.pulse ? 'animate-pulse' : ''}`}>
+        <div className={`flex items-center gap-1 sm:gap-2 ${statusInfo.pulse ? 'animate-pulse' : ''}`}>
           {statusInfo.icon}
-          <span>{statusInfo.text}</span>
+          <span className="hidden sm:inline truncate">{statusInfo.text}</span>
+          <span className="sm:hidden truncate">{statusInfo.text.split(' ')[0]}</span>
         </div>
         {isActive ? (
-          <Pause className="w-3 h-3" />
+          <Pause className="w-2 h-2 sm:w-3 sm:h-3 flex-shrink-0" />
         ) : (
-          <Play className="w-3 h-3" />
+          <Play className="w-2 h-2 sm:w-3 sm:h-3 flex-shrink-0" />
         )}
       </button>
     </Tooltip>
@@ -695,18 +705,19 @@ const DashboardControls = ({
   showPerformancePanel
 }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1 sm:gap-2 flex-wrap flex-shrink-0">
       {/* Botón de notificaciones */}
       <Tooltip content={notificationsEnabled ? "Deshabilitar notificaciones" : "Habilitar notificaciones"}>
         <button
           onClick={onToggleNotifications}
-          className={`p-2 rounded-md transition-colors ${
+          className={`p-1 sm:p-1.5 md:p-2 rounded-md transition-colors min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px] flex items-center justify-center flex-shrink-0 ${
             notificationsEnabled
               ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 hover:bg-blue-100 dark:hover:bg-blue-800'
               : 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800'
           }`}
+          aria-label={notificationsEnabled ? "Deshabilitar notificaciones" : "Habilitar notificaciones"}
         >
-          {notificationsEnabled ? <Bell className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
+          {notificationsEnabled ? <Bell className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" /> : <BellOff className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />}
         </button>
       </Tooltip>
 
@@ -714,9 +725,10 @@ const DashboardControls = ({
       <Tooltip content="Forzar actualización de datos">
         <button
           onClick={() => onForceUpdate('all')}
-          className="p-2 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900 hover:bg-green-100 dark:hover:bg-green-800 rounded-md transition-colors"
+          className="p-1 sm:p-1.5 md:p-2 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900 hover:bg-green-100 dark:hover:bg-green-800 rounded-md transition-colors min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px] flex items-center justify-center flex-shrink-0"
+          aria-label="Forzar actualización de datos"
         >
-          <RefreshCw className="w-4 h-4" />
+          <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
         </button>
       </Tooltip>
 
@@ -724,9 +736,10 @@ const DashboardControls = ({
       <Tooltip content="Limpiar cache del dashboard">
         <button
           onClick={() => onClearCache('dashboard')}
-          className="p-2 text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900 hover:bg-purple-100 dark:hover:bg-purple-800 rounded-md transition-colors"
+          className="p-1 sm:p-1.5 md:p-2 text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900 hover:bg-purple-100 dark:hover:bg-purple-800 rounded-md transition-colors min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px] flex items-center justify-center flex-shrink-0"
+          aria-label="Limpiar cache del dashboard"
         >
-          <Zap className="w-4 h-4" />
+          <Zap className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
         </button>
       </Tooltip>
 
@@ -734,13 +747,14 @@ const DashboardControls = ({
       <Tooltip content="Mostrar métricas de rendimiento">
         <button
           onClick={onShowPerformance}
-          className={`p-2 rounded-md transition-colors ${
+          className={`p-1 sm:p-1.5 md:p-2 rounded-md transition-colors min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px] flex items-center justify-center flex-shrink-0 ${
             showPerformancePanel
               ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900'
               : 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800'
           }`}
+          aria-label={showPerformancePanel ? "Ocultar métricas de rendimiento" : "Mostrar métricas de rendimiento"}
         >
-          <Activity className="w-4 h-4" />
+          <Activity className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
         </button>
       </Tooltip>
     </div>
@@ -750,37 +764,38 @@ const DashboardControls = ({
 // Componente para mostrar métricas de rendimiento
 const PerformancePanel = ({ connectionStatus, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-background-light dark:bg-surface-dark rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
         {/* Header del panel */}
-        <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <Activity className="w-6 h-6 text-orange-500" />
-            <h2 className="text-xl font-bold text-text-primary-light dark:text-text-primary-dark m-0">
+        <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 min-h-[60px] sm:min-h-[70px] md:min-h-[80px]">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl font-bold text-text-primary-light dark:text-text-primary-dark m-0 truncate">
               Métricas de Rendimiento
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl leading-none"
+            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xl sm:text-2xl leading-none p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors flex-shrink-0 min-h-[32px] sm:min-h-[36px] md:min-h-[40px] min-w-[32px] sm:min-w-[36px] md:min-w-[40px]"
+            aria-label="Cerrar panel de métricas"
           >
             ×
           </button>
         </div>
 
         {/* Contenido del panel */}
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Estado de conexión */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <Wifi className="w-5 h-5" />
-                Estado de Conexión
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <Wifi className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Estado de Conexión</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Estado:</span>
-                  <span className={`font-medium ${
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Estado:</span>
+                  <span className={`font-medium truncate ml-2 flex-shrink-0 ${
                     connectionStatus === 'connected'
                       ? 'text-green-600 dark:text-green-400'
                       : connectionStatus === 'connecting'
@@ -791,9 +806,9 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
                      connectionStatus === 'connecting' ? 'Conectando...' : 'Desconectado'}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">WebSocket:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">WebSocket:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     {connectionStatus === 'connected' ? 'Activo' : 'Inactivo'}
                   </span>
                 </div>
@@ -801,33 +816,33 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
             </div>
 
             {/* Métricas de rendimiento */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <Zap className="w-5 h-5" />
-                Rendimiento del Sistema
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Rendimiento del Sistema</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Tiempo de respuesta:</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Tiempo de respuesta:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400 truncate ml-2 flex-shrink-0">
                     45ms
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Consultas/segundo:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Consultas/segundo:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     1,247
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">CPU:</span>
-                  <span className="font-medium text-orange-600 dark:text-orange-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">CPU:</span>
+                  <span className="font-medium text-orange-600 dark:text-orange-400 truncate ml-2 flex-shrink-0">
                     23%
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Memoria:</span>
-                  <span className="font-medium text-purple-600 dark:text-purple-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Memoria:</span>
+                  <span className="font-medium text-purple-600 dark:text-purple-400 truncate ml-2 flex-shrink-0">
                     156MB
                   </span>
                 </div>
@@ -835,27 +850,27 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
             </div>
 
             {/* Estadísticas de actualizaciones */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <RefreshCw className="w-5 h-5" />
-                Actualizaciones
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Actualizaciones</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Total actualizaciones:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Total actualizaciones:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     1,847
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Última actualización:</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Última actualización:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400 truncate ml-2 flex-shrink-0">
                     {new Date().toLocaleTimeString('es-CO')}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Estado:</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Estado:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400 truncate ml-2 flex-shrink-0">
                     Activo
                   </span>
                 </div>
@@ -863,27 +878,27 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
             </div>
 
             {/* Métricas de cache */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <Settings className="w-5 h-5" />
-                Cache
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Cache</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Hits:</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Hits:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400 truncate ml-2 flex-shrink-0">
                     2,847
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Misses:</span>
-                  <span className="font-medium text-red-600 dark:text-red-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Misses:</span>
+                  <span className="font-medium text-red-600 dark:text-red-400 truncate ml-2 flex-shrink-0">
                     153
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Tasa de aciertos:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Tasa de aciertos:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     94.9%
                   </span>
                 </div>
@@ -891,27 +906,27 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
             </div>
 
             {/* Métricas de notificaciones */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <Bell className="w-5 h-5" />
-                Notificaciones
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <Bell className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Notificaciones</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Enviadas:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Enviadas:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     47
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Pendientes:</span>
-                  <span className="font-medium text-orange-600 dark:text-orange-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Pendientes:</span>
+                  <span className="font-medium text-orange-600 dark:text-orange-400 truncate ml-2 flex-shrink-0">
                     3
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Errores:</span>
-                  <span className="font-medium text-red-600 dark:text-red-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Errores:</span>
+                  <span className="font-medium text-red-600 dark:text-red-400 truncate ml-2 flex-shrink-0">
                     0
                   </span>
                 </div>
@@ -919,27 +934,27 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
             </div>
 
             {/* Información del sistema */}
-            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-3 flex items-center gap-2">
-                <Activity className="w-5 h-5" />
-                Información del Sistema
+            <div className="bg-surface-light dark:bg-background-dark rounded-lg p-3 sm:p-4 min-h-[120px] sm:min-h-[140px] md:min-h-[160px]">
+              <h3 className="text-base sm:text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2 min-w-0">
+                <Activity className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="truncate">Información del Sistema</span>
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Uptime:</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
+              <div className="space-y-1 sm:space-y-2 flex-1">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Uptime:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400 truncate ml-2 flex-shrink-0">
                     2d 14h 32m
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Versión:</span>
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Versión:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400 truncate ml-2 flex-shrink-0">
                     v2.1.4
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary-light dark:text-text-secondary-dark">Entorno:</span>
-                  <span className="font-medium text-purple-600 dark:text-purple-400">
+                <div className="flex justify-between text-xs sm:text-sm min-h-[24px] sm:min-h-[28px]">
+                  <span className="text-text-secondary-light dark:text-text-secondary-dark truncate">Entorno:</span>
+                  <span className="font-medium text-purple-600 dark:text-purple-400 truncate ml-2 flex-shrink-0">
                     Producción
                   </span>
                 </div>
@@ -948,10 +963,10 @@ const PerformancePanel = ({ connectionStatus, onClose }) => {
           </div>
 
           {/* Botones de acción */}
-          <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700">
             <button
               onClick={onClose}
-              className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+              className="px-3 py-2 sm:px-4 sm:py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm sm:text-base"
             >
               Cerrar
             </button>

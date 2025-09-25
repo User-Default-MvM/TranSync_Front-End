@@ -13,16 +13,17 @@ const Button = ({
   type = "button"
 }) => {
   const baseClasses = `
-    font-medium rounded-lg transition-all duration-300 ease-in-out 
-    focus:outline-none focus:ring-2 focus:ring-offset-2 
-    relative overflow-hidden cursor-pointer tracking-wide 
-    shadow-[0_1px_3px_rgba(0,0,0,0.1)] 
+    font-medium rounded-lg transition-all duration-300 ease-in-out
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    relative overflow-hidden cursor-pointer tracking-wide
+    shadow-[0_1px_3px_rgba(0,0,0,0.1)]
     flex items-center justify-center
     active:transform active:translate-y-0
-    before:content-[''] before:absolute before:top-1/2 before:left-1/2 
-    before:w-[5px] before:h-[5px] before:bg-white before:bg-opacity-50 
+    before:content-[''] before:absolute before:top-1/2 before:left-1/2
+    before:w-[3px] before:h-[3px] sm:before:w-[5px] sm:before:h-[5px] before:bg-white before:bg-opacity-50
     before:opacity-0 before:rounded-full before:transform before:scale-100 before:translate-x-[-50%] before:translate-y-[-50%]
     focus:not(:active):before:animate-[ripple_0.6s_ease-out]
+    min-h-[36px] sm:min-h-[40px] md:min-h-[44px]
   `;
   
   const variantClasses = {
@@ -70,9 +71,9 @@ const Button = ({
   };
   
   const sizeClasses = {
-    small: "px-4 py-2 text-sm",
-    medium: "px-5 py-2.5 text-[0.95rem]",
-    large: "px-6 py-3 text-base"
+    small: "px-2 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm min-h-[32px] sm:min-h-[36px]",
+    medium: "px-3 py-1.5 text-sm sm:px-4 sm:py-2 sm:text-[0.95rem] min-h-[36px] sm:min-h-[40px]",
+    large: "px-4 py-2 text-base sm:px-5 sm:py-2.5 sm:text-lg min-h-[40px] sm:min-h-[44px]"
   };
   
   const disabledClasses = "opacity-65 pointer-events-none cursor-not-allowed";
@@ -116,13 +117,21 @@ const Button = ({
         }}
       >
         {icon && iconPosition === "left" && (
-          <span className="flex items-center justify-center mr-2" aria-hidden="true">{icon}</span>
+          <span className="flex items-center justify-center mr-1 sm:mr-2 flex-shrink-0" aria-hidden="true">
+            {React.cloneElement(icon, {
+              className: `w-3 h-3 sm:w-4 sm:h-4 ${icon.props.className || ''}`
+            })}
+          </span>
         )}
 
-        <span>{children}</span>
+        <span className="truncate min-w-0 flex-1 text-center">{children}</span>
 
         {icon && iconPosition === "right" && (
-          <span className="flex items-center justify-center ml-2" aria-hidden="true">{icon}</span>
+          <span className="flex items-center justify-center ml-1 sm:ml-2 flex-shrink-0" aria-hidden="true">
+            {React.cloneElement(icon, {
+              className: `w-3 h-3 sm:w-4 sm:h-4 ${icon.props.className || ''}`
+            })}
+          </span>
         )}
       </button>
     </>
