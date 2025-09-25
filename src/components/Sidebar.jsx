@@ -226,8 +226,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
             : "bg-gradient-to-br from-primary-800 via-primary-700 to-primary-600 text-white before:from-white/5"}
           before:absolute before:inset-0 before:bg-gradient-to-r before:to-transparent before:pointer-events-none
           ${isMobile || isTablet
-            ? `w-[calc(100vw-2rem)] max-w-[320px] sm:w-[280px] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
-            : `${isOpen ? 'w-[280px]' : 'w-[70px]'} translate-x-0`
+            ? `w-[calc(100vw-2rem)] max-w-[320px] sm:w-[280px] ${isOpen ? 'translate-x-0' : '-translate-x-full'} transform-gpu`
+            : `${isOpen ? 'w-[280px]' : 'w-[70px]'} translate-x-0 transform-gpu`
           }
         `}
         role="navigation"
@@ -320,6 +320,17 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                 </div>
               </div>
             )}
+            {/* Mostrar nombre del usuario cuando está colapsado en móvil */}
+            {(!isOpen && (isMobile || isTablet)) && (
+              <div className="flex-1 min-w-0">
+                <h4 className={`text-xs sm:text-sm font-semibold truncate ${theme === "dark" ? "text-gray-100" : "text-white"}`} title={getDisplayName()}>
+                  {getDisplayName()}
+                </h4>
+                <p className={`text-xs truncate ${theme === "dark" ? "text-gray-400" : "text-blue-200 opacity-80"}`} title={formatUserRole(userRole)}>
+                  {formatUserRole(userRole)}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -348,6 +359,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                         path === "/emergency" ? "emergency" :
                         null
                       }
+                      title={(!isOpen && (isMobile || isTablet)) ? label : undefined}
                       className={`
                         flex items-center no-underline rounded-lg sm:rounded-xl
                         transition-all duration-300 ease-in-out
@@ -409,8 +421,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
           </button> */}
 
           {/* Botón logout */}
-          <button 
-            onClick={handleLogout} 
+          <button
+            onClick={handleLogout}
             className={`
               flex items-center w-full rounded-xl cursor-pointer
               transition-all duration-300 ease-in-out
@@ -421,7 +433,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onOverlayClick, isMobile: isMobileProp
                 : "bg-gradient-to-r from-[#c62828] to-[#d32f2f] hover:from-[#b71c1c] hover:to-[#c62828] text-white"}
               ${(isOpen || (!isMobile && !isTablet)) ? 'p-3 justify-start' : 'p-3 justify-center'}
             `}
-            title="Cerrar Sesión"
+            title={(!isOpen && (isMobile || isTablet)) ? t('sidebar.logout') : "Cerrar Sesión"}
+            aria-label={t('sidebar.logout')}
           >
             <div className={`${(isOpen || (!isMobile && !isTablet)) ? 'mr-3' : ''}`}>
               <FaSignOutAlt />

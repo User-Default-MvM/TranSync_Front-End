@@ -832,6 +832,20 @@
       "start": "Comenzar tutorial",
       "skip": "Omitir tutorial"
     },
+    "roles": {
+      "superadmin": {
+        "title": "¡Bienvenido SuperAdmin!",
+        "description": "Como SuperAdministrador, tienes acceso completo al sistema. Te guiaremos por las funciones de gestión de usuarios, empresas y configuración global del sistema."
+      },
+      "gestor": {
+        "title": "¡Bienvenido Gestor!",
+        "description": "Como Gestor, tienes el control total de tu empresa. Te mostraremos cómo administrar conductores, vehículos, rutas y horarios de manera eficiente."
+      },
+      "conductor": {
+        "title": "¡Bienvenido Conductor!",
+        "description": "Como Conductor, podrás ver tus horarios, rutas asignadas y gestionar tu perfil personal. Te guiaremos por las funciones específicas para tu rol."
+      }
+    },
     "step1": {
       "title": "Panel de Control",
       "description": "Aquí encontrarás un resumen completo de todas tus operaciones de transporte, incluyendo rutas activas, vehículos disponibles y estadísticas importantes."

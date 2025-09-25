@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 const STORAGE_KEY = 'transsync_tutorial_completed';
 const STORAGE_SKIP_KEY = 'transsync_tutorial_skipped';
@@ -9,184 +10,334 @@ export const useTutorial = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const { userRole } = useAuthContext();
   const [isActive, setIsActive] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSkipped, setIsSkipped] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Definir los pasos del tutorial como tour completo guiado por sidebar
-  const tutorialSteps = useMemo(() => [
-    {
-      id: 'welcome',
-      title: '¡Bienvenido a TransSync!',
-      description: 'Te guiaremos por las principales funcionalidades del sistema. Comenzaremos explorando el menú lateral.',
-      target: null,
-      placement: 'center',
-      page: null,
-      isNavigation: false
-    },
-    {
-      id: 'sidebar-intro',
-      title: 'Menú de Navegación',
-      description: 'Este es el menú lateral donde encontrarás todas las secciones del sistema. Cada ícono representa una funcionalidad diferente.',
-      target: '#sidebar-navigation',
-      placement: 'right',
-      page: null,
-      isNavigation: false
-    },
-    {
-      id: 'navigate-dashboard',
-      title: 'Ve al Dashboard',
-      description: 'Haz clic en "Dashboard" para ver el panel principal con estadísticas y métricas del sistema.',
-      target: '[data-tutorial="dashboard"]',
-      placement: 'right',
-      page: null,
-      isNavigation: true,
-      navigateTo: '/dashboard'
-    },
-    {
-      id: 'explain-dashboard',
-      title: 'Panel de Control',
-      description: 'Aquí puedes ver estadísticas generales, gráficos de rendimiento y el estado actual de tu flota.',
-      target: '[data-tutorial="dashboard"]',
-      placement: 'bottom',
-      page: '/dashboard',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-drivers',
-      title: 'Gestiona tus Conductores',
-      description: 'Haz clic en "Conductores" para administrar el personal que opera tus vehículos.',
-      target: '[data-tutorial="drivers"]',
-      placement: 'right',
-      page: '/dashboard',
-      isNavigation: true,
-      navigateTo: '/drivers'
-    },
-    {
-      id: 'explain-drivers',
-      title: 'Gestión de Conductores',
-      description: 'Administra conductores, asigna vehículos, verifica licencias y mantén el control de tu personal.',
-      target: '[data-tutorial="drivers"]',
-      placement: 'right',
-      page: '/drivers',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-routes',
-      title: 'Configura tus Rutas',
-      description: 'Haz clic en "Rutas" para definir y gestionar las rutas de transporte.',
-      target: '[data-tutorial="routes"]',
-      placement: 'right',
-      page: '/drivers',
-      isNavigation: true,
-      navigateTo: '/rutas'
-    },
-    {
-      id: 'explain-routes',
-      title: 'Sistema de Rutas',
-      description: 'Crea rutas optimizadas, define paradas y administra los recorridos de tu flota.',
-      target: '[data-tutorial="routes"]',
-      placement: 'right',
-      page: '/rutas',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-vehicles',
-      title: 'Administra tu Flota',
-      description: 'Haz clic en "Vehículos" para gestionar todos los buses y vehículos de tu empresa.',
-      target: '[data-tutorial="vehicles"]',
-      placement: 'right',
-      page: '/rutas',
-      isNavigation: true,
-      navigateTo: '/vehiculos'
-    },
-    {
-      id: 'explain-vehicles',
-      title: 'Flota de Vehículos',
-      description: 'Controla el estado de tus vehículos, programar mantenimientos y asignar conductores.',
-      target: '[data-tutorial="vehicles"]',
-      placement: 'right',
-      page: '/vehiculos',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-schedules',
-      title: 'Programa Horarios',
-      description: 'Haz clic en "Horarios" para organizar los turnos y horarios de operación.',
-      target: '[data-tutorial="schedules"]',
-      placement: 'right',
-      page: '/vehiculos',
-      isNavigation: true,
-      navigateTo: '/horarios'
-    },
-    {
-      id: 'explain-schedules',
-      title: 'Gestión de Horarios',
-      description: 'Crea horarios de salida, asigna rutas y optimiza la programación de tu servicio.',
-      target: '[data-tutorial="schedules"]',
-      placement: 'right',
-      page: '/horarios',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-reports',
-      title: 'Revisa tus Reportes',
-      description: 'Haz clic en "Informes" para ver análisis detallados y reportes del rendimiento.',
-      target: '[data-tutorial="reports"]',
-      placement: 'right',
-      page: '/horarios',
-      isNavigation: true,
-      navigateTo: '/informes'
-    },
-    {
-      id: 'explain-reports',
-      title: 'Sistema de Reportes',
-      description: 'Genera reportes de rendimiento, estadísticas de uso y análisis de eficiencia.',
-      target: '[data-tutorial="reports"]',
-      placement: 'right',
-      page: '/informes',
-      isNavigation: false
-    },
-    {
-      id: 'navigate-profile',
-      title: 'Acceder a tu Perfil',
-      description: 'Haz clic en tu avatar en la parte superior derecha para ver el menú de opciones.',
-      target: '[data-tutorial="user-menu"]',
-      placement: 'bottom',
-      page: '/informes',
-      isNavigation: false
-    },
-    {
-      id: 'show-profile-menu',
-      title: 'Menú de Usuario',
-      description: 'Aquí puedes acceder a tu perfil, cambiar configuraciones y cerrar sesión.',
-      target: '[data-tutorial="profile-menu-item"]',
-      placement: 'left',
-      page: '/informes',
-      isNavigation: true,
-      navigateTo: '/profile'
-    },
-    {
-      id: 'explain-profile',
-      title: 'Configuración de Perfil',
-      description: 'Personaliza tu perfil, cambia contraseñas y configura tus preferencias del sistema.',
-      target: '[data-tutorial="profile"]',
-      placement: 'bottom',
-      page: '/profile',
-      isNavigation: false
-    },
-    {
-      id: 'final-message',
-      title: '¡Tour Completado!',
-      description: 'Has explorado todas las funcionalidades principales. Ahora puedes usar TransSync con confianza. Si necesitas ayuda, recuerda que tienes disponible el ChatBot inteligente.',
-      target: null,
-      placement: 'center',
-      page: '/profile',
-      isNavigation: false
+  // Definir los pasos del tutorial según el rol del usuario
+  const tutorialSteps = useMemo(() => {
+    const baseSteps = {
+      welcome: {
+        id: 'welcome',
+        title: '¡Bienvenido a TransSync!',
+        description: 'Te guiaremos por las funcionalidades específicas de tu rol. Comenzaremos explorando el menú lateral.',
+        target: null,
+        placement: 'center',
+        page: null,
+        isNavigation: false
+      },
+      sidebar: {
+        id: 'sidebar-intro',
+        title: 'Menú de Navegación',
+        description: 'Este es el menú lateral donde encontrarás todas las secciones disponibles para tu rol. Cada ícono representa una funcionalidad diferente.',
+        target: '#sidebar-navigation',
+        placement: 'right',
+        page: null,
+        isNavigation: false
+      },
+      profile: {
+        id: 'navigate-profile',
+        title: 'Acceder a tu Perfil',
+        description: 'Haz clic en tu avatar en la parte superior derecha para ver el menú de opciones.',
+        target: '[data-tutorial="user-menu"]',
+        placement: 'bottom',
+        page: null,
+        isNavigation: false
+      },
+      profileMenu: {
+        id: 'show-profile-menu',
+        title: 'Menú de Usuario',
+        description: 'Aquí puedes acceder a tu perfil, cambiar configuraciones y cerrar sesión.',
+        target: '[data-tutorial="profile-menu-item"]',
+        placement: 'left',
+        page: null,
+        isNavigation: true,
+        navigateTo: '/profile'
+      },
+      profileSettings: {
+        id: 'explain-profile',
+        title: 'Configuración de Perfil',
+        description: 'Personaliza tu perfil, cambia contraseñas y configura tus preferencias del sistema.',
+        target: '[data-tutorial="profile"]',
+        placement: 'bottom',
+        page: '/profile',
+        isNavigation: false
+      },
+      final: {
+        id: 'final-message',
+        title: '¡Tutorial Completado!',
+        description: 'Has explorado todas las funcionalidades disponibles para tu rol. Ahora puedes usar TransSync con confianza. Si necesitas ayuda, recuerda que tienes disponible el ChatBot inteligente.',
+        target: null,
+        placement: 'center',
+        page: '/profile',
+        isNavigation: false
+      }
+    };
+
+    // Tutorial específico para SUPERADMIN
+    if (userRole === 'SUPERADMIN') {
+      return [
+        baseSteps.welcome,
+        baseSteps.sidebar,
+        {
+          id: 'navigate-admin-dashboard',
+          title: 'Panel de Administración',
+          description: 'Como SuperAdmin, haz clic en "Administración" para gestionar usuarios y roles del sistema.',
+          target: '[data-tutorial="admin-dashboard"]',
+          placement: 'right',
+          page: null,
+          isNavigation: true,
+          navigateTo: '/admin-dashboard'
+        },
+        {
+          id: 'explain-admin-dashboard',
+          title: 'Gestión de Usuarios',
+          description: 'Administra usuarios, asigna roles (Gestor, Conductor) y controla el acceso al sistema.',
+          target: '[data-tutorial="admin-dashboard"]',
+          placement: 'bottom',
+          page: '/admin-dashboard',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-dashboard',
+          title: 'Ve al Dashboard General',
+          description: 'Accede al panel principal para ver estadísticas generales del sistema completo.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'right',
+          page: '/admin-dashboard',
+          isNavigation: true,
+          navigateTo: '/dashboard'
+        },
+        {
+          id: 'explain-dashboard',
+          title: 'Panel de Control General',
+          description: 'Visualiza métricas globales, rendimiento de todas las empresas y estadísticas del sistema.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'bottom',
+          page: '/dashboard',
+          isNavigation: false
+        },
+        baseSteps.profile,
+        baseSteps.profileMenu,
+        baseSteps.profileSettings,
+        baseSteps.final
+      ];
     }
-  ], []);
+
+    // Tutorial específico para GESTOR
+    if (userRole === 'GESTOR') {
+      return [
+        baseSteps.welcome,
+        baseSteps.sidebar,
+        {
+          id: 'navigate-dashboard',
+          title: 'Panel de Control',
+          description: 'Como Gestor, haz clic en "Dashboard" para ver las estadísticas de tu empresa.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'right',
+          page: null,
+          isNavigation: true,
+          navigateTo: '/dashboard'
+        },
+        {
+          id: 'explain-dashboard',
+          title: 'Panel de Control Empresarial',
+          description: 'Visualiza métricas de tu empresa, rendimiento de conductores y estado de la flota.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'bottom',
+          page: '/dashboard',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-drivers',
+          title: 'Gestiona tus Conductores',
+          description: 'Haz clic en "Conductores" para administrar el personal de tu empresa.',
+          target: '[data-tutorial="drivers"]',
+          placement: 'right',
+          page: '/dashboard',
+          isNavigation: true,
+          navigateTo: '/drivers'
+        },
+        {
+          id: 'explain-drivers',
+          title: 'Gestión de Conductores',
+          description: 'Administra conductores, asigna vehículos, verifica licencias y mantén el control de tu personal.',
+          target: '[data-tutorial="drivers"]',
+          placement: 'right',
+          page: '/drivers',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-vehicles',
+          title: 'Administra tu Flota',
+          description: 'Haz clic en "Vehículos" para gestionar todos los vehículos de tu empresa.',
+          target: '[data-tutorial="vehicles"]',
+          placement: 'right',
+          page: '/drivers',
+          isNavigation: true,
+          navigateTo: '/vehiculos'
+        },
+        {
+          id: 'explain-vehicles',
+          title: 'Flota de Vehículos',
+          description: 'Controla el estado de tus vehículos, programa mantenimientos y asigna conductores.',
+          target: '[data-tutorial="vehicles"]',
+          placement: 'right',
+          page: '/vehiculos',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-routes',
+          title: 'Configura tus Rutas',
+          description: 'Haz clic en "Rutas" para definir y gestionar las rutas de tu empresa.',
+          target: '[data-tutorial="routes"]',
+          placement: 'right',
+          page: '/vehiculos',
+          isNavigation: true,
+          navigateTo: '/rutas'
+        },
+        {
+          id: 'explain-routes',
+          title: 'Sistema de Rutas',
+          description: 'Crea rutas optimizadas, define paradas y administra los recorridos de tu flota.',
+          target: '[data-tutorial="routes"]',
+          placement: 'right',
+          page: '/rutas',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-schedules',
+          title: 'Programa Horarios',
+          description: 'Haz clic en "Horarios" para organizar los turnos y horarios de operación.',
+          target: '[data-tutorial="schedules"]',
+          placement: 'right',
+          page: '/rutas',
+          isNavigation: true,
+          navigateTo: '/horarios'
+        },
+        {
+          id: 'explain-schedules',
+          title: 'Gestión de Horarios',
+          description: 'Crea horarios de salida, asigna rutas y optimiza la programación de tu servicio.',
+          target: '[data-tutorial="schedules"]',
+          placement: 'right',
+          page: '/horarios',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-reports',
+          title: 'Revisa tus Reportes',
+          description: 'Haz clic en "Informes" para ver análisis detallados y reportes del rendimiento.',
+          target: '[data-tutorial="reports"]',
+          placement: 'right',
+          page: '/horarios',
+          isNavigation: true,
+          navigateTo: '/informes'
+        },
+        {
+          id: 'explain-reports',
+          title: 'Sistema de Reportes',
+          description: 'Genera reportes de rendimiento, estadísticas de uso y análisis de eficiencia de tu empresa.',
+          target: '[data-tutorial="reports"]',
+          placement: 'right',
+          page: '/informes',
+          isNavigation: false
+        },
+        baseSteps.profile,
+        baseSteps.profileMenu,
+        baseSteps.profileSettings,
+        baseSteps.final
+      ];
+    }
+
+    // Tutorial específico para CONDUCTOR
+    if (userRole === 'CONDUCTOR') {
+      return [
+        baseSteps.welcome,
+        baseSteps.sidebar,
+        {
+          id: 'navigate-dashboard',
+          title: 'Panel de Control',
+          description: 'Como Conductor, haz clic en "Dashboard" para ver tus viajes y estadísticas personales.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'right',
+          page: null,
+          isNavigation: true,
+          navigateTo: '/dashboard'
+        },
+        {
+          id: 'explain-dashboard',
+          title: 'Panel Personal',
+          description: 'Visualiza tus viajes asignados, horarios y estadísticas de tu rendimiento como conductor.',
+          target: '[data-tutorial="dashboard"]',
+          placement: 'bottom',
+          page: '/dashboard',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-schedules',
+          title: 'Tus Horarios',
+          description: 'Haz clic en "Horarios" para ver tus viajes programados y asignaciones.',
+          target: '[data-tutorial="schedules"]',
+          placement: 'right',
+          page: '/dashboard',
+          isNavigation: true,
+          navigateTo: '/horarios'
+        },
+        {
+          id: 'explain-schedules',
+          title: 'Gestión de Horarios',
+          description: 'Revisa tus horarios de trabajo, rutas asignadas y estado de tus viajes.',
+          target: '[data-tutorial="schedules"]',
+          placement: 'right',
+          page: '/horarios',
+          isNavigation: false
+        },
+        {
+          id: 'navigate-profile',
+          title: 'Configura tu Perfil',
+          description: 'Haz clic en tu avatar para acceder a tu perfil personal.',
+          target: '[data-tutorial="user-menu"]',
+          placement: 'bottom',
+          page: '/horarios',
+          isNavigation: false
+        },
+        {
+          id: 'show-profile-menu',
+          title: 'Menú Personal',
+          description: 'Aquí puedes ver tu información personal, cambiar contraseña y configurar preferencias.',
+          target: '[data-tutorial="profile-menu-item"]',
+          placement: 'left',
+          page: '/horarios',
+          isNavigation: true,
+          navigateTo: '/profile'
+        },
+        {
+          id: 'explain-profile',
+          title: 'Configuración Personal',
+          description: 'Actualiza tu información personal, cambia tu contraseña y configura tus preferencias.',
+          target: '[data-tutorial="profile"]',
+          placement: 'bottom',
+          page: '/profile',
+          isNavigation: false
+        },
+        baseSteps.final
+      ];
+    }
+
+    // Tutorial por defecto (para roles desconocidos)
+    return [
+      baseSteps.welcome,
+      baseSteps.sidebar,
+      baseSteps.profile,
+      baseSteps.profileMenu,
+      baseSteps.profileSettings,
+      baseSteps.final
+    ];
+  }, [userRole]);
 
   // Función para verificar si un elemento existe en el DOM
   const elementExists = useCallback((selector) => {

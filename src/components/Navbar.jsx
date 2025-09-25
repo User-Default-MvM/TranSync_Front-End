@@ -539,22 +539,22 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                 {location.pathname === '/home' && (
                   <button
                     onClick={goToDashboard}
-                    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg sm:rounded-xl transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg border border-transparent"
+                    className="flex items-center gap-1 sm:gap-2 px-1.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg sm:rounded-xl transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg border border-transparent min-h-[36px] sm:min-h-[44px]"
                     title={t('navbar.dashboard')}
                   >
-                    <FaChartLine size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span className="hidden sm:inline">{t('navbar.dashboard')}</span>
+                    <FaChartLine size={14} className="sm:w-[14px] sm:h-[14px]" />
+                    <span className="hidden xs:inline sm:inline">{t('navbar.dashboard')}</span>
                   </button>
                 )}
 
                 {(location.pathname === '/dashboard' || location.pathname.startsWith('/admin')) && (
                   <button
                     onClick={goToHome}
-                    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 hover:scale-105"
+                    className="flex items-center gap-1 sm:gap-2 px-1.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 hover:scale-105 min-h-[36px] sm:min-h-[44px]"
                     title={t('navbar.goToHome')}
                   >
-                    <FaHome size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span className="hidden sm:inline">{t('navbar.goToHome')}</span>
+                    <FaHome size={14} className="sm:w-[14px] sm:h-[14px]" />
+                    <span className="hidden xs:inline sm:inline">{t('navbar.goToHome')}</span>
                   </button>
                 )}
               </div>
@@ -562,13 +562,13 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
 
             {!isLoggedIn ? (
               <div className="flex items-center gap-2 sm:gap-3">
-                <button onClick={handleLogin} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400">
-                  <FaSignInAlt size={12} className="sm:w-[14px] sm:h-[14px]" />
-                  <span className="hidden sm:inline">{t('navbar.login')}</span>
+                <button onClick={handleLogin} className="flex items-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-indigo-800 dark:text-gray-200 border border-indigo-300 dark:border-gray-600 rounded-lg sm:rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-400 min-h-[36px] sm:min-h-[44px]">
+                  <FaSignInAlt size={14} className="sm:w-[14px] sm:h-[14px]" />
+                  <span className="hidden xs:inline sm:inline">{t('navbar.login')}</span>
                 </button>
-                <button onClick={handleRegister} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-[#1a237e] dark:to-[#3949ab] rounded-lg sm:rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
-                  <FaUserCircle size={12} className="sm:w-[14px] sm:h-[14px]" />
-                  <span className="hidden sm:inline">{t('navbar.register')}</span>
+                <button onClick={handleRegister} className="flex items-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-[#1a237e] dark:to-[#3949ab] rounded-lg sm:rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 min-h-[36px] sm:min-h-[44px]">
+                  <FaUserCircle size={14} className="sm:w-[14px] sm:h-[14px]" />
+                  <span className="hidden xs:inline sm:inline">{t('navbar.register')}</span>
                 </button>
               </div>
             ) : (
@@ -731,10 +731,10 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                         <span className="text-white font-bold text-xs sm:text-sm">{getUserInitials()}</span>
                       </div>
                     </div>
-                    <div className="hidden md:flex flex-col items-start min-w-0">
-                      <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{getDisplayName()}</span>
-                      <span className={`text-xs px-1.5 sm:px-2 py-0.5 rounded-md font-medium ${getRoleBadgeColor()}`}>{formatUserRole(userRole)}</span>
-                    </div>
+                    <div className="hidden sm:flex flex-col items-start min-w-0">
+                       <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{getDisplayName()}</span>
+                       <span className={`text-xs px-1.5 sm:px-2 py-0.5 rounded-md font-medium ${getRoleBadgeColor()}`}>{formatUserRole(userRole)}</span>
+                     </div>
                     <FaChevronDown size={10} className={`text-gray-400 dark:text-gray-300 ${isUserMenuOpen ? 'rotate-180 text-[#3949ab]' : ''} sm:w-[12px] sm:h-[12px]`} />
                   </button>
 
