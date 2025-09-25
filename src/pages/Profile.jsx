@@ -383,7 +383,7 @@ const Profile = () => {
                     className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 rounded-md sm:rounded-lg transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   >
                     <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span>Cancelar</span>
+                    <span>{loading ? 'Procesando...' : 'Cancelar'}</span>
                   </button>
                 </div>
               )}
@@ -497,7 +497,7 @@ const Profile = () => {
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 text-xs sm:text-sm rounded-md sm:rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     >
                       <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                      <span>Cancelar</span>
+                      <span>{loading ? 'Procesando...' : 'Cancelar'}</span>
                     </button>
                   </div>
                 </div>
