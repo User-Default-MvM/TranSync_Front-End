@@ -8,7 +8,7 @@
    NPM_FLAGS = "--legacy-peer-deps"
    NODE_OPTIONS = "--max_old_space_size=4096"
 
-# Headers for better SEO and performance
+# Security headers for all pages
 [[headers]]
   for = "/*"
   [headers.values]
@@ -17,17 +17,6 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
-
-# Cache static assets - more specific patterns
-[[headers]]
-  for = "/static/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
 
 # Force proper MIME types for static files (must be before general headers)
 [[headers]]
@@ -44,20 +33,11 @@
     Content-Type = "text/css; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
-# Admin static files - ensure proper MIME types
+# Cache static assets
 [[headers]]
-  for = "/static/js/*.js"
+  for = "/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/static/css/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "text/css; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
 
 [[headers]]
   for = "/assets/*"
@@ -78,21 +58,6 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
     Content-Type = "image/x-icon"
-    X-Content-Type-Options = "nosniff"
-
-# Admin-specific headers to ensure proper MIME types
-[[headers]]
-  for = "/static/js/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/static/css/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "text/css; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
 # Security headers for HTML pages
@@ -126,6 +91,7 @@
   to = "/assets/:splat"
   status = 200
 
+# Critical static files - serve directly
 [[redirects]]
   from = "/favicon.ico"
   to = "/favicon.ico"
@@ -153,6 +119,7 @@
   status = 200
 
 # SPA fallback - redirect only non-asset routes to index.html (must be last)
+# This should NOT match static files like /static/js/*.js
 [[redirects]]
   from = "/*"
   to = "/index.html"
