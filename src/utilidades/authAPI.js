@@ -72,18 +72,60 @@ const authAPI = {
         throw new Error('Formato de email inválido');
       }
 
+      console.log('🔐 Attempting login for:', email);
+
       const response = await apiClient.post('/api/auth/login', {
         email: email.trim().toLowerCase(),
         password: finalPassword
       });
 
+      console.log('📡 Login response received:', {
+        status: response.status,
+        hasData: !!response.data,
+        hasToken: !!response.data?.token,
+        hasUser: !!response.data?.user,
+        userKeys: response.data?.user ? Object.keys(response.data.user) : [],
+        fullResponse: response.data
+      });
+
+      // Verificar que la respuesta tenga la estructura esperada
+      if (!response.data) {
+        throw new Error('No se recibió respuesta del servidor');
+      }
+
+      if (!response.data.token) {
+        throw new Error('No se recibió token de autenticación');
+      }
+
+      if (!response.data.user) {
+        throw new Error('No se recibieron datos del usuario');
+      }
+
+      // Verificar que el usuario tenga los campos requeridos
+      const user = response.data.user;
+      if (!user.id || !user.email) {
+        console.error('❌ User data incomplete:', user);
+        throw new Error('Los datos del usuario están incompletos');
+      }
+
       // Guardar datos de autenticación automáticamente
-      if (response.data.token) {
+      try {
         authAPI.saveAuthData(response.data);
+        console.log('✅ Authentication data saved successfully');
+      } catch (saveError) {
+        console.error('❌ Error saving auth data:', saveError);
+        throw new Error('Error al guardar los datos de autenticación');
       }
 
       return response.data;
     } catch (error) {
+      console.error('❌ Login error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        fullError: error
+      });
+
       // Manejo específico de errores de login
       if (error.status === 401 || error.response?.status === 401) {
         throw new Error('Credenciales incorrectas. Verifique su email y contraseña.');
@@ -371,15 +413,25 @@ const authAPI = {
         localStorage.setItem('isAuthenticated', 'true');
 
         if (authData.user) {
-          localStorage.setItem('userData', JSON.stringify(authData.user));
-          localStorage.setItem('userName', authData.user.name || '');
-          localStorage.setItem('userRole', authData.user.role || '');
-          localStorage.setItem('userEmail', authData.user.email || '');
-          localStorage.setItem('userId', authData.user.id || '');
+          const userData = {
+            id: authData.user.id,
+            name: authData.user.name,
+            email: authData.user.email,
+            role: authData.user.role
+          };
+
+          localStorage.setItem('userData', JSON.stringify(userData));
+          localStorage.setItem('userName', userData.name || '');
+          localStorage.setItem('userRole', userData.role || '');
+          localStorage.setItem('userEmail', userData.email || '');
+          localStorage.setItem('userId', userData.id || '');
+
+          console.log('✅ User data saved successfully:', userData);
         }
       }
     } catch (error) {
-      console.error('Error guardando datos de auth:', error);
+      console.error('❌ Error saving auth data:', error);
+      throw new Error('Failed to save authentication data');
     }
   },
 
@@ -406,6 +458,181 @@ const authAPI = {
   // Obtener token de autorización
   getAuthToken: () => {
     return localStorage.getItem('authToken') || localStorage.getItem('userToken');
+  },
+
+  // ================================
+  // UTILIDADES DE DEBUGGING
+  // ================================
+
+  // Limpiar datos corruptos de localStorage
+  clearCorruptedData: () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const userData = localStorage.getItem('userData');
+      const isAuth = localStorage.getItem('isAuthenticated');
+
+      let corrupted = false;
+
+      if (token && isAuth === 'true') {
+        if (!userData) {
+          console.warn('⚠️ Token exists but no user data - clearing corrupted data');
+          corrupted = true;
+        } else {
+          try {
+            const parsedUser = JSON.parse(userData);
+            if (!parsedUser.id || !parsedUser.email) {
+              console.warn('⚠️ User data incomplete - clearing corrupted data');
+              corrupted = true;
+            }
+          } catch (e) {
+            console.warn('⚠️ User data corrupted JSON - clearing corrupted data');
+            corrupted = true;
+          }
+        }
+      }
+
+      if (corrupted) {
+        authAPI.clearAuthData();
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error('❌ Error checking for corrupted data:', error);
+      return false;
+    }
+  },
+
+  // ================================
+  // DIAGNÓSTICO DE CONEXIÓN
+  // ================================
+
+  // Función para diagnosticar problemas de conexión
+  diagnoseConnection: async () => {
+    const diagnostics = {
+      timestamp: new Date().toISOString(),
+      frontend: {},
+      backend: {},
+      issues: []
+    };
+
+    try {
+      // Verificar configuración del frontend
+      diagnostics.frontend = {
+        apiUrl: process.env.REACT_APP_API_URL || "https://transyncbackend-production.up.railway.app",
+        timeout: parseInt(process.env.REACT_APP_API_TIMEOUT) || 30000,
+        environment: process.env.NODE_ENV || 'development'
+      };
+
+      // Verificar localStorage
+      const token = localStorage.getItem('authToken');
+      const userData = localStorage.getItem('userData');
+      const isAuth = localStorage.getItem('isAuthenticated');
+
+      diagnostics.frontend.localStorage = {
+        hasToken: !!token,
+        hasUserData: !!userData,
+        isAuthenticated: isAuth === 'true'
+      };
+
+      if (token) {
+        diagnostics.frontend.localStorage.tokenLength = token.length;
+      }
+
+      // Verificar conectividad básica
+      const apiUrl = diagnostics.frontend.apiUrl;
+      try {
+        const response = await fetch(`${apiUrl}/api/health`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          signal: AbortSignal.timeout(5000)
+        });
+
+        diagnostics.backend.health = {
+          status: response.status,
+          ok: response.ok,
+          statusText: response.statusText
+        };
+
+        if (response.ok) {
+          const data = await response.json();
+          diagnostics.backend.health.data = data;
+        }
+      } catch (error) {
+        diagnostics.backend.health = {
+          error: error.message,
+          code: error.code || 'UNKNOWN'
+        };
+        diagnostics.issues.push('No se puede conectar al endpoint de health');
+      }
+
+      // Verificar endpoint de login
+      try {
+        const response = await fetch(`${apiUrl}/api/auth/login`, {
+          method: 'OPTIONS',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          signal: AbortSignal.timeout(5000)
+        });
+
+        diagnostics.backend.loginEndpoint = {
+          status: response.status,
+          ok: response.ok,
+          statusText: response.statusText,
+          headers: Object.fromEntries(response.headers.entries())
+        };
+      } catch (error) {
+        diagnostics.backend.loginEndpoint = {
+          error: error.message,
+          code: error.code || 'UNKNOWN'
+        };
+        diagnostics.issues.push('No se puede acceder al endpoint de login');
+      }
+
+      // Verificar CORS
+      try {
+        const response = await fetch(`${apiUrl}/api/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: 'test@example.com',
+            password: 'test123'
+          }),
+          signal: AbortSignal.timeout(5000)
+        });
+
+        diagnostics.backend.corsTest = {
+          status: response.status,
+          ok: response.ok,
+          statusText: response.statusText
+        };
+
+        if (response.status === 401) {
+          diagnostics.backend.corsTest.note = 'CORS funciona correctamente (401 es respuesta esperada para credenciales inválidas)';
+        }
+      } catch (error) {
+        diagnostics.backend.corsTest = {
+          error: error.message,
+          code: error.code || 'UNKNOWN'
+        };
+
+        if (error.message.includes('CORS') || error.message.includes('Access-Control')) {
+          diagnostics.issues.push('Problema de CORS detectado');
+        }
+      }
+
+    } catch (error) {
+      diagnostics.error = error.message;
+      diagnostics.issues.push('Error general en el diagnóstico');
+    }
+
+    console.log('🔍 Connection Diagnostics:', diagnostics);
+    return diagnostics;
   },
 
   // ================================
@@ -487,5 +714,7 @@ export const {
   hasRole,
   isSuperAdmin,
   isAdmin,
-  checkServerHealth
+  checkServerHealth,
+  diagnoseConnection,
+  clearCorruptedData
 } = authAPI;

@@ -117,6 +117,17 @@ const Login = () => {
 
       setSuccess(t('login.messages.success'));
 
+      // Verificar que los datos del usuario se guardaron correctamente
+      if (response.user && response.token) {
+        // Forzar actualización del contexto de autenticación
+        window.dispatchEvent(new CustomEvent('auth:login', {
+          detail: { user: response.user, token: response.token }
+        }));
+        console.log('✅ Login successful, user data verified:', response.user);
+      } else {
+        throw new Error('No user data received after login');
+      }
+
       // Guardar estado de "recordarme"
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);

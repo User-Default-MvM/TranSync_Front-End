@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { isAuthenticated, getCurrentUser, getUserRole, logout } from '../utilidades/authAPI';
+import { isAuthenticated, getCurrentUser, getUserRole, logout, clearCorruptedData } from '../utilidades/authAPI';
+import authAPI from '../utilidades/authAPI';
 
 /**
  * Hook personalizado para manejar la autenticación
@@ -16,22 +17,36 @@ export const useAuth = () => {
   const checkAuthStatus = useCallback(() => {
     try {
       setError(null);
+
+      // Limpiar datos corruptos primero
+      clearCorruptedData();
+
       const authenticated = isAuthenticated();
 
       if (authenticated) {
         const userData = getCurrentUser();
         const role = getUserRole();
 
-        setIsLoggedIn(true);
-        setUser(userData);
-        setUserRole(role);
+        if (userData && role) {
+          setIsLoggedIn(true);
+          setUser(userData);
+          setUserRole(role);
+          console.log('✅ Auth status verified:', { userData, role });
+        } else {
+          console.warn('⚠️ Incomplete user data after cleanup:', { userData, role });
+          // Limpiar datos corruptos
+          authAPI.clearAuthData();
+          setIsLoggedIn(false);
+          setUser(null);
+          setUserRole('');
+        }
       } else {
         setIsLoggedIn(false);
         setUser(null);
         setUserRole('');
       }
     } catch (err) {
-      console.error('Error checking auth status:', err);
+      console.error('❌ Error checking auth status:', err);
       setError(err.message);
       setIsLoggedIn(false);
       setUser(null);
