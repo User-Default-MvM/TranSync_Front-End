@@ -42,6 +42,26 @@ const tutorialStyles = `
   .tutorial-input {
     font-size: 16px;
   }
+
+  /* Optimizaciones de rendimiento */
+  .tutorial-overlay * {
+    will-change: transform;
+  }
+
+  .tutorial-highlight {
+    will-change: box-shadow, transform;
+  }
+
+  /* Reducir motion para usuarios que prefieren menos animaciones */
+  @media (prefers-reduced-motion: reduce) {
+    .tutorial-highlight,
+    .touch-feedback,
+    .animate-bounce,
+    .animate-pulse {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 `;
 
 // Inyectar estilos en el head
@@ -221,7 +241,7 @@ const Tutorial = () => {
   // Pantalla de bienvenida
    if (showWelcome) {
      return (
-       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-3 md:p-4">
+       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] p-2 sm:p-3 md:p-4">
          <div className="bg-background-light dark:bg-background-dark rounded-xl shadow-2xl max-w-[95vw] sm:max-w-sm md:max-w-md lg:max-w-lg w-full mx-2 sm:mx-4 md:mx-6">
            <div className="p-4 sm:p-5 md:p-6 text-center">
              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 md:mb-5">
