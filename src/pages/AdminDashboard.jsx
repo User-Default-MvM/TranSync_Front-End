@@ -26,13 +26,13 @@ const EditUserForm = ({ user, onSave, onCancel, theme }) => {
   };
 
   return (
-      <div>
-        <button onClick={onCancel} className={`flex items-center gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6 ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'}`}>
-          <FaArrowLeft size={14} className="sm:w-4 sm:h-4"/> {t('adminDashboard.editUser.backToList')}
-        </button>
-        <div className={`p-4 sm:p-6 md:p-8 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-          <h2 className={`text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('adminDashboard.editUser.title')}</h2>
-          <p className={`mb-3 sm:mb-4 md:mb-6 text-sm sm:text-base ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{t('adminDashboard.editUser.modifying')} <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{user.nomUsuario} {user.apeUsuario}</span>.</p>
+    <div>
+      <button onClick={onCancel} className={`flex items-center gap-1 sm:gap-2 mb-3 sm:mb-4 md:mb-6 ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'}`}>
+        <FaArrowLeft size={14} className="sm:w-4 sm:h-4"/> {t('adminDashboard.editUser.backToList')}
+      </button>
+      <div className={`p-4 sm:p-6 md:p-8 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+        <h2 className={`text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('adminDashboard.editUser.title')}</h2>
+        <p className={`mb-3 sm:mb-4 md:mb-6 text-sm sm:text-base ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{t('adminDashboard.editUser.modifying')} <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{user.nomUsuario} {user.apeUsuario}</span>.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Fila 1: Nombre y Apellido (no editables por ahora) */}
@@ -72,7 +72,6 @@ const EditUserForm = ({ user, onSave, onCancel, theme }) => {
     </div>
   );
 };
-
 
 // ====================================================================
 // COMPONENTE PRINCIPAL DEL DASHBOARD
@@ -116,7 +115,9 @@ const AdminDashboard = () => {
       setError('');
     } catch (err) {
       setError('Error al cargar la lista de usuarios');
-      toast.error('No se pudo cargar la lista de usuarios.');
+      toast.error('No se pudo cargar la lista de usuarios.', {
+        duration: 5000,
+      });
     } finally {
       setLoading(false);
     }
@@ -142,6 +143,8 @@ const AdminDashboard = () => {
                 loading: 'Eliminando usuario...',
                 success: 'Usuario eliminado exitosamente.',
                 error: 'No se pudo eliminar el usuario.',
+              }, {
+                duration: 5000,
               });
             }}
           >
@@ -157,9 +160,9 @@ const AdminDashboard = () => {
       </div>
     ), {
       style: { background: '#374151', color: '#F9FAFB', borderRadius: '10px' },
-      duration: 6000,
+      duration: 5000,
     });
-  }
+  };
 
   const handleEditUser = (userToEdit) => {
     setEditingUser(userToEdit);
@@ -175,6 +178,8 @@ const AdminDashboard = () => {
       loading: 'Actualizando rol...',
       success: 'Rol actualizado exitosamente.',
       error: 'No se pudo actualizar el rol.',
+    }, {
+      duration: 5000,
     });
   };
 

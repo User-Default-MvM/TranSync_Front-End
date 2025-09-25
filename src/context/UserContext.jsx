@@ -130,6 +130,7 @@ export const UserProvider = ({ children }) => {
   // Cambiar contraseña del usuario
   const changePassword = useCallback(async (passwordData) => {
     try {
+      setLoading(prev => ({ ...prev, profile: true }));
       clearError('profile');
 
       const result = await changeUserPassword(passwordData);
@@ -137,6 +138,8 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       setErrorMessage('profile', err.message);
       throw err;
+    } finally {
+      setLoading(prev => ({ ...prev, profile: false }));
     }
   }, [clearError, setErrorMessage]);
 

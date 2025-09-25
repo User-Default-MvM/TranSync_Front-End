@@ -930,5 +930,72 @@
     "allNotifications": "Todas las Notificaciones",
     "error": "Error",
     "processingError": "Lo siento, ocurrió un error procesando tu consulta. Por favor verifica tu conexión e intenta nuevamente."
+  },
+  "forgotPassword": {
+    "title": "Olvidé mi Contraseña",
+    "subtitle": "Recupera el acceso a tu cuenta",
+    "brand": {
+      "description": "Sistema de gestión empresarial para el transporte moderno",
+      "features": {
+        "security": "Recuperación segura de contraseña",
+        "admin": "Gestión de administradores",
+        "dashboard": "Panel de control avanzado"
+      }
+    },
+    "form": {
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingrese su correo electrónico",
+      "submitButton": "Enviar Enlace de Recuperación",
+      "sending": "Enviando...",
+      "backToLogin": "Volver al Inicio de Sesión",
+      "rememberPassword": "¿Recordaste tu contraseña?"
+    },
+    "messages": {
+      "emailRequired": "Por favor ingrese su correo electrónico",
+      "emailInvalid": "Por favor ingrese un correo electrónico válido",
+      "success": "¡Se ha enviado un enlace de recuperación a su correo electrónico!",
+      "error": "Error al enviar el correo de recuperación. Verifique que el email esté registrado.",
+      "checkEmail": "Revisa tu bandeja de entrada y carpeta de spam"
+    },
+    "theme": {
+      "activateLight": "Activar modo claro",
+      "activateDark": "Activar modo oscuro"
+    }
+  },
+  "resetPassword": {
+    "title": "Restablecer Contraseña",
+    "subtitle": "Crea una nueva contraseña segura",
+    "brand": {
+      "description": "Sistema de gestión empresarial para el transporte moderno",
+      "features": {
+        "security": "Restablecimiento seguro de contraseña",
+        "admin": "Gestión de administradores",
+        "dashboard": "Panel de control avanzado"
+      }
+    },
+    "form": {
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "newPasswordPlaceholder": "Ingrese su nueva contraseña",
+      "confirmPasswordPlaceholder": "Confirme su nueva contraseña",
+      "submitButton": "Restablecer Contraseña",
+      "resetting": "Restableciendo...",
+      "backToLogin": "Volver al Inicio de Sesión",
+      "rememberPassword": "¿Recordaste tu contraseña?"
+    },
+    "messages": {
+      "passwordRequired": "Por favor ingrese su nueva contraseña",
+      "passwordInvalid": "La contraseña debe tener al menos 6 caracteres",
+      "confirmPasswordRequired": "Por favor confirme su nueva contraseña",
+      "passwordsNotMatch": "Las contraseñas no coinciden",
+      "tokenRequired": "Token de restablecimiento requerido. Solicite un nuevo enlace.",
+      "success": "¡Contraseña restablecida exitosamente! Redirigiendo al inicio de sesión...",
+      "error": "Error al restablecer la contraseña. El enlace puede haber expirado.",
+      "tryAgain": "Solicite un nuevo enlace de recuperación"
+    },
+    "theme": {
+      "activateLight": "Activar modo claro",
+      "activateDark": "Activar modo oscuro"
+    }
   }
 }

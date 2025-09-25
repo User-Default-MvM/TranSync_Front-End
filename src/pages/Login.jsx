@@ -208,31 +208,9 @@ const Login = () => {
     }
   };
 
-  const handleForgotPassword = async (e) => {
+  const handleForgotPassword = (e) => {
     e.preventDefault();
-
-    if (!email) {
-      setError(t('login.messages.emailRequired'));
-      return;
-    }
-
-    if (!isEmailValid(email)) {
-      setError(t('login.messages.emailInvalid'));
-      return;
-    }
-
-    setError("");
-    setLoading(true);
-
-    try {
-      await authAPI.forgotPassword(email);
-      setSuccess(t('login.messages.forgotPasswordSuccess'));
-    } catch (err) {
-      console.error("Error en forgot password:", err);
-      setError(err.message || t('login.messages.forgotPasswordError'));
-    } finally {
-      setLoading(false);
-    }
+    navigate("/forgot-password");
   };
 
   const handleNavigateToRegister = () => {
