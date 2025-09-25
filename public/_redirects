@@ -15,7 +15,7 @@
 
 # Specific chunk files - ensure they are served correctly (IMPORTANT: Before SPA fallback)
 /static/js/267.*.chunk.js    /static/js/267.:splat.chunk.js    200
-/admin/static/js/267.*.chunk.js    /static/js/267.:splat.chunk.js    200
+/admin/static/js/267.*.chunk.js    /admin/static/js/267.:splat.chunk.js    200
 
 # Critical static files - serve directly (IMPORTANT: Before SPA fallback)
 /favicon.ico    /favicon.ico   200
@@ -35,5 +35,4 @@
 /.env*  404
 
 # Block invalid admin routes that don't exist
-/admin/static/js/*.js    404
 /admin/static/css/*.css   404
