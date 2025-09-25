@@ -26,6 +26,14 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
+# Force proper MIME types for admin static files
+[[headers]]
+  for = "/admin/static/js/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
+
 [[headers]]
   for = "/static/css/*.css"
   [headers.values]
@@ -80,17 +88,6 @@
   to = "/assets/:splat"
   status = 200
 
-# Admin static assets - serve directly without redirect
-[[redirects]]
-  from = "/static/*"
-  to = "/static/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 200
-
 # Critical static files - serve directly
 [[redirects]]
   from = "/favicon.ico"
@@ -119,7 +116,7 @@
   status = 200
 
 # SPA fallback - redirect only non-asset routes to index.html (must be last)
-# This should NOT match static files like /static/js/*.js
+# This should NOT match static files like /static/js/*.js or /admin/static/js/*.js
 [[redirects]]
   from = "/*"
   to = "/index.html"
