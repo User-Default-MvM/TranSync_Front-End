@@ -1,15 +1,17 @@
-# API proxy to Railway backend
-/api/*  https://transyncbackend-production.up.railway.app/:splat  200
-
-# Static assets - serve directly without redirect
+# Static assets - serve directly without redirect (must be before SPA fallback)
+# JavaScript files
+/static/js/*    /static/js/:splat    200
+/static/css/*   /static/css/:splat   200
 /assets/*   /assets/:splat   200
 /favicon.ico    /favicon.ico   200
 /manifest.json  /manifest.json 200
 /robots.txt /robots.txt 200
 /sitemap.xml    /sitemap.xml   200
-/static/*   /static/:splat   200
 
-# SPA fallback - redirect only non-asset routes to index.html
+# API proxy to Railway backend
+/api/*  https://transyncbackend-production.up.railway.app/:splat  200
+
+# SPA fallback - redirect only non-asset routes to index.html (must be last)
 /*    /index.html   200
 
 # Block access to sensitive files
