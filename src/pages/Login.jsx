@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -91,6 +91,27 @@ const Login = () => {
     setError("");
     setSuccess("");
   };
+
+  // Manejo de eventos de teclado para navegación mejorada
+  const handleKeyDown = (e, nextFieldRef = null, isSubmit = false) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isSubmit) {
+        handleLogin(e);
+      } else if (nextFieldRef) {
+        nextFieldRef.current?.focus();
+      }
+    } else if (e.key === 'Escape') {
+      setError("");
+      setSuccess("");
+    }
+  };
+
+  // Referencias para navegación con teclado
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rememberMeRef = useRef(null);
+  const submitButtonRef = useRef(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -218,12 +239,25 @@ const Login = () => {
     navigate("/register");
   };
 
+  // Auto-focus en el primer campo al cargar
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-surface-light via-primary-50 to-primary-100 dark:from-background-dark dark:via-surface-dark dark:to-background-dark flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 transition-all duration-500">
       {/* Theme toggle button - fixed position */}
       <button
         onClick={toggleTheme}
-        className="fixed top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 z-10 p-2 sm:p-3 rounded-full bg-background-light dark:bg-surface-dark shadow-lg hover:shadow-xl transition-all duration-300 border border-border-light dark:border-gray-600 hover:border-border-light dark:hover:border-gray-500 min-w-[40px] sm:min-w-[44px] min-h-[40px] sm:min-h-[44px] flex items-center justify-center"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+          }
+        }}
+        className="fixed top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 z-10 p-2 sm:p-3 rounded-full bg-background-light dark:bg-surface-dark shadow-lg hover:shadow-xl transition-all duration-300 border border-border-light dark:border-gray-600 hover:border-border-light dark:hover:border-gray-500 min-w-[40px] sm:min-w-[44px] min-h-[40px] sm:min-h-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         title={theme === 'dark' ? t('login.theme.activateLight') : t('login.theme.activateDark')}
         aria-label={theme === 'dark' ? t('login.theme.changeToLight') : t('login.theme.changeToDark')}
       >
@@ -309,7 +343,13 @@ const Login = () => {
                     <div className="mt-1 sm:mt-2">
                       <button
                         onClick={checkServerConnection}
-                        className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400 underline font-medium transition-colors duration-200 text-xs sm:text-sm"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            checkServerConnection();
+                          }
+                        }}
+                        className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400 underline font-medium transition-colors duration-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1"
                         disabled={loading}
                       >
                         {t('login.messages.checkConnection')}
@@ -330,13 +370,15 @@ const Login = () => {
                 <div className="relative">
                   <FaUser className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg flex-shrink-0" />
                   <input
+                    ref={emailRef}
                     id="email"
                     type="email"
                     placeholder={t('login.form.emailPlaceholder')}
                     value={email}
                     onChange={handleInputChange(setEmail)}
+                    onKeyDown={(e) => handleKeyDown(e, passwordRef)}
                     disabled={loading}
-                    className={`w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] ${formTouched && !isEmailValid(email) && email
+                    className={`w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] focus:ring-4 focus:ring-blue-500/20 ${formTouched && !isEmailValid(email) && email
                         ? 'border-red-500 focus:ring-2 focus:ring-red-500'
                         : 'border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                       }`}
@@ -359,13 +401,15 @@ const Login = () => {
                 <div className="relative">
                   <FaLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg flex-shrink-0" />
                   <input
+                    ref={passwordRef}
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder={t('login.form.passwordPlaceholder')}
                     value={password}
                     onChange={handleInputChange(setPassword)}
+                    onKeyDown={(e) => handleKeyDown(e, rememberMe ? rememberMeRef : submitButtonRef, !rememberMe)}
                     disabled={loading}
-                    className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] ${formTouched && !password
+                    className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] focus:ring-4 focus:ring-blue-500/20 ${formTouched && !password
                         ? "border-red-500 focus:ring-2 focus:ring-red-500"
                         : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
@@ -389,18 +433,26 @@ const Login = () => {
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 text-xs sm:text-sm md:text-base min-w-0">
                 <label className="flex items-center cursor-pointer text-text-primary-light dark:text-slate-200 min-w-0">
                   <input
+                    ref={rememberMeRef}
                     type="checkbox"
                     checked={rememberMe}
                     onChange={() => setRememberMe(!rememberMe)}
+                    onKeyDown={(e) => handleKeyDown(e, submitButtonRef, true)}
                     disabled={loading}
-                    className="mr-2 sm:mr-3 w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0"
+                    className="mr-2 sm:mr-3 w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   />
                   <span className="font-medium truncate">{t('login.form.rememberMe')}</span>
                 </label>
                 <button
                   type="button"
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400 font-semibold transition-colors duration-200 hover:underline disabled:opacity-50 min-w-0 flex-shrink-0"
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400 font-semibold transition-colors duration-200 hover:underline disabled:opacity-50 min-w-0 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1"
                   onClick={handleForgotPassword}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleForgotPassword(e);
+                    }
+                  }}
                   disabled={loading}
                 >
                   <span className="truncate">{t('login.form.forgotPassword')}</span>
@@ -409,9 +461,16 @@ const Login = () => {
 
               {/* Submit */}
               <button
+                ref={submitButtonRef}
                 type="button"
                 onClick={handleLogin}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:transform-none disabled:hover:scale-100 text-sm sm:text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[48px] sm:min-h-[52px]"
+                onKeyDown={(e) => {
+                  if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    handleLogin(e);
+                  }
+                }}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:transform-none disabled:hover:scale-100 text-sm sm:text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 min-h-[48px] sm:min-h-[52px]"
                 disabled={loading || serverStatus?.status === 'disconnected'}
                 aria-describedby={loading ? "login-loading" : serverStatus?.status === 'disconnected' ? "server-status" : undefined}
               >
@@ -432,8 +491,14 @@ const Login = () => {
                 </p>
                 <button
                   type="button"
-                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-300 border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 font-semibold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-xl transition-all duration-300 text-xs sm:text-sm md:text-base animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[44px] sm:min-h-[48px] min-w-0"
+                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-300 border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 font-semibold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-xl transition-all duration-300 text-xs sm:text-sm md:text-base animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 min-h-[44px] sm:min-h-[48px] min-w-0"
                   onClick={handleNavigateToRegister}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleNavigateToRegister();
+                    }
+                  }}
                   disabled={loading}
                   aria-label="Ir a la página de registro de cuenta"
                 >

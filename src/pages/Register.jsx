@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -45,6 +45,37 @@ const Register = () => {
   const updateUI = (updates) => setUI((prev) => ({ ...prev, ...updates }));
 
   const clearMessages = () => updateUI({ error: "", success: "" });
+
+  // Manejo de eventos de teclado para navegación mejorada
+  const handleKeyDown = (e, nextFieldRef = null, isSubmit = false) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isSubmit) {
+        handleRegister(e);
+      } else if (nextFieldRef) {
+        nextFieldRef.current?.focus();
+      }
+    } else if (e.key === 'Escape') {
+      clearMessages();
+    }
+  };
+
+  // Referencias para navegación con teclado
+  const emailRef = useRef(null);
+  const nombreRef = useRef(null);
+  const apellidoRef = useRef(null);
+  const numeroDocumentoRef = useRef(null);
+  const telefonoRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+  const submitButtonRef = useRef(null);
+
+  // Auto-focus en el primer campo al cargar
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
 
   const validateField = (name, value) => {
     const validators = {
@@ -267,14 +298,16 @@ const Register = () => {
                 <div className="relative">
                   <FaEnvelope className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
                   <input
+                    ref={emailRef}
                     id="email"
                     name="email"
                     type="email"
                     placeholder={t('register.form.emailPlaceholder')}
                     value={formData.email}
                     onChange={handleChange}
+                    onKeyDown={(e) => handleKeyDown(e, nombreRef)}
                     disabled={ui.loading}
-                    className={`w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.email
+                    className={`w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.email
                       ? "border-red-500 focus:ring-2 focus:ring-red-500"
                       : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
@@ -299,13 +332,15 @@ const Register = () => {
                     {t('register.form.name')} <span className="text-red-500">*</span>
                   </label>
                   <input
+                    ref={nombreRef}
                     id="nombre"
                     name="nombre"
                     placeholder={t('register.form.namePlaceholder')}
                     value={formData.nombre}
                     onChange={handleChange}
+                    onKeyDown={(e) => handleKeyDown(e, apellidoRef)}
                     disabled={ui.loading}
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.nombre
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.nombre
                       ? "border-red-500 focus:ring-2 focus:ring-red-500"
                       : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
@@ -327,13 +362,15 @@ const Register = () => {
                     {t('register.form.lastname')} <span className="text-red-500">*</span>
                   </label>
                   <input
+                    ref={apellidoRef}
                     id="apellido"
                     name="apellido"
                     placeholder={t('register.form.lastnamePlaceholder')}
                     value={formData.apellido}
                     onChange={handleChange}
+                    onKeyDown={(e) => handleKeyDown(e, numeroDocumentoRef)}
                     disabled={ui.loading}
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.apellido
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.apellido
                       ? "border-red-500 focus:ring-2 focus:ring-red-500"
                       : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       }`}
@@ -356,13 +393,15 @@ const Register = () => {
                   {t('register.form.document')}
                 </label>
                 <input
+                  ref={numeroDocumentoRef}
                   id="numeroDocumento"
                   name="numeroDocumento"
                   placeholder={t('register.form.documentPlaceholder')}
                   value={formData.numeroDocumento}
                   onChange={handleChange}
+                  onKeyDown={(e) => handleKeyDown(e, telefonoRef)}
                   disabled={ui.loading}
-                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.numeroDocumento
+                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.numeroDocumento
                     ? "border-red-500 focus:ring-2 focus:ring-red-500"
                     : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
@@ -382,13 +421,15 @@ const Register = () => {
                   {t('register.form.phone')}
                 </label>
                 <input
+                  ref={telefonoRef}
                   id="telefono"
                   name="telefono"
                   placeholder={t('register.form.phonePlaceholder')}
                   value={formData.telefono}
                   onChange={handleChange}
+                  onKeyDown={(e) => handleKeyDown(e, passwordRef)}
                   disabled={ui.loading}
-                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.telefono
+                  className={`w-full px-3 sm:px-4 py-3 sm:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-base sm:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.telefono
                     ? "border-red-500 focus:ring-2 focus:ring-red-500"
                     : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     }`}
@@ -411,14 +452,16 @@ const Register = () => {
                   <div className="relative">
                     <FaLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
                     <input
+                      ref={passwordRef}
                       id="password"
                       name="password"
                       type={ui.showPassword ? "text" : "password"}
                       placeholder={t('register.form.passwordPlaceholder')}
                       value={formData.password}
                       onChange={handleChange}
+                      onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
                       disabled={ui.loading}
-                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.password
+                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.password
                         ? "border-red-500 focus:ring-2 focus:ring-red-500"
                         : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         }`}
@@ -427,10 +470,17 @@ const Register = () => {
                     />
                     <button
                       type="button"
-                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                       onClick={() => togglePasswordVisibility('password')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          togglePasswordVisibility('password');
+                        }
+                      }}
                       disabled={ui.loading}
                       tabIndex="-1"
+                      aria-label={ui.showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                     >
                       {ui.showPassword ? <FaEyeSlash className="text-sm sm:text-base" /> : <FaEye className="text-sm sm:text-base" />}
                     </button>
@@ -471,14 +521,16 @@ const Register = () => {
                   <div className="relative">
                     <FaLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 text-base sm:text-lg" />
                     <input
+                      ref={confirmPasswordRef}
                       id="confirmPassword"
                       name="confirmPassword"
                       type={ui.showConfirmPassword ? "text" : "password"}
                       placeholder={t('register.form.confirmPasswordPlaceholder')}
                       value={formData.confirmPassword}
                       onChange={handleChange}
+                      onKeyDown={(e) => handleKeyDown(e, submitButtonRef, true)}
                       disabled={ui.loading}
-                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] ${ui.formTouched && ui.formErrors.confirmPassword
+                      className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 md:py-4 border rounded-lg sm:rounded-xl bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-white focus:outline-none focus:bg-background-light dark:focus:bg-gray-600 transition-all duration-200 text-sm sm:text-base md:text-lg disabled:opacity-50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px] focus:ring-4 focus:ring-blue-500/20 ${ui.formTouched && ui.formErrors.confirmPassword
                         ? "border-red-500 focus:ring-2 focus:ring-red-500"
                         : "border-border-light dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         }`}
@@ -487,10 +539,17 @@ const Register = () => {
                     />
                     <button
                       type="button"
-                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50"
+                      className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-text-secondary-light dark:text-slate-500 hover:text-blue-500 transition-colors duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                       onClick={() => togglePasswordVisibility('confirmPassword')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          togglePasswordVisibility('confirmPassword');
+                        }
+                      }}
                       disabled={ui.loading}
                       tabIndex="-1"
+                      aria-label={ui.showConfirmPassword ? "Ocultar confirmación de contraseña" : "Mostrar confirmación de contraseña"}
                     >
                       {ui.showConfirmPassword ? <FaEyeSlash className="text-sm sm:text-base" /> : <FaEye className="text-sm sm:text-base" />}
                     </button>
@@ -543,8 +602,15 @@ const Register = () => {
 
               {/* Submit button */}
               <button
+                ref={submitButtonRef}
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 sm:py-4 md:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 text-sm sm:text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[48px] sm:min-h-[52px] md:min-h-[56px]"
+                onKeyDown={(e) => {
+                  if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    handleRegister(e);
+                  }
+                }}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 sm:py-4 md:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 text-sm sm:text-base md:text-lg animate-scale-in focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 min-h-[48px] sm:min-h-[52px] md:min-h-[56px]"
                 disabled={ui.loading}
                 aria-describedby={ui.loading ? "register-loading" : undefined}
               >
@@ -563,8 +629,14 @@ const Register = () => {
                 <p className="text-text-secondary-light dark:text-slate-300 text-xs sm:text-sm md:text-base mb-2 sm:mb-3 md:mb-4">{t('register.form.hasAccount')}</p>
                 <button
                   type="button"
-                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl transition-all duration-300 text-xs sm:text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
+                  className="w-full sm:w-auto bg-background-light dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 font-semibold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl transition-all duration-300 text-xs sm:text-sm md:text-base disabled:opacity-50 animate-scale-in hover:animate-bounce-gentle focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   onClick={() => navigate("/login")}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      navigate("/login");
+                    }
+                  }}
                   disabled={ui.loading}
                   aria-label="Ir a la página de inicio de sesión"
                 >
