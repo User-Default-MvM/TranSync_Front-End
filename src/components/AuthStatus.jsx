@@ -8,10 +8,11 @@ import { diagnoseConnection } from '../utilidades/authAPI';
  * Este componente puede ser usado en cualquier parte de la aplicación
  */
 const AuthStatus = ({ showDetails = false }) => {
-  const { isLoggedIn, user, userRole, loading, logout } = useAuthContext();
+  const { isLoggedIn, user, userRole, loading, logout, recoverUserData } = useAuthContext();
   const [showDiagnostics, setShowDiagnostics] = useState(false);
   const [diagnostics, setDiagnostics] = useState(null);
   const [diagnosticsLoading, setDiagnosticsLoading] = useState(false);
+  const [recovering, setRecovering] = useState(false);
 
   const runDiagnostics = async () => {
     setDiagnosticsLoading(true);
@@ -25,6 +26,20 @@ const AuthStatus = ({ showDetails = false }) => {
       });
     } finally {
       setDiagnosticsLoading(false);
+    }
+  };
+
+  const handleRecoverUserData = async () => {
+    setRecovering(true);
+    try {
+      const recovered = await recoverUserData();
+      if (recovered) {
+        setShowDiagnostics(false);
+      }
+    } catch (error) {
+      console.error('Error recovering user data:', error);
+    } finally {
+      setRecovering(false);
     }
   };
 
@@ -87,6 +102,17 @@ const AuthStatus = ({ showDetails = false }) => {
             </span>
           </div>
         </div>
+
+        {/* Botón de recuperación */}
+        <button
+          onClick={handleRecoverUserData}
+          disabled={recovering}
+          className="flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition-colors text-xs sm:text-sm disabled:opacity-50"
+          title="Recuperar datos del usuario"
+        >
+          <FaSpinner className={`w-3 h-3 sm:w-4 sm:h-4 ${recovering ? 'animate-spin' : ''}`} />
+          <span>{recovering ? 'Recuperando...' : 'Recuperar Usuario'}</span>
+        </button>
 
         {/* Botón de diagnóstico */}
         <button

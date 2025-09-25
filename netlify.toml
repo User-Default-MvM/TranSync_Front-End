@@ -18,21 +18,29 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
 
-# Cache static assets
+# Cache static assets - more specific patterns
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Ensure proper MIME types for static files
 [[headers]]
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript"
 
 [[headers]]
   for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "text/css"
 
 # Security headers for HTML pages
 [[headers]]
@@ -49,6 +57,7 @@
   to = "https://transyncbackend-production.up.railway.app/:splat"
   status = 200
 
+# SPA fallback - redirect all non-asset routes to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
