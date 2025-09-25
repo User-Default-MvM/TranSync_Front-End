@@ -29,7 +29,7 @@ const Profile = () => {
   const { user, userRole, refreshAuth } = useAuth();
   const {
     userProfile,
-    loading: profileLoading,
+    loading,
     updateProfile,
     changePassword
   } = useUser();
@@ -50,6 +50,13 @@ const Profile = () => {
     current: false,
     new: false,
     confirm: false
+  });
+
+  // Estados para validación de contraseña
+  const [passwordErrors, setPasswordErrors] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   });
 
   // Estados locales para edición
@@ -137,6 +144,42 @@ const Profile = () => {
       ...prev,
       [name]: value
     }));
+
+    // Validación en tiempo real
+    validatePasswordField(name, value);
+  };
+
+  const validatePasswordField = (name, value) => {
+    let error = '';
+
+    switch (name) {
+      case 'currentPassword':
+        if (!value.trim()) {
+          error = 'La contraseña actual es requerida';
+        }
+        break;
+      case 'newPassword':
+        if (!value.trim()) {
+          error = 'La nueva contraseña es requerida';
+        } else if (value.length < 6) {
+          error = 'La contraseña debe tener al menos 6 caracteres';
+        }
+        break;
+      case 'confirmPassword':
+        if (!value.trim()) {
+          error = 'La confirmación de contraseña es requerida';
+        } else if (value !== passwordData.newPassword) {
+          error = 'Las contraseñas no coinciden';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setPasswordErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
   };
 
   const togglePasswordVisibility = (field) => {
@@ -189,22 +232,32 @@ const Profile = () => {
     try {
       setMessage({ type: '', text: '' });
 
-      // Validaciones
-      if (!passwordData.currentPassword.trim()) {
-        throw new Error('Debes ingresar tu contraseña actual');
-      }
+      // Validar todos los campos antes de enviar
+      const errors = {};
+      Object.keys(passwordData).forEach(key => {
+        validatePasswordField(key, passwordData[key]);
+        if (passwordErrors[key]) {
+          errors[key] = passwordErrors[key];
+        }
+      });
 
-      if (passwordData.newPassword !== passwordData.confirmPassword) {
-        throw new Error('Las contraseñas no coinciden');
-      }
-
-      if (passwordData.newPassword.length < 6) {
-        throw new Error('La nueva contraseña debe tener al menos 6 caracteres');
+      // Si hay errores, no continuar
+      if (Object.keys(errors).length > 0) {
+        setMessage({
+          type: 'error',
+          text: 'Por favor corrige los errores en el formulario'
+        });
+        return;
       }
 
       await changePassword(passwordData);
       setIsChangingPassword(false);
       setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      setPasswordErrors({
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
@@ -225,6 +278,34 @@ const Profile = () => {
     setIsEditing(false);
     setIsChangingPassword(false);
     setMessage({ type: '', text: '' });
+
+    // Limpiar errores de validación
+    setEditErrors({
+      nomUsuario: '',
+      apeUsuario: '',
+      email: '',
+      telUsuario: ''
+    });
+
+    setPasswordErrors({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+
+    // Limpiar datos de formularios
+    setEditData({
+      nomUsuario: '',
+      apeUsuario: '',
+      email: '',
+      telUsuario: ''
+    });
+
+    setPasswordData({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
   };
 
   const getRoleDisplayName = (role) => {
@@ -249,7 +330,7 @@ const Profile = () => {
     }
   };
 
-  if (profileLoading && !userProfile) {
+  if (loading.profile && !userProfile) {
     return (
       <div className="min-h-screen bg-surface-light dark:bg-gray-900 flex items-center justify-center p-4">
         <div className="flex items-center gap-3">
@@ -480,19 +561,19 @@ const Profile = () => {
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 border-t border-border-light dark:border-gray-700">
                   <button
                     onClick={handleSaveProfile}
-                    disabled={profileLoading}
+                    disabled={loading.profile}
                     className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-md sm:rounded-lg transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   >
                     <FaSave size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span>{profileLoading ? 'Guardando...' : 'Guardar Cambios'}</span>
+                    <span>{loading.profile ? 'Guardando...' : 'Guardar Cambios'}</span>
                   </button>
                   <button
                     onClick={handleCancel}
-                    disabled={profileLoading}
+                    disabled={loading.profile}
                     className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 rounded-md sm:rounded-lg transition-colors text-sm sm:text-base min-h-[44px] sm:min-h-[48px] md:min-h-[52px]"
                   >
                     <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                    <span>{profileLoading ? 'Procesando...' : 'Cancelar'}</span>
+                    <span>{loading.profile ? 'Procesando...' : 'Cancelar'}</span>
                   </button>
                 </div>
               )}
@@ -529,7 +610,11 @@ const Profile = () => {
                         name="currentPassword"
                         value={passwordData.currentPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          passwordErrors.currentPassword
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
                         placeholder="Ingresa tu contraseña actual"
                       />
                       <button
@@ -541,6 +626,9 @@ const Profile = () => {
                         {showPasswords.current ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
                     </div>
+                    {passwordErrors.currentPassword && (
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">{passwordErrors.currentPassword}</p>
+                    )}
                   </div>
 
                   {/* Nueva contraseña */}
@@ -554,7 +642,11 @@ const Profile = () => {
                         name="newPassword"
                         value={passwordData.newPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          passwordErrors.newPassword
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
                         placeholder="Ingresa tu nueva contraseña"
                       />
                       <button
@@ -566,6 +658,9 @@ const Profile = () => {
                         {showPasswords.new ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
                     </div>
+                    {passwordErrors.newPassword && (
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">{passwordErrors.newPassword}</p>
+                    )}
                   </div>
 
                   {/* Confirmar contraseña */}
@@ -579,7 +674,11 @@ const Profile = () => {
                         name="confirmPassword"
                         value={passwordData.confirmPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border border-border-light dark:border-gray-600 rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
+                        className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 border rounded-md sm:rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-light dark:bg-gray-700 text-text-primary-light dark:text-gray-100 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] ${
+                          passwordErrors.confirmPassword
+                            ? 'border-red-500 dark:border-red-500'
+                            : 'border-border-light dark:border-gray-600'
+                        }`}
                         placeholder="Confirma tu nueva contraseña"
                       />
                       <button
@@ -591,25 +690,28 @@ const Profile = () => {
                         {showPasswords.confirm ? <FaEyeSlash size={14} className="sm:w-[16px] sm:h-[16px]" /> : <FaEye size={14} className="sm:w-[16px] sm:h-[16px]" />}
                       </button>
                     </div>
+                    {passwordErrors.confirmPassword && (
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">{passwordErrors.confirmPassword}</p>
+                    )}
                   </div>
 
                   {/* Botones */}
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 sm:pt-3">
                     <button
                       onClick={handleChangePassword}
-                      disabled={profileLoading}
+                      disabled={loading.profile}
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white text-xs sm:text-sm rounded-md sm:rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     >
                       <FaSave size={12} className="sm:w-[14px] sm:h-[14px]" />
-                      <span>{profileLoading ? 'Cambiando...' : 'Cambiar'}</span>
+                      <span>{loading.profile ? 'Cambiando...' : 'Cambiar'}</span>
                     </button>
                     <button
                       onClick={handleCancel}
-                      disabled={profileLoading}
+                      disabled={loading.profile}
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 bg-surface-light dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-text-primary-light dark:text-gray-300 text-xs sm:text-sm rounded-md sm:rounded-lg transition-colors min-h-[40px] sm:min-h-[44px] md:min-h-[48px]"
                     >
                       <FaTimes size={12} className="sm:w-[14px] sm:h-[14px]" />
-                      <span>{profileLoading ? 'Procesando...' : 'Cancelar'}</span>
+                      <span>{loading.profile ? 'Procesando...' : 'Cancelar'}</span>
                     </button>
                   </div>
                 </div>
