@@ -26,6 +26,17 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
+# Redirect admin static files to correct locations (IMPORTANT: Before SPA fallback)
+[[redirects]]
+  from = "/admin/static/js/*"
+  to = "/static/js/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/admin/static/css/*"
+  to = "/static/css/:splat"
+  status = 200
+
 # Force proper MIME types for dynamic chunks (IMPORTANT: Before SPA fallback)
 [[headers]]
   for = "/static/js/*.chunk.js"
