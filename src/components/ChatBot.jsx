@@ -79,14 +79,26 @@ const ChatBot = ({
   // Verificar conexión con el servicio de chatbot
   const verificarConexion = useCallback(async () => {
     try {
-      // Verificar conexión intentando obtener estadísticas del chatbot
+      console.log('🔍 Verificando conexión del chatbot...');
+
+      // Primero probar el endpoint de health
+      try {
+        const health = await chatbotAPI.testConnection(userContext?.idEmpresa || 1);
+        console.log('✅ Health check del chatbot exitoso:', health);
+        setConnectionStatus('connected');
+        return;
+      } catch (healthError) {
+        console.warn('⚠️ Health check falló, intentando con estadísticas:', healthError);
+      }
+
+      // Si health falla, intentar con estadísticas
       const stats = await chatbotAPI.getChatbotStats(userContext?.idEmpresa || 1);
       setConnectionStatus(stats ? 'connected' : 'disconnected');
     } catch (error) {
-      console.error('Error verificando conexión del chatbot:', error);
+      console.error('❌ Error verificando conexión del chatbot:', error);
       setConnectionStatus('disconnected');
     }
-  }, [userContext?.idUsuario, userContext?.idEmpresa]);
+  }, [userContext?.idEmpresa]);
 
   useEffect(() => {
     // El contexto del usuario ya está disponible a través del UserContext
@@ -113,7 +125,7 @@ const ChatBot = ({
     if (isOpen && connectionStatus === 'unknown') {
       verificarConexion();
     }
-  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext?.idUsuario, userContext?.idEmpresa, verificarConexion]);
+  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext, verificarConexion]);
 
   // Manejar notificaciones en tiempo real
   const handleRealTimeNotification = useCallback((notification) => {
@@ -144,7 +156,7 @@ const ChatBot = ({
     setTimeout(() => {
       scrollToBottom();
     }, 100);
-  }, [quietMode, t, messages]);
+  }, [quietMode, t]);
 
   // Configurar WebSocket para notificaciones en tiempo real
   useEffect(() => {
@@ -199,7 +211,7 @@ const ChatBot = ({
         setWsConnected(false);
       };
     }
-  }, [userContext?.idUsuario, userContext?.idEmpresa, isOpen]);
+  }, [userContext, handleRealTimeNotification, isOpen]);
 
   useEffect(() => {
     scrollToBottom();
@@ -450,6 +462,19 @@ const ChatBot = ({
     setIsTyping(true);
 
     try {
+      console.log('🚀 Iniciando envío de mensaje:', {
+        mensaje: mensajeUsuario,
+        idEmpresa: userContext?.idEmpresa || 1,
+        idUsuario: userContext?.idUsuario || null,
+        connectionStatus
+      });
+
+      // Verificar conexión antes de enviar
+      if (connectionStatus !== 'connected') {
+        console.warn('⚠️ Estado de conexión:', connectionStatus);
+        await verificarConexion();
+      }
+
       // Enviar mensaje usando la API básica del chatbot
       const respuesta = await chatbotAPI.sendMessage(
         mensajeUsuario,
