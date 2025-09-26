@@ -63,7 +63,7 @@ const chatbotAPI = {
         throw new Error('ID de empresa es requerido');
       }
 
-      const response = await apiClient.get(`/api/chatbot/stats?idEmpresa=${idEmpresa}&period=${period}`);
+      const response = await apiClient.get(`/api/chatbot/estadisticas?idEmpresa=${idEmpresa}&period=${period}`);
       return response.data;
     } catch (error) {
       throw new Error(apiUtils.formatError(error));
