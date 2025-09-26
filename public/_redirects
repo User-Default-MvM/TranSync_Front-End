@@ -8,7 +8,10 @@
 /assets/*   /assets/:splat   200
 
 # Admin JavaScript files - serve with correct MIME type (IMPORTANT: Before SPA fallback)
-/admin/static/js/*.js    /admin/static/js/:splat    200
+ /admin/static/js/*.js    /admin/static/js/:splat    200
+
+# Admin CSS files - serve with correct MIME type (IMPORTANT: Before SPA fallback)
+ /admin/static/css/*.css  /admin/static/css/:splat   200
 
 # Critical static files - serve directly (IMPORTANT: Before SPA fallback)
 /favicon.ico    /favicon.ico   200
