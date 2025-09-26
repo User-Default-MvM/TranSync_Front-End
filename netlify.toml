@@ -190,9 +190,18 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
+# Headers for main JavaScript files
 [[headers]]
-  for = "/*.js"
+  for = "/static/js/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
+
+# Headers for main CSS files
+[[headers]]
+  for = "/static/css/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "text/css; charset=utf-8"
     X-Content-Type-Options = "nosniff"
