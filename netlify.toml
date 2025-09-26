@@ -26,22 +26,6 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
-# Force proper MIME types for admin static files (IMPORTANT: Before SPA fallback)
-[[headers]]
-  for = "/admin/static/js/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
-# Force proper MIME types for admin dynamic chunks (IMPORTANT: Before SPA fallback)
-[[headers]]
-  for = "/admin/static/js/*.chunk.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
 # Force proper MIME types for dynamic chunks (IMPORTANT: Before SPA fallback)
 [[headers]]
   for = "/static/js/*.chunk.js"
@@ -50,21 +34,7 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
-# Force proper MIME types for admin dynamic chunks (IMPORTANT: Before SPA fallback)
-[[headers]]
-  for = "/admin/static/js/*.chunk.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
-# Force proper MIME types for any .js file in admin directory (catch-all)
-[[headers]]
-  for = "/admin/static/js/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
+# REMOVED: Admin static files headers - chunks are served from /static/js/ not /admin/static/js/
 
 [[headers]]
   for = "/static/css/*.css"

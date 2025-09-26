@@ -6,10 +6,8 @@
 
 # Dynamic chunks with hash - serve JavaScript files correctly (IMPORTANT: Before SPA fallback)
 /static/js/*.chunk.js    /static/js/:splat    200
-/admin/static/js/*.chunk.js    /admin/static/js/:splat    200
 
-# Admin JavaScript files - serve with correct MIME type (IMPORTANT: Before SPA fallback)
-/admin/static/js/*.js    /admin/static/js/:splat    200
+# Admin JavaScript files - REMOVED: chunks are served from /static/js/ not /admin/static/js/
 
 # Critical static files - serve directly (IMPORTANT: Before SPA fallback)
 /favicon.ico    /favicon.ico   200
