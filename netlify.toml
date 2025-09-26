@@ -205,3 +205,19 @@
     Cache-Control = "public, max-age=31536000, immutable"
     Content-Type = "text/css; charset=utf-8"
     X-Content-Type-Options = "nosniff"
+
+# Headers for dynamic chunks - CRITICAL FIX
+[[headers]]
+  for = "/static/js/*.chunk.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
+
+# Headers for specific chunk patterns
+[[headers]]
+  for = "/*.chunk.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"

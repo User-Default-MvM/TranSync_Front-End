@@ -1,6 +1,10 @@
 # JavaScript chunks with dynamic hashes - serve directly (IMPORTANT: Before SPA fallback)
-/static/js/*.chunk.js    /static/js/:splat    200
-/admin/static/js/*.chunk.js    /admin/static/js/:splat    200
+ /static/js/*.chunk.js    /static/js/:splat    200
+ /admin/static/js/*.chunk.js    /admin/static/js/:splat    200
+
+# Specific chunk patterns - CRITICAL FIX
+ /static/js/*.*.chunk.js    /static/js/:splat    200
+ /*.chunk.js    /:splat    200
 
 # Static assets - serve directly without redirect (IMPORTANT: Before SPA fallback)
  /static/js/*    /static/js/:splat    200
