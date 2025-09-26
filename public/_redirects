@@ -4,18 +4,8 @@
 /static/css/*   /static/css/:splat   200
 /assets/*   /assets/:splat   200
 
-# Admin static assets - serve from actual location (IMPORTANT: Before SPA fallback)
-/admin/static/js/*    /static/js/:splat    200
-/admin/static/css/*   /static/css/:splat   200
-/admin/assets/*   /assets/:splat   200
-
 # Dynamic chunks with hash - serve JavaScript files correctly (IMPORTANT: Before SPA fallback)
 /static/js/*.chunk.js    /static/js/:splat    200
-/admin/static/js/*.chunk.js    /static/js/:splat    200
-
-# Specific chunk files - ensure they are served correctly (IMPORTANT: Before SPA fallback)
-/static/js/267.*.chunk.js    /static/js/267.:splat.chunk.js    200
-/admin/static/js/267.*.chunk.js    /admin/static/js/267.:splat.chunk.js    200
 
 # Critical static files - serve directly (IMPORTANT: Before SPA fallback)
 /favicon.ico    /favicon.ico   200
@@ -23,16 +13,19 @@
 /robots.txt /robots.txt 200
 /sitemap.xml    /sitemap.xml   200
 
-# API proxy to Railway backend
+# API proxy to Railway backend (IMPORTANT: Before SPA fallback)
 /api/*  https://transyncbackend-production.up.railway.app/:splat  200
 
-# SPA fallback - redirect only non-asset routes to index.html (must be last)
-/*    /index.html   200
+# Critical static files - serve directly (IMPORTANT: Before SPA fallback)
+/favicon.ico    /favicon.ico   200
+/manifest.json  /manifest.json 200
+/robots.txt /robots.txt 200
+/sitemap.xml    /sitemap.xml   200
 
 # Block access to sensitive files and invalid routes
 /node_modules/*    404
 /.git/* 404
 /.env*  404
 
-# Block invalid admin routes that don't exist
-/admin/static/css/*.css   404
+# SPA fallback - redirect only non-asset routes to index.html (must be last)
+/*    /index.html   200
