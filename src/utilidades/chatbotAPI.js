@@ -19,7 +19,7 @@ const chatbotAPI = {
         throw new Error('Mensaje e ID de empresa son requeridos');
       }
 
-      const response = await apiClient.post('/api/chatbot/message', {
+      const response = await apiClient.post('/api/chatbot/consulta', {
         mensaje: mensaje.trim(),
         idEmpresa: parseInt(idEmpresa),
         idUsuario: idUsuario ? parseInt(idUsuario) : null
