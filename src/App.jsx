@@ -110,7 +110,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <UserProvider>
-          <Router basename="/admin">
+          <Router basename="/">
           <Suspense fallback={<LazyLoadingFallback />}>
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
