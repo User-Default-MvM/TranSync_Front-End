@@ -11,6 +11,7 @@ import {
   FaCogs,
   FaSignInAlt,
   FaBell,
+  FaQuestionCircle,
   FaMoon,
   FaSun,
   FaExclamationTriangle,
@@ -26,6 +27,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useNotification } from '../utilidades/notificationService';
 import { useSocket } from '../utilidades/realTimeService';
 import { dashboardAPI } from '../utilidades/dashboardAPI';
+import { useTutorial } from '../hooks/useTutorial';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
@@ -34,6 +36,7 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
   const location = useLocation();
   const { isLoggedIn, user, userRole, logout: handleLogoutAuth, loading: authLoading } = useAuth();
   const { theme, toggleTheme: toggleThemeContext } = useTheme();
+  const { startTutorial } = useTutorial();
 
   // Obtener datos de autenticación para WebSocket (definido primero)
   const getAuthData = useCallback(() => {
@@ -704,6 +707,16 @@ const Navbar = ({ toggleSidebar, isMobile, isPublic = false }) => {
                   )}
                 </div>
 
+                <button
+                  onClick={() => {
+                    console.log('Tutorial button clicked');
+                    startTutorial();
+                  }}
+                  className="p-2.5 text-slate-700 dark:text-gray-300 hover:text-indigo-700 dark:hover:text-white hover:bg-indigo-50/80 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-200 group min-h-[44px] min-w-[44px] flex items-center justify-center border border-transparent hover:border-indigo-200/50 dark:hover:border-gray-600"
+                  title={t('navbar.tutorial')}
+                >
+                  <FaQuestionCircle size={16} />
+                </button>
 
                 {/* User menu */}
                 <div className="relative" ref={userMenuRef}>
