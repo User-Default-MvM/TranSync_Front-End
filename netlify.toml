@@ -13,7 +13,19 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/admin/static/js/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/static/css/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/static/css/*.css"
   [headers.values]
     Content-Type = "text/css; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
@@ -26,7 +38,19 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/admin/static/js/*.chunk.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/*.chunk.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/*.chunk.js"
   [headers.values]
     Content-Type = "application/javascript; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
@@ -34,6 +58,12 @@
 # Headers for main JS file
 [[headers]]
   for = "/static/js/main.*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/static/js/main.*.js"
   [headers.values]
     Content-Type = "application/javascript; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
@@ -49,13 +79,23 @@
   [headers.values]
     Content-Type = "image/x-icon"
 
-# API proxy only - static redirects handled by _redirects file
+# API proxy - handle both root and admin paths
 [[redirects]]
   from = "/api/*"
   to = "https://transyncbackend-production.up.railway.app/:splat"
   status = 200
 
+[[redirects]]
+  from = "/admin/api/*"
+  to = "https://transyncbackend-production.up.railway.app/:splat"
+  status = 200
+
 # SPA fallback - DEBE SER EL ÚLTIMO (only if _redirects doesn't handle it)
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
