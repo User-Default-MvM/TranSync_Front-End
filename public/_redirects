@@ -1,12 +1,11 @@
-# Static assets - serve directly without redirect (must be before SPA fallback)
-# JavaScript files - IMPORTANT: These must be before SPA fallback
+# JavaScript chunks with dynamic hashes - serve directly (IMPORTANT: Before SPA fallback)
+/static/js/*.chunk.js    /static/js/:splat    200
+/admin/static/js/*.chunk.js    /admin/static/js/:splat    200
+
+# Static assets - serve directly without redirect (IMPORTANT: Before SPA fallback)
 /static/js/*    /static/js/:splat    200
 /static/css/*   /static/css/:splat   200
 /assets/*   /assets/:splat   200
-
-# Dynamic chunks with hash - serve JavaScript files correctly (IMPORTANT: Before SPA fallback)
-/static/js/*.chunk.js    /static/js/:splat    200
-/admin/static/js/*.chunk.js    /admin/static/js/:splat    200
 
 # Admin JavaScript files - serve with correct MIME type (IMPORTANT: Before SPA fallback)
 /admin/static/js/*.js    /admin/static/js/:splat    200
@@ -19,12 +18,6 @@
 
 # API proxy to Railway backend (IMPORTANT: Before SPA fallback)
 /api/*  https://transyncbackend-production.up.railway.app/:splat  200
-
-# Critical static files - serve directly (IMPORTANT: Before SPA fallback)
-/favicon.ico    /favicon.ico   200
-/manifest.json  /manifest.json 200
-/robots.txt /robots.txt 200
-/sitemap.xml    /sitemap.xml   200
 
 # Block access to sensitive files and invalid routes
 /node_modules/*    404

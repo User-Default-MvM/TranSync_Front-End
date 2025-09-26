@@ -4,6 +4,7 @@ import chatbotAPI from '../utilidades/chatbotAPI';
 import conversationMemory from '../utilidades/conversationMemory';
 import realTimeService from '../utilidades/realTimeService';
 import { useTheme } from '../context/ThemeContext'; // 👈 Importar useTheme
+import { useUser } from '../context/UserContext'; // 👈 Importar useUser
 
 // Componente Button con paleta uniforme y modo oscuro
 const Button = ({
@@ -64,7 +65,7 @@ const ChatBot = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('unknown');
-  const [userContext] = useState(null);
+  const userContext = useUser();
   const { theme: appTheme } = useTheme();
   const [realTimeNotifications, setRealTimeNotifications] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
@@ -85,7 +86,7 @@ const ChatBot = ({
       console.error('Error verificando conexión del chatbot:', error);
       setConnectionStatus('disconnected');
     }
-  }, [userContext?.idEmpresa]);
+  }, [userContext?.idUsuario, userContext?.idEmpresa]);
 
   useEffect(() => {
     // El contexto del usuario ya está disponible a través del UserContext
@@ -112,7 +113,7 @@ const ChatBot = ({
     if (isOpen && connectionStatus === 'unknown') {
       verificarConexion();
     }
-  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext, verificarConexion]);
+  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext?.idUsuario, userContext?.idEmpresa, verificarConexion]);
 
   // Manejar notificaciones en tiempo real
   const handleRealTimeNotification = useCallback((notification) => {
@@ -143,7 +144,7 @@ const ChatBot = ({
     setTimeout(() => {
       scrollToBottom();
     }, 100);
-  }, [quietMode, t]);
+  }, [quietMode, t, messages]);
 
   // Configurar WebSocket para notificaciones en tiempo real
   useEffect(() => {
@@ -198,7 +199,7 @@ const ChatBot = ({
         setWsConnected(false);
       };
     }
-  }, [userContext, isOpen, handleRealTimeNotification]);
+  }, [userContext?.idUsuario, userContext?.idEmpresa, isOpen]);
 
   useEffect(() => {
     scrollToBottom();
@@ -635,7 +636,7 @@ const ChatBot = ({
       // Usar sugerencias del sistema de memoria de conversación
       const sugerenciasInteligentes = conversationMemory.getSuggestions(
         userContext.idUsuario,
-        userContext.idEmpresa
+        userContext.idEmpresa || 1
       );
 
       if (sugerenciasInteligentes && sugerenciasInteligentes.length > 0) {

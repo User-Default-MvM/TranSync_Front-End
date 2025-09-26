@@ -14,8 +14,8 @@ const conversationMemory = {
   /**
    * Inicializar o recuperar conversación para un usuario
    */
-  getConversation: function(userId, empresaId = 1) {
-    const conversationKey = `${userId}_${empresaId}`;
+  getConversation: function(userId, empresaId) {
+    const conversationKey = `${userId}_${empresaId || 1}`;
 
     if (!this.activeConversations.has(conversationKey)) {
       this.activeConversations.set(conversationKey, {
@@ -54,7 +54,7 @@ const conversationMemory = {
   /**
    * Agregar mensaje a la conversación
    */
-  addMessage: function(userId, message, empresaId = 1) {
+  addMessage: function(userId, message, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
 
     const messageEntry = {
@@ -113,7 +113,7 @@ const conversationMemory = {
   /**
    * Recuperar contexto relevante para una nueva consulta
    */
-  getRelevantContext: function(userId, currentMessage = '', empresaId = 1) {
+  getRelevantContext: function(userId, currentMessage = '', empresaId) {
     const conversation = this.getConversation(userId, empresaId);
 
     const context = {
@@ -245,7 +245,7 @@ const conversationMemory = {
   /**
    * Almacenar variables de sesión
    */
-  setSessionVariable: function(userId, key, value, empresaId = 1) {
+  setSessionVariable: function(userId, key, value, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
     conversation.context.sessionVariables[key] = {
       value: value,
@@ -257,7 +257,7 @@ const conversationMemory = {
   /**
    * Recuperar variable de sesión
    */
-  getSessionVariable: function(userId, key, empresaId = 1) {
+  getSessionVariable: function(userId, key, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
     const variable = conversation.context.sessionVariables[key];
 
@@ -272,7 +272,7 @@ const conversationMemory = {
   /**
    * Actualizar preferencias del usuario
    */
-  updateUserPreferences: function(userId, preferences, empresaId = 1) {
+  updateUserPreferences: function(userId, preferences, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
 
     Object.entries(preferences).forEach(([key, value]) => {
@@ -287,7 +287,7 @@ const conversationMemory = {
   /**
    * Obtener sugerencias basadas en el historial
    */
-  getSuggestions: function(userId, empresaId = 1) {
+  getSuggestions: function(userId, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
     const suggestions = [];
 
@@ -361,7 +361,7 @@ const conversationMemory = {
   /**
    * Obtener estadísticas de la conversación
    */
-  getConversationStats: function(userId, empresaId = 1) {
+  getConversationStats: function(userId, empresaId) {
     const conversation = this.getConversation(userId, empresaId);
 
     return {
@@ -382,7 +382,7 @@ const conversationMemory = {
   /**
    * Resetear conversación
    */
-  resetConversation: function(userId, empresaId = 1) {
+  resetConversation: function(userId, empresaId) {
     const conversationKey = `${userId}_${empresaId}`;
     this.activeConversations.delete(conversationKey);
   }
