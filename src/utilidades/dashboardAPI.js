@@ -3,6 +3,10 @@
 import { apiClient, apiUtils } from '../api/baseAPI';
 
 export const dashboardAPI = {
+  // ================================
+  // ESTADÍSTICAS GENERALES
+  // ================================
+
   // Obtener estadísticas generales del dashboard
   getGeneralStatistics: async () => {
     try {
@@ -10,7 +14,37 @@ export const dashboardAPI = {
       return response.data;
     } catch (error) {
       console.error('Error obteniendo estadísticas generales:', error);
-      return { estadisticas: { totalRutas: 0, totalVehiculos: 0, rutasActivas: 0 } };
+      // Retornar datos basados en la tabla ResumenOperacional
+      return {
+        estadisticas: {
+          conductoresActivos: 0,
+          vehiculosDisponibles: 0,
+          viajesEnCurso: 0,
+          viajesCompletados: 0,
+          alertasPendientes: 0
+        }
+      };
+    }
+  },
+
+  // Obtener resumen operacional desde la tabla ResumenOperacional
+  getOperationalSummary: async (idEmpresa) => {
+    try {
+      if (!idEmpresa) throw new Error('ID de empresa requerido');
+
+      const response = await apiClient.get(`/api/dashboard/resumen-operacional?idEmpresa=${idEmpresa}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo resumen operacional:', error);
+      return {
+        resumen: {
+          conductoresActivos: 0,
+          vehiculosDisponibles: 0,
+          viajesEnCurso: 0,
+          viajesCompletados: 0,
+          alertasPendientes: 0
+        }
+      };
     }
   },
 
@@ -37,6 +71,45 @@ export const dashboardAPI = {
       return response.data;
     } catch (error) {
       console.error('Error obteniendo alertas activas:', error);
+      return { alertas: [] };
+    }
+  },
+
+  // Obtener alertas de vencimientos desde la tabla AlertasVencimientos
+  getExpirationAlerts: async (idEmpresa) => {
+    try {
+      if (!idEmpresa) throw new Error('ID de empresa requerido');
+
+      const response = await apiClient.get(`/api/dashboard/alertas-vencimientos?idEmpresa=${idEmpresa}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo alertas de vencimientos:', error);
+      return { alertas: [] };
+    }
+  },
+
+  // Obtener alertas próximas a vencer (próximos 30 días)
+  getUpcomingAlerts: async (idEmpresa, dias = 30) => {
+    try {
+      if (!idEmpresa) throw new Error('ID de empresa requerido');
+
+      const response = await apiClient.get(`/api/dashboard/alertas-proximas?idEmpresa=${idEmpresa}&dias=${dias}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo alertas próximas:', error);
+      return { alertas: [] };
+    }
+  },
+
+  // Obtener alertas vencidas
+  getOverdueAlerts: async (idEmpresa) => {
+    try {
+      if (!idEmpresa) throw new Error('ID de empresa requerido');
+
+      const response = await apiClient.get(`/api/dashboard/alertas-vencidas?idEmpresa=${idEmpresa}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo alertas vencidas:', error);
       return { alertas: [] };
     }
   },

@@ -417,9 +417,19 @@ const authAPI = {
     return authAPI.hasRole('SUPERADMIN');
   },
 
-  // Verificar si es administrador
+  // Verificar si es gestor
+  isGestor: () => {
+    return authAPI.hasRole('GESTOR');
+  },
+
+  // Verificar si es conductor
+  isConductor: () => {
+    return authAPI.hasRole('CONDUCTOR');
+  },
+
+  // Verificar si es administrador (mantiene compatibilidad)
   isAdmin: () => {
-    return authAPI.hasRole('ADMINISTRADOR');
+    return authAPI.hasRole('ADMINISTRADOR') || authAPI.hasRole('SUPERADMIN') || authAPI.hasRole('GESTOR');
   },
 
   // ================================
@@ -793,6 +803,8 @@ export const {
   getUserRole,
   hasRole,
   isSuperAdmin,
+  isGestor,
+  isConductor,
   isAdmin,
   checkServerHealth,
   diagnoseConnection,

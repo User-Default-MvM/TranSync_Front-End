@@ -36,55 +36,46 @@ const rutasAPI = {
   // Crear nueva ruta
   create: async (routeData) => {
     try {
-      // Validaciones específicas para rutas
-      const { 
-        nomRuta, 
-        origen, 
-        destino, 
-        distanciaKm,
-        tiempoEstimadoMin,
-        tarifaRuta,
-        idEmpresa 
+      // Validaciones específicas para rutas según la base de datos
+      const {
+        nomRuta,
+        oriRuta,
+        desRuta,
+        idEmpresa
       } = routeData;
 
-      const missing = apiUtils.validateRequired({ 
-        nomRuta, 
-        origen, 
-        destino, 
-        distanciaKm,
-        tiempoEstimadoMin,
-        tarifaRuta
+      const missing = apiUtils.validateRequired({
+        nomRuta,
+        oriRuta,
+        desRuta
       });
 
       if (missing.length > 0) {
         throw new Error(`Campos requeridos: ${missing.join(', ')}`);
       }
 
-      // Validar distancia
-      if (distanciaKm <= 0 || distanciaKm > 1000) {
-        throw new Error('La distancia debe estar entre 1 y 1000 kilómetros');
-      }
-
-      // Validar tiempo estimado
-      if (tiempoEstimadoMin <= 0 || tiempoEstimadoMin > 1440) { // 24 horas máximo
-        throw new Error('El tiempo estimado debe estar entre 1 y 1440 minutos');
-      }
-
-      // Validar tarifa
-      if (tarifaRuta <= 0 || tarifaRuta > 1000000) {
-        throw new Error('La tarifa debe estar entre 1 y 1,000,000');
-      }
-
       // Validar que origen y destino sean diferentes
-      if (origen.trim().toLowerCase() === destino.trim().toLowerCase()) {
+      if (oriRuta.trim().toLowerCase() === desRuta.trim().toLowerCase()) {
         throw new Error('El origen y destino deben ser diferentes');
       }
 
+      // Validar longitud de campos
+      if (nomRuta.trim().length < 3) {
+        throw new Error('El nombre de la ruta debe tener al menos 3 caracteres');
+      }
+
+      if (oriRuta.trim().length < 2) {
+        throw new Error('El origen debe tener al menos 2 caracteres');
+      }
+
+      if (desRuta.trim().length < 2) {
+        throw new Error('El destino debe tener al menos 2 caracteres');
+      }
+
       const response = await apiClient.post('/api/rutas', {
-        ...routeData,
         nomRuta: nomRuta.trim(),
-        origen: origen.trim(),
-        destino: destino.trim(),
+        oriRuta: oriRuta.trim(),
+        desRuta: desRuta.trim(),
         idEmpresa: idEmpresa || 1
       });
 
@@ -99,31 +90,30 @@ const rutasAPI = {
     try {
       if (!id) throw new Error('ID de ruta requerido');
 
-      // Validar datos si se proporcionan
-      if (routeData.distanciaKm && (routeData.distanciaKm <= 0 || routeData.distanciaKm > 1000)) {
-        throw new Error('La distancia debe estar entre 1 y 1000 kilómetros');
-      }
-
-      if (routeData.tiempoEstimadoMin && (routeData.tiempoEstimadoMin <= 0 || routeData.tiempoEstimadoMin > 1440)) {
-        throw new Error('El tiempo estimado debe estar entre 1 y 1440 minutos');
-      }
-
-      if (routeData.tarifaRuta && (routeData.tarifaRuta <= 0 || routeData.tarifaRuta > 1000000)) {
-        throw new Error('La tarifa debe estar entre 1 y 1,000,000');
-      }
-
       // Validar que origen y destino sean diferentes si ambos están presentes
-      if (routeData.origen && routeData.destino && 
-          routeData.origen.trim().toLowerCase() === routeData.destino.trim().toLowerCase()) {
+      if (routeData.oriRuta && routeData.desRuta &&
+          routeData.oriRuta.trim().toLowerCase() === routeData.desRuta.trim().toLowerCase()) {
         throw new Error('El origen y destino deben ser diferentes');
+      }
+
+      // Validar longitud de campos si se proporcionan
+      if (routeData.nomRuta && routeData.nomRuta.trim().length < 3) {
+        throw new Error('El nombre de la ruta debe tener al menos 3 caracteres');
+      }
+
+      if (routeData.oriRuta && routeData.oriRuta.trim().length < 2) {
+        throw new Error('El origen debe tener al menos 2 caracteres');
+      }
+
+      if (routeData.desRuta && routeData.desRuta.trim().length < 2) {
+        throw new Error('El destino debe tener al menos 2 caracteres');
       }
 
       // Limpiar campos de texto si existen
       const cleanedData = { ...routeData };
       if (cleanedData.nomRuta) cleanedData.nomRuta = cleanedData.nomRuta.trim();
-      if (cleanedData.origen) cleanedData.origen = cleanedData.origen.trim();
-      if (cleanedData.destino) cleanedData.destino = cleanedData.destino.trim();
-      if (cleanedData.descripcion) cleanedData.descripcion = cleanedData.descripcion.trim();
+      if (cleanedData.oriRuta) cleanedData.oriRuta = cleanedData.oriRuta.trim();
+      if (cleanedData.desRuta) cleanedData.desRuta = cleanedData.desRuta.trim();
 
       const response = await apiClient.put(`/api/rutas/${id}`, cleanedData);
       return response.data;
@@ -215,8 +205,15 @@ const rutasAPI = {
         throw new Error('El término de búsqueda debe tener al menos 2 caracteres');
       }
 
-      const response = await apiClient.get(`/api/rutas/buscar?q=${encodeURIComponent(searchTerm.trim())}`);
-      return response.data;
+      // Buscar en todas las rutas y filtrar por origen o destino
+      const response = await rutasAPI.getAll();
+      const filteredRoutes = response.rutas.filter(ruta =>
+        ruta.oriRuta.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ruta.desRuta.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ruta.nomRuta.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      return { rutas: filteredRoutes };
     } catch (error) {
       throw new Error(apiUtils.formatError(error));
     }
@@ -226,8 +223,11 @@ const rutasAPI = {
   getByOrigin: async (origen) => {
     try {
       if (!origen) throw new Error('Origen requerido');
-      const response = await apiClient.get(`/api/rutas?origen=${encodeURIComponent(origen)}`);
-      return response.data;
+      const response = await rutasAPI.getAll();
+      const filteredRoutes = response.rutas.filter(ruta =>
+        ruta.oriRuta.toLowerCase().includes(origen.toLowerCase())
+      );
+      return { rutas: filteredRoutes };
     } catch (error) {
       throw new Error(apiUtils.formatError(error));
     }
@@ -237,34 +237,11 @@ const rutasAPI = {
   getByDestination: async (destino) => {
     try {
       if (!destino) throw new Error('Destino requerido');
-      const response = await apiClient.get(`/api/rutas?destino=${encodeURIComponent(destino)}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(apiUtils.formatError(error));
-    }
-  },
-
-  // Obtener rutas por rango de distancia
-  getByDistanceRange: async (minKm, maxKm) => {
-    try {
-      if (!minKm || !maxKm) throw new Error('Rango de distancia requerido');
-      if (minKm >= maxKm) throw new Error('La distancia mínima debe ser menor que la máxima');
-      
-      const response = await apiClient.get(`/api/rutas?minDistancia=${minKm}&maxDistancia=${maxKm}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(apiUtils.formatError(error));
-    }
-  },
-
-  // Obtener rutas por rango de tarifa
-  getByPriceRange: async (minTarifa, maxTarifa) => {
-    try {
-      if (!minTarifa || !maxTarifa) throw new Error('Rango de tarifa requerido');
-      if (minTarifa >= maxTarifa) throw new Error('La tarifa mínima debe ser menor que la máxima');
-      
-      const response = await apiClient.get(`/api/rutas?minTarifa=${minTarifa}&maxTarifa=${maxTarifa}`);
-      return response.data;
+      const response = await rutasAPI.getAll();
+      const filteredRoutes = response.rutas.filter(ruta =>
+        ruta.desRuta.toLowerCase().includes(destino.toLowerCase())
+      );
+      return { rutas: filteredRoutes };
     } catch (error) {
       throw new Error(apiUtils.formatError(error));
     }
@@ -424,41 +401,26 @@ const rutasAPI = {
   // Validar datos de ruta
   validateRouteData: (routeData) => {
     const errors = [];
-    
+
     // Validar nombre
     if (!routeData.nomRuta || routeData.nomRuta.trim().length < 3) {
       errors.push('El nombre de la ruta debe tener al menos 3 caracteres');
     }
-    
+
     // Validar origen
-    if (!routeData.origen || routeData.origen.trim().length < 2) {
+    if (!routeData.oriRuta || routeData.oriRuta.trim().length < 2) {
       errors.push('El origen debe tener al menos 2 caracteres');
     }
 
     // Validar destino
-    if (!routeData.destino || routeData.destino.trim().length < 2) {
+    if (!routeData.desRuta || routeData.desRuta.trim().length < 2) {
       errors.push('El destino debe tener al menos 2 caracteres');
     }
 
     // Validar que origen y destino sean diferentes
-    if (routeData.origen && routeData.destino && 
-        routeData.origen.trim().toLowerCase() === routeData.destino.trim().toLowerCase()) {
+    if (routeData.oriRuta && routeData.desRuta &&
+        routeData.oriRuta.trim().toLowerCase() === routeData.desRuta.trim().toLowerCase()) {
       errors.push('El origen y destino deben ser diferentes');
-    }
-
-    // Validar distancia
-    if (!routeData.distanciaKm || routeData.distanciaKm <= 0 || routeData.distanciaKm > 1000) {
-      errors.push('La distancia debe estar entre 1 y 1000 kilómetros');
-    }
-
-    // Validar tiempo estimado
-    if (!routeData.tiempoEstimadoMin || routeData.tiempoEstimadoMin <= 0 || routeData.tiempoEstimadoMin > 1440) {
-      errors.push('El tiempo estimado debe estar entre 1 y 1440 minutos');
-    }
-
-    // Validar tarifa
-    if (!routeData.tarifaRuta || routeData.tarifaRuta <= 0 || routeData.tarifaRuta > 1000000) {
-      errors.push('La tarifa debe estar entre 1 y 1,000,000');
     }
 
     return errors;
@@ -468,30 +430,10 @@ const rutasAPI = {
   formatRouteData: (route) => {
     return {
       ...route,
-      descripcionCompleta: `${route.origen} → ${route.destino}`,
-      distanciaFormateada: `${route.distanciaKm} km`,
-      tiempoFormateado: rutasAPI.formatTiempo(route.tiempoEstimadoMin),
-      tarifaFormateada: new Intl.NumberFormat('es-CO', { 
-        style: 'currency', 
-        currency: 'COP' 
-      }).format(route.tarifaRuta),
+      descripcionCompleta: `${route.oriRuta} → ${route.desRuta}`,
       estadoFormateado: rutasAPI.getStatusLabel(route.estRuta),
-      velocidadPromedio: Math.round((route.distanciaKm / route.tiempoEstimadoMin) * 60) // km/h
+      rutaDisplay: `${route.nomRuta} (${route.oriRuta} - ${route.desRuta})`
     };
-  },
-
-  // Formatear tiempo en minutos a formato legible
-  formatTiempo: (minutos) => {
-    const horas = Math.floor(minutos / 60);
-    const mins = minutos % 60;
-    
-    if (horas === 0) {
-      return `${mins} min`;
-    } else if (mins === 0) {
-      return `${horas}h`;
-    } else {
-      return `${horas}h ${mins}min`;
-    }
   },
 
   // Obtener etiqueta del estado
@@ -502,7 +444,7 @@ const rutasAPI = {
       'EN_MANTENIMIENTO': 'En mantenimiento',
       'SUSPENDIDA': 'Suspendida'
     };
-    return statusLabels[status] || status;
+    return statusLabels[status] || status || 'Activa';
   },
 
   // Obtener color del estado para UI
