@@ -4,7 +4,6 @@ import chatbotAPI from '../utilidades/chatbotAPI';
 import conversationMemory from '../utilidades/conversationMemory';
 import realTimeService from '../utilidades/realTimeService';
 import { useTheme } from '../context/ThemeContext'; // 👈 Importar useTheme
-import { useUser } from '../context/UserContext'; // 👈 Importar useUser
 
 // Componente Button con paleta uniforme y modo oscuro
 const Button = ({
@@ -65,7 +64,7 @@ const ChatBot = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('unknown');
-  const userContext = useUser();
+  const [userContext, setUserContext] = useState(null);
   const { theme: appTheme } = useTheme();
   const [realTimeNotifications, setRealTimeNotifications] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
@@ -75,40 +74,18 @@ const ChatBot = ({
     return saved ? JSON.parse(saved) : false;
   });
   const messagesEndRef = useRef(null);
-
-  // Verificar conexión con el servicio de chatbot
-  const verificarConexion = useCallback(async () => {
-    try {
-      console.log('🔍 Verificando conexión del chatbot...');
-
-      // Primero probar el endpoint de health
-      try {
-        const health = await chatbotAPI.testConnection(userContext?.idEmpresa || 1);
-        console.log('✅ Health check del chatbot exitoso:', health);
-        setConnectionStatus('connected');
-        return;
-      } catch (healthError) {
-        console.warn('⚠️ Health check falló, intentando con estadísticas:', healthError);
-      }
-
-      // Si health falla, intentar con estadísticas
-      const stats = await chatbotAPI.getChatbotStats(userContext?.idEmpresa || 1);
-      setConnectionStatus(stats ? 'connected' : 'disconnected');
-    } catch (error) {
-      console.error('❌ Error verificando conexión del chatbot:', error);
-      setConnectionStatus('disconnected');
-    }
-  }, [userContext?.idEmpresa]);
-
+  
+  
   useEffect(() => {
-    // El contexto del usuario ya está disponible a través del UserContext
-    // No necesitamos obtenerlo adicionalmente
+    // Obtener contexto del usuario al inicializar
+    const context = chatbotAPI.obtenerContextoUsuario();
+    setUserContext(context);
 
     // Mensaje inicial personalizado
-    if (messages.length === 0 && userContext) {
-      const mensajeInicial = userContext.esUsuarioAutenticado
-        ? `Hola ${userContext.nombreUsuario}! Soy el asistente de ${userContext.empresa}. Tengo acceso a datos actuales del sistema y puedo ayudarte con información sobre conductores, vehículos, rutas, horarios y más. ¿Qué necesitas consultar?`
-        : initialMessage;
+    if (messages.length === 0) {
+      const mensajeInicial = context.esUsuarioAutenticado
+        ? `Hola ${context.nombreUsuario}! Soy el asistente de ${context.empresa}. Tengo acceso a datos actuales del sistema y puedo ayudarte con información sobre conductores, vehículos, rutas, horarios y más. ¿Qué necesitas consultar?`
+        : t('chatbot.initialMessage');
 
       setMessages([
         {
@@ -125,7 +102,7 @@ const ChatBot = ({
     if (isOpen && connectionStatus === 'unknown') {
       verificarConexion();
     }
-  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext, verificarConexion]);
+  }, [isOpen, connectionStatus, messages.length, initialMessage, t]);
 
   // Manejar notificaciones en tiempo real
   const handleRealTimeNotification = useCallback((notification) => {
@@ -211,11 +188,21 @@ const ChatBot = ({
         setWsConnected(false);
       };
     }
-  }, [userContext, handleRealTimeNotification, isOpen]);
+  }, [userContext, isOpen, handleRealTimeNotification]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Verificar conexión con el servicio de chatbot
+  const verificarConexion = async () => {
+    try {
+      const resultado = await chatbotAPI.verificarEstado();
+      setConnectionStatus(resultado.success ? 'connected' : 'disconnected');
+    } catch (error) {
+      setConnectionStatus('disconnected');
+    }
+  };
 
   // Animaciones CSS mejoradas con modo oscuro
   useEffect(() => {
@@ -412,35 +399,16 @@ const ChatBot = ({
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Función simple para formatear mensajes con negrita e italica
-  const formatearMensajeSimple = (text) => {
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **negrita**
-      .replace(/\*(.*?)\*/g, '<em>$1</em>') // *italica*
-      .replace(/\n/g, '<br>'); // Saltos de línea
-  };
-
   const handleSendMessage = async () => {
     if (inputText.trim() === '' || isTyping) return;
 
-    // Validar mensaje básico
-    const trimmedMessage = inputText.trim();
-    if (trimmedMessage.length === 0) {
+    // Validar mensaje
+    const validacion = chatbotAPI.validarMensaje(inputText);
+    if (!validacion.esValido) {
+      // Mostrar error de validación
       const errorMessage = {
         id: Date.now(),
-        text: `${t('chatbot.error')}: El mensaje no puede estar vacío`,
-        sender: 'bot',
-        timestamp: new Date(),
-        isError: true
-      };
-      setMessages(prev => [...prev, errorMessage]);
-      return;
-    }
-
-    if (trimmedMessage.length > 1000) {
-      const errorMessage = {
-        id: Date.now(),
-        text: `${t('chatbot.error')}: El mensaje es demasiado largo (máximo 1000 caracteres)`,
+        text: `${t('chatbot.error')}: ${validacion.error}`,
         sender: 'bot',
         timestamp: new Date(),
         isError: true
@@ -462,40 +430,26 @@ const ChatBot = ({
     setIsTyping(true);
 
     try {
-      console.log('🚀 Iniciando envío de mensaje:', {
-        mensaje: mensajeUsuario,
-        idEmpresa: userContext?.idEmpresa || 1,
-        idUsuario: userContext?.idUsuario || null,
-        connectionStatus
+      // Usar procesamiento inteligente avanzado
+      const respuesta = await chatbotAPI.procesarConsultaInteligente(mensajeUsuario, {
+        incluirMetadata: true,
+        contextoUsuario: userContext
       });
-
-      // Verificar conexión antes de enviar
-      if (connectionStatus !== 'connected') {
-        console.warn('⚠️ Estado de conexión:', connectionStatus);
-        await verificarConexion();
-      }
-
-      // Enviar mensaje usando la API básica del chatbot
-      const respuesta = await chatbotAPI.sendMessage(
-        mensajeUsuario,
-        userContext?.idEmpresa || 1,
-        userContext?.idUsuario || null
-      );
 
       setTimeout(() => {
         const botMessage = {
           id: Date.now() + 1,
-          text: respuesta.respuesta || respuesta.mensaje || 'Lo siento, no pude procesar tu mensaje.',
+          text: respuesta.respuesta,
           sender: 'bot',
           timestamp: new Date(),
-          intencion: respuesta.intencion || 'general',
-          confianza: respuesta.confianza || 0.5,
-          entidades: respuesta.entidades || {},
-          tiempoProcesamiento: respuesta.tiempoProcesamiento || 1000,
-          sugerencias: respuesta.sugerencias || [],
-          success: respuesta.success !== false,
+          intencion: respuesta.intencion,
+          confianza: respuesta.confianza,
+          entidades: respuesta.entidades,
+          tiempoProcesamiento: respuesta.tiempoProcesamiento,
+          sugerencias: respuesta.sugerencias,
+          success: respuesta.success,
           formatted: true,
-          metadata: respuesta.metadata || {}
+          metadata: respuesta.metadata
         };
 
         setMessages(prev => [...prev, botMessage]);
@@ -508,7 +462,7 @@ const ChatBot = ({
           }, 1000);
         }
 
-      }, Math.max(500, respuesta.tiempoProcesamiento || 1000));
+      }, Math.max(500, respuesta.tiempoProcesamiento || 0));
 
     } catch (error) {
       console.error('Error procesando mensaje inteligente:', error);
@@ -645,23 +599,15 @@ const ChatBot = ({
 
   // Obtener sugerencias inteligentes
   const obtenerSugerenciasInteligentes = () => {
-    // Sugerencias estáticas básicas para el chatbot
-    const sugerenciasBasicas = [
-      { texto: '¿Cuántos conductores activos hay?', icono: '👨‍💼', categoria: 'drivers' },
-      { texto: '¿Cuál es el estado de la flota?', icono: '🚗', categoria: 'vehicles' },
-      { texto: '¿Hay rutas programadas para hoy?', icono: '🗺️', categoria: 'routes' },
-      { texto: '¿Qué viajes están en curso?', icono: '⏰', categoria: 'schedules' }
-    ];
-
     if (!userContext?.idUsuario) {
-      return sugerenciasBasicas;
+      return chatbotAPI.obtenerSugerencias().slice(0, 4);
     }
 
     try {
       // Usar sugerencias del sistema de memoria de conversación
       const sugerenciasInteligentes = conversationMemory.getSuggestions(
         userContext.idUsuario,
-        userContext.idEmpresa || 1
+        userContext.idEmpresa
       );
 
       if (sugerenciasInteligentes && sugerenciasInteligentes.length > 0) {
@@ -672,7 +618,7 @@ const ChatBot = ({
     }
 
     // Fallback a sugerencias estáticas
-    return sugerenciasBasicas;
+    return chatbotAPI.obtenerSugerencias().slice(0, 4);
   };
 
   const sugerencias = obtenerSugerenciasInteligentes();
@@ -688,7 +634,7 @@ const ChatBot = ({
               : 'bg-gradient-to-r from-[#1a237e] to-[#3949ab] hover:from-[#0d1642] hover:to-[#283593]'
             }
             text-white border-none rounded-full
-            w-14 h-14 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center cursor-pointer
+            w-14 h-14 xs:w-12 xs:h-12 sm:w-14 sm:h-14 flex items-center justify-center cursor-pointer
             shadow-lg hover:shadow-xl
             transition-all duration-300 ease-out
             hover:scale-110
@@ -698,20 +644,20 @@ const ChatBot = ({
           onClick={toggleChat}
           aria-label="Abrir chat de asistencia"
         >
-          <span className="text-2xl xs:text-lg sm:text-xl md:text-2xl filter drop-shadow-sm">💬</span>
+          <span className="text-2xl sm:text-xl filter drop-shadow-sm">💬</span>
 
           {/* Indicadores reorganizados para evitar superposición */}
           <div className="absolute -top-2 -left-2 flex flex-col gap-0.5">
             {/* Indicador de notificaciones en tiempo real */}
             {realTimeNotifications.length > 0 && !quietMode && (
-              <div className="bg-red-500 text-white text-xs rounded-full w-3 h-3 xs:w-4 xs:h-4 flex items-center justify-center font-bold animate-pulse">
+              <div className="bg-red-500 text-white text-xs rounded-full w-4 h-4 xs:w-5 xs:h-5 flex items-center justify-center font-bold animate-pulse">
                 {realTimeNotifications.length > 9 ? '9+' : realTimeNotifications.length}
               </div>
             )}
 
             {/* Indicador de modo quiet */}
             {quietMode && (
-              <div className="bg-yellow-500 text-white text-xs rounded-full w-3 h-3 xs:w-4 xs:h-4 flex items-center justify-center font-bold">
+              <div className="bg-yellow-500 text-white text-xs rounded-full w-4 h-4 xs:w-5 xs:h-5 flex items-center justify-center font-bold">
                 <span className="text-xs">🔕</span>
               </div>
             )}
@@ -868,7 +814,7 @@ const ChatBot = ({
                       }`}>
                         {msg.formatted ? (
                           <div dangerouslySetInnerHTML={{
-                            __html: formatearMensajeSimple(msg.text)
+                            __html: chatbotAPI.formatearMensaje(msg.text)
                           }} />
                         ) : (
                           msg.text

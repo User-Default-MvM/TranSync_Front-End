@@ -18,7 +18,7 @@
     Content-Type = "text/css; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Headers CRÍTICOS para chunks dinámicos
+# Headers CRÍTICOS para chunks dinámicos - FIXED PATTERNS
 [[headers]]
   for = "/static/js/*.chunk.js"
   [headers.values]
@@ -27,6 +27,13 @@
 
 [[headers]]
   for = "/*.chunk.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers for main JS file
+[[headers]]
+  for = "/static/js/main.*.js"
   [headers.values]
     Content-Type = "application/javascript; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
@@ -42,43 +49,13 @@
   [headers.values]
     Content-Type = "image/x-icon"
 
-# Redirecciones - ORDEN CRÍTICO
-[[redirects]]
-  from = "/static/js/*.chunk.js"
-  to = "/static/js/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*.chunk.js"
-  to = "/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/static/*"
-  to = "/static/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 200
-
+# API proxy only - static redirects handled by _redirects file
 [[redirects]]
   from = "/api/*"
   to = "https://transyncbackend-production.up.railway.app/:splat"
   status = 200
 
-[[redirects]]
-  from = "/favicon.ico"
-  to = "/favicon.ico"
-  status = 200
-
-[[redirects]]
-  from = "/manifest.json"
-  to = "/manifest.json"
-  status = 200
-
-# SPA fallback - DEBE SER EL ÚLTIMO
+# SPA fallback - DEBE SER EL ÚLTIMO (only if _redirects doesn't handle it)
 [[redirects]]
   from = "/*"
   to = "/index.html"

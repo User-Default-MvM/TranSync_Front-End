@@ -19,28 +19,14 @@ const chatbotAPI = {
         throw new Error('Mensaje e ID de empresa son requeridos');
       }
 
-      console.log('🤖 Enviando mensaje al chatbot:', {
-        mensaje: mensaje.trim(),
-        idEmpresa: parseInt(idEmpresa),
-        idUsuario: idUsuario ? parseInt(idUsuario) : null,
-        endpoint: '/api/chatbot/consulta'
-      });
-
-      const response = await apiClient.post('/api/chatbot/consulta', {
+      const response = await apiClient.post('/api/chatbot/message', {
         mensaje: mensaje.trim(),
         idEmpresa: parseInt(idEmpresa),
         idUsuario: idUsuario ? parseInt(idUsuario) : null
       });
 
-      console.log('✅ Respuesta del chatbot recibida:', response.data);
       return response.data;
     } catch (error) {
-      console.error('❌ Error en sendMessage:', {
-        error: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-        endpoint: '/api/chatbot/consulta'
-      });
       throw new Error(apiUtils.formatError(error));
     }
   },
@@ -77,50 +63,9 @@ const chatbotAPI = {
         throw new Error('ID de empresa es requerido');
       }
 
-      console.log('📊 Obteniendo estadísticas del chatbot:', {
-        idEmpresa,
-        period,
-        endpoint: '/api/chatbot/estadisticas'
-      });
-
-      const response = await apiClient.get(`/api/chatbot/estadisticas?idEmpresa=${idEmpresa}&dias=${period === 'semana' ? 7 : period === 'mes' ? 30 : 1}`);
-      console.log('✅ Estadísticas del chatbot obtenidas:', response.data);
+      const response = await apiClient.get(`/api/chatbot/estadisticas?idEmpresa=${idEmpresa}&period=${period}`);
       return response.data;
     } catch (error) {
-      console.error('❌ Error obteniendo estadísticas del chatbot:', {
-        error: error.message,
-        status: error.response?.status,
-        data: error.response?.data
-      });
-      throw new Error(apiUtils.formatError(error));
-    }
-  },
-
-  /**
-   * Probar conectividad del chatbot
-   * @param {number} idEmpresa - ID de la empresa
-   * @returns {Promise<Object>} Estado de conectividad
-   */
-  testConnection: async (idEmpresa) => {
-    try {
-      if (!idEmpresa) {
-        throw new Error('ID de empresa es requerido');
-      }
-
-      console.log('🔍 Probando conectividad del chatbot:', {
-        idEmpresa,
-        endpoint: '/api/chatbot/health'
-      });
-
-      const response = await apiClient.get('/api/chatbot/health');
-      console.log('✅ Conectividad del chatbot verificada:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('❌ Error probando conectividad del chatbot:', {
-        error: error.message,
-        status: error.response?.status,
-        data: error.response?.data
-      });
       throw new Error(apiUtils.formatError(error));
     }
   },

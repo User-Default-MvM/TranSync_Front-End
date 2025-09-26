@@ -1,6 +1,7 @@
-# SERVE CHUNKS DIRECTLY - MOST IMPORTANT
+# SERVE CHUNKS DIRECTLY - MOST IMPORTANT - FIXED PATTERNS
 /static/js/*.chunk.js    /static/js/:splat    200
 /*.chunk.js              /:splat              200
+/static/css/*.css        /static/css/:splat   200
 
 # SERVE STATIC ASSETS DIRECTLY
 /static/*                /static/:splat        200
