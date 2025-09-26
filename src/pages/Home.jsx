@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bus, Clock, Shield, Map, BarChart, CalendarClock, Check, Award, TrendingUp, Users, Zap, Star, ArrowRight, Play, Globe, Target, Download } from 'lucide-react';
+import { Bus, Clock, Shield, Map, BarChart, CalendarClock, Check, Award, TrendingUp, Users, Zap, Star, Globe, Target, Download } from 'lucide-react';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -454,10 +454,10 @@ const Home = () => {
           </p>
 
           <div className={`flex justify-center items-center transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <a href="#" className="group bg-gradient-to-r from-primary-600 to-secondary-700 hover:from-primary-700 hover:to-secondary-800 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-2xl shadow-2xl transition-all duration-300 flex items-center gap-2 sm:gap-3 hover:scale-105 text-sm sm:text-base md:text-lg">
+            <button className="group bg-gradient-to-r from-primary-600 to-secondary-700 hover:from-primary-700 hover:to-secondary-800 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-2xl shadow-2xl transition-all duration-300 flex items-center gap-2 sm:gap-3 hover:scale-105 text-sm sm:text-base md:text-lg">
               <Download className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               {t('homePage.cta.buttons.download')}
-            </a>
+            </button>
           </div>
 
           <div className="mt-6 sm:mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-blue-100 dark:text-gray-300">

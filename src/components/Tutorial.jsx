@@ -248,8 +248,8 @@ const Tutorial = () => {
           setShowArrow(false);
         };
       }
-    }
-  }, [currentStepData, showWelcome, nextStep]);
+     }
+   }, [currentStepData, showWelcome, nextStep, isActive, isPaused]);
 
   // No renderizar si el tutorial no está activo o está pausado
   if (!isActive || isPaused) {

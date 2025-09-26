@@ -64,7 +64,7 @@ const ChatBot = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('unknown');
-  const [userContext, setUserContext] = useState(null);
+  const [userContext] = useState(null);
   const { theme: appTheme } = useTheme();
   const [realTimeNotifications, setRealTimeNotifications] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
@@ -74,8 +74,19 @@ const ChatBot = ({
     return saved ? JSON.parse(saved) : false;
   });
   const messagesEndRef = useRef(null);
-  
-  
+
+  // Verificar conexión con el servicio de chatbot
+  const verificarConexion = useCallback(async () => {
+    try {
+      // Verificar conexión intentando obtener estadísticas del chatbot
+      const stats = await chatbotAPI.getChatbotStats(userContext?.idEmpresa || 1);
+      setConnectionStatus(stats ? 'connected' : 'disconnected');
+    } catch (error) {
+      console.error('Error verificando conexión del chatbot:', error);
+      setConnectionStatus('disconnected');
+    }
+  }, [userContext?.idEmpresa]);
+
   useEffect(() => {
     // El contexto del usuario ya está disponible a través del UserContext
     // No necesitamos obtenerlo adicionalmente
@@ -101,7 +112,7 @@ const ChatBot = ({
     if (isOpen && connectionStatus === 'unknown') {
       verificarConexion();
     }
-  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext]);
+  }, [isOpen, connectionStatus, messages.length, initialMessage, t, userContext, verificarConexion]);
 
   // Manejar notificaciones en tiempo real
   const handleRealTimeNotification = useCallback((notification) => {
@@ -192,18 +203,6 @@ const ChatBot = ({
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  // Verificar conexión con el servicio de chatbot
-  const verificarConexion = async () => {
-    try {
-      // Verificar conexión intentando obtener estadísticas del chatbot
-      const stats = await chatbotAPI.getChatbotStats(userContext?.idEmpresa || 1);
-      setConnectionStatus(stats ? 'connected' : 'disconnected');
-    } catch (error) {
-      console.error('Error verificando conexión del chatbot:', error);
-      setConnectionStatus('disconnected');
-    }
-  };
 
   // Animaciones CSS mejoradas con modo oscuro
   useEffect(() => {
