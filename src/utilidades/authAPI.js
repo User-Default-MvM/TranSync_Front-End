@@ -371,7 +371,20 @@ const authAPI = {
     try {
       const userData = localStorage.getItem('userData');
       if (userData) {
-        return JSON.parse(userData);
+        try {
+          const parsed = JSON.parse(userData);
+          // Validar que el objeto parseado tenga la estructura mínima
+          if (parsed && typeof parsed === 'object') {
+            return {
+              id: parsed.id || parsed.userId || parsed._id,
+              name: parsed.name || parsed.userName || parsed.fullName || 'Usuario',
+              email: parsed.email || parsed.userEmail,
+              role: parsed.role || parsed.userRole || parsed.type || 'USER'
+            };
+          }
+        } catch (parseError) {
+          console.warn('⚠️ Error parsing userData JSON, attempting recovery:', parseError);
+        }
       }
 
       // Fallback con datos separados
@@ -382,16 +395,16 @@ const authAPI = {
 
       if (userName || userRole || userEmail || userId) {
         return {
-          id: userId,
-          name: userName,
-          email: userEmail,
-          role: userRole
+          id: userId || 'unknown',
+          name: userName || 'Usuario',
+          email: userEmail || 'user@example.com',
+          role: userRole || 'USER'
         };
       }
 
       return null;
     } catch (error) {
-      console.error('Error parseando userData:', error);
+      console.error('Error getting current user:', error);
       return null;
     }
   },
@@ -444,77 +457,84 @@ const authAPI = {
         localStorage.setItem('userToken', authData.token); // Por compatibilidad
         localStorage.setItem('isAuthenticated', 'true');
 
-        // Verificar y guardar datos del usuario con validación mejorada
+        // Buscar datos del usuario en múltiples ubicaciones posibles
+        let userData = null;
+        let userSource = '';
+
+        // 1. Intentar obtener de authData.user
         if (authData.user && typeof authData.user === 'object') {
-          const userData = {
-            id: authData.user.id,
-            name: authData.user.name,
-            email: authData.user.email,
-            role: authData.user.role
+          userData = authData.user;
+          userSource = 'authData.user';
+        }
+        // 2. Intentar obtener de authData.userData
+        else if (authData.userData && typeof authData.userData === 'object') {
+          userData = authData.userData;
+          userSource = 'authData.userData';
+        }
+        // 3. Intentar obtener de authData.profile
+        else if (authData.profile && typeof authData.profile === 'object') {
+          userData = authData.profile;
+          userSource = 'authData.profile';
+        }
+        // 4. Intentar obtener de authData.data
+        else if (authData.data && typeof authData.data === 'object') {
+          userData = authData.data;
+          userSource = 'authData.data';
+        }
+
+        if (userData) {
+          // Crear objeto de usuario con valores por defecto seguros
+          const finalUserData = {
+            id: userData.id || userData.userId || userData._id,
+            name: userData.name || userData.userName || userData.fullName || userData.displayName,
+            email: userData.email || userData.userEmail,
+            role: userData.role || userData.userRole || userData.type || 'USER'
           };
 
-          // Validar que los datos del usuario sean completos
-          if (userData.id && userData.email) {
-            localStorage.setItem('userData', JSON.stringify(userData));
-            localStorage.setItem('userName', userData.name || '');
-            localStorage.setItem('userRole', userData.role || '');
-            localStorage.setItem('userEmail', userData.email || '');
-            localStorage.setItem('userId', userData.id || '');
+          // Validar que al menos tengamos id y email
+          if (finalUserData.id && finalUserData.email) {
+            localStorage.setItem('userData', JSON.stringify(finalUserData));
+            localStorage.setItem('userName', finalUserData.name || '');
+            localStorage.setItem('userRole', finalUserData.role || '');
+            localStorage.setItem('userEmail', finalUserData.email || '');
+            localStorage.setItem('userId', finalUserData.id || '');
 
-            console.log('✅ User data saved successfully:', userData);
+            console.log('✅ User data saved successfully:', finalUserData, 'from:', userSource);
           } else {
-            console.warn('⚠️ User data incomplete, attempting to recover from response:', authData);
-            // Intentar recuperar datos del usuario desde la respuesta completa
-            if (authData.userData || authData.profile) {
-              const recoveredUser = authData.userData || authData.profile;
-              const recoveredUserData = {
-                id: recoveredUser.id,
-                name: recoveredUser.name,
-                email: recoveredUser.email,
-                role: recoveredUser.role
-              };
-
-              if (recoveredUserData.id && recoveredUserData.email) {
-                localStorage.setItem('userData', JSON.stringify(recoveredUserData));
-                localStorage.setItem('userName', recoveredUserData.name || '');
-                localStorage.setItem('userRole', recoveredUserData.role || '');
-                localStorage.setItem('userEmail', recoveredUserData.email || '');
-                localStorage.setItem('userId', recoveredUserData.id || '');
-
-                console.log('✅ User data recovered and saved successfully:', recoveredUserData);
-              } else {
-                throw new Error('No valid user data found in response');
-              }
-            } else {
-              throw new Error('No valid user data found in response');
-            }
-          }
-        } else {
-          console.warn('⚠️ No user data in auth response, attempting recovery...');
-          // Intentar recuperar datos del usuario desde otras partes de la respuesta
-          if (authData.userData || authData.profile) {
-            const recoveredUser = authData.userData || authData.profile;
-            const recoveredUserData = {
-              id: recoveredUser.id,
-              name: recoveredUser.name,
-              email: recoveredUser.email,
-              role: recoveredUser.role
+            console.warn('⚠️ User data incomplete, creating minimal user object:', finalUserData);
+            // Crear usuario mínimo con datos disponibles
+            const minimalUserData = {
+              id: finalUserData.id || 'unknown',
+              name: finalUserData.name || 'Usuario',
+              email: finalUserData.email || 'user@example.com',
+              role: finalUserData.role || 'USER'
             };
 
-            if (recoveredUserData.id && recoveredUserData.email) {
-              localStorage.setItem('userData', JSON.stringify(recoveredUserData));
-              localStorage.setItem('userName', recoveredUserData.name || '');
-              localStorage.setItem('userRole', recoveredUserData.role || '');
-              localStorage.setItem('userEmail', recoveredUserData.email || '');
-              localStorage.setItem('userId', recoveredUserData.id || '');
+            localStorage.setItem('userData', JSON.stringify(minimalUserData));
+            localStorage.setItem('userName', minimalUserData.name);
+            localStorage.setItem('userRole', minimalUserData.role);
+            localStorage.setItem('userEmail', minimalUserData.email);
+            localStorage.setItem('userId', minimalUserData.id);
 
-              console.log('✅ User data recovered and saved successfully:', recoveredUserData);
-            } else {
-              throw new Error('No valid user data found in response');
-            }
-          } else {
-            throw new Error('No user data found in authentication response');
+            console.log('✅ Minimal user data saved successfully:', minimalUserData);
           }
+        } else {
+          console.warn('⚠️ No user data found in response, creating fallback user');
+          // Crear usuario de fallback
+          const fallbackUserData = {
+            id: 'fallback',
+            name: 'Usuario',
+            email: 'user@example.com',
+            role: 'USER'
+          };
+
+          localStorage.setItem('userData', JSON.stringify(fallbackUserData));
+          localStorage.setItem('userName', fallbackUserData.name);
+          localStorage.setItem('userRole', fallbackUserData.role);
+          localStorage.setItem('userEmail', fallbackUserData.email);
+          localStorage.setItem('userId', fallbackUserData.id);
+
+          console.log('✅ Fallback user data saved successfully:', fallbackUserData);
         }
       } else {
         throw new Error('No authentication token provided');
