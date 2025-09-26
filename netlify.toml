@@ -26,22 +26,21 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
-# Redirect admin static files to correct locations (IMPORTANT: Before SPA fallback)
-[[redirects]]
-  from = "/admin/static/js/*"
-  to = "/static/js/:splat"
-  status = 200
+# Force proper MIME types for admin static files (IMPORTANT: Before SPA fallback)
+[[headers]]
+  for = "/admin/static/js/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
 
-[[redirects]]
-  from = "/admin/static/css/*"
-  to = "/static/css/:splat"
-  status = 200
-
-# Handle chunks with admin basename - redirect to correct static location
-[[redirects]]
-  from = "/admin/static/js/*.chunk.js"
-  to = "/static/js/:splat"
-  status = 200
+# Force proper MIME types for admin dynamic chunks (IMPORTANT: Before SPA fallback)
+[[headers]]
+  for = "/admin/static/js/*.chunk.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
 
 # Force proper MIME types for dynamic chunks (IMPORTANT: Before SPA fallback)
 [[headers]]
@@ -51,7 +50,21 @@
     Content-Type = "application/javascript; charset=utf-8"
     X-Content-Type-Options = "nosniff"
 
-# REMOVED: Admin static files headers - chunks are served from /static/js/ not /admin/static/js/
+# Force proper MIME types for admin dynamic chunks (IMPORTANT: Before SPA fallback)
+[[headers]]
+  for = "/admin/static/js/*.chunk.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
+
+# Force proper MIME types for any .js file in admin directory (catch-all)
+[[headers]]
+  for = "/admin/static/js/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
 
 [[headers]]
   for = "/static/css/*.css"
