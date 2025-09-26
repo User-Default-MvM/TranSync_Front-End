@@ -158,7 +158,7 @@ const Tutorial = () => {
 
   // Efecto para resaltar elementos del tutorial
   useEffect(() => {
-    if (currentStepData?.target && !showWelcome) {
+    if (currentStepData?.target && !showWelcome && isActive && !isPaused) {
       const element = document.querySelector(currentStepData.target);
       if (element) {
         // Para el menú de usuario, abrirlo automáticamente si está cerrado
@@ -168,8 +168,9 @@ const Tutorial = () => {
           if (!isMenuOpen) {
             // Simular clic para abrir el menú
             userMenuButton.click();
-            // Esperar un poco para que se renderice el menú
-            setTimeout(() => {
+
+            // Usar un enfoque más robusto para esperar que el menú se abra
+            const waitForMenu = () => {
               const profileItem = document.querySelector('[data-tutorial="profile-menu-item"]');
               if (profileItem) {
                 profileItem.classList.add('tutorial-highlight');
@@ -197,10 +198,23 @@ const Tutorial = () => {
                   setHighlightedElement(null);
                   setShowArrow(false);
                 };
+              } else {
+                // Si no se encontró, intentar de nuevo en un breve momento
+                setTimeout(waitForMenu, 50);
               }
-            }, 100);
+            };
+
+            // Iniciar la espera
+            setTimeout(waitForMenu, 50);
             return;
           }
+        }
+
+        // Verificar que el elemento sea visible y no esté oculto
+        const rect = element.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) {
+          console.warn('Tutorial: Elemento objetivo no es visible', currentStepData.target);
+          return;
         }
 
         // Añadir clase de resaltado
@@ -209,23 +223,27 @@ const Tutorial = () => {
         setShowArrow(currentStepData.isNavigation || false);
 
         // Calcular posición de la flecha
-        const rect = element.getBoundingClientRect();
         const arrowTop = rect.top + rect.height / 2 - 16; // Centrar verticalmente
         const arrowLeft = rect.left - 40; // A la izquierda del elemento
         setArrowPosition({ top: arrowTop, left: arrowLeft });
 
         // Función para manejar clics en elementos resaltados
         const handleElementClick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+          // Solo prevenir el comportamiento por defecto si es un enlace o botón
+          if (element.tagName === 'A' || element.tagName === 'BUTTON' || element.onclick) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           nextStep();
         };
 
         element.addEventListener('click', handleElementClick);
 
         return () => {
-          element.classList.remove('tutorial-highlight');
-          element.removeEventListener('click', handleElementClick);
+          if (element) {
+            element.classList.remove('tutorial-highlight');
+            element.removeEventListener('click', handleElementClick);
+          }
           setHighlightedElement(null);
           setShowArrow(false);
         };
@@ -377,8 +395,8 @@ const Tutorial = () => {
 
       {/* Tooltip para elementos específicos */}
       {currentStepData?.target && highlightedElement && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[120]">
-          <div className="bg-primary-600 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base shadow-lg animate-pulse max-w-[90vw] sm:max-w-sm text-center">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[120] px-2 sm:px-0">
+          <div className="bg-primary-600 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm md:text-base shadow-lg animate-pulse max-w-[85vw] sm:max-w-xs md:max-w-sm text-center leading-relaxed">
             {texts.clickToContinue || 'Haz clic en el elemento resaltado para continuar'}
           </div>
         </div>
@@ -391,13 +409,13 @@ const Tutorial = () => {
           style={{ top: `${arrowPosition.top}px`, left: `${arrowPosition.left}px` }}
         >
           <div className="relative">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-600 rounded-full flex items-center justify-center animate-bounce shadow-lg">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-primary-600 rounded-full flex items-center justify-center animate-bounce shadow-lg">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </div>
             {/* Línea punteada hacia el elemento */}
-            <div className="absolute top-4 sm:top-5 left-8 sm:left-10 w-12 sm:w-16 md:w-20 h-0.5 bg-primary-600 opacity-50 animate-pulse"></div>
+            <div className="absolute top-3 sm:top-4 md:top-5 left-6 sm:left-8 md:left-10 w-8 sm:w-12 md:w-16 lg:w-20 h-0.5 bg-primary-600 opacity-50 animate-pulse"></div>
           </div>
         </div>
       )}

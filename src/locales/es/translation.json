@@ -303,13 +303,12 @@
       "subtitle": "Reconocidos por nuestra innovación y potencial en el sector"
     },
     "cta": {
-      "title": "¿Listo para Transformar tu Sistema de Transporte?",
-      "subtitle": "Sé parte de la revolución del transporte inteligente. Únete a nuestro programa de adopción temprana y transforma tu operación",
+      "title": "¿Descarga la App para Conductores?",
+      "subtitle": "Únete a nuestra flota y accede a todas las herramientas necesarias para una gestión eficiente de tus rutas y viajes",
       "buttons": {
-        "demo": "Solicitar Demo Gratuita",
-        "expert": "Hablar con un Experto"
+        "download": "Descargar App para Android"
       },
-      "features": ["Implementación en 30 días", "Soporte 24/7 incluido", "Garantía de resultados"]
+      "features": ["Gestión de rutas en tiempo real", "Reportes automáticos", "Soporte 24/7 incluido"]
     }
   },
   "navbar": {

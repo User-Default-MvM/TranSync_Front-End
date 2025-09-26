@@ -299,7 +299,7 @@ const InteractiveMap = () => {
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 md:gap-6">
             <div className="flex items-center gap-3">
               <Bus className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary-600 dark:text-primary-400 flex-shrink-0" />
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary-light dark:text-text-primary-dark truncate">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary-light dark:text-text-primary-dark truncate" data-tutorial="routes">
                 {t('routes.title')}
               </h1>
             </div>

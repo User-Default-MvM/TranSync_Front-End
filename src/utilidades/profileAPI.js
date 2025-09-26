@@ -56,7 +56,7 @@ const profileAPI = {
         apeUsuario: profileData.apeUsuario.trim(),
         email: profileData.email?.trim().toLowerCase(),
         telUsuario: profileData.telUsuario?.trim()
-      });
+      }, { timeout: 10000 }); // Timeout reducido a 10 segundos
 
       return response.data;
     } catch (error) {
@@ -97,7 +97,7 @@ const profileAPI = {
         currentPassword,
         newPassword,
         confirmPassword
-      });
+      }, { timeout: 10000 }); // Timeout reducido a 10 segundos
 
       return response.data;
     } catch (error) {

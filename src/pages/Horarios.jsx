@@ -471,7 +471,7 @@ const Horarios = () => {
     <div className="min-h-screen w-full bg-surface-light dark:bg-gray-900 p-2 sm:p-4 md:p-6 text-text-primary-light dark:text-gray-100">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2 sm:gap-3 text-text-primary-light dark:text-gray-100 min-w-0 flex-shrink-0">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2 sm:gap-3 text-text-primary-light dark:text-gray-100 min-w-0 flex-shrink-0" data-tutorial="schedules">
           <Clock className="text-indigo-600 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 flex-shrink-0" />
           <span className="truncate">{t('schedules.title')}</span>
           <span className="text-xs sm:text-sm md:text-base font-normal text-text-secondary-light dark:text-gray-400 ml-1 sm:ml-2 min-w-0 flex-shrink-0">

@@ -303,13 +303,12 @@
       "subtitle": "Recognized for our innovation and potential in the sector"
     },
     "cta": {
-      "title": "Ready to Transform Your Transportation System?",
-      "subtitle": "Be part of the smart transportation revolution. Join our early adoption program and transform your operation",
+      "title": "Download the Driver App?",
+      "subtitle": "Join our fleet and access all the tools needed for efficient route and trip management",
       "buttons": {
-        "demo": "Request Free Demo",
-        "expert": "Talk to an Expert"
+        "download": "Download Android App"
       },
-      "features": ["30-day implementation", "24/7 support included", "Results guarantee"]
+      "features": ["Real-time route management", "Automatic reports", "24/7 support included"]
     }
   },
   "navbar": {

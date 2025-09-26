@@ -209,7 +209,7 @@ const AdminDashboard = () => {
       ) : (
         // VISTA DE LISTA DE USUARIOS
         <>
-          <h1 className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 sm:mb-2 ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`}>{t('adminDashboard.title')}</h1>
+          <h1 className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 sm:mb-2 ${theme === 'dark' ? 'text-white' : 'text-text-primary-light'}`} data-tutorial="admin-dashboard">{t('adminDashboard.title')}</h1>
           <p className={`mb-3 sm:mb-4 md:mb-6 lg:mb-8 text-sm sm:text-base ${theme === 'dark' ? 'text-gray-400' : 'text-text-secondary-light'}`}>{t('adminDashboard.subtitle')}</p>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-3 sm:mb-4 md:mb-6 lg:mb-8">

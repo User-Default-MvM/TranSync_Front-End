@@ -39,7 +39,7 @@ const Informes = () => {
     <div className="p-2 sm:p-4 md:p-6 max-w-7xl mx-auto text-text-primary-light min-h-screen">
       {/* Header */}
       <div className="mb-4 sm:mb-6 md:mb-8">
-        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 text-text-primary-light min-w-0">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 text-text-primary-light min-w-0" data-tutorial="reports">
           <FileText className="text-blue-600 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 flex-shrink-0" />
           <span className="leading-tight truncate">{t('reports.title')}</span>
         </h1>

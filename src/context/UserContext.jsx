@@ -105,43 +105,59 @@ export const UserProvider = ({ children }) => {
   }, [isLoggedIn, clearError, setErrorMessage]);
 
   // Actualizar perfil del usuario
-  const updateProfile = useCallback(async (profileData) => {
-    try {
-      setLoading(prev => ({ ...prev, profile: true }));
-      clearError('profile');
+   const updateProfile = useCallback(async (profileData) => {
+     let timeoutId;
+     try {
+       setLoading(prev => ({ ...prev, profile: true }));
+       clearError('profile');
 
-      const updatedProfile = await updateUserProfile(profileData);
-      setUserProfile(prev => ({ ...prev, ...updatedProfile }));
+       // Timeout de seguridad para resetear loading si algo falla
+       timeoutId = setTimeout(() => {
+         console.warn('Timeout de seguridad: reseteando loading.profile');
+         setLoading(prev => ({ ...prev, profile: false }));
+       }, 15000); // 15 segundos
 
-      // Refrescar datos de autenticación si se actualizó el email
-      if (profileData.email) {
-        refreshAuth();
-      }
+       const updatedProfile = await updateUserProfile(profileData);
+       setUserProfile(prev => ({ ...prev, ...updatedProfile }));
 
-      return updatedProfile;
-    } catch (err) {
-      setErrorMessage('profile', err.message);
-      throw err;
-    } finally {
-      setLoading(prev => ({ ...prev, profile: false }));
-    }
-  }, [clearError, setErrorMessage, refreshAuth]);
+       // Refrescar datos de autenticación si se actualizó el email
+       if (profileData.email) {
+         refreshAuth();
+       }
+
+       return updatedProfile;
+     } catch (err) {
+       setErrorMessage('profile', err.message);
+       throw err;
+     } finally {
+       if (timeoutId) clearTimeout(timeoutId);
+       setLoading(prev => ({ ...prev, profile: false }));
+     }
+   }, [clearError, setErrorMessage, refreshAuth]);
 
   // Cambiar contraseña del usuario
-  const changePassword = useCallback(async (passwordData) => {
-    try {
-      setLoading(prev => ({ ...prev, profile: true }));
-      clearError('profile');
+   const changePassword = useCallback(async (passwordData) => {
+     let timeoutId;
+     try {
+       setLoading(prev => ({ ...prev, profile: true }));
+       clearError('profile');
 
-      const result = await changeUserPassword(passwordData);
-      return result;
-    } catch (err) {
-      setErrorMessage('profile', err.message);
-      throw err;
-    } finally {
-      setLoading(prev => ({ ...prev, profile: false }));
-    }
-  }, [clearError, setErrorMessage]);
+       // Timeout de seguridad para resetear loading si algo falla
+       timeoutId = setTimeout(() => {
+         console.warn('Timeout de seguridad: reseteando loading.profile');
+         setLoading(prev => ({ ...prev, profile: false }));
+       }, 15000); // 15 segundos
+
+       const result = await changeUserPassword(passwordData);
+       return result;
+     } catch (err) {
+       setErrorMessage('profile', err.message);
+       throw err;
+     } finally {
+       if (timeoutId) clearTimeout(timeoutId);
+       setLoading(prev => ({ ...prev, profile: false }));
+     }
+   }, [clearError, setErrorMessage]);
 
   // Cargar preferencias del usuario
   const loadUserPreferences = useCallback(async () => {
