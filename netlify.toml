@@ -37,6 +37,12 @@
   to = "/static/css/:splat"
   status = 200
 
+# Handle chunks with admin basename - redirect to correct static location
+[[redirects]]
+  from = "/admin/static/js/*.chunk.js"
+  to = "/static/js/:splat"
+  status = 200
+
 # Force proper MIME types for dynamic chunks (IMPORTANT: Before SPA fallback)
 [[headers]]
   for = "/static/js/*.chunk.js"

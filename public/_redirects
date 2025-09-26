@@ -9,6 +9,9 @@
 /admin/static/js/*    /static/js/:splat    200
 /admin/static/css/*   /static/css/:splat   200
 
+# Handle chunks with admin basename - redirect to correct static location
+/admin/static/js/*.chunk.js    /static/js/:splat    200
+
 # Dynamic chunks with hash - serve JavaScript files correctly (IMPORTANT: Before SPA fallback)
 /static/js/*.chunk.js    /static/js/:splat    200
 
